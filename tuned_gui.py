@@ -26,6 +26,7 @@ import tuned.logs
 import tuned.consts as consts
 import tuned.version as ver
 import tuned.daemon.daemon as daemon
+import tuned.utils.commands as commands
 
 LICENSE = "licence"
 NAME = "TUNED"
@@ -85,9 +86,9 @@ class Base(object):
         self.imagemenuitem_about = self.builder.get_object("imagemenuitem_about")
         
         
-        self.actual_profile_variable = self.builder.get_object("actual_profile_variable")
-        self.recomended_profile_variable = self.builder.get_object("recomended_profile_variable")
-        
+        self.label_actual_profile = self.builder.get_object("label_actual_profile")
+        self.label_recommended_profile = self.builder.get_object("label_recommemnded_profile")
+        self.label_dbus_status = self.builder.get_object("label_dbus_status")
         
         
         
@@ -99,11 +100,7 @@ class Base(object):
         self.switch_tuned_startup_start_stop = self.builder.get_object("switch_tuned_startup_start_stop")
         
         
-        
-        
-        
-        
-        
+
         
         #Set factory values for objects
         

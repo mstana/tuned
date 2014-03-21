@@ -448,10 +448,12 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkLabel" id="label_actual_profile">
+              <object class="GtkLabel" id="label15">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="valign">end</property>
                 <property name="margin_left">100</property>
+                <property name="hexpand">True</property>
                 <property name="label" translatable="yes">Actual Profile:</property>
               </object>
               <packing>
@@ -462,10 +464,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_recomended_profile">
+              <object class="GtkLabel" id="label14">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="valign">end</property>
                 <property name="margin_left">100</property>
+                <property name="hexpand">True</property>
                 <property name="label" translatable="yes">Recomended Profile:</property>
               </object>
               <packing>
@@ -476,9 +480,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="actual_profile_variable">
+              <object class="GtkLabel" id="label_actual_profile">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="valign">end</property>
+                <property name="hexpand">True</property>
+                <property name="lines">75</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -488,12 +495,43 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="recomended_profile_variable">
+              <object class="GtkLabel" id="label_recommemnded_profile">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="valign">end</property>
+                <property name="hexpand">False</property>
               </object>
               <packing>
                 <property name="left_attach">3</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label13">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">end</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">DBUS Status:</property>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_dbus_status">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">end</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">5</property>
                 <property name="top_attach">0</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
