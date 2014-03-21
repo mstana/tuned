@@ -10,30 +10,24 @@ Created on Oct 15, 2013
 @author: mstana
 '''
 from gi.repository import GObject, Gtk
-from gi.repository import Polkit
 
-
-
-import tuned.admin.dbus_controller as dbus_controller
 import subprocess
-import tuned.consts as consts
-
-
 import sys
 import os
-import traceback
-import argparse
 
-import tuned.profiles.loader as loader
-import tuned.profiles.locator as locator
-import tuned.profiles.factory as factory
-import tuned.profiles.merger as merger
 
-import tuned.logs
-import tuned.daemon
+# probably not important imports
+# import tuned.profiles.loader as loader
+# import tuned.profiles.locator as locator
+# import tuned.profiles.factory as factory
+# import tuned.profiles.merger as merger
+
+
 import tuned.exceptions
+import tuned.logs
 import tuned.consts as consts
 import tuned.version as ver
+import tuned.daemon.daemon as daemon
 
 
 
