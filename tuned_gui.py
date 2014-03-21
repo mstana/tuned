@@ -32,7 +32,23 @@ NAME = "TUNED"
 VERSION = "TUNED 2.3.0"
 COPYRIGHT = "copyright"
 
-AUTHORS = ["Authors"]
+AUTHORS = [
+"",
+"Based on old tuned/ktune code by:",
+"- Philip Knirsch",
+"- Thomas Woerner",
+
+"Significant contributors:",
+"- Jan Vcelak",
+"- Jan Kaluza",
+"- Jaroslav Skarvada",
+
+"Other contributors:",
+"- Petr Lautrbach",
+"- Marcela Maslanova",
+"- Jarod Wilson",
+"- Jan Hutar"
+]
 
 
 
