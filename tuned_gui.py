@@ -1,19 +1,17 @@
-'''
-Created on Jan 29, 2014
-
-@author: mstana
-'''
 #!/usr/bin/env python
 '''
 Created on Oct 15, 2013
 
 @author: mstana
 '''
+
+
 from gi.repository import GObject, Gtk
 
 import subprocess
 import sys
 import os
+import signal
 
 
 # probably not important imports
@@ -29,9 +27,12 @@ import tuned.consts as consts
 import tuned.version as ver
 import tuned.daemon.daemon as daemon
 
+LICENSE = "licence"
+NAME = "TUNED"
+VERSION = "TUNED 2.3.0"
+COPYRIGHT = "copyright"
 
-
-
+AUTHORS = ["Authors"]
 
 
 
@@ -39,6 +40,20 @@ import tuned.daemon.daemon as daemon
 class Base(object):
     
     def __init__(self):
+        
+        
+        
+        self.about_dialog = Gtk.AboutDialog.new()
+        self.about_dialog.set_name(NAME)
+        self.about_dialog.set_version(VERSION)
+        self.about_dialog.set_license(LICENSE)
+        self.about_dialog.set_wrap_license(True)
+        self.about_dialog.set_copyright(COPYRIGHT)
+        self.about_dialog.set_authors(AUTHORS)
+
+        
+        
+        
         
         
         self.builder = Gtk.Builder()
@@ -49,10 +64,30 @@ class Base(object):
         
         
         self.main_window = self.builder.get_object("main_window")
+        
+        self.imagemenuitem_quit = self.builder.get_object("imagemenuitem_quit")
+        self.imagemenuitem_about = self.builder.get_object("imagemenuitem_about")
+        
+        
         self.actual_profile_variable = self.builder.get_object("actual_profile_variable")
         self.recomended_profile_variable = self.builder.get_object("recomended_profile_variable")
+        
+        
+        
+        
         self.comboboxtext1 = self.builder.get_object("comboboxtext1")
         self.button_fast_change_profile = self.builder.get_object("button_fast_change_profile")
+        
+        
+        self.switch_tuned_start_stop = self.builder.get_object("switch_tuned_start_stop")
+        self.switch_tuned_startup_start_stop = self.builder.get_object("switch_tuned_startup_start_stop")
+        
+        
+        
+        
+        
+        
+        
         
         #Set factory values for objects
         
@@ -64,14 +99,26 @@ class Base(object):
         
         
         # connections
+        self.imagemenuitem_quit.connect("activate", Gtk.main_quit)
+        self.imagemenuitem_about.connect("activate", self.execute_about)
+
 
         self.comboboxtext1.set_active(0)        
         self.button_fast_change_profile.connect("clicked", self.execute_change_profile)
+    
+        self.switch_tuned_start_stop.connect('button-press-event', self.execute_switch_tuned)
+        self.switch_tuned_startup_start_stop.connect('button-press-event', self.execute_switch_tuned)
         
         if (self.main_window):
             self.main_window.connect("destroy", Gtk.main_quit)
             
         self.main_window.show()   
+        
+        
+        
+        
+        
+        
             
     def execute_change_profile(self, profile):
                 
@@ -83,34 +130,48 @@ class Base(object):
         
     def execute_cancel_button(self, button):
         exit(1)
-    
-    def inicialyze_tuned(self):
         
-        if os.geteuid() != 0:
-            print "si pako"
-            os.error("Superuser permissions are required to run the daemon.")
-            sys.exit(1)
+        
+    def execute_switch_tuned(self, switch, no_idea_argument2):
+        
+        
+        if switch == self.switch_tuned_start_stop:
+              
+            if self.switch_tuned_start_stop.get_active():
+                subprocess.call(["service", "tuned", "stop"])
+#                 print "service tuned stop"
+            else:
+                subprocess.call(["service", "tuned", "start"])
+#                 print "service tuned start"    
+                
+        elif switch == self.switch_tuned_startup_start_stop: 
             
-        try:
+            if self.switch_tuned_startup_start_stop.get_active():
 
-            app = tuned.daemon.Application()
-            app.attach_to_dbus(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
-            app.run()
+                subprocess.call(["systemctl", "disable", "tuned"])
+#                 print "Control statement: systemctl enable tuned"
+            else:
+
+                subprocess.call(["systemctl", "enable", "tuned"])
+#                 print "Control statement: systemctl disable tuned" 
             
-        except tuned.exceptions.TunedException as exception:
-            os.error(str(exception))
-            sys.exit(1)
+            
+    def execute_about(self, widget):
+        self.about_dialog.run()
+        self.about_dialog.hide()      
+            
+                
         
-    
+        
 if __name__ == '__main__':
     
     
-    
-    
-    subprocess.call(["systemctl", "start", "tuned"])
+    if os.geteuid() != 0:
+        os.error("Superuser permissions are required to run the daemon.")
+        sys.exit(1)
     
     base = Base()            
-#     base.inicialyze_tuned()
+
     Gtk.main()
     sys.exit(1)
     
