@@ -428,7 +428,7 @@
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
@@ -440,21 +440,23 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">3</property>
+            <property name="position">2</property>
           </packing>
         </child>
         <child>
           <object class="GtkGrid" id="statusBar">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="hexpand">True</property>
             <child>
               <object class="GtkLabel" id="label15">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">start</property>
                 <property name="valign">end</property>
                 <property name="margin_left">100</property>
-                <property name="hexpand">True</property>
                 <property name="label" translatable="yes">Actual Profile:</property>
+                <property name="justify">fill</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -481,8 +483,10 @@
             </child>
             <child>
               <object class="GtkLabel" id="label_actual_profile">
+                <property name="width_request">100</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">start</property>
                 <property name="valign">end</property>
                 <property name="hexpand">True</property>
                 <property name="lines">75</property>
@@ -496,10 +500,12 @@
             </child>
             <child>
               <object class="GtkLabel" id="label_recommemnded_profile">
+                <property name="width_request">120</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">start</property>
                 <property name="valign">end</property>
-                <property name="hexpand">False</property>
+                <property name="hexpand">True</property>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -525,8 +531,10 @@
             </child>
             <child>
               <object class="GtkLabel" id="label_dbus_status">
+                <property name="width_request">60</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">start</property>
                 <property name="valign">end</property>
                 <property name="hexpand">True</property>
               </object>
@@ -540,9 +548,9 @@
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
+            <property name="fill">False</property>
             <property name="pack_type">end</property>
-            <property name="position">4</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>

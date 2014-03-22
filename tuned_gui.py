@@ -15,6 +15,7 @@ import signal
 
 
 # probably not important imports
+
 # import tuned.profiles.loader as loader
 # import tuned.profiles.locator as locator
 # import tuned.profiles.factory as factory
@@ -27,6 +28,12 @@ import tuned.consts as consts
 import tuned.version as ver
 import tuned.daemon.daemon as daemon
 import tuned.utils.commands as commands
+
+
+import tuned.admin
+
+
+
 
 LICENSE = "licence"
 NAME = "TUNED"
@@ -53,10 +60,20 @@ AUTHORS = [
 
 
 
-
 class Base(object):
     
     def __init__(self):
+        
+        
+        self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
+        admin = tuned.admin.Admin(self.controller)
+
+        
+        #
+        #    DIALOG ABOUT
+        #
+        
+        
         
         
         
@@ -73,6 +90,13 @@ class Base(object):
         
         
         
+        #
+        #    MAIN WINDOW
+        #
+        
+        
+        
+        
         self.builder = Gtk.Builder()
         self.builder.add_from_file("tuned-gui.glade")
         self.builder.connect_signals(self)
@@ -85,12 +109,9 @@ class Base(object):
         self.imagemenuitem_quit = self.builder.get_object("imagemenuitem_quit")
         self.imagemenuitem_about = self.builder.get_object("imagemenuitem_about")
         
-        
         self.label_actual_profile = self.builder.get_object("label_actual_profile")
         self.label_recommended_profile = self.builder.get_object("label_recommemnded_profile")
         self.label_dbus_status = self.builder.get_object("label_dbus_status")
-        
-        
         
         self.comboboxtext1 = self.builder.get_object("comboboxtext1")
         self.button_fast_change_profile = self.builder.get_object("button_fast_change_profile")
@@ -104,14 +125,20 @@ class Base(object):
         
         #Set factory values for objects
         
-#         self.actual_profile_variable.set_text(self.app.profile_factory)
-#         self.recomended_profile_variable.set_text(self.controller.recommend_profile())
-#         self.profile_list = self.controller.profiles()
-#         for profile in self.profile_list:
-#             self.comboboxtext1.append_text(profile)
+        self.label_actual_profile.set_text(self.controller.active_profile())
+        self.label_recommended_profile.set_text(self.controller.recommend_profile())
+        self.profile_list = self.controller.profiles()
+        
+        for profile in self.profile_list:
+            self.comboboxtext1.append_text(profile)
+        self.label_dbus_status.set_text(str(self.controller.is_running())+"a")
         
         
-        # connections
+
+        #
+        #    CONNECTIONS
+        #
+        
         self.imagemenuitem_quit.connect("activate", Gtk.main_quit)
         self.imagemenuitem_about.connect("activate", self.execute_about)
 
@@ -136,14 +163,9 @@ class Base(object):
     def execute_change_profile(self, profile):
                 
         if profile is not None:
-#             self.controller.switch_profile(self.comboboxtext1.get_active_text())
-#             self.actual_profile_variable.set_text(self.controller.active_profile())
+            self.controller.switch_profile(self.comboboxtext1.get_active_text())
+            self.label_actual_profile.set_text(self.controller.active_profile())
             pass
-
-        
-    def execute_cancel_button(self, button):
-        exit(1)
-        
         
     def execute_switch_tuned(self, switch, no_idea_argument2):
         
@@ -182,6 +204,9 @@ if __name__ == '__main__':
     if os.geteuid() != 0:
         os.error("Superuser permissions are required to run the daemon.")
         sys.exit(1)
+    
+    
+    subprocess.call(["service", "tuned", "start"])
     
     base = Base()            
 
