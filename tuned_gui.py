@@ -131,8 +131,17 @@ class Base(object):
         
         for profile in self.profile_list:
             self.comboboxtext1.append_text(profile)
-        self.label_dbus_status.set_text(str(self.controller.is_running())+"a")
+            
+#             TO DO: probably exist better way to print this
+        self.label_dbus_status.set_text(str(bool(self.controller.is_running())))
+
+
+#       TO DO:  need Add check if its correct in system
+#       just ask system if for some properties
         
+        self.switch_tuned_start_stop.set_active(True)
+        self.switch_tuned_startup_start_stop.set_active(False)
+
         
 
         #
@@ -204,14 +213,18 @@ if __name__ == '__main__':
     if os.geteuid() != 0:
         os.error("Superuser permissions are required to run the daemon.")
         sys.exit(1)
-    
+        
+        
+#     Now we expect that tuned starts here with no problem and switch is prepared - need to add statement for check properties
     
     subprocess.call(["service", "tuned", "start"])
     
+    
+    
     base = Base()            
-
+    
     Gtk.main()
-    sys.exit(1)
+ 
     
     
     
