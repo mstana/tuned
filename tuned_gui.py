@@ -11,13 +11,14 @@ from gi.repository import GObject, Gtk
 import subprocess
 import sys
 import os
+import re
 import signal
 
 
 # probably not important imports
 
-# import tuned.profiles.loader as loader
-# import tuned.profiles.locator as locator
+import tuned.profiles.locator as locator
+import tuned.profiles.loader as loader
 # import tuned.profiles.factory as factory
 # import tuned.profiles.merger as merger
 
@@ -28,9 +29,8 @@ import tuned.consts as consts
 import tuned.version as ver
 import tuned.daemon.daemon as daemon
 import tuned.utils.commands as commands
+import tuned.admin.dbus_controller
 
-
-import tuned.admin
 
 
 
@@ -66,7 +66,7 @@ class Base(object):
         
         
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
-        admin = tuned.admin.Admin(self.controller)
+#         admin = tuned.admin.Admin(self.controller)
 
         
         #
@@ -183,6 +183,8 @@ class Base(object):
               
             if self.switch_tuned_start_stop.get_active():
                 subprocess.call(["service", "tuned", "stop"])
+                
+                
 #                 print "service tuned stop"
             else:
                 subprocess.call(["service", "tuned", "start"])
@@ -203,26 +205,40 @@ class Base(object):
     def execute_about(self, widget):
         self.about_dialog.run()
         self.about_dialog.hide()      
+        
+        
+        
+        
+        
             
+    def findProcess(self, processId):
+        self.ps = subprocess.Popen("ps -ef | grep "+processId, shell=True, stdout=subprocess.PIPE)
+        self.output = self.ps.stdout.read()
+        self.ps.stdout.close()
+        self.ps.wait()
+        return self.output
+    
+    def isProcessRunning(self, processId):
+        self.output = self.findProcess(processId)
+        if re.search(processId, self.output) is None:
+            return True
+        else:
+            return False
+                
                 
         
         
 if __name__ == '__main__':
     
-    
     if os.geteuid() != 0:
         os.error("Superuser permissions are required to run the daemon.")
         sys.exit(1)
         
-        
 #     Now we expect that tuned starts here with no problem and switch is prepared - need to add statement for check properties
-    
     subprocess.call(["service", "tuned", "start"])
-    
-    
-    
+
+
     base = Base()            
-    
     Gtk.main()
  
     

@@ -52,3 +52,5 @@ class Profile(object):
 		Profile global options.
 		"""
 		return self._options
+	def get_name(self):
+		return self._name
