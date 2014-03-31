@@ -21,44 +21,28 @@ class Gtk_profile_loader(object):
     def __init__(self, directories):
         self.directories = directories
         self._load_all_profiles()
+        
 
     def test_print_all_loaded(self):
-
         print "test begin"  
-
-        for profile, config in self.profiles.items():
-             
-            print profile
-            print config
-        print self.profiles.get("balanced").units
-        
-        
-        
-        
+        for profile, config in self.profiles.items():             
+            print profile + " " + str(config.units.keys())
         print "test done"
+        
+        
                 
     def load_profile_config(self, profile_name, path):
 
         conf_path = path + "/" + profile_name + "/tuned.conf"
-        profile_config = ConfigObj(conf_path)        
+        profile_config = ConfigObj(conf_path)
 
         for section in profile_config.keys():
-          for option in profile_config[section].keys(): 
-            
+          for option in profile_config[section].keys():      
             if (section == "main" and option == "include"):
-                
                 config = self.load_profile_config(profile_config[section][option], 
                                                     self._locate_profile_path(profile_config[section][option]))                
                 config.merge(profile_config)
-
                 return config
-
-                        
-                            
-                        
-#             here I return config obj - if it will have the same "values" as my conf - ok, if not 
-
-
         return profile_config
     
     def _locate_profile_path(self, profile_name):
@@ -74,21 +58,37 @@ class Gtk_profile_loader(object):
         for d in self.directories:
             for profile in os.listdir(d):
                 if os.path.isdir(d + "/"+ profile):
-#                     print d
-                    self.profiles[profile] = p.Profile(profile,self.load_profile_config( profile, d) )
-
+                    self.profiles[profile] = p.Profile(profile,self.load_profile_config(profile, d))
+                    
                  
     def save_profile(self, profile):
+
+#         print profile.units.keys()
+        config = ConfigObj()            
         
-        config = ConfigObj()
+        
+        print profile.units
+        
+        for section in profile.units.keys():
+          for option in profile.units[section].keys():  
+#               print section
+#               print option
+#               print profile.units[section][option].pop()
+              config[section] = {option : profile.units[section][option].pop()}
+                  
+
+              
+#         config['section'] = {'key': 'value', 'key2': ['val1', 'val2']}
 
 #         https://wiki.python.org/moin/ConfigObj -  not big issue
-#         config['section'] = value
-#         config['option'] = {'key': 'value', 'key2': ['val1', 'val2']}
-
-        config.filename = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name + "/tuned.conf"
-        config.write()
         
+        path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name
+        
+        if not os.path.exists(path): 
+            os.makedirs(path)
+            
+        config.filename = path + "/tuned1.conf"
+        config.write()
 
         
     def get_names(self):
@@ -109,13 +109,30 @@ if __name__ == '__main__':
     print
     print
       
-    test = Gtk_profile_loader(tuned.consts.LOAD_DIRECTORIES)
-#     test.test_print_all_loaded()
+    t = Gtk_profile_loader(tuned.consts.LOAD_DIRECTORIES)
+    pr = t.get_profile("balanced")
+    t.save_profile(pr)    
+    print 1
+# teraz mam iba dictionary of units
+    print t.profiles["powersave"].units["cpu"].options
     
-#     test.save_profile(test.get_profile("myprofile"))
-#     print test.get_profile("myprofile").units
+    
+#     print t.profiles["desktop"].units["cpu"].options
+#     
+#     
+#     for profile, config in t.profiles.items():             
+#         print profile + " " + str(config.units.keys())
+    
+
+#     t.test_print_all_loaded()
+
+#     
 
     
-    print test.get_names()
-       
-#     print test.profiles.get("balanced")
+
+    
+#     print test.get_names()
+
+#     
+#     
+#     test.save_profile(pr)
