@@ -30,7 +30,7 @@ import tuned.version as ver
 import tuned.daemon.daemon as daemon
 import tuned.utils.commands as commands
 import tuned.admin.dbus_controller
-
+import gtk_profile_loader
 
 
 
@@ -68,15 +68,23 @@ class Base(object):
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
 #         admin = tuned.admin.Admin(self.controller)
 
+        self.manager = gtk_profile_loader.Gtk_profile_loader(tuned.consts.LOAD_DIRECTORIES)
+        
+        
+        
+        
+        
+#         print active_profile.units['main']
+#         someblock = None
+#         for unit in  active_profile.units.keys():
+#             someblock.prop1 = unit.name
+#             someblock.prop2 = unit.type
+#             someblock.prop3 = unit.option
+#         
         
         #
         #    DIALOG ABOUT
         #
-        
-        
-        
-        
-        
         self.about_dialog = Gtk.AboutDialog.new()
         self.about_dialog.set_name(NAME)
         self.about_dialog.set_version(VERSION)
@@ -84,50 +92,44 @@ class Base(object):
         self.about_dialog.set_wrap_license(True)
         self.about_dialog.set_copyright(COPYRIGHT)
         self.about_dialog.set_authors(AUTHORS)
-
-        
-        
-        
-        
-        
         #
-        #    MAIN WINDOW
-        #
-        
-        
-        
-        
+        #    WINDOW MAIN
+        #        
         self.builder = Gtk.Builder()
         self.builder.add_from_file("tuned-gui.glade")
         self.builder.connect_signals(self)
-
-        # get widgets
-        
-        
+        #
+        #    WIDGETS
+        #
         self.main_window = self.builder.get_object("main_window")
-        
         self.imagemenuitem_quit = self.builder.get_object("imagemenuitem_quit")
         self.imagemenuitem_about = self.builder.get_object("imagemenuitem_about")
         
         self.label_actual_profile = self.builder.get_object("label_actual_profile")
         self.label_recommended_profile = self.builder.get_object("label_recommemnded_profile")
         self.label_dbus_status = self.builder.get_object("label_dbus_status")
+        self.label_summary_profile = self.builder.get_object("summary_profile_name")
+
+        
+#         test
+        
+        
+        
         
         self.comboboxtext1 = self.builder.get_object("comboboxtext1")
         self.button_fast_change_profile = self.builder.get_object("button_fast_change_profile")
         
-        
         self.switch_tuned_start_stop = self.builder.get_object("switch_tuned_start_stop")
         self.switch_tuned_startup_start_stop = self.builder.get_object("switch_tuned_startup_start_stop")
-        
-        
-
-        
+        #
         #Set factory values for objects
-        
+        #
         self.label_actual_profile.set_text(self.controller.active_profile())
         self.label_recommended_profile.set_text(self.controller.recommend_profile())
+        self.refresh_summary_of_actual_profile()
+        
         self.profile_list = self.controller.profiles()
+        
         
         for profile in self.profile_list:
             self.comboboxtext1.append_text(profile)
@@ -165,8 +167,25 @@ class Base(object):
         
         
         
+    def refresh_summary_of_actual_profile(self):
         
         
+        self.active_profile = self.manager.get_profile(self.controller.active_profile())
+        self.label_summary_profile.set_text(self.active_profile.name)
+        
+        text = ""
+        for u in self.active_profile.units:
+            
+            text += "\n" + u + "\n" + "___________" + "\n" 
+
+            
+            for o in self.active_profile.units[u].options:
+                text += "\n"+ o + " = " + self.active_profile.units[u].options[o]
+                text += "\n"  
+                
+#         print self.text_view
+
+#         buffer.insert_at_cursor(text)
         
             
     def execute_change_profile(self, profile):
@@ -174,7 +193,13 @@ class Base(object):
         if profile is not None:
             self.controller.switch_profile(self.comboboxtext1.get_active_text())
             self.label_actual_profile.set_text(self.controller.active_profile())
-            pass
+            
+        self.refresh_summary_of_actual_profile()
+            
+
+            
+            
+            
         
     def execute_switch_tuned(self, switch, no_idea_argument2):
         
@@ -188,6 +213,7 @@ class Base(object):
 #                 print "service tuned stop"
             else:
                 subprocess.call(["service", "tuned", "start"])
+                self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
 #                 print "service tuned start"    
                 
         elif switch == self.switch_tuned_startup_start_stop: 
