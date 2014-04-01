@@ -21,6 +21,16 @@ class Gtk_profile_loader(object):
     def __init__(self, directories):
         self.directories = directories
         self._load_all_profiles()
+    
+    
+    def test_values_in_profile(self, profile):
+        
+        print "fst"
+        print profile.units.keys()
+        print "scnd"
+        for i in profile.units.keys():
+            print i
+        
         
 
     def test_print_all_loaded(self):
@@ -32,18 +42,25 @@ class Gtk_profile_loader(object):
         
                 
     def load_profile_config(self, profile_name, path):
-
-        conf_path = path + "/" + profile_name + "/tuned.conf"
+        conf_path = path + "/" + profile_name + "/tuned.conf"                
         profile_config = ConfigObj(conf_path)
-
-        for section in profile_config.keys():
-          for option in profile_config[section].keys():      
-            if (section == "main" and option == "include"):
-                config = self.load_profile_config(profile_config[section][option], 
-                                                    self._locate_profile_path(profile_config[section][option]))                
-                config.merge(profile_config)
-                return config
         return profile_config
+
+
+#         FLAT VERSION
+#  
+#         conf_path = path + "/" + profile_name + "/tuned.conf"        
+#         profile_config = ConfigObj(conf_path)
+#         for section in profile_config:
+#             if (section == "main"):
+#                 print profile_config[section]
+#                 
+#                 config = self.load_profile_config(profile_config[section]["include"], 
+#                                                     self._locate_profile_path(profile_config[section]["include"]))                
+#                 config.merge(profile_config)
+#                 return config
+#             
+#         return profile_config
     
     def _locate_profile_path(self, profile_name):
         
@@ -62,32 +79,31 @@ class Gtk_profile_loader(object):
                     
                  
     def save_profile(self, profile):
+                
+        path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name     
+        config = ConfigObj()
+        config.filename = path + tuned.consts.CONF_PROFILE_FILE
+        config.initial_comment = "#", "tuned configuration","#"
 
-#         print profile.units.keys()
-        config = ConfigObj()            
+        print profile.units.items()    
+        print profile.name
+        print profile.options
+#         print profile.units["main"].options
         
-        
-        print profile.units
-        
-        for section in profile.units.keys():
-          for option in profile.units[section].keys():  
-#               print section
-#               print option
-#               print profile.units[section][option].pop()
-              config[section] = {option : profile.units[section][option].pop()}
-                  
-
-              
-#         config['section'] = {'key': 'value', 'key2': ['val1', 'val2']}
-
-#         https://wiki.python.org/moin/ConfigObj -  not big issue
-        
-        path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name
-        
-        if not os.path.exists(path): 
-            os.makedirs(path)
+        try:
+            config["main"] = profile.options
+             
+#             {"include" : profile.options["include"]}
+        except KeyError: 
             
-        config.filename = path + "/tuned1.conf"
+            pass #no problem just profile dont have include
+
+        for name, unit in profile.units.items():
+            config[name] = unit.options
+            
+        if not os.path.exists(path): 
+# TO DO: add exception for rewrite profile!
+            os.makedirs(path)            
         config.write()
 
         
@@ -95,44 +111,19 @@ class Gtk_profile_loader(object):
         return self.profiles.keys()
     
     def get_profile(self, profile):
-        return self.profiles.get(profile)
+        return self.profiles[profile]
 
-         
-         
-         
  
 if __name__ == '__main__':
       
     if os.geteuid() != 0:
         os.error("Superuser permissions are required to run the daemon.")
         sys.exit(1)
-    print
-    print
+
       
     t = Gtk_profile_loader(tuned.consts.LOAD_DIRECTORIES)
-    pr = t.get_profile("balanced")
-    t.save_profile(pr)    
-    print 1
-# teraz mam iba dictionary of units
-    print t.profiles["powersave"].units["cpu"].options
+    
+#     pr = t.get_profile("sap")
     
     
-#     print t.profiles["desktop"].units["cpu"].options
-#     
-#     
-#     for profile, config in t.profiles.items():             
-#         print profile + " " + str(config.units.keys())
-    
-
-#     t.test_print_all_loaded()
-
-#     
-
-    
-
-    
-#     print test.get_names()
-
-#     
-#     
-#     test.save_profile(pr)
+    t.save_profile(t.get_profile("sap"))
