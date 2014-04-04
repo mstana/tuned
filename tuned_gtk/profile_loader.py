@@ -10,7 +10,7 @@ import tuned.profiles.profile as p
 import tuned.profiles.merger as merger
 import tuned.consts
 
-class Gtk_profile_loader(object):
+class Profile_loader(object):
     """
     Profiles loader for GUI Gtk purposes.
     """
@@ -91,8 +91,9 @@ class Gtk_profile_loader(object):
             config[name] = unit.options
             
         if not os.path.exists(path): 
-# TO DO: add exception for rewrite profile!
-            os.makedirs(path)            
+            os.makedirs(path)  
+        else:
+            pass# TO DO: add exception for rewrite profile!
         config.write()
 
         
@@ -110,7 +111,7 @@ class Gtk_profile_loader(object):
 #         sys.exit(1)
 # 
 #       
-#     t = Gtk_profile_loader(tuned.consts.LOAD_DIRECTORIES)
+#     t = Profile_loader(tuned.consts.LOAD_DIRECTORIES)
 #     
 # #     pr = t.get_profile("sap")
 #     

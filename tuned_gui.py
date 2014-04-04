@@ -30,7 +30,7 @@ import tuned.version as ver
 import tuned.daemon.daemon as daemon
 import tuned.utils.commands as commands
 import tuned.admin.dbus_controller
-import gtk_profile_loader
+import tuned_gtk.profile_loader
 
 
 
@@ -64,23 +64,11 @@ class Base(object):
     
     def __init__(self):
         
-        
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
+
 #         admin = tuned.admin.Admin(self.controller)
 
-        self.manager = gtk_profile_loader.Gtk_profile_loader(tuned.consts.LOAD_DIRECTORIES)
-        
-        
-        
-        
-        
-#         print active_profile.units['main']
-#         someblock = None
-#         for unit in  active_profile.units.keys():
-#             someblock.prop1 = unit.name
-#             someblock.prop2 = unit.type
-#             someblock.prop3 = unit.option
-#         
+        self.manager = tuned_gtk.profile_loader.Profile_loader(tuned.consts.LOAD_DIRECTORIES)
         
         #
         #    DIALOG ABOUT
@@ -108,13 +96,7 @@ class Base(object):
         self.label_actual_profile = self.builder.get_object("label_actual_profile")
         self.label_recommended_profile = self.builder.get_object("label_recommemnded_profile")
         self.label_dbus_status = self.builder.get_object("label_dbus_status")
-        self.label_summary_profile = self.builder.get_object("summary_profile_name")
-
-        
-#         test
-        
-        
-        
+        self.label_summary_profile = self.builder.get_object("summary_profile_name")        
         
         self.comboboxtext1 = self.builder.get_object("comboboxtext1")
         self.button_fast_change_profile = self.builder.get_object("button_fast_change_profile")
@@ -128,9 +110,8 @@ class Base(object):
         self.label_recommended_profile.set_text(self.controller.recommend_profile())
         self.refresh_summary_of_actual_profile()
         
+        
         self.profile_list = self.controller.profiles()
-        
-        
         for profile in self.profile_list:
             self.comboboxtext1.append_text(profile)
             
@@ -141,15 +122,11 @@ class Base(object):
 #       TO DO:  need Add check if its correct in system
 #       just ask system if for some properties
         
-        self.switch_tuned_start_stop.set_active(True)
-        self.switch_tuned_startup_start_stop.set_active(False)
-
-        
-
+        self.switch_tuned_start_stop.set_active(self.service_is_runnung("tuned"))
+        self.switch_tuned_startup_start_stop.set_active(self.service_run_on_start_up("tuned"))
         #
         #    CONNECTIONS
         #
-        
         self.imagemenuitem_quit.connect("activate", Gtk.main_quit)
         self.imagemenuitem_about.connect("activate", self.execute_about)
 
@@ -252,7 +229,20 @@ class Base(object):
             return False
                 
                 
-        
+                
+                
+                
+                
+    def service_is_runnung(self, service):
+        if subprocess.call(["service", service, "status"]) == 0:
+            return True
+        return False
+    
+    
+    def service_run_on_start_up(self, service):
+        if subprocess.call(["systemctl", "status", service]) == 0:
+            return True
+        return False
         
 if __name__ == '__main__':
     
@@ -261,11 +251,24 @@ if __name__ == '__main__':
         sys.exit(1)
         
 #     Now we expect that tuned starts here with no problem and switch is prepared - need to add statement for check properties
+
+ 
+    
+
     subprocess.call(["service", "tuned", "start"])
+    
+    
+    print
+    print
+         
+    subprocess.call(["systemctl", "tuned", "disable"])
 
-
+# 
+# 
     base = Base()            
+
     Gtk.main()
+ 
  
     
     
