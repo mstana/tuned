@@ -9,8 +9,10 @@ import os, sys
 import tuned.profiles.profile as p
 import tuned.profiles.merger as merger
 import tuned.consts
+import shutil
+import managerException
 
-class Profile_loader(object):
+class ProfileLoader(object):
     """
     Profiles loader for GUI Gtk purposes.
     """
@@ -59,12 +61,13 @@ class Profile_loader(object):
 #         return profile_config
     
     
-    def _locate_profile_path(self, profile_name):
+    def _locate_profile_path(self, profileName):
         
         for d in self.directories:
             for profile in os.listdir(d):
-                if os.path.isdir(d + "/"+ profile) and profile == profile_name:
-                    return d
+                if os.path.isdir(d + "/"+ profile) and profile == profileName:
+                    path = d
+        return path
     
     
     def _load_all_profiles(self):    
@@ -103,7 +106,21 @@ class Profile_loader(object):
     
     def get_profile(self, profile):
         return self.profiles[profile]
-
+    
+    
+    def remove_profile(self, profileName):
+        
+        profilePath = self._locate_profile_path(profileName)
+    
+        if (profilePath == tuned.consts.LOAD_DIRECTORIES[1]):
+#            profile is in /etc/profile
+            shutil.rmtree(profilePath + "/" + profileName)
+            self._load_all_profiles()
+        else:
+            raise managerException.ManagerException(profileName + " profile is stored in "+ profilePath)
+        
+       
+        
 # if __name__ == '__main__':
 #       
 #     if os.geteuid() != 0:

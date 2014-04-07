@@ -6,31 +6,24 @@ Created on Oct 15, 2013
 '''
 
 
-from gi.repository import GObject, Gtk
+
+import gi.repository.GObject as GObject
+import gi.repository.Gtk as Gtk
 
 import subprocess
 import sys
 import os
 import re
-import signal
 
-
-# probably not important imports
-
-import tuned.profiles.locator as locator
-import tuned.profiles.loader as loader
-# import tuned.profiles.factory as factory
-# import tuned.profiles.merger as merger
-
-
-import tuned.exceptions
 import tuned.logs
 import tuned.consts as consts
 import tuned.version as ver
 import tuned.daemon.daemon as daemon
 import tuned.utils.commands as commands
 import tuned.admin.dbus_controller
-import tuned_gtk.profile_loader
+import tuned_gtk.profileLoader
+
+from tuned_gtk.managerException import ManagerException
 
 
 
@@ -68,8 +61,13 @@ class Base(object):
 
 #         admin = tuned.admin.Admin(self.controller)
 
-        self.manager = tuned_gtk.profile_loader.Profile_loader(tuned.consts.LOAD_DIRECTORIES)
-        
+        self.manager = tuned_gtk.profileLoader.ProfileLoader(tuned.consts.LOAD_DIRECTORIES)
+        #
+        #    WINDOW MAIN
+        #        
+        self.builder = Gtk.Builder()
+        self.builder.add_from_file("tuned-gui.glade")
+        self.builder.connect_signals(self)       
         #
         #    DIALOG ABOUT
         #
@@ -79,17 +77,16 @@ class Base(object):
         self.about_dialog.set_license(LICENSE)
         self.about_dialog.set_wrap_license(True)
         self.about_dialog.set_copyright(COPYRIGHT)
-        self.about_dialog.set_authors(AUTHORS)
-        #
-        #    WINDOW MAIN
-        #        
-        self.builder = Gtk.Builder()
-        self.builder.add_from_file("tuned-gui.glade")
-        self.builder.connect_signals(self)
+        self.about_dialog.set_authors(AUTHORS)   
+        #         
+        #         
+        #         
+        self.messagedialogOperationError = self.builder.get_object("messagedialogOperationError")
         #
         #    WIDGETS
-        #
+        #  
         self.main_window = self.builder.get_object("main_window")
+       
         self.imagemenuitem_quit = self.builder.get_object("imagemenuitem_quit")
         self.imagemenuitem_about = self.builder.get_object("imagemenuitem_about")
         
@@ -99,10 +96,31 @@ class Base(object):
         self.label_summary_profile = self.builder.get_object("summary_profile_name")        
         
         self.comboboxtext1 = self.builder.get_object("comboboxtext1")
-        self.button_fast_change_profile = self.builder.get_object("button_fast_change_profile")
+        self.buttonFastChangeProfile = self.builder.get_object("buttonFastChangeProfile")
         
         self.switch_tuned_start_stop = self.builder.get_object("switch_tuned_start_stop")
         self.switch_tuned_startup_start_stop = self.builder.get_object("switch_tuned_startup_start_stop")
+
+
+        self.treeviewProfileManager = self.builder.get_object("treeviewProfileManager")
+        self.treestoreProfileManager = Gtk.ListStore(GObject.TYPE_STRING)
+        self.treeviewProfileManager.append_column(
+            Gtk.TreeViewColumn("Profile", Gtk.CellRendererText(), text=0))
+        self.treeviewProfileManager.set_model(self.treestoreProfileManager)
+        
+        
+        for profile in self.manager.get_names():
+            self.treestoreProfileManager.append([profile])
+        self.treeviewProfileManager.get_selection().select_path(0)
+        
+        self.buttonCreateProfile = self.builder.get_object("buttonCreateProfile")
+        self.buttonUpadteSelectedProfile = self.builder.get_object("buttonUpadteSelectedProfile")
+        self.buttonDeleteSelectedProfile = self.builder.get_object("buttonDeleteSelectedProfile")
+        
+        self.buttonCancel = self.builder.get_object("buttonCancel")
+        self.buttonCancel.connect("clicked", self.execute_cancel_window)
+        
+        
         #
         #Set factory values for objects
         #
@@ -122,7 +140,7 @@ class Base(object):
 #       TO DO:  need Add check if its correct in system
 #       just ask system if for some properties
         
-        self.switch_tuned_start_stop.set_active(self.service_is_runnung("tuned"))
+        self.switch_tuned_start_stop.set_active(self.is_service_running("tuned"))
         self.switch_tuned_startup_start_stop.set_active(self.service_run_on_start_up("tuned"))
         #
         #    CONNECTIONS
@@ -130,20 +148,34 @@ class Base(object):
         self.imagemenuitem_quit.connect("activate", Gtk.main_quit)
         self.imagemenuitem_about.connect("activate", self.execute_about)
 
-
         self.comboboxtext1.set_active(0)        
-        self.button_fast_change_profile.connect("clicked", self.execute_change_profile)
+        self.buttonFastChangeProfile.connect("clicked", self.execute_change_profile)
     
+#     fix this with documnetation
         self.switch_tuned_start_stop.connect('button-press-event', self.execute_switch_tuned)
         self.switch_tuned_startup_start_stop.connect('button-press-event', self.execute_switch_tuned)
         
-        if (self.main_window):
-            self.main_window.connect("destroy", Gtk.main_quit)
-            
-        self.main_window.show()   
+        self.buttonCreateProfile.connect('clicked', self.execute_create_profile)
+        self.buttonUpadteSelectedProfile.connect('clicked', self.execute_update_profile)
+        self.buttonDeleteSelectedProfile.connect('clicked', self.execute_remove_profile)
+        
+        self.main_window.connect("destroy", Gtk.main_quit)
+        
+        
+        self.main_window.show()       
         
         
         
+    def execute_cancel_window(self, button):
+        
+#         self.windowProfileEditor.close()
+        self.windowProfileEditor.close()
+
+        Gtk.Widget.destroy(self.windowProfileEditor)
+        self.windowProfileEditor.destroy()
+        print self.windowProfileEditor
+#         self.windowProfileEditor.destroy()
+    
     def refresh_summary_of_actual_profile(self):
         
         
@@ -164,20 +196,39 @@ class Base(object):
 
 #         buffer.insert_at_cursor(text)
         
+    def execute_remove_profile(self, button):
+
+        selection = self.treeviewProfileManager.get_selection()
+        (model, iter) = selection.get_selected()
+        if iter is None:
+            self.error_dialog("No profile selected", "")
+        profile = self.treestoreProfileManager.get_value(iter, 0)
+        try:
+            self.manager.remove_profile(profile)
+            self.treestoreProfileManager.remove(iter)
+        except ManagerException as ex:
+            self.error_dialog("Profile can not be remove", ex.__str__())
             
-    def execute_change_profile(self, profile):
-                
+
+    def execute_create_profile(self, button):
+        self.windowProfileEditor = self.builder.get_object("windowProfileEditor")
+#         self.windowProfileEditor.connect("destroy", )
+        
+#         self.windowProfileEditor.set_keep_above(True)
+        print self.windowProfileEditor.show()
+        
+        
+        
+    def execute_update_profile(self, button):
+        raise NotImplementedError()
+        
+    def execute_change_profile(self, profile):     
         if profile is not None:
             self.controller.switch_profile(self.comboboxtext1.get_active_text())
             self.label_actual_profile.set_text(self.controller.active_profile())
             
         self.refresh_summary_of_actual_profile()
             
-
-            
-            
-            
-        
     def execute_switch_tuned(self, switch, no_idea_argument2):
         
         
@@ -197,12 +248,12 @@ class Base(object):
             
             if self.switch_tuned_startup_start_stop.get_active():
 
-                subprocess.call(["systemctl", "disable", "tuned"])
-#                 print "Control statement: systemctl enable tuned"
+                subprocess.call(["systemctl", "enable", "tuned"])
+                print "Control statement: systemctl enable tuned"
             else:
 
-                subprocess.call(["systemctl", "enable", "tuned"])
-#                 print "Control statement: systemctl disable tuned" 
+                subprocess.call(["systemctl", "disable", "tuned"])
+                print "Control statement: systemctl disable tuned" 
             
             
     def execute_about(self, widget):
@@ -214,26 +265,23 @@ class Base(object):
         
         
             
-    def findProcess(self, processId):
+    def find_process(self, processId):
         self.ps = subprocess.Popen("ps -ef | grep "+processId, shell=True, stdout=subprocess.PIPE)
         self.output = self.ps.stdout.read()
         self.ps.stdout.close()
         self.ps.wait()
         return self.output
     
-    def isProcessRunning(self, processId):
-        self.output = self.findProcess(processId)
+    def is_process_running(self, processId):
+        self.output = self.find_process(processId)
         if re.search(processId, self.output) is None:
             return True
         else:
             return False
                 
+
                 
-                
-                
-                
-                
-    def service_is_runnung(self, service):
+    def is_service_running(self, service):
         if subprocess.call(["service", service, "status"]) == 0:
             return True
         return False
@@ -243,28 +291,23 @@ class Base(object):
         if subprocess.call(["systemctl", "status", service]) == 0:
             return True
         return False
+    
+    def error_dialog(self, error, info):
+        
+        self.messagedialogOperationError.set_markup(error)         
+        self.messagedialogOperationError.format_secondary_text(info)
+        self.messagedialogOperationError.run()
+        self.messagedialogOperationError.hide()
+    
+    
         
 if __name__ == '__main__':
     
     if os.geteuid() != 0:
         os.error("Superuser permissions are required to run the daemon.")
         sys.exit(1)
-        
-#     Now we expect that tuned starts here with no problem and switch is prepared - need to add statement for check properties
-
  
-    
-
     subprocess.call(["service", "tuned", "start"])
-    
-    
-    print
-    print
-         
-    subprocess.call(["systemctl", "tuned", "disable"])
-
-# 
-# 
     base = Base()            
 
     Gtk.main()
