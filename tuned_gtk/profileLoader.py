@@ -27,9 +27,9 @@ class ProfileLoader(object):
     
     def test_values_in_profile(self, profile):
         
-        print "fst"
+        print "pegin"
         print profile.units.keys()
-        print "scnd"
+        print "done "
         for i in profile.units.keys():
             print i
         
@@ -62,7 +62,6 @@ class ProfileLoader(object):
     
     
     def _locate_profile_path(self, profileName):
-        
         for d in self.directories:
             for profile in os.listdir(d):
                 if os.path.isdir(d + "/"+ profile) and profile == profileName:
@@ -71,7 +70,6 @@ class ProfileLoader(object):
     
     
     def _load_all_profiles(self):    
-            
         for d in self.directories:
             for profile in os.listdir(d):
                 if os.path.isdir(d + "/"+ profile):
@@ -107,6 +105,10 @@ class ProfileLoader(object):
     def get_profile(self, profile):
         return self.profiles[profile]
     
+    
+    def add_profile(self, profile):
+        self.profiles[profile.name] = profile
+        self.save_profile(profile)
     
     def remove_profile(self, profileName):
         
