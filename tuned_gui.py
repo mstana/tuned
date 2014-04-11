@@ -298,7 +298,8 @@ class Base(object):
 if __name__ == '__main__':
 
     if os.geteuid() != 0:
-        os.error("Superuser permissions are required to run the daemon.")
+        print os.error("Superuser permissions are required to run the daemon.")
+        print "Aplication ends."
         sys.exit(1)
 
     subprocess.call(["service", "tuned", "start"])
