@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.profiles.merger</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.profiles-module.html">Package&nbsp;profiles</a> ::
+        Module&nbsp;merger
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.profiles.merger-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.profiles.merger-module.html">Module tuned.profiles.merger</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">collections</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="Merger"></a><div id="Merger-def"><a name="L3"></a><tt class="py-lineno"> 3</tt> <a class="py-toggle" href="#" id="Merger-toggle" onclick="return toggle('Merger');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.profiles.merger.Merger-class.html">Merger</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Merger-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Merger-expanded"><a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">        Tool for merging multiple profiles into one.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="Merger.__init__"></a><div id="Merger.__init__-def"><a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="Merger.__init__-toggle" onclick="return toggle('Merger.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.profiles.merger.Merger-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Merger.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Merger.__init__-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="Merger.merge"></a><div id="Merger.merge-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="Merger.merge-toggle" onclick="return toggle('Merger.merge');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.profiles.merger.Merger-class.html#merge">merge</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">configs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Merger.merge-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Merger.merge-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">                Merge multiple configurations into one. If there are multiple units of the same type, option 'devices'</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">                is set for each unit with respect to eliminating any duplicate devices.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                <tt class="py-name">merged_config</tt> <tt class="py-op">=</tt> <tt class="py-name">reduce</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Method tuned.profiles.merger.Merger._merge_two()=tuned.profiles.merger.Merger-class.html#_merge_two"><a title="tuned.profiles.merger.Merger._merge_two" class="py-name" href="#" onclick="return doclink('link-0', '_merge_two', 'link-0');">_merge_two</a></tt><tt class="py-op">,</tt> <tt class="py-name">configs</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">merged_config</tt> </tt>
+</div><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="Merger._merge_two"></a><div id="Merger._merge_two-def"><a name="L19"></a><tt class="py-lineno">19</tt> <a class="py-toggle" href="#" id="Merger._merge_two-toggle" onclick="return toggle('Merger._merge_two');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.profiles.merger.Merger-class.html#_merge_two">_merge_two</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">profile_a</tt><tt class="py-op">,</tt> <tt class="py-param">profile_b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Merger._merge_two-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Merger._merge_two-expanded"><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">                Merge two profiles. The configuration of units with matching names are updated with options</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">                from the newer profile. If the 'replace' options of the newer unit is 'True', all options from the</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">                older unit are dropped.</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Variable tuned.plugins.instance.instance.Instance.options=tuned.plugins.instance.instance.Instance-class.html#options,Variable tuned.profiles.profile.Profile.options=tuned.profiles.profile.Profile-class.html#options,Variable tuned.profiles.unit.Unit.options=tuned.profiles.unit.Unit-class.html#options"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-1', 'options', 'link-1');">options</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Class Method tuned.monitors.base.Monitor.update()=tuned.monitors.base.Monitor-class.html#update,Class Method tuned.monitors.monitor_disk.DiskMonitor.update()=tuned.monitors.monitor_disk.DiskMonitor-class.html#update,Class Method tuned.monitors.monitor_load.LoadMonitor.update()=tuned.monitors.monitor_load.LoadMonitor-class.html#update,Class Method tuned.monitors.monitor_net.NetMonitor.update()=tuned.monitors.monitor_net.NetMonitor-class.html#update,Method tuned.utils.nettool.Nettool.update()=tuned.utils.nettool.Nettool-class.html#update"><a title="tuned.monitors.base.Monitor.update
+tuned.monitors.monitor_disk.DiskMonitor.update
+tuned.monitors.monitor_load.LoadMonitor.update
+tuned.monitors.monitor_net.NetMonitor.update
+tuned.utils.nettool.Nettool.update" class="py-name" href="#" onclick="return doclink('link-2', 'update', 'link-2');">update</a></tt><tt class="py-op">(</tt><tt class="py-name">profile_b</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-3', 'options', 'link-1');">options</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">unit_name</tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Module tuned.profiles.unit=tuned.profiles.unit-module.html"><a title="tuned.profiles.unit" class="py-name" href="#" onclick="return doclink('link-4', 'unit', 'link-4');">unit</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">profile_b</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Variable tuned.profiles.profile.Profile.units=tuned.profiles.profile.Profile-class.html#units,Package tuned.units=tuned.units-module.html"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-5', 'units', 'link-5');">units</a></tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt id="link-6" class="py-name"><a title="tuned.profiles.unit" class="py-name" href="#" onclick="return doclink('link-6', 'unit', 'link-4');">unit</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Variable tuned.profiles.unit.Unit.replace=tuned.profiles.unit.Unit-class.html#replace"><a title="tuned.profiles.unit.Unit.replace" class="py-name" href="#" onclick="return doclink('link-7', 'replace', 'link-7');">replace</a></tt> <tt class="py-keyword">or</tt> <tt class="py-name">unit_name</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-8', 'units', 'link-5');">units</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">                                <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-9', 'units', 'link-5');">units</a></tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="tuned.profiles.unit" class="py-name" href="#" onclick="return doclink('link-10', 'unit', 'link-4');">unit</a></tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">                        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">                                <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-11', 'units', 'link-5');">units</a></tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Variable tuned.profiles.unit.Unit.type=tuned.profiles.unit.Unit-class.html#type"><a title="tuned.profiles.unit.Unit.type" class="py-name" href="#" onclick="return doclink('link-12', 'type', 'link-12');">type</a></tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="tuned.profiles.unit" class="py-name" href="#" onclick="return doclink('link-13', 'unit', 'link-4');">unit</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="tuned.profiles.unit.Unit.type" class="py-name" href="#" onclick="return doclink('link-14', 'type', 'link-12');">type</a></tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                                <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-15', 'units', 'link-5');">units</a></tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Variable tuned.profiles.unit.Unit.enabled=tuned.profiles.unit.Unit-class.html#enabled"><a title="tuned.profiles.unit.Unit.enabled" class="py-name" href="#" onclick="return doclink('link-16', 'enabled', 'link-16');">enabled</a></tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="tuned.profiles.unit" class="py-name" href="#" onclick="return doclink('link-17', 'unit', 'link-4');">unit</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="tuned.profiles.unit.Unit.enabled" class="py-name" href="#" onclick="return doclink('link-18', 'enabled', 'link-16');">enabled</a></tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                                <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-19', 'units', 'link-5');">units</a></tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Variable tuned.monitors.base.Monitor.devices=tuned.monitors.base.Monitor-class.html#devices,Variable tuned.plugins.instance.instance.Instance.devices=tuned.plugins.instance.instance.Instance-class.html#devices,Variable tuned.profiles.unit.Unit.devices=tuned.profiles.unit.Unit-class.html#devices"><a title="tuned.monitors.base.Monitor.devices
+tuned.plugins.instance.instance.Instance.devices
+tuned.profiles.unit.Unit.devices" class="py-name" href="#" onclick="return doclink('link-20', 'devices', 'link-20');">devices</a></tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="tuned.profiles.unit" class="py-name" href="#" onclick="return doclink('link-21', 'unit', 'link-4');">unit</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="tuned.monitors.base.Monitor.devices
+tuned.plugins.instance.instance.Instance.devices
+tuned.profiles.unit.Unit.devices" class="py-name" href="#" onclick="return doclink('link-22', 'devices', 'link-20');">devices</a></tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">                                <tt class="py-keyword">if</tt> <tt class="py-name">unit_name</tt> <tt class="py-op">==</tt> <tt class="py-string">"script"</tt> <tt class="py-keyword">and</tt> <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-23', 'units', 'link-5');">units</a></tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-24', 'options', 'link-1');">options</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-25', 'get', 'link-25');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"script"</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                                        <tt class="py-name">script</tt> <tt class="py-op">=</tt> <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-26', 'units', 'link-5');">units</a></tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-27', 'options', 'link-1');">options</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-28', 'get', 'link-25');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"script"</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                                        <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-29', 'units', 'link-5');">units</a></tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-30', 'options', 'link-1');">options</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="tuned.monitors.base.Monitor.update
+tuned.monitors.monitor_disk.DiskMonitor.update
+tuned.monitors.monitor_load.LoadMonitor.update
+tuned.monitors.monitor_net.NetMonitor.update
+tuned.utils.nettool.Nettool.update" class="py-name" href="#" onclick="return doclink('link-31', 'update', 'link-2');">update</a></tt><tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="tuned.profiles.unit" class="py-name" href="#" onclick="return doclink('link-32', 'unit', 'link-4');">unit</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-33', 'options', 'link-1');">options</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                                        <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-34', 'units', 'link-5');">units</a></tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-35', 'options', 'link-1');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"script"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">script</tt> <tt class="py-op">+</tt> <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-36', 'units', 'link-5');">units</a></tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-37', 'options', 'link-1');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"script"</tt><tt class="py-op">]</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                                        <tt class="py-name">profile_a</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="tuned.profiles.profile.Profile.units
+tuned.units" class="py-name" href="#" onclick="return doclink('link-38', 'units', 'link-5');">units</a></tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-39', 'options', 'link-1');">options</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="tuned.monitors.base.Monitor.update
+tuned.monitors.monitor_disk.DiskMonitor.update
+tuned.monitors.monitor_load.LoadMonitor.update
+tuned.monitors.monitor_net.NetMonitor.update
+tuned.utils.nettool.Nettool.update" class="py-name" href="#" onclick="return doclink('link-40', 'update', 'link-2');">update</a></tt><tt class="py-op">(</tt><tt id="link-41" class="py-name"><a title="tuned.profiles.unit" class="py-name" href="#" onclick="return doclink('link-41', 'unit', 'link-4');">unit</a></tt><tt class="py-op">.</tt><tt id="link-42" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-42', 'options', 'link-1');">options</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">profile_a</tt> </tt>
+</div></div><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

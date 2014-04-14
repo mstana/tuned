@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.exports</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        Package&nbsp;exports
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.exports-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.exports-module.html">Package tuned.exports</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module tuned.exports.interfaces=tuned.exports.interfaces-module.html,Module tuned.storage.interfaces=tuned.storage.interfaces-module.html"><a title="tuned.exports.interfaces
+tuned.storage.interfaces" class="py-name" href="#" onclick="return doclink('link-0', 'interfaces', 'link-0');">interfaces</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Variable tuned.daemon.application.Application.controller=tuned.daemon.application.Application-class.html#controller,Module tuned.daemon.controller=tuned.daemon.controller-module.html,Module tuned.exports.controller=tuned.exports.controller-module.html"><a title="tuned.daemon.application.Application.controller
+tuned.daemon.controller
+tuned.exports.controller" class="py-name" href="#" onclick="return doclink('link-1', 'controller', 'link-1');">controller</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Module tuned.exports.dbus_exporter=tuned.exports.dbus_exporter-module.html"><a title="tuned.exports.dbus_exporter" class="py-name" href="#" onclick="return doclink('link-2', 'dbus_exporter', 'link-2');">dbus_exporter</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">dbus</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="export"></a><div id="export-def"><a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="export-toggle" onclick="return toggle('export');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports-module.html#export">export</a><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="export-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="export-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">        <tt class="py-docstring">"""Decorator, use to mark exportable methods."""</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">wrapper</tt><tt class="py-op">(</tt><tt class="py-param">method</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">                <tt class="py-name">method</tt><tt class="py-op">.</tt><tt class="py-name">export_params</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> <tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-name">kwargs</tt> <tt class="py-op">]</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">method</tt> </tt>
+</div><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">wrapper</tt> </tt>
+</div><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="register_exporter"></a><div id="register_exporter-def"><a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="register_exporter-toggle" onclick="return toggle('register_exporter');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports-module.html#register_exporter">register_exporter</a><tt class="py-op">(</tt><tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="register_exporter-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="register_exporter-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-3" class="py-name" targets="Package tuned.plugins.instance=tuned.plugins.instance-module.html,Module tuned.plugins.instance.instance=tuned.plugins.instance.instance-module.html"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-3', 'instance', 'link-3');">instance</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name"><a title="tuned.exports.interfaces
+tuned.storage.interfaces" class="py-name" href="#" onclick="return doclink('link-4', 'interfaces', 'link-0');">interfaces</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Class tuned.exports.interfaces.ExporterInterface=tuned.exports.interfaces.ExporterInterface-class.html"><a title="tuned.exports.interfaces.ExporterInterface" class="py-name" href="#" onclick="return doclink('link-5', 'ExporterInterface', 'link-5');">ExporterInterface</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-name">ctl</tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="tuned.daemon.application.Application.controller
+tuned.daemon.controller
+tuned.exports.controller" class="py-name" href="#" onclick="return doclink('link-6', 'controller', 'link-1');">controller</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Class tuned.exports.controller.ExportsController=tuned.exports.controller.ExportsController-class.html"><a title="tuned.exports.controller.ExportsController" class="py-name" href="#" onclick="return doclink('link-7', 'ExportsController', 'link-7');">ExportsController</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Class Method tuned.patterns.Singleton.get_instance()=tuned.patterns.Singleton-class.html#get_instance"><a title="tuned.patterns.Singleton.get_instance" class="py-name" href="#" onclick="return doclink('link-8', 'get_instance', 'link-8');">get_instance</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">ctl</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method tuned.exports.controller.ExportsController.register_exporter()=tuned.exports.controller.ExportsController-class.html#register_exporter,Function tuned.exports.register_exporter()=tuned.exports-module.html#register_exporter"><a title="tuned.exports.controller.ExportsController.register_exporter
+tuned.exports.register_exporter" class="py-name" href="#" onclick="return doclink('link-9', 'register_exporter', 'link-9');">register_exporter</a></tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-10', 'instance', 'link-3');">instance</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="register_object"></a><div id="register_object-def"><a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="register_object-toggle" onclick="return toggle('register_object');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports-module.html#register_object">register_object</a><tt class="py-op">(</tt><tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="register_object-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="register_object-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-11" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-11', 'instance', 'link-3');">instance</a></tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name"><a title="tuned.exports.interfaces
+tuned.storage.interfaces" class="py-name" href="#" onclick="return doclink('link-12', 'interfaces', 'link-0');">interfaces</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Class tuned.exports.interfaces.ExportableInterface=tuned.exports.interfaces.ExportableInterface-class.html"><a title="tuned.exports.interfaces.ExportableInterface" class="py-name" href="#" onclick="return doclink('link-13', 'ExportableInterface', 'link-13');">ExportableInterface</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">ctl</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="tuned.daemon.application.Application.controller
+tuned.daemon.controller
+tuned.exports.controller" class="py-name" href="#" onclick="return doclink('link-14', 'controller', 'link-1');">controller</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="tuned.exports.controller.ExportsController" class="py-name" href="#" onclick="return doclink('link-15', 'ExportsController', 'link-7');">ExportsController</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="tuned.patterns.Singleton.get_instance" class="py-name" href="#" onclick="return doclink('link-16', 'get_instance', 'link-8');">get_instance</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">ctl</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method tuned.exports.controller.ExportsController.register_object()=tuned.exports.controller.ExportsController-class.html#register_object,Function tuned.exports.register_object()=tuned.exports-module.html#register_object"><a title="tuned.exports.controller.ExportsController.register_object
+tuned.exports.register_object" class="py-name" href="#" onclick="return doclink('link-17', 'register_object', 'link-17');">register_object</a></tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-18', 'instance', 'link-3');">instance</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="start"></a><div id="start-def"><a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="start-toggle" onclick="return toggle('start');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports-module.html#start">start</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="start-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="start-expanded"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-name">ctl</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="tuned.daemon.application.Application.controller
+tuned.daemon.controller
+tuned.exports.controller" class="py-name" href="#" onclick="return doclink('link-19', 'controller', 'link-1');">controller</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="tuned.exports.controller.ExportsController" class="py-name" href="#" onclick="return doclink('link-20', 'ExportsController', 'link-7');">ExportsController</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="tuned.patterns.Singleton.get_instance" class="py-name" href="#" onclick="return doclink('link-21', 'get_instance', 'link-8');">get_instance</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">ctl</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method tuned.admin.dbus_controller.DBusController.start()=tuned.admin.dbus_controller.DBusController-class.html#start,Method tuned.daemon.controller.Controller.start()=tuned.daemon.controller.Controller-class.html#start,Method tuned.daemon.daemon.Daemon.start()=tuned.daemon.daemon.Daemon-class.html#start,Method tuned.exports.controller.ExportsController.start()=tuned.exports.controller.ExportsController-class.html#start,Method tuned.exports.dbus_exporter.DBusExporter.start()=tuned.exports.dbus_exporter.DBusExporter-class.html#start,Method tuned.exports.interfaces.ExporterInterface.start()=tuned.exports.interfaces.ExporterInterface-class.html#start,Function tuned.exports.start()=tuned.exports-module.html#start"><a title="tuned.admin.dbus_controller.DBusController.start
+tuned.daemon.controller.Controller.start
+tuned.daemon.daemon.Daemon.start
+tuned.exports.controller.ExportsController.start
+tuned.exports.dbus_exporter.DBusExporter.start
+tuned.exports.interfaces.ExporterInterface.start
+tuned.exports.start" class="py-name" href="#" onclick="return doclink('link-22', 'start', 'link-22');">start</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="stop"></a><div id="stop-def"><a name="L28"></a><tt class="py-lineno">28</tt> <a class="py-toggle" href="#" id="stop-toggle" onclick="return toggle('stop');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports-module.html#stop">stop</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="stop-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="stop-expanded"><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">ctl</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name"><a title="tuned.daemon.application.Application.controller
+tuned.daemon.controller
+tuned.exports.controller" class="py-name" href="#" onclick="return doclink('link-23', 'controller', 'link-1');">controller</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="tuned.exports.controller.ExportsController" class="py-name" href="#" onclick="return doclink('link-24', 'ExportsController', 'link-7');">ExportsController</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="tuned.patterns.Singleton.get_instance" class="py-name" href="#" onclick="return doclink('link-25', 'get_instance', 'link-8');">get_instance</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">ctl</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method tuned.admin.dbus_controller.DBusController.stop()=tuned.admin.dbus_controller.DBusController-class.html#stop,Method tuned.daemon.controller.Controller.stop()=tuned.daemon.controller.Controller-class.html#stop,Method tuned.daemon.daemon.Daemon.stop()=tuned.daemon.daemon.Daemon-class.html#stop,Method tuned.exports.controller.ExportsController.stop()=tuned.exports.controller.ExportsController-class.html#stop,Method tuned.exports.dbus_exporter.DBusExporter.stop()=tuned.exports.dbus_exporter.DBusExporter-class.html#stop,Method tuned.exports.interfaces.ExporterInterface.stop()=tuned.exports.interfaces.ExporterInterface-class.html#stop,Function tuned.exports.stop()=tuned.exports-module.html#stop"><a title="tuned.admin.dbus_controller.DBusController.stop
+tuned.daemon.controller.Controller.stop
+tuned.daemon.daemon.Daemon.stop
+tuned.exports.controller.ExportsController.stop
+tuned.exports.dbus_exporter.DBusExporter.stop
+tuned.exports.interfaces.ExporterInterface.stop
+tuned.exports.stop" class="py-name" href="#" onclick="return doclink('link-26', 'stop', 'link-26');">stop</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

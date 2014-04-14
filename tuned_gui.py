@@ -114,8 +114,6 @@ class Base(object):
         self.treestore_actual_plugins = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)
 
         self.dialog_add_plugin = self.builder.get_object("dialogAddPlugin")
-        self.combobox_plugins = self.builder.get_object("comboboxPlugins")
-        self.combobox_plugins.set_model(self.treestore_actual_plugins)
         #
         #    GET WIDGETS
         #
@@ -130,6 +128,7 @@ class Base(object):
         self.comboboxtext1 = self.builder.get_object("comboboxtext1")
         self.button_fast_change_profile = self.builder.get_object("buttonFastChangeProfile")
         self.spinner_fast_change_profile = self.builder.get_object("spinnerFastChangeProfile")
+        self.spinner_fast_change_profile.hide()
 
         self.switch_tuned_start_stop = self.builder.get_object("switch_tuned_start_stop")
         self.switch_tuned_startup_start_stop = self.builder.get_object("switch_tuned_startup_start_stop")
@@ -157,15 +156,12 @@ class Base(object):
         self.combobox_include_profile.pack_start(cell, True)
         self.combobox_include_profile.add_attribute(cell,'text', 0 )
 
-        
+
         self.treestore_profile_manager = Gtk.ListStore(GObject.TYPE_STRING)
         self.treeview_profile_manager.append_column(Gtk.TreeViewColumn("Profile", Gtk.CellRendererText(), text=0))
         self.treeview_profile_manager.set_model(self.treestore_profile_manager)
-        
-        
 
-        
-        
+
         for profile in self.manager.get_names():
             self.treestore_profile_manager.append([profile])
         self.treeview_profile_manager.get_selection().select_path(0)
@@ -203,19 +199,36 @@ class Base(object):
         self.button_upadte_selected_profile.connect('clicked', self.execute_update_profile)
         self.button_delete_selected_profile.connect('clicked', self.execute_remove_profile)
 
-        self.button_confirm_profile = self.builder.get_object("buttonConfirmProfile")
-        self.button_confirm_profile.connect("clicked", self.make_profile)
+        self.button_confirm_profile_create = self.builder.get_object("buttonConfirmProfileCreate")
+        self.button_confirm_profile_update = self.builder.get_object("buttonConfirmProfileUpdate")
+        
+        self.button_confirm_profile_create.connect("clicked", self.execute_make_profile)
+        self.button_confirm_profile_update.connect("clicked", self.execute_modify_profile)
+        
 
         self.main_window.connect("destroy", Gtk.main_quit)
         self.main_window.show()
 
-
-    def make_profile(self, button):
+    
+    def execute_make_profile(self, button):
+        raise Exception()
+    
+    def execute_modify_profile(self, button):
+        
 #             TO DO - get values from window to object!
-        profile = None
-        profile.name = self.entry_profile_name.get_text()
-        self.manager.add_profile(profile)
-
+        modify_profile = self.manager.get_profile(self.get_treeview_selected())
+        modify_profile.name = self.entry_profile_name.get_text()
+        
+        try:
+            self.manager.add_profile(modify_profile)
+            self.window_profile_editor.close()
+        except ManagerException:
+            self.error_dialog("You can not do this.", "info")
+        
+        
+            
+        
+        
     def on_delete_event(self, window, data):
         window.hide()
         return True
@@ -230,13 +243,20 @@ class Base(object):
                 text += "\n"+ o + " = " + self.active_profile.units[u].options[o]
                 text += "\n"
 
+    def _get_active_profile_name(self):
+        return self.manager.get_profile(self.controller.active_profile()).name
+
+
     def execute_remove_profile(self, button):
         profile = self.get_treeview_selected()
         try:
+            if (self._get_active_profile_name() == profile):
+                self.error_dialog("You can not remove active profile", "Please deactivate profile by choosind another!")
+                return
             self.manager.remove_profile(profile)
             self.treestore_profile_manager.remove(iter)
         except ManagerException as ex:
-            self.window_profile_editor_rawself.error_dialog("Profile can not be remove", ex.__str__())
+            self.error_dialog("Profile can not be remove", ex.__str__())
 
     def execute_cancel_window_profile_editor(self, button):
         self.window_profile_editor.close()
@@ -250,9 +270,37 @@ class Base(object):
         text_buffer = self.textview1.get_buffer()
         text_buffer.set_text(self.manager.get_raw_profile(profile_name))
         self.window_profile_editor_raw.show_all()  
+
+
+    def execute_choose_plugin_dialog(self):
+
+        self.button_add_plugin = self.builder.get_object("buttonAddPluginDialog")
+        self.button_cancel_add_plugin_dialog = self.builder.get_object("buttonCloseAddPlugin")        
+
+        self.combobox_plugins = self.builder.get_object("comboboxPlugins")
+        self.combobox_plugins.set_model(self.treestore_actual_plugins)
+
+        self.button_cancel_add_plugin_dialog.connect('clicked', lambda d: self.dialog_add_plugin.hide())
+        self.button_add_plugin.connect('clicked', self.execute_add_plugin_dialog_choose)
         
-        
+        self.dialog_add_plugin.connect('destroy', lambda d: self.dialog_add_plugin.hide())
+
+        self.dialog_add_plugin.run()
+        self.dialog_add_plugin.hide()
+
+    def execute_add_plugin_dialog_choose(self, data):            
+        if (self.combobox_plugins.get_active() == -1):
+            self.error_dialog("No plugin selected", "To add plugin You have to select one.")
+        else:     
+            self.dialog_add_plugin.hide()
+            return self.combobox_plugins.get_active()
+
     def execute_add_plugin_to_notebook(self, data):
+
+        plugin = self.execute_choose_plugin_dialog() 
+
+        if (plugin == None):
+            return
         
         treestore = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)        
 #         TO DO: store data to treestore - option, value for plugin
@@ -267,7 +315,11 @@ class Base(object):
         treeview.append_column(column_option)
         
 #         TO DO: Store Name of plugin
-        plugin_name = Gtk.Label("name of plugin")
+        plugin_name = Gtk.Label(plugin)
+        
+        
+        
+#         add plugin to profile backend
         
         self.notebook_plugins.append_page_menu( treeview, plugin_name, None)
         self.notebook_plugins.show_all()
@@ -286,6 +338,8 @@ class Base(object):
     
     def execute_create_profile(self, button):
         self.reset_values_window_edit_profile()
+        self.button_confirm_profile_create.show()
+        self.button_confirm_profile_update.hide()
         self.button_open_raw.hide()
         self.window_profile_editor.show()
 
@@ -314,33 +368,45 @@ class Base(object):
 
     def execute_update_profile(self, button):
         
+        self.button_confirm_profile_create.hide()
+        self.button_confirm_profile_update.show()
         self.button_open_raw.show()
         profile_name = self.get_treeview_selected()
+        
         if profile_name == None :
             self.error_dialog("No profile Selected", "To update profile please select profile.")
+            return
+        if (self._get_active_profile_name() == profile_name):
+            self.error_dialog("You can not update active profile", "Please deactivate profile by choosind another!")
+            return
         
-        profile = self.manager.get_profile(profile_name)
+        if (self.manager.is_profile_removable(profile_name)):
+            
+            profile = self.manager.get_profile(profile_name)
 
-        self.entry_profile_name.set_text(profile.name)
-        try:
-            included = profile.options["include"]
-            profile.options["include"]
-            self.combobox_include_profile.set_active(self.dict_profiles[profile.options["include"]])
-        except KeyError:
-            self.combobox_include_profile.set_active(0)      
-
-#    plugins
-
-
-        self.window_profile_editor.show()
-
+            self.entry_profile_name.set_text(profile.name)
+            try:
+                included = profile.options["include"]
+                profile.options["include"]
+                self.combobox_include_profile.set_active(self.dict_profiles[profile.options["include"]])
+            except KeyError:
+                self.combobox_include_profile.set_active(0)
+    #    plugins
+            self.window_profile_editor.show()
+        else:
+            self.error_dialog("You can not update Factory profile", "")
+            
+            
+            
     def execute_change_profile(self, profile):
+        self.spinner_fast_change_profile.show()
         self.spinner_fast_change_profile.start()
         if profile is not None:
             self.controller.switch_profile(self.comboboxtext1.get_active_text())
             self.label_actual_profile.set_text(self.controller.active_profile())
         self.refresh_summary_of_actual_profile()
         self.spinner_fast_change_profile.stop()
+        self.spinner_fast_change_profile.hide()
 
 
     def execute_switch_tuned(self, switch, no_idea_argument2):

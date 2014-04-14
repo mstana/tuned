@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.plugins.plugin_net</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.plugins-module.html">Package&nbsp;plugins</a> ::
+        Module&nbsp;plugin_net
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.plugins.plugin_net-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.plugins.plugin_net-module.html">Module tuned.plugins.plugin_net</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module tuned.monitors.base=tuned.monitors.base-module.html,Module tuned.plugins.base=tuned.plugins.base-module.html"><a title="tuned.monitors.base
+tuned.plugins.base" class="py-name" href="#" onclick="return doclink('link-0', 'base', 'link-0');">base</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Module tuned.plugins.decorators=tuned.plugins.decorators-module.html"><a title="tuned.plugins.decorators" class="py-name" href="#" onclick="return doclink('link-1', 'decorators', 'link-1');">decorators</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Package tuned=tuned-module.html"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-2', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module tuned.logs=tuned.logs-module.html"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-3', 'logs', 'link-3');">logs</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-4', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package tuned.utils=tuned.utils-module.html"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-5', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module tuned.utils.nettool=tuned.utils.nettool-module.html"><a title="tuned.utils.nettool" class="py-name" href="#" onclick="return doclink('link-6', 'nettool', 'link-6');">nettool</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Function tuned.utils.nettool.ethcard()=tuned.utils.nettool-module.html#ethcard"><a title="tuned.utils.nettool.ethcard" class="py-name" href="#" onclick="return doclink('link-7', 'ethcard', 'link-7');">ethcard</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable tuned.daemon.application.log=tuned.daemon.application-module.html#log,Variable tuned.daemon.controller.log=tuned.daemon.controller-module.html#log,Variable tuned.daemon.daemon.log=tuned.daemon.daemon-module.html#log,Method tuned.exceptions.TunedException.log()=tuned.exceptions.TunedException-class.html#log,Variable tuned.hardware.inventory.log=tuned.hardware.inventory-module.html#log,Variable tuned.monitors.base.log=tuned.monitors.base-module.html#log,Variable tuned.monitors.repository.log=tuned.monitors.repository-module.html#log,Variable tuned.plugins.base.log=tuned.plugins.base-module.html#log,Variable tuned.plugins.hotplug.log=tuned.plugins.hotplug-module.html#log,Variable tuned.plugins.plugin_audio.log=tuned.plugins.plugin_audio-module.html#log,Variable tuned.plugins.plugin_cpu.log=tuned.plugins.plugin_cpu-module.html#log,Variable tuned.plugins.plugin_disk.log=tuned.plugins.plugin_disk-module.html#log,Variable tuned.plugins.plugin_eeepc_she.log=tuned.plugins.plugin_eeepc_she-module.html#log,Variable tuned.plugins.plugin_mounts.log=tuned.plugins.plugin_mounts-module.html#log,Variable tuned.plugins.plugin_net.log=tuned.plugins.plugin_net-module.html#log,Variable tuned.plugins.plugin_script.log=tuned.plugins.plugin_script-module.html#log,Variable tuned.plugins.plugin_sysctl.log=tuned.plugins.plugin_sysctl-module.html#log,Variable tuned.plugins.plugin_sysfs.log=tuned.plugins.plugin_sysfs-module.html#log,Variable tuned.plugins.plugin_usb.log=tuned.plugins.plugin_usb-module.html#log,Variable tuned.plugins.plugin_video.log=tuned.plugins.plugin_video-module.html#log,Variable tuned.plugins.plugin_vm.log=tuned.plugins.plugin_vm-module.html#log,Variable tuned.plugins.repository.log=tuned.plugins.repository-module.html#log,Variable tuned.profiles.loader.log=tuned.profiles.loader-module.html#log,Variable tuned.storage.pickle_provider.log=tuned.storage.pickle_provider-module.html#log,Variable tuned.units.manager.log=tuned.units.manager-module.html#log,Variable tuned.utils.commands.log=tuned.utils.commands-module.html#log,Variable tuned.utils.nettool.log=tuned.utils.nettool-module.html#log,Variable tuned.utils.plugin_loader.log=tuned.utils.plugin_loader-module.html#log"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-8', 'log', 'link-8');">log</a></tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-9', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-10', 'logs', 'link-3');">logs</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-11', 'get', 'link-11');">get</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt id="link-12" class="py-name" targets="Variable tuned.plugins.plugin_net.WOL_VALUES=tuned.plugins.plugin_net-module.html#WOL_VALUES"><a title="tuned.plugins.plugin_net.WOL_VALUES" class="py-name" href="#" onclick="return doclink('link-12', 'WOL_VALUES', 'link-12');">WOL_VALUES</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"pumbagsd"</tt> </tt>
+<a name="NetTuningPlugin"></a><div id="NetTuningPlugin-def"><a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt> <a class="py-toggle" href="#" id="NetTuningPlugin-toggle" onclick="return toggle('NetTuningPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html">NetTuningPlugin</a><tt class="py-op">(</tt><tt class="py-base-class">base</tt><tt class="py-op">.</tt><tt class="py-base-class">Plugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="NetTuningPlugin-expanded"><a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">        Plugin for ethernet card options tuning.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin.__init__"></a><div id="NetTuningPlugin.__init__-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="NetTuningPlugin.__init__-toggle" onclick="return toggle('NetTuningPlugin.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin.__init__-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">                <tt class="py-name">super</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method tuned.admin.admin.Admin.__init__()=tuned.admin.admin.Admin-class.html#__init__,Method tuned.admin.dbus_controller.DBusController.__init__()=tuned.admin.dbus_controller.DBusController-class.html#__init__,Method tuned.daemon.application.Application.__init__()=tuned.daemon.application.Application-class.html#__init__,Method tuned.daemon.controller.Controller.__init__()=tuned.daemon.controller.Controller-class.html#__init__,Method tuned.daemon.daemon.Daemon.__init__()=tuned.daemon.daemon.Daemon-class.html#__init__,Method tuned.exports.controller.ExportsController.__init__()=tuned.exports.controller.ExportsController-class.html#__init__,Method tuned.exports.dbus_exporter.DBusExporter.__init__()=tuned.exports.dbus_exporter.DBusExporter-class.html#__init__,Method tuned.hardware.inventory.Inventory.__init__()=tuned.hardware.inventory.Inventory-class.html#__init__,Method tuned.logs.TunedLogger.__init__()=tuned.logs.TunedLogger-class.html#__init__,Method tuned.monitors.base.Monitor.__init__()=tuned.monitors.base.Monitor-class.html#__init__,Method tuned.monitors.repository.Repository.__init__()=tuned.monitors.repository.Repository-class.html#__init__,Method tuned.patterns.Singleton.__init__()=tuned.patterns.Singleton-class.html#__init__,Method tuned.plugins.base.Plugin.__init__()=tuned.plugins.base.Plugin-class.html#__init__,Method tuned.plugins.hotplug.Plugin.__init__()=tuned.plugins.hotplug.Plugin-class.html#__init__,Method tuned.plugins.instance.instance.Instance.__init__()=tuned.plugins.instance.instance.Instance-class.html#__init__,Method tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#__init__,Method tuned.plugins.plugin_disk.DiskPlugin.__init__()=tuned.plugins.plugin_disk.DiskPlugin-class.html#__init__,Method tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__()=tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#__init__,Method tuned.plugins.plugin_net.NetTuningPlugin.__init__()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#__init__,Method tuned.plugins.plugin_sysctl.SysctlPlugin.__init__()=tuned.plugins.plugin_sysctl.SysctlPlugin-class.html#__init__,Method tuned.plugins.plugin_sysfs.SysfsPlugin.__init__()=tuned.plugins.plugin_sysfs.SysfsPlugin-class.html#__init__,Method tuned.plugins.repository.Repository.__init__()=tuned.plugins.repository.Repository-class.html#__init__,Method tuned.profiles.loader.Loader.__init__()=tuned.profiles.loader.Loader-class.html#__init__,Method tuned.profiles.locator.Locator.__init__()=tuned.profiles.locator.Locator-class.html#__init__,Method tuned.profiles.merger.Merger.__init__()=tuned.profiles.merger.Merger-class.html#__init__,Method tuned.profiles.profile.Profile.__init__()=tuned.profiles.profile.Profile-class.html#__init__,Method tuned.profiles.unit.Unit.__init__()=tuned.profiles.unit.Unit-class.html#__init__,Method tuned.storage.factory.Factory.__init__()=tuned.storage.factory.Factory-class.html#__init__,Method tuned.storage.pickle_provider.PickleProvider.__init__()=tuned.storage.pickle_provider.PickleProvider-class.html#__init__,Method tuned.storage.storage.Storage.__init__()=tuned.storage.storage.Storage-class.html#__init__,Method tuned.units.manager.Manager.__init__()=tuned.units.manager.Manager-class.html#__init__,Method tuned.utils.nettool.Nettool.__init__()=tuned.utils.nettool.Nettool-class.html#__init__,Method tuned.utils.plugin_loader.PluginLoader.__init__()=tuned.utils.plugin_loader.PluginLoader-class.html#__init__"><a title="tuned.admin.admin.Admin.__init__
+tuned.admin.dbus_controller.DBusController.__init__
+tuned.daemon.application.Application.__init__
+tuned.daemon.controller.Controller.__init__
+tuned.daemon.daemon.Daemon.__init__
+tuned.exports.controller.ExportsController.__init__
+tuned.exports.dbus_exporter.DBusExporter.__init__
+tuned.hardware.inventory.Inventory.__init__
+tuned.logs.TunedLogger.__init__
+tuned.monitors.base.Monitor.__init__
+tuned.monitors.repository.Repository.__init__
+tuned.patterns.Singleton.__init__
+tuned.plugins.base.Plugin.__init__
+tuned.plugins.hotplug.Plugin.__init__
+tuned.plugins.instance.instance.Instance.__init__
+tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__
+tuned.plugins.plugin_disk.DiskPlugin.__init__
+tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__
+tuned.plugins.plugin_net.NetTuningPlugin.__init__
+tuned.plugins.plugin_sysctl.SysctlPlugin.__init__
+tuned.plugins.plugin_sysfs.SysfsPlugin.__init__
+tuned.plugins.repository.Repository.__init__
+tuned.profiles.loader.Loader.__init__
+tuned.profiles.locator.Locator.__init__
+tuned.profiles.merger.Merger.__init__
+tuned.profiles.profile.Profile.__init__
+tuned.profiles.unit.Unit.__init__
+tuned.storage.factory.Factory.__init__
+tuned.storage.pickle_provider.PickleProvider.__init__
+tuned.storage.storage.Storage.__init__
+tuned.units.manager.Manager.__init__
+tuned.utils.nettool.Nettool.__init__
+tuned.utils.plugin_loader.PluginLoader.__init__" class="py-name" href="#" onclick="return doclink('link-13', '__init__', 'link-13');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_load_smallest</tt> <tt class="py-op">=</tt> <tt class="py-number">0.05</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_level_steps</tt> <tt class="py-op">=</tt> <tt class="py-number">6</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._init_devices"></a><div id="NetTuningPlugin._init_devices-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._init_devices-toggle" onclick="return toggle('NetTuningPlugin._init_devices');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_init_devices">_init_devices</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._init_devices-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._init_devices-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Variable tuned.profiles.unit.Unit._devices=tuned.profiles.unit.Unit-class.html#_devices"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-14', '_devices', 'link-14');">_devices</a></tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name" targets="Method tuned.storage.interfaces.Provider.set()=tuned.storage.interfaces.Provider-class.html#set,Method tuned.storage.pickle_provider.PickleProvider.set()=tuned.storage.pickle_provider.PickleProvider-class.html#set,Method tuned.storage.storage.Storage.set()=tuned.storage.storage.Storage-class.html#set"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-15', 'set', 'link-15');">set</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_assigned_devices</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-16', 'set', 'link-15');">set</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">                <tt class="py-name">re_not_virtual</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'(?!.*/virtual/.*)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">device</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_hardware_inventory</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method tuned.hardware.inventory.Inventory.get_devices()=tuned.hardware.inventory.Inventory-class.html#get_devices"><a title="tuned.hardware.inventory.Inventory.get_devices" class="py-name" href="#" onclick="return doclink('link-17', 'get_devices', 'link-17');">get_devices</a></tt><tt class="py-op">(</tt><tt class="py-string">"net"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">re_not_virtual</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method tuned.hardware.device_matcher.DeviceMatcher.match()=tuned.hardware.device_matcher.DeviceMatcher-class.html#match"><a title="tuned.hardware.device_matcher.DeviceMatcher.match" class="py-name" href="#" onclick="return doclink('link-18', 'match', 'link-18');">match</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">device_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">                                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-19', '_devices', 'link-14');">_devices</a></tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">sys_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_free_devices</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-20', '_devices', 'link-14');">_devices</a></tt><tt class="py-op">.</tt><tt class="py-name">copy</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">                <tt id="link-21" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-21', 'log', 'link-8');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"devices: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-22', '_devices', 'link-14');">_devices</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._instance_init"></a><div id="NetTuningPlugin._instance_init-def"><a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._instance_init-toggle" onclick="return toggle('NetTuningPlugin._instance_init');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_instance_init">_instance_init</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._instance_init-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._instance_init-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">                <tt id="link-23" class="py-name" targets="Package tuned.plugins.instance=tuned.plugins.instance-module.html,Module tuned.plugins.instance.instance=tuned.plugins.instance.instance-module.html"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-23', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_has_static_tuning</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">                <tt id="link-24" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-24', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_has_dynamic_tuning</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                <tt id="link-25" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-25', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_monitors_repository</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method tuned.hardware.inventory._MonitorObserverFactory.create()=tuned.hardware.inventory._MonitorObserverFactory-class.html#create,Method tuned.monitors.repository.Repository.create()=tuned.monitors.repository.Repository-class.html#create,Method tuned.plugins.instance.factory.Factory.create()=tuned.plugins.instance.factory.Factory-class.html#create,Method tuned.plugins.repository.Repository.create()=tuned.plugins.repository.Repository-class.html#create,Method tuned.profiles.factory.Factory.create()=tuned.profiles.factory.Factory-class.html#create,Method tuned.storage.factory.Factory.create()=tuned.storage.factory.Factory-class.html#create,Method tuned.storage.interfaces.Factory.create()=tuned.storage.interfaces.Factory-class.html#create,Method tuned.units.manager.Manager.create()=tuned.units.manager.Manager-class.html#create"><a title="tuned.hardware.inventory._MonitorObserverFactory.create
+tuned.monitors.repository.Repository.create
+tuned.plugins.instance.factory.Factory.create
+tuned.plugins.repository.Repository.create
+tuned.profiles.factory.Factory.create
+tuned.storage.factory.Factory.create
+tuned.storage.interfaces.Factory.create
+tuned.units.manager.Manager.create" class="py-name" href="#" onclick="return doclink('link-26', 'create', 'link-26');">create</a></tt><tt class="py-op">(</tt><tt class="py-string">"net"</tt><tt class="py-op">,</tt> <tt id="link-27" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-27', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Variable tuned.monitors.base.Monitor.devices=tuned.monitors.base.Monitor-class.html#devices,Variable tuned.plugins.instance.instance.Instance.devices=tuned.plugins.instance.instance.Instance-class.html#devices,Variable tuned.profiles.unit.Unit.devices=tuned.profiles.unit.Unit-class.html#devices"><a title="tuned.monitors.base.Monitor.devices
+tuned.plugins.instance.instance.Instance.devices
+tuned.profiles.unit.Unit.devices" class="py-name" href="#" onclick="return doclink('link-28', 'devices', 'link-28');">devices</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                <tt id="link-29" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-29', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                <tt id="link-30" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-30', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._instance_cleanup"></a><div id="NetTuningPlugin._instance_cleanup-def"><a name="L42"></a><tt class="py-lineno"> 42</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._instance_cleanup-toggle" onclick="return toggle('NetTuningPlugin._instance_cleanup');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_instance_cleanup">_instance_cleanup</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._instance_cleanup-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._instance_cleanup-expanded"><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-31" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-31', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_monitors_repository</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Method tuned.monitors.repository.Repository.delete()=tuned.monitors.repository.Repository-class.html#delete,Method tuned.plugins.repository.Repository.delete()=tuned.plugins.repository.Repository-class.html#delete"><a title="tuned.monitors.repository.Repository.delete
+tuned.plugins.repository.Repository.delete" class="py-name" href="#" onclick="return doclink('link-32', 'delete', 'link-32');">delete</a></tt><tt class="py-op">(</tt><tt id="link-33" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-33', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                        <tt id="link-34" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-34', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._instance_apply_dynamic"></a><div id="NetTuningPlugin._instance_apply_dynamic-def"><a name="L47"></a><tt class="py-lineno"> 47</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._instance_apply_dynamic-toggle" onclick="return toggle('NetTuningPlugin._instance_apply_dynamic');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_instance_apply_dynamic">_instance_apply_dynamic</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._instance_apply_dynamic-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._instance_apply_dynamic-expanded"><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Method tuned.plugins.base.Plugin._instance_update_dynamic()=tuned.plugins.base.Plugin-class.html#_instance_update_dynamic,Method tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_update_dynamic()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_update_dynamic,Method tuned.plugins.plugin_disk.DiskPlugin._instance_update_dynamic()=tuned.plugins.plugin_disk.DiskPlugin-class.html#_instance_update_dynamic,Method tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin._instance_update_dynamic()=tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#_instance_update_dynamic,Method tuned.plugins.plugin_net.NetTuningPlugin._instance_update_dynamic()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#_instance_update_dynamic"><a title="tuned.plugins.base.Plugin._instance_update_dynamic
+tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_update_dynamic
+tuned.plugins.plugin_disk.DiskPlugin._instance_update_dynamic
+tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin._instance_update_dynamic
+tuned.plugins.plugin_net.NetTuningPlugin._instance_update_dynamic" class="py-name" href="#" onclick="return doclink('link-35', '_instance_update_dynamic', 'link-35');">_instance_update_dynamic</a></tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-36', 'instance', 'link-23');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._instance_update_dynamic"></a><div id="NetTuningPlugin._instance_update_dynamic-def"><a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._instance_update_dynamic-toggle" onclick="return toggle('NetTuningPlugin._instance_update_dynamic');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_instance_update_dynamic">_instance_update_dynamic</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._instance_update_dynamic-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._instance_update_dynamic-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt id="link-37" class="py-name" targets="Method tuned.profiles.loader.Loader.load()=tuned.profiles.loader.Loader-class.html#load,Method tuned.storage.interfaces.Provider.load()=tuned.storage.interfaces.Provider-class.html#load,Method tuned.storage.pickle_provider.PickleProvider.load()=tuned.storage.pickle_provider.PickleProvider-class.html#load"><a title="tuned.profiles.loader.Loader.load
+tuned.storage.interfaces.Provider.load
+tuned.storage.pickle_provider.PickleProvider.load" class="py-name" href="#" onclick="return doclink('link-37', 'load', 'link-37');">load</a></tt> <tt class="py-op">=</tt> <tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">value</tt><tt class="py-op">:</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-38" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-38', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method tuned.monitors.base.Monitor.get_device_load()=tuned.monitors.base.Monitor-class.html#get_device_load"><a title="tuned.monitors.base.Monitor.get_device_load" class="py-name" href="#" onclick="return doclink('link-39', 'get_device_load', 'link-39');">get_device_load</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-40" class="py-name"><a title="tuned.profiles.loader.Loader.load
+tuned.storage.interfaces.Provider.load
+tuned.storage.pickle_provider.PickleProvider.load" class="py-name" href="#" onclick="return doclink('link-40', 'load', 'link-37');">load</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">device</tt> <tt class="py-keyword">in</tt> <tt id="link-41" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-41', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Method tuned.plugins.plugin_disk.DiskPlugin._init_stats_and_idle()=tuned.plugins.plugin_disk.DiskPlugin-class.html#_init_stats_and_idle,Method tuned.plugins.plugin_net.NetTuningPlugin._init_stats_and_idle()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#_init_stats_and_idle"><a title="tuned.plugins.plugin_disk.DiskPlugin._init_stats_and_idle
+tuned.plugins.plugin_net.NetTuningPlugin._init_stats_and_idle" class="py-name" href="#" onclick="return doclink('link-42', '_init_stats_and_idle', 'link-42');">_init_stats_and_idle</a></tt><tt class="py-op">(</tt><tt id="link-43" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-43', 'instance', 'link-23');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method tuned.plugins.plugin_disk.DiskPlugin._update_stats()=tuned.plugins.plugin_disk.DiskPlugin-class.html#_update_stats,Method tuned.plugins.plugin_net.NetTuningPlugin._update_stats()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#_update_stats"><a title="tuned.plugins.plugin_disk.DiskPlugin._update_stats
+tuned.plugins.plugin_net.NetTuningPlugin._update_stats" class="py-name" href="#" onclick="return doclink('link-44', '_update_stats', 'link-44');">_update_stats</a></tt><tt class="py-op">(</tt><tt id="link-45" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-45', 'instance', 'link-23');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">,</tt> <tt id="link-46" class="py-name"><a title="tuned.profiles.loader.Loader.load
+tuned.storage.interfaces.Provider.load
+tuned.storage.pickle_provider.PickleProvider.load" class="py-name" href="#" onclick="return doclink('link-46', 'load', 'link-37');">load</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method tuned.plugins.plugin_disk.DiskPlugin._update_idle()=tuned.plugins.plugin_disk.DiskPlugin-class.html#_update_idle,Method tuned.plugins.plugin_net.NetTuningPlugin._update_idle()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#_update_idle"><a title="tuned.plugins.plugin_disk.DiskPlugin._update_idle
+tuned.plugins.plugin_net.NetTuningPlugin._update_idle" class="py-name" href="#" onclick="return doclink('link-47', '_update_idle', 'link-47');">_update_idle</a></tt><tt class="py-op">(</tt><tt id="link-48" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-48', 'instance', 'link-23');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                <tt class="py-name">stats</tt> <tt class="py-op">=</tt> <tt id="link-49" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-49', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                <tt class="py-name">idle</tt> <tt class="py-op">=</tt> <tt id="link-50" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-50', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"level"</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt> <tt class="py-keyword">and</tt> <tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"read"</tt><tt class="py-op">]</tt> <tt class="py-op">&gt;=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_level_steps</tt> <tt class="py-keyword">and</tt> <tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"write"</tt><tt class="py-op">]</tt> <tt class="py-op">&gt;=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_level_steps</tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                        <tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"level"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                        <tt id="link-51" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-51', 'log', 'link-8');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"%s: setting 100Mbps"</tt> <tt class="py-op">%</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                        <tt id="link-52" class="py-name"><a title="tuned.utils.nettool.ethcard" class="py-name" href="#" onclick="return doclink('link-52', 'ethcard', 'link-7');">ethcard</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name" targets="Method tuned.utils.nettool.Nettool.set_speed()=tuned.utils.nettool.Nettool-class.html#set_speed"><a title="tuned.utils.nettool.Nettool.set_speed" class="py-name" href="#" onclick="return doclink('link-53', 'set_speed', 'link-53');">set_speed</a></tt><tt class="py-op">(</tt><tt class="py-number">100</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"level"</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"read"</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt> <tt class="py-keyword">or</tt> <tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"write"</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">                        <tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"level"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                        <tt id="link-54" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-54', 'log', 'link-8');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"%s: setting max speed"</tt> <tt class="py-op">%</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                        <tt id="link-55" class="py-name"><a title="tuned.utils.nettool.ethcard" class="py-name" href="#" onclick="return doclink('link-55', 'ethcard', 'link-7');">ethcard</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name" targets="Method tuned.utils.nettool.Nettool.set_max_speed()=tuned.utils.nettool.Nettool-class.html#set_max_speed"><a title="tuned.utils.nettool.Nettool.set_max_speed" class="py-name" href="#" onclick="return doclink('link-56', 'set_max_speed', 'link-56');">set_max_speed</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                <tt id="link-57" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-57', 'log', 'link-8');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">"%s load: read %0.2f, write %0.2f"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">,</tt> <tt class="py-name">stats</tt><tt class="py-op">[</tt><tt class="py-string">"read"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">stats</tt><tt class="py-op">[</tt><tt class="py-string">"write"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                <tt id="link-58" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-58', 'log', 'link-8');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">"%s idle: read %d, write %d, level %d"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">,</tt> <tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"read"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"write"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">idle</tt><tt class="py-op">[</tt><tt class="py-string">"level"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._get_config_options"></a><div id="NetTuningPlugin._get_config_options-def"><a name="L75"></a><tt class="py-lineno"> 75</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._get_config_options-toggle" onclick="return toggle('NetTuningPlugin._get_config_options');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_get_config_options">_get_config_options</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._get_config_options-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._get_config_options-expanded"><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-op">{</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                        <tt class="py-string">"wake_on_lan"</tt><tt class="py-op">:</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                <tt class="py-op">}</tt> </tt>
+</div><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._init_stats_and_idle"></a><div id="NetTuningPlugin._init_stats_and_idle-def"><a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._init_stats_and_idle-toggle" onclick="return toggle('NetTuningPlugin._init_stats_and_idle');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_init_stats_and_idle">_init_stats_and_idle</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._init_stats_and_idle-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._init_stats_and_idle-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                <tt class="py-name">max_speed</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name" targets="Method tuned.plugins.plugin_net.NetTuningPlugin._calc_speed()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#_calc_speed"><a title="tuned.plugins.plugin_net.NetTuningPlugin._calc_speed" class="py-name" href="#" onclick="return doclink('link-59', '_calc_speed', 'link-59');">_calc_speed</a></tt><tt class="py-op">(</tt><tt id="link-60" class="py-name"><a title="tuned.utils.nettool.ethcard" class="py-name" href="#" onclick="return doclink('link-60', 'ethcard', 'link-7');">ethcard</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name" targets="Method tuned.utils.nettool.Nettool.get_max_speed()=tuned.utils.nettool.Nettool-class.html#get_max_speed"><a title="tuned.utils.nettool.Nettool.get_max_speed" class="py-name" href="#" onclick="return doclink('link-61', 'get_max_speed', 'link-61');">get_max_speed</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                <tt id="link-62" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-62', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> <tt class="py-string">"new"</tt><tt class="py-op">:</tt> <tt class="py-number">4</tt> <tt class="py-op">*</tt> <tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">"max"</tt><tt class="py-op">:</tt> <tt class="py-number">2</tt> <tt class="py-op">*</tt> <tt class="py-op">[</tt><tt class="py-name">max_speed</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">}</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                <tt id="link-63" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-63', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> <tt class="py-string">"level"</tt><tt class="py-op">:</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-string">"read"</tt><tt class="py-op">:</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-string">"write"</tt><tt class="py-op">:</tt> <tt class="py-number">0</tt> <tt class="py-op">}</tt> </tt>
+</div><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._update_stats"></a><div id="NetTuningPlugin._update_stats-def"><a name="L85"></a><tt class="py-lineno"> 85</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._update_stats-toggle" onclick="return toggle('NetTuningPlugin._update_stats');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_update_stats">_update_stats</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">,</tt> <tt class="py-param">new_load</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._update_stats-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._update_stats-expanded"><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                <tt class="py-comment"># put new to old</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                <tt id="link-64" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-64', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"old"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">old_load</tt> <tt class="py-op">=</tt> <tt id="link-65" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-65', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"new"</tt><tt class="py-op">]</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                <tt id="link-66" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-66', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"new"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">new_load</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                <tt class="py-comment"># load difference</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">                <tt class="py-name">diff</tt> <tt class="py-op">=</tt> <tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-op">(</tt><tt class="py-name">new</tt><tt class="py-op">,</tt> <tt class="py-name">old</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-name">new</tt> <tt class="py-op">-</tt> <tt class="py-name">old</tt><tt class="py-op">,</tt> <tt class="py-name">zip</tt><tt class="py-op">(</tt><tt class="py-name">new_load</tt><tt class="py-op">,</tt> <tt class="py-name">old_load</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                <tt id="link-67" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-67', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"diff"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">diff</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                <tt class="py-comment"># adapt maximum expected load if the difference is higer</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                <tt class="py-name">old_max_load</tt> <tt class="py-op">=</tt> <tt id="link-68" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-68', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"max"</tt><tt class="py-op">]</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                <tt class="py-name">max_load</tt> <tt class="py-op">=</tt> <tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">pair</tt><tt class="py-op">:</tt> <tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-name">pair</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">zip</tt><tt class="py-op">(</tt><tt class="py-name">old_max_load</tt><tt class="py-op">,</tt> <tt class="py-name">diff</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                <tt id="link-69" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-69', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"max"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">max_load</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                <tt class="py-comment"># read/write ratio</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                <tt id="link-70" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-70', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"read"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt>  <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">diff</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">max_load</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">                <tt id="link-71" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-71', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"write"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">diff</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">max_load</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._update_idle"></a><div id="NetTuningPlugin._update_idle-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._update_idle-toggle" onclick="return toggle('NetTuningPlugin._update_idle');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_update_idle">_update_idle</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._update_idle-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._update_idle-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                <tt class="py-comment"># increase counter if there is no load, otherwise reset the counter</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">operation</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">"read"</tt><tt class="py-op">,</tt> <tt class="py-string">"write"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt id="link-72" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-72', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">operation</tt><tt class="py-op">]</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_load_smallest</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">                                <tt id="link-73" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-73', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">operation</tt><tt class="py-op">]</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">                        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">                                <tt id="link-74" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-74', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">operation</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._instance_unapply_dynamic"></a><div id="NetTuningPlugin._instance_unapply_dynamic-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._instance_unapply_dynamic-toggle" onclick="return toggle('NetTuningPlugin._instance_unapply_dynamic');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_instance_unapply_dynamic">_instance_unapply_dynamic</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._instance_unapply_dynamic-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._instance_unapply_dynamic-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">device</tt> <tt class="py-keyword">in</tt> <tt id="link-75" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-75', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt> <tt class="py-keyword">and</tt> <tt id="link-76" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-76', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"level"</tt><tt class="py-op">]</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">                        <tt id="link-77" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-77', 'instance', 'link-23');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_idle</tt><tt class="py-op">[</tt><tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"level"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">                        <tt id="link-78" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-78', 'log', 'link-8');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"%s: setting max speed"</tt> <tt class="py-op">%</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">                        <tt id="link-79" class="py-name"><a title="tuned.utils.nettool.ethcard" class="py-name" href="#" onclick="return doclink('link-79', 'ethcard', 'link-7');">ethcard</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-80" class="py-name"><a title="tuned.utils.nettool.Nettool.set_max_speed" class="py-name" href="#" onclick="return doclink('link-80', 'set_max_speed', 'link-56');">set_max_speed</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="NetTuningPlugin._calc_speed"></a><div id="NetTuningPlugin._calc_speed-def"><a name="L117"></a><tt class="py-lineno">117</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._calc_speed-toggle" onclick="return toggle('NetTuningPlugin._calc_speed');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_calc_speed">_calc_speed</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">speed</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._calc_speed-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._calc_speed-expanded"><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">                <tt class="py-comment"># 0.6 is just a magical constant (empirical value): Typical workload on netcard won't exceed</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">                <tt class="py-comment"># that and if it does, then the code is smart enough to adapt it.</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">                <tt class="py-comment"># 1024 * 1024 as for MB -&gt; B</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">                <tt class="py-comment"># speed / 7  Mb -&gt; MB</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">int</tt><tt class="py-op">)</tt> <tt class="py-op">(</tt><tt class="py-number">0.6</tt> <tt class="py-op">*</tt> <tt class="py-number">1024</tt> <tt class="py-op">*</tt> <tt class="py-number">1024</tt> <tt class="py-op">*</tt> <tt class="py-name">speed</tt> <tt class="py-op">/</tt> <tt class="py-number">8</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">command_set</tt><tt class="py-op">(</tt><tt class="py-string">"wake_on_lan"</tt><tt class="py-op">,</tt> <tt class="py-name">per_device</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="NetTuningPlugin._set_wake_on_lan"></a><div id="NetTuningPlugin._set_wake_on_lan-def"><a name="L125"></a><tt class="py-lineno">125</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._set_wake_on_lan-toggle" onclick="return toggle('NetTuningPlugin._set_wake_on_lan');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_set_wake_on_lan">_set_wake_on_lan</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._set_wake_on_lan-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._set_wake_on_lan-expanded"><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">value</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">                <tt class="py-comment"># see man ethtool for possible wol values, 0 added as an alias for 'd'</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">                <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">sub</tt><tt class="py-op">(</tt><tt class="py-string">r"0"</tt><tt class="py-op">,</tt> <tt class="py-string">"d"</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt id="link-81" class="py-name"><a title="tuned.hardware.device_matcher.DeviceMatcher.match" class="py-name" href="#" onclick="return doclink('link-81', 'match', 'link-18');">match</a></tt><tt class="py-op">(</tt><tt class="py-string">r"^["</tt> <tt class="py-op">+</tt> <tt id="link-82" class="py-name"><a title="tuned.plugins.plugin_net.WOL_VALUES" class="py-name" href="#" onclick="return doclink('link-82', 'WOL_VALUES', 'link-12');">WOL_VALUES</a></tt> <tt class="py-op">+</tt> <tt class="py-string">r"]+$"</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">                        <tt id="link-83" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-83', 'log', 'link-8');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warn</tt><tt class="py-op">(</tt><tt class="py-string">"Incorrect 'wake_on_lan' value."</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">                <tt id="link-84" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-84', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-85" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-85', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-86" class="py-name" targets="Module tuned.utils.commands=tuned.utils.commands-module.html"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-86', 'commands', 'link-86');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">"ethtool"</tt><tt class="py-op">,</tt> <tt class="py-string">"-s"</tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">,</tt> <tt class="py-string">"wol"</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">command_get</tt><tt class="py-op">(</tt><tt class="py-string">"wake_on_lan"</tt><tt class="py-op">)</tt> </tt>
+<a name="NetTuningPlugin._get_wake_on_lan"></a><div id="NetTuningPlugin._get_wake_on_lan-def"><a name="L138"></a><tt class="py-lineno">138</tt> <a class="py-toggle" href="#" id="NetTuningPlugin._get_wake_on_lan-toggle" onclick="return toggle('NetTuningPlugin._get_wake_on_lan');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_net.NetTuningPlugin-class.html#_get_wake_on_lan">_get_wake_on_lan</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetTuningPlugin._get_wake_on_lan-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="NetTuningPlugin._get_wake_on_lan-expanded"><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">                <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">                        <tt class="py-name">m</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt id="link-87" class="py-name"><a title="tuned.hardware.device_matcher.DeviceMatcher.match" class="py-name" href="#" onclick="return doclink('link-87', 'match', 'link-18');">match</a></tt><tt class="py-op">(</tt><tt class="py-string">r".*Wake-on:\s*(["</tt> <tt class="py-op">+</tt> <tt id="link-88" class="py-name"><a title="tuned.plugins.plugin_net.WOL_VALUES" class="py-name" href="#" onclick="return doclink('link-88', 'WOL_VALUES', 'link-12');">WOL_VALUES</a></tt> <tt class="py-op">+</tt> <tt class="py-string">"]+).*"</tt><tt class="py-op">,</tt> <tt id="link-89" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-89', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-90" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-90', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-91" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-91', 'commands', 'link-86');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">"ethtool"</tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">S</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">m</tt><tt class="py-op">:</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">                                <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">m</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt> <tt class="py-name">IOError</tt><tt class="py-op">:</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">                        <tt class="py-keyword">pass</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">value</tt> </tt>
+</div></div><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

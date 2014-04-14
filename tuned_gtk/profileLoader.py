@@ -54,7 +54,7 @@ class ProfileLoader(object):
         profile_config = configobj.ConfigObj(conf_path)
         return profile_config
 
-    
+
 #         FLAT VERSION
 #  
 #         conf_path = path + "/" + profile_name + "/tuned.conf"        
@@ -69,16 +69,13 @@ class ProfileLoader(object):
 #                 return config
 #             
 #         return profile_config
-    
-    
     def _locate_profile_path(self, profileName):
         for d in self.directories:
             for profile in os.listdir(d):
                 if os.path.isdir(d + "/"+ profile) and profile == profileName:
                     path = d
         return path
-    
-    
+
     def _load_all_profiles(self):    
         for d in self.directories:
             for profile in os.listdir(d):
@@ -102,7 +99,7 @@ class ProfileLoader(object):
         try:
             config["main"] = profile.options
         except KeyError:
-            pass #no problem just profile dont have include
+            pass #profile dont have main section 
 
         for name, unit in profile.units.items():
             config[name] = unit.options
@@ -110,7 +107,27 @@ class ProfileLoader(object):
         if not os.path.exists(path): 
             os.makedirs(path)  
         else:
-            pass# TO DO: add exception for rewrite profile!
+#             mozes prepisat ale nesmies na nejaky co uz existuje!
+            raise managerException.ManagerException("Profile Exists already")
+        config.write()
+
+    def update_profile(self, profile):
+                
+        path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name     
+        config = configobj.ConfigObj()
+        config.filename = path + tuned.consts.CONF_PROFILE_FILE
+        config.initial_comment = "#", "tuned configuration","#"
+        
+        try:
+            config["main"] = profile.options
+        except KeyError:
+            pass #profile dont have main section 
+
+        for name, unit in profile.units.items():
+            config[name] = unit.options
+#         hej, vazne chces prepisat? -> ano prepiseme, nie neprepiseme
+
+        os.makedirs(path)  
         config.write()
 
         

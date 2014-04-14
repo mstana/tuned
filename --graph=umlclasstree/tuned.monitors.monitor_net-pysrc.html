@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.monitors.monitor_net</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.monitors-module.html">Package&nbsp;monitors</a> ::
+        Module&nbsp;monitor_net
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.monitors.monitor_net-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.monitors.monitor_net-module.html">Module tuned.monitors.monitor_net</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package tuned=tuned-module.html"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-0', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package tuned.monitors=tuned.monitors-module.html,Variable tuned.monitors.repository.Repository.monitors=tuned.monitors.repository.Repository-class.html#monitors"><a title="tuned.monitors
+tuned.monitors.repository.Repository.monitors" class="py-name" href="#" onclick="return doclink('link-1', 'monitors', 'link-1');">monitors</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-2', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Package tuned.utils=tuned.utils-module.html"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-3', 'utils', 'link-3');">utils</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module tuned.utils.nettool=tuned.utils.nettool-module.html"><a title="tuned.utils.nettool" class="py-name" href="#" onclick="return doclink('link-4', 'nettool', 'link-4');">nettool</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Function tuned.utils.nettool.ethcard()=tuned.utils.nettool-module.html#ethcard"><a title="tuned.utils.nettool.ethcard" class="py-name" href="#" onclick="return doclink('link-5', 'ethcard', 'link-5');">ethcard</a></tt> </tt>
+<a name="NetMonitor"></a><div id="NetMonitor-def"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="NetMonitor-toggle" onclick="return toggle('NetMonitor');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.monitors.monitor_net.NetMonitor-class.html">NetMonitor</a><tt class="py-op">(</tt><tt class="py-base-class">tuned</tt><tt class="py-op">.</tt><tt class="py-base-class">monitors</tt><tt class="py-op">.</tt><tt class="py-base-class">Monitor</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetMonitor-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="NetMonitor-expanded"><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="NetMonitor._init_available_devices"></a><div id="NetMonitor._init_available_devices-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="NetMonitor._init_available_devices-toggle" onclick="return toggle('NetMonitor._init_available_devices');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.monitors.monitor_net.NetMonitor-class.html#_init_available_devices">_init_available_devices</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetMonitor._init_available_devices-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="NetMonitor._init_available_devices-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">                <tt class="py-name">available</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">root</tt><tt class="py-op">,</tt> <tt class="py-name">dirs</tt><tt class="py-op">,</tt> <tt class="py-name">files</tt> <tt class="py-keyword">in</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">walk</tt><tt class="py-op">(</tt><tt class="py-string">"/sys/devices"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">root</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-string">"/net"</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">root</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-string">"/virtual/net"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                                <tt class="py-name">available</tt> <tt class="py-op">+=</tt> <tt class="py-name">dirs</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">                 </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">                <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">_available_devices</tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name" targets="Method tuned.storage.interfaces.Provider.set()=tuned.storage.interfaces.Provider-class.html#set,Method tuned.storage.pickle_provider.PickleProvider.set()=tuned.storage.pickle_provider.PickleProvider-class.html#set,Method tuned.storage.storage.Storage.set()=tuned.storage.storage.Storage-class.html#set"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-6', 'set', 'link-6');">set</a></tt><tt class="py-op">(</tt><tt class="py-name">available</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">dev</tt> <tt class="py-keyword">in</tt> <tt class="py-name">available</tt><tt class="py-op">:</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">                        <tt class="py-comment">#max_speed = cls._calcspeed(ethcard(dev).get_max_speed())</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">                        <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">_load</tt><tt class="py-op">[</tt><tt class="py-name">dev</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'0'</tt><tt class="py-op">,</tt> <tt class="py-string">'0'</tt><tt class="py-op">,</tt> <tt class="py-string">'0'</tt><tt class="py-op">,</tt> <tt class="py-string">'0'</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="NetMonitor._calcspeed"></a><div id="NetMonitor._calcspeed-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="NetMonitor._calcspeed-toggle" onclick="return toggle('NetMonitor._calcspeed');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.monitors.monitor_net.NetMonitor-class.html#_calcspeed">_calcspeed</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">speed</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetMonitor._calcspeed-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="NetMonitor._calcspeed-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-comment"># 0.6 is just a magical constant (empirical value): Typical workload on netcard won't exceed</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                <tt class="py-comment"># that and if it does, then the code is smart enough to adapt it.</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">                <tt class="py-comment"># 1024 * 1024 as for MB -&gt; B</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt class="py-comment"># speed / 8  Mb -&gt; MB</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">int</tt><tt class="py-op">)</tt> <tt class="py-op">(</tt><tt class="py-number">0.6</tt> <tt class="py-op">*</tt> <tt class="py-number">1024</tt> <tt class="py-op">*</tt> <tt class="py-number">1024</tt> <tt class="py-op">*</tt> <tt class="py-name">speed</tt> <tt class="py-op">/</tt> <tt class="py-number">8</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="NetMonitor._updateStat"></a><div id="NetMonitor._updateStat-def"><a name="L30"></a><tt class="py-lineno">30</tt> <a class="py-toggle" href="#" id="NetMonitor._updateStat-toggle" onclick="return toggle('NetMonitor._updateStat');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.monitors.monitor_net.NetMonitor-class.html#_updateStat">_updateStat</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">dev</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetMonitor._updateStat-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="NetMonitor._updateStat-expanded"><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">                <tt class="py-name">files</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"rx_bytes"</tt><tt class="py-op">,</tt> <tt class="py-string">"rx_packets"</tt><tt class="py-op">,</tt> <tt class="py-string">"tx_bytes"</tt><tt class="py-op">,</tt> <tt class="py-string">"tx_packets"</tt><tt class="py-op">]</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">i</tt><tt class="py-op">,</tt><tt class="py-name">f</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">files</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                        <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-string">"/sys/class/net/"</tt> <tt class="py-op">+</tt> <tt class="py-name">dev</tt> <tt class="py-op">+</tt> <tt class="py-string">"/statistics/"</tt> <tt class="py-op">+</tt> <tt class="py-name">f</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">statfile</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                                <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">_load</tt><tt class="py-op">[</tt><tt class="py-name">dev</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">statfile</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="NetMonitor.update"></a><div id="NetMonitor.update-def"><a name="L37"></a><tt class="py-lineno">37</tt> <a class="py-toggle" href="#" id="NetMonitor.update-toggle" onclick="return toggle('NetMonitor.update');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.monitors.monitor_net.NetMonitor-class.html#update">update</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetMonitor.update-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="NetMonitor.update-expanded"><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">device</tt> <tt class="py-keyword">in</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">_updating_devices</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                        <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Class Method tuned.monitors.monitor_net.NetMonitor._updateStat()=tuned.monitors.monitor_net.NetMonitor-class.html#_updateStat"><a title="tuned.monitors.monitor_net.NetMonitor._updateStat" class="py-name" href="#" onclick="return doclink('link-7', '_updateStat', 'link-7');">_updateStat</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:45 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

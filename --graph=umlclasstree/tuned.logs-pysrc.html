@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.logs</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        Module&nbsp;logs
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.logs-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.logs-module.html">Module tuned.logs</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">atexit</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">handlers</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">inspect</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package tuned=tuned-module.html"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-0', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module tuned.consts=tuned.consts-module.html"><a title="tuned.consts" class="py-name" href="#" onclick="return doclink('link-1', 'consts', 'link-1');">consts</a></tt> <tt class="py-keyword">as</tt> <tt id="link-2" class="py-name"><a title="tuned.consts" class="py-name" href="#" onclick="return doclink('link-2', 'consts', 'link-1');">consts</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"get"</tt><tt class="py-op">]</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable tuned.logs.root_logger=tuned.logs-module.html#root_logger"><a title="tuned.logs.root_logger" class="py-name" href="#" onclick="return doclink('link-3', 'root_logger', 'link-3');">root_logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="get"></a><div id="get-def"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="get-toggle" onclick="return toggle('get');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.logs-module.html#get">get</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="get-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="get-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-keyword">global</tt> <tt id="link-4" class="py-name"><a title="tuned.logs.root_logger" class="py-name" href="#" onclick="return doclink('link-4', 'root_logger', 'link-3');">root_logger</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-5" class="py-name"><a title="tuned.logs.root_logger" class="py-name" href="#" onclick="return doclink('link-5', 'root_logger', 'link-3');">root_logger</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                <tt id="link-6" class="py-name"><a title="tuned.logs.root_logger" class="py-name" href="#" onclick="return doclink('link-6', 'root_logger', 'link-3');">root_logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">"tuned"</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">calling_module</tt> <tt class="py-op">=</tt> <tt class="py-name">inspect</tt><tt class="py-op">.</tt><tt class="py-name">currentframe</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">f_back</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt id="link-7" class="py-name" targets="Variable tuned.plugins.base.Plugin.name=tuned.plugins.base.Plugin-class.html#name,Variable tuned.plugins.instance.instance.Instance.name=tuned.plugins.instance.instance.Instance-class.html#name,Variable tuned.profiles.profile.Profile.name=tuned.profiles.profile.Profile-class.html#name,Variable tuned.profiles.unit.Unit.name=tuned.profiles.unit.Unit-class.html#name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-7', 'name', 'link-7');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">calling_module</tt><tt class="py-op">.</tt><tt class="py-name">f_locals</tt><tt class="py-op">[</tt><tt class="py-string">"__name__"</tt><tt class="py-op">]</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-8" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-8', 'name', 'link-7');">name</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"__main__"</tt><tt class="py-op">:</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">                <tt id="link-9" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-9', 'name', 'link-7');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"tuned"</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-10" class="py-name"><a title="tuned.logs.root_logger" class="py-name" href="#" onclick="return doclink('link-10', 'root_logger', 'link-3');">root_logger</a></tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt id="link-11" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-11', 'name', 'link-7');">name</a></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">"tuned."</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-name">root</tt><tt class="py-op">,</tt> <tt class="py-name">child</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-12', 'name', 'link-7');">name</a></tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">"."</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">                <tt class="py-name">child_logger</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="tuned.logs.root_logger" class="py-name" href="#" onclick="return doclink('link-13', 'root_logger', 'link-3');">root_logger</a></tt><tt class="py-op">.</tt><tt class="py-name">getChild</tt><tt class="py-op">(</tt><tt class="py-name">child</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt class="py-name">child_logger</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method tuned.logs.TunedLogger.remove_all_handlers()=tuned.logs.TunedLogger-class.html#remove_all_handlers"><a title="tuned.logs.TunedLogger.remove_all_handlers" class="py-name" href="#" onclick="return doclink('link-14', 'remove_all_handlers', 'link-14');">remove_all_handlers</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                <tt class="py-name">child_logger</tt><tt class="py-op">.</tt><tt class="py-name">setLevel</tt><tt class="py-op">(</tt><tt class="py-string">"NOTSET"</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">child_logger</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">                <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="TunedLogger"></a><div id="TunedLogger-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="TunedLogger-toggle" onclick="return toggle('TunedLogger');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.logs.TunedLogger-class.html">TunedLogger</a><tt class="py-op">(</tt><tt class="py-base-class">logging</tt><tt class="py-op">.</tt><tt class="py-base-class">getLoggerClass</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TunedLogger-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="TunedLogger-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-docstring">"""Custom tuned daemon logger class."""</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt id="link-15" class="py-name" targets="Variable tuned.logs.TunedLogger._formatter=tuned.logs.TunedLogger-class.html#_formatter"><a title="tuned.logs.TunedLogger._formatter" class="py-name" href="#" onclick="return doclink('link-15', '_formatter', 'link-15');">_formatter</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">Formatter</tt><tt class="py-op">(</tt><tt class="py-string">"%(asctime)s %(levelname)-8s %(name)s: %(message)s"</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt id="link-16" class="py-name" targets="Variable tuned.logs.TunedLogger._console_handler=tuned.logs.TunedLogger-class.html#_console_handler"><a title="tuned.logs.TunedLogger._console_handler" class="py-name" href="#" onclick="return doclink('link-16', '_console_handler', 'link-16');">_console_handler</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt id="link-17" class="py-name" targets="Variable tuned.logs.TunedLogger._file_handler=tuned.logs.TunedLogger-class.html#_file_handler"><a title="tuned.logs.TunedLogger._file_handler" class="py-name" href="#" onclick="return doclink('link-17', '_file_handler', 'link-17');">_file_handler</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="TunedLogger.__init__"></a><div id="TunedLogger.__init__-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="TunedLogger.__init__-toggle" onclick="return toggle('TunedLogger.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.logs.TunedLogger-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TunedLogger.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="TunedLogger.__init__-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                <tt class="py-name">super</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method tuned.admin.admin.Admin.__init__()=tuned.admin.admin.Admin-class.html#__init__,Method tuned.admin.dbus_controller.DBusController.__init__()=tuned.admin.dbus_controller.DBusController-class.html#__init__,Method tuned.daemon.application.Application.__init__()=tuned.daemon.application.Application-class.html#__init__,Method tuned.daemon.controller.Controller.__init__()=tuned.daemon.controller.Controller-class.html#__init__,Method tuned.daemon.daemon.Daemon.__init__()=tuned.daemon.daemon.Daemon-class.html#__init__,Method tuned.exports.controller.ExportsController.__init__()=tuned.exports.controller.ExportsController-class.html#__init__,Method tuned.exports.dbus_exporter.DBusExporter.__init__()=tuned.exports.dbus_exporter.DBusExporter-class.html#__init__,Method tuned.hardware.inventory.Inventory.__init__()=tuned.hardware.inventory.Inventory-class.html#__init__,Method tuned.logs.TunedLogger.__init__()=tuned.logs.TunedLogger-class.html#__init__,Method tuned.monitors.base.Monitor.__init__()=tuned.monitors.base.Monitor-class.html#__init__,Method tuned.monitors.repository.Repository.__init__()=tuned.monitors.repository.Repository-class.html#__init__,Method tuned.patterns.Singleton.__init__()=tuned.patterns.Singleton-class.html#__init__,Method tuned.plugins.base.Plugin.__init__()=tuned.plugins.base.Plugin-class.html#__init__,Method tuned.plugins.hotplug.Plugin.__init__()=tuned.plugins.hotplug.Plugin-class.html#__init__,Method tuned.plugins.instance.instance.Instance.__init__()=tuned.plugins.instance.instance.Instance-class.html#__init__,Method tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#__init__,Method tuned.plugins.plugin_disk.DiskPlugin.__init__()=tuned.plugins.plugin_disk.DiskPlugin-class.html#__init__,Method tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__()=tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#__init__,Method tuned.plugins.plugin_net.NetTuningPlugin.__init__()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#__init__,Method tuned.plugins.plugin_sysctl.SysctlPlugin.__init__()=tuned.plugins.plugin_sysctl.SysctlPlugin-class.html#__init__,Method tuned.plugins.plugin_sysfs.SysfsPlugin.__init__()=tuned.plugins.plugin_sysfs.SysfsPlugin-class.html#__init__,Method tuned.plugins.repository.Repository.__init__()=tuned.plugins.repository.Repository-class.html#__init__,Method tuned.profiles.loader.Loader.__init__()=tuned.profiles.loader.Loader-class.html#__init__,Method tuned.profiles.locator.Locator.__init__()=tuned.profiles.locator.Locator-class.html#__init__,Method tuned.profiles.merger.Merger.__init__()=tuned.profiles.merger.Merger-class.html#__init__,Method tuned.profiles.profile.Profile.__init__()=tuned.profiles.profile.Profile-class.html#__init__,Method tuned.profiles.unit.Unit.__init__()=tuned.profiles.unit.Unit-class.html#__init__,Method tuned.storage.factory.Factory.__init__()=tuned.storage.factory.Factory-class.html#__init__,Method tuned.storage.pickle_provider.PickleProvider.__init__()=tuned.storage.pickle_provider.PickleProvider-class.html#__init__,Method tuned.storage.storage.Storage.__init__()=tuned.storage.storage.Storage-class.html#__init__,Method tuned.units.manager.Manager.__init__()=tuned.units.manager.Manager-class.html#__init__,Method tuned.utils.nettool.Nettool.__init__()=tuned.utils.nettool.Nettool-class.html#__init__,Method tuned.utils.plugin_loader.PluginLoader.__init__()=tuned.utils.plugin_loader.PluginLoader-class.html#__init__"><a title="tuned.admin.admin.Admin.__init__
+tuned.admin.dbus_controller.DBusController.__init__
+tuned.daemon.application.Application.__init__
+tuned.daemon.controller.Controller.__init__
+tuned.daemon.daemon.Daemon.__init__
+tuned.exports.controller.ExportsController.__init__
+tuned.exports.dbus_exporter.DBusExporter.__init__
+tuned.hardware.inventory.Inventory.__init__
+tuned.logs.TunedLogger.__init__
+tuned.monitors.base.Monitor.__init__
+tuned.monitors.repository.Repository.__init__
+tuned.patterns.Singleton.__init__
+tuned.plugins.base.Plugin.__init__
+tuned.plugins.hotplug.Plugin.__init__
+tuned.plugins.instance.instance.Instance.__init__
+tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__
+tuned.plugins.plugin_disk.DiskPlugin.__init__
+tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__
+tuned.plugins.plugin_net.NetTuningPlugin.__init__
+tuned.plugins.plugin_sysctl.SysctlPlugin.__init__
+tuned.plugins.plugin_sysfs.SysfsPlugin.__init__
+tuned.plugins.repository.Repository.__init__
+tuned.profiles.loader.Loader.__init__
+tuned.profiles.locator.Locator.__init__
+tuned.profiles.merger.Merger.__init__
+tuned.profiles.profile.Profile.__init__
+tuned.profiles.unit.Unit.__init__
+tuned.storage.factory.Factory.__init__
+tuned.storage.pickle_provider.PickleProvider.__init__
+tuned.storage.storage.Storage.__init__
+tuned.units.manager.Manager.__init__
+tuned.utils.nettool.Nettool.__init__
+tuned.utils.plugin_loader.PluginLoader.__init__" class="py-name" href="#" onclick="return doclink('link-18', '__init__', 'link-18');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setLevel</tt><tt class="py-op">(</tt><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">INFO</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method tuned.logs.TunedLogger.switch_to_console()=tuned.logs.TunedLogger-class.html#switch_to_console"><a title="tuned.logs.TunedLogger.switch_to_console" class="py-name" href="#" onclick="return doclink('link-19', 'switch_to_console', 'link-19');">switch_to_console</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="TunedLogger.set_level"></a><div id="TunedLogger.set_level-def"><a name="L43"></a><tt class="py-lineno">43</tt> <a class="py-toggle" href="#" id="TunedLogger.set_level-toggle" onclick="return toggle('TunedLogger.set_level');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.logs.TunedLogger-class.html#set_level">set_level</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">level</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">NOTSET</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TunedLogger.set_level-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="TunedLogger.set_level-expanded"><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">                <tt class="py-docstring">"""Set logging level. The 'level' parameter can be str or logging module constant."""</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-20" class="py-name" targets="Variable tuned.profiles.unit.Unit.type=tuned.profiles.unit.Unit-class.html#type"><a title="tuned.profiles.unit.Unit.type" class="py-name" href="#" onclick="return doclink('link-20', 'type', 'link-20');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">level</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-name">str</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">                        <tt class="py-name">level</tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">_levelNames</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-21', 'get', 'link-21');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">level</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">NOTSET</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">level</tt> <tt class="py-op">=</tt> <tt class="py-name">level</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt>
+<a name="TunedLogger.switch_to_console"></a><div id="TunedLogger.switch_to_console-def"><a name="L49"></a><tt class="py-lineno">49</tt> <a class="py-toggle" href="#" id="TunedLogger.switch_to_console-toggle" onclick="return toggle('TunedLogger.switch_to_console');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.logs.TunedLogger-class.html#switch_to_console">switch_to_console</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TunedLogger.switch_to_console-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="TunedLogger.switch_to_console-expanded"><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Class Method tuned.logs.TunedLogger._setup_console_handler()=tuned.logs.TunedLogger-class.html#_setup_console_handler"><a title="tuned.logs.TunedLogger._setup_console_handler" class="py-name" href="#" onclick="return doclink('link-22', '_setup_console_handler', 'link-22');">_setup_console_handler</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="tuned.logs.TunedLogger.remove_all_handlers" class="py-name" href="#" onclick="return doclink('link-23', 'remove_all_handlers', 'link-14');">remove_all_handlers</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">addHandler</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="tuned.logs.TunedLogger._console_handler" class="py-name" href="#" onclick="return doclink('link-24', '_console_handler', 'link-16');">_console_handler</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="TunedLogger.switch_to_file"></a><div id="TunedLogger.switch_to_file-def"><a name="L54"></a><tt class="py-lineno">54</tt> <a class="py-toggle" href="#" id="TunedLogger.switch_to_file-toggle" onclick="return toggle('TunedLogger.switch_to_file');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.logs.TunedLogger-class.html#switch_to_file">switch_to_file</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filename</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="tuned.consts" class="py-name" href="#" onclick="return doclink('link-25', 'consts', 'link-1');">consts</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Variable tuned.consts.LOG_FILE=tuned.consts-module.html#LOG_FILE"><a title="tuned.consts.LOG_FILE" class="py-name" href="#" onclick="return doclink('link-26', 'LOG_FILE', 'link-26');">LOG_FILE</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TunedLogger.switch_to_file-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="TunedLogger.switch_to_file-expanded"><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Class Method tuned.logs.TunedLogger._setup_file_handler()=tuned.logs.TunedLogger-class.html#_setup_file_handler"><a title="tuned.logs.TunedLogger._setup_file_handler" class="py-name" href="#" onclick="return doclink('link-27', '_setup_file_handler', 'link-27');">_setup_file_handler</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="tuned.logs.TunedLogger.remove_all_handlers" class="py-name" href="#" onclick="return doclink('link-28', 'remove_all_handlers', 'link-14');">remove_all_handlers</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">addHandler</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="tuned.logs.TunedLogger._file_handler" class="py-name" href="#" onclick="return doclink('link-29', '_file_handler', 'link-17');">_file_handler</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt>
+<a name="TunedLogger.remove_all_handlers"></a><div id="TunedLogger.remove_all_handlers-def"><a name="L59"></a><tt class="py-lineno">59</tt> <a class="py-toggle" href="#" id="TunedLogger.remove_all_handlers-toggle" onclick="return toggle('TunedLogger.remove_all_handlers');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.logs.TunedLogger-class.html#remove_all_handlers">remove_all_handlers</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TunedLogger.remove_all_handlers-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="TunedLogger.remove_all_handlers-expanded"><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">handler</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">handlers</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">removeHandler</tt><tt class="py-op">(</tt><tt class="py-name">handler</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="TunedLogger._setup_console_handler"></a><div id="TunedLogger._setup_console_handler-def"><a name="L64"></a><tt class="py-lineno">64</tt> <a class="py-toggle" href="#" id="TunedLogger._setup_console_handler-toggle" onclick="return toggle('TunedLogger._setup_console_handler');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.logs.TunedLogger-class.html#_setup_console_handler">_setup_console_handler</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TunedLogger._setup_console_handler-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="TunedLogger._setup_console_handler-expanded"><a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="tuned.logs.TunedLogger._console_handler" class="py-name" href="#" onclick="return doclink('link-30', '_console_handler', 'link-16');">_console_handler</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">                <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="tuned.logs.TunedLogger._console_handler" class="py-name" href="#" onclick="return doclink('link-31', '_console_handler', 'link-16');">_console_handler</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">StreamHandler</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">                <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="tuned.logs.TunedLogger._console_handler" class="py-name" href="#" onclick="return doclink('link-32', '_console_handler', 'link-16');">_console_handler</a></tt><tt class="py-op">.</tt><tt class="py-name">setFormatter</tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="tuned.logs.TunedLogger._formatter" class="py-name" href="#" onclick="return doclink('link-33', '_formatter', 'link-15');">_formatter</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="TunedLogger._setup_file_handler"></a><div id="TunedLogger._setup_file_handler-def"><a name="L72"></a><tt class="py-lineno">72</tt> <a class="py-toggle" href="#" id="TunedLogger._setup_file_handler-toggle" onclick="return toggle('TunedLogger._setup_file_handler');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.logs.TunedLogger-class.html#_setup_file_handler">_setup_file_handler</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TunedLogger._setup_file_handler-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="TunedLogger._setup_file_handler-expanded"><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="tuned.logs.TunedLogger._file_handler" class="py-name" href="#" onclick="return doclink('link-34', '_file_handler', 'link-17');">_file_handler</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">                <tt class="py-name">log_directory</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">dirname</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">log_directory</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">                        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">makedirs</tt><tt class="py-op">(</tt><tt class="py-name">log_directory</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">                <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="tuned.logs.TunedLogger._file_handler" class="py-name" href="#" onclick="return doclink('link-35', '_file_handler', 'link-17');">_file_handler</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">handlers</tt><tt class="py-op">.</tt><tt class="py-name">RotatingFileHandler</tt><tt class="py-op">(</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">                        <tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">maxBytes</tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name"><a title="tuned.consts" class="py-name" href="#" onclick="return doclink('link-36', 'consts', 'link-1');">consts</a></tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Variable tuned.consts.LOG_FILE_MAXBYTES=tuned.consts-module.html#LOG_FILE_MAXBYTES"><a title="tuned.consts.LOG_FILE_MAXBYTES" class="py-name" href="#" onclick="return doclink('link-37', 'LOG_FILE_MAXBYTES', 'link-37');">LOG_FILE_MAXBYTES</a></tt><tt class="py-op">,</tt> <tt class="py-name">backupCount</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="tuned.consts" class="py-name" href="#" onclick="return doclink('link-38', 'consts', 'link-1');">consts</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Variable tuned.consts.LOG_FILE_COUNT=tuned.consts-module.html#LOG_FILE_COUNT"><a title="tuned.consts.LOG_FILE_COUNT" class="py-name" href="#" onclick="return doclink('link-39', 'LOG_FILE_COUNT', 'link-39');">LOG_FILE_COUNT</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">                <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="tuned.logs.TunedLogger._file_handler" class="py-name" href="#" onclick="return doclink('link-40', '_file_handler', 'link-17');">_file_handler</a></tt><tt class="py-op">.</tt><tt class="py-name">setFormatter</tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="tuned.logs.TunedLogger._formatter" class="py-name" href="#" onclick="return doclink('link-41', '_formatter', 'link-15');">_formatter</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line"><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">setLoggerClass</tt><tt class="py-op">(</tt><tt id="link-42" class="py-name" targets="Class tuned.logs.TunedLogger=tuned.logs.TunedLogger-class.html"><a title="tuned.logs.TunedLogger" class="py-name" href="#" onclick="return doclink('link-42', 'TunedLogger', 'link-42');">TunedLogger</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line"><tt class="py-name">atexit</tt><tt class="py-op">.</tt><tt class="py-name">register</tt><tt class="py-op">(</tt><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">shutdown</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

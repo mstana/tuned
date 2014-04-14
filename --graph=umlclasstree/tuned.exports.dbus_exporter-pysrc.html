@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.exports.dbus_exporter</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.exports-module.html">Package&nbsp;exports</a> ::
+        Module&nbsp;dbus_exporter
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.exports.dbus_exporter-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.exports.dbus_exporter-module.html">Module tuned.exports.dbus_exporter</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module tuned.exports.interfaces=tuned.exports.interfaces-module.html,Module tuned.storage.interfaces=tuned.storage.interfaces-module.html"><a title="tuned.exports.interfaces
+tuned.storage.interfaces" class="py-name" href="#" onclick="return doclink('link-0', 'interfaces', 'link-0');">interfaces</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">decorator</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">dbus</tt><tt class="py-op">.</tt><tt class="py-name">service</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">dbus</tt><tt class="py-op">.</tt><tt class="py-name">mainloop</tt><tt class="py-op">.</tt><tt class="py-name">glib</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">inspect</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">threading</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">signal</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">gi</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module tuned.monitors.repository=tuned.monitors.repository-module.html,Module tuned.plugins.repository=tuned.plugins.repository-module.html"><a title="tuned.monitors.repository
+tuned.plugins.repository" class="py-name" href="#" onclick="return doclink('link-1', 'repository', 'link-1');">repository</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">GObject</tt> <tt class="py-keyword">as</tt> <tt class="py-name">gobject</tt> </tt>
+<a name="DBusExporter"></a><div id="DBusExporter-def"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="DBusExporter-toggle" onclick="return toggle('DBusExporter');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.exports.dbus_exporter.DBusExporter-class.html">DBusExporter</a><tt class="py-op">(</tt><tt class="py-base-class">interfaces</tt><tt class="py-op">.</tt><tt class="py-base-class">ExporterInterface</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DBusExporter-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="DBusExporter-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">        Export method calls through DBus Interface.</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">        We take a method to be exported and create a simple wrapper function</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">        to call it. This is required as we need the original function to be</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">        bound to the original object instance. While the wrapper will be bound</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">        to an object we dynamically construct.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="DBusExporter.__init__"></a><div id="DBusExporter.__init__-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="DBusExporter.__init__-toggle" onclick="return toggle('DBusExporter.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports.dbus_exporter.DBusExporter-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">bus_name</tt><tt class="py-op">,</tt> <tt class="py-param">interface_name</tt><tt class="py-op">,</tt> <tt class="py-param">object_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DBusExporter.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DBusExporter.__init__-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">                <tt class="py-name">gobject</tt><tt class="py-op">.</tt><tt class="py-name">threads_init</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dbus_object_cls</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dbus_object</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dbus_methods</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_bus_name</tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name" targets="Variable tuned.exports.dbus_exporter.DBusExporter.bus_name=tuned.exports.dbus_exporter.DBusExporter-class.html#bus_name"><a title="tuned.exports.dbus_exporter.DBusExporter.bus_name" class="py-name" href="#" onclick="return doclink('link-2', 'bus_name', 'link-2');">bus_name</a></tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_interface_name</tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name" targets="Variable tuned.exports.dbus_exporter.DBusExporter.interface_name=tuned.exports.dbus_exporter.DBusExporter-class.html#interface_name"><a title="tuned.exports.dbus_exporter.DBusExporter.interface_name" class="py-name" href="#" onclick="return doclink('link-3', 'interface_name', 'link-3');">interface_name</a></tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_object_name</tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name" targets="Variable tuned.exports.dbus_exporter.DBusExporter.object_name=tuned.exports.dbus_exporter.DBusExporter-class.html#object_name"><a title="tuned.exports.dbus_exporter.DBusExporter.object_name" class="py-name" href="#" onclick="return doclink('link-4', 'object_name', 'link-4');">object_name</a></tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_thread</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">                <tt class="py-comment"># dirty hack that fixes KeyboardInterrupt handling</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                <tt class="py-comment"># the hack is needed because PyGObject / GTK+-3 developers are morons</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                <tt class="py-name">signal_handler</tt> <tt class="py-op">=</tt> <tt class="py-name">signal</tt><tt class="py-op">.</tt><tt class="py-name">getsignal</tt><tt class="py-op">(</tt><tt class="py-name">signal</tt><tt class="py-op">.</tt><tt class="py-name">SIGINT</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_main_loop</tt> <tt class="py-op">=</tt> <tt class="py-name">gobject</tt><tt class="py-op">.</tt><tt class="py-name">MainLoop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                <tt class="py-name">signal</tt><tt class="py-op">.</tt><tt class="py-name">signal</tt><tt class="py-op">(</tt><tt class="py-name">signal</tt><tt class="py-op">.</tt><tt class="py-name">SIGINT</tt><tt class="py-op">,</tt> <tt class="py-name">signal_handler</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="DBusExporter.bus_name"></a><div id="DBusExporter.bus_name-def"><a name="L39"></a><tt class="py-lineno">39</tt> <a class="py-toggle" href="#" id="DBusExporter.bus_name-toggle" onclick="return toggle('DBusExporter.bus_name');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports.dbus_exporter.DBusExporter-class.html#bus_name">bus_name</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DBusExporter.bus_name-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DBusExporter.bus_name-expanded"><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_bus_name</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="DBusExporter.interface_name"></a><div id="DBusExporter.interface_name-def"><a name="L43"></a><tt class="py-lineno">43</tt> <a class="py-toggle" href="#" id="DBusExporter.interface_name-toggle" onclick="return toggle('DBusExporter.interface_name');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports.dbus_exporter.DBusExporter-class.html#interface_name">interface_name</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DBusExporter.interface_name-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DBusExporter.interface_name-expanded"><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_interface_name</tt> </tt>
+</div><a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="DBusExporter.object_name"></a><div id="DBusExporter.object_name-def"><a name="L47"></a><tt class="py-lineno">47</tt> <a class="py-toggle" href="#" id="DBusExporter.object_name-toggle" onclick="return toggle('DBusExporter.object_name');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports.dbus_exporter.DBusExporter-class.html#object_name">object_name</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DBusExporter.object_name-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DBusExporter.object_name-expanded"><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_object_name</tt> </tt>
+</div><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="DBusExporter.export"></a><div id="DBusExporter.export-def"><a name="L50"></a><tt class="py-lineno">50</tt> <a class="py-toggle" href="#" id="DBusExporter.export-toggle" onclick="return toggle('DBusExporter.export');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports.dbus_exporter.DBusExporter-class.html#export">export</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">method</tt><tt class="py-op">,</tt> <tt class="py-param">in_signature</tt><tt class="py-op">,</tt> <tt class="py-param">out_signature</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DBusExporter.export-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DBusExporter.export-expanded"><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">inspect</tt><tt class="py-op">.</tt><tt class="py-name">ismethod</tt><tt class="py-op">(</tt><tt class="py-name">method</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Only bound methods can be exported."</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                <tt class="py-name">method_name</tt> <tt class="py-op">=</tt> <tt class="py-name">method</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">method_name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dbus_methods</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">                        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Method with this name is already exported."</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">                <tt class="py-keyword">def</tt> <tt class="py-def-name">wrapper</tt><tt class="py-op">(</tt><tt class="py-param">wrapped</tt><tt class="py-op">,</tt> <tt class="py-param">owner</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">method</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">                <tt class="py-name">wrapper</tt> <tt class="py-op">=</tt> <tt class="py-name">decorator</tt><tt class="py-op">.</tt><tt class="py-name">decorator</tt><tt class="py-op">(</tt><tt class="py-name">wrapper</tt><tt class="py-op">,</tt> <tt class="py-name">method</tt><tt class="py-op">.</tt><tt class="py-name">im_func</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">                <tt class="py-name">wrapper</tt> <tt class="py-op">=</tt> <tt class="py-name">dbus</tt><tt class="py-op">.</tt><tt class="py-name">service</tt><tt class="py-op">.</tt><tt class="py-name">method</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_interface_name</tt><tt class="py-op">,</tt> <tt class="py-name">in_signature</tt><tt class="py-op">,</tt> <tt class="py-name">out_signature</tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt class="py-name">wrapper</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dbus_methods</tt><tt class="py-op">[</tt><tt class="py-name">method_name</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">wrapper</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"> </tt>
+<a name="DBusExporter._construct_dbus_object_class"></a><div id="DBusExporter._construct_dbus_object_class-def"><a name="L66"></a><tt class="py-lineno">66</tt> <a class="py-toggle" href="#" id="DBusExporter._construct_dbus_object_class-toggle" onclick="return toggle('DBusExporter._construct_dbus_object_class');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports.dbus_exporter.DBusExporter-class.html#_construct_dbus_object_class">_construct_dbus_object_class</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DBusExporter._construct_dbus_object_class-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DBusExporter._construct_dbus_object_class-expanded"><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dbus_object_cls</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">                        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"The exporter class was already build."</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">                <tt class="py-name">unique_name</tt> <tt class="py-op">=</tt> <tt class="py-string">"DBusExporter_%d"</tt> <tt class="py-op">%</tt> <tt class="py-name">id</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">                <tt class="py-name">cls</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name" targets="Variable tuned.profiles.unit.Unit.type=tuned.profiles.unit.Unit-class.html#type"><a title="tuned.profiles.unit.Unit.type" class="py-name" href="#" onclick="return doclink('link-5', 'type', 'link-5');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">unique_name</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">dbus</tt><tt class="py-op">.</tt><tt class="py-name">service</tt><tt class="py-op">.</tt><tt class="py-name">Object</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dbus_methods</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dbus_object_cls</tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt> </tt>
+</div><a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"> </tt>
+<a name="DBusExporter.start"></a><div id="DBusExporter.start-def"><a name="L75"></a><tt class="py-lineno">75</tt> <a class="py-toggle" href="#" id="DBusExporter.start-toggle" onclick="return toggle('DBusExporter.start');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports.dbus_exporter.DBusExporter-class.html#start">start</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DBusExporter.start-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DBusExporter.start-expanded"><a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dbus_object_cls</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method tuned.exports.dbus_exporter.DBusExporter._construct_dbus_object_class()=tuned.exports.dbus_exporter.DBusExporter-class.html#_construct_dbus_object_class"><a title="tuned.exports.dbus_exporter.DBusExporter._construct_dbus_object_class" class="py-name" href="#" onclick="return doclink('link-6', '_construct_dbus_object_class', 'link-6');">_construct_dbus_object_class</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line"> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method tuned.admin.dbus_controller.DBusController.stop()=tuned.admin.dbus_controller.DBusController-class.html#stop,Method tuned.daemon.controller.Controller.stop()=tuned.daemon.controller.Controller-class.html#stop,Method tuned.daemon.daemon.Daemon.stop()=tuned.daemon.daemon.Daemon-class.html#stop,Method tuned.exports.controller.ExportsController.stop()=tuned.exports.controller.ExportsController-class.html#stop,Method tuned.exports.dbus_exporter.DBusExporter.stop()=tuned.exports.dbus_exporter.DBusExporter-class.html#stop,Method tuned.exports.interfaces.ExporterInterface.stop()=tuned.exports.interfaces.ExporterInterface-class.html#stop,Function tuned.exports.stop()=tuned.exports-module.html#stop"><a title="tuned.admin.dbus_controller.DBusController.stop
+tuned.daemon.controller.Controller.stop
+tuned.daemon.daemon.Daemon.stop
+tuned.exports.controller.ExportsController.stop
+tuned.exports.dbus_exporter.DBusExporter.stop
+tuned.exports.interfaces.ExporterInterface.stop
+tuned.exports.stop" class="py-name" href="#" onclick="return doclink('link-7', 'stop', 'link-7');">stop</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_thread</tt> <tt class="py-op">=</tt> <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">Thread</tt><tt class="py-op">(</tt><tt class="py-name">target</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method tuned.daemon.daemon.Daemon._thread_code()=tuned.daemon.daemon.Daemon-class.html#_thread_code,Method tuned.exports.dbus_exporter.DBusExporter._thread_code()=tuned.exports.dbus_exporter.DBusExporter-class.html#_thread_code"><a title="tuned.daemon.daemon.Daemon._thread_code
+tuned.exports.dbus_exporter.DBusExporter._thread_code" class="py-name" href="#" onclick="return doclink('link-8', '_thread_code', 'link-8');">_thread_code</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_thread</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method tuned.admin.dbus_controller.DBusController.start()=tuned.admin.dbus_controller.DBusController-class.html#start,Method tuned.daemon.controller.Controller.start()=tuned.daemon.controller.Controller-class.html#start,Method tuned.daemon.daemon.Daemon.start()=tuned.daemon.daemon.Daemon-class.html#start,Method tuned.exports.controller.ExportsController.start()=tuned.exports.controller.ExportsController-class.html#start,Method tuned.exports.dbus_exporter.DBusExporter.start()=tuned.exports.dbus_exporter.DBusExporter-class.html#start,Method tuned.exports.interfaces.ExporterInterface.start()=tuned.exports.interfaces.ExporterInterface-class.html#start,Function tuned.exports.start()=tuned.exports-module.html#start"><a title="tuned.admin.dbus_controller.DBusController.start
+tuned.daemon.controller.Controller.start
+tuned.daemon.daemon.Daemon.start
+tuned.exports.controller.ExportsController.start
+tuned.exports.dbus_exporter.DBusExporter.start
+tuned.exports.interfaces.ExporterInterface.start
+tuned.exports.start" class="py-name" href="#" onclick="return doclink('link-9', 'start', 'link-9');">start</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"> </tt>
+<a name="DBusExporter.stop"></a><div id="DBusExporter.stop-def"><a name="L83"></a><tt class="py-lineno">83</tt> <a class="py-toggle" href="#" id="DBusExporter.stop-toggle" onclick="return toggle('DBusExporter.stop');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports.dbus_exporter.DBusExporter-class.html#stop">stop</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DBusExporter.stop-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DBusExporter.stop-expanded"><a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_thread</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_thread</tt><tt class="py-op">.</tt><tt class="py-name">is_alive</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_main_loop</tt><tt class="py-op">.</tt><tt class="py-name">quit</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_thread</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_thread</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line"> </tt>
+<a name="DBusExporter._thread_code"></a><div id="DBusExporter._thread_code-def"><a name="L89"></a><tt class="py-lineno">89</tt> <a class="py-toggle" href="#" id="DBusExporter._thread_code-toggle" onclick="return toggle('DBusExporter._thread_code');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.exports.dbus_exporter.DBusExporter-class.html#_thread_code">_thread_code</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DBusExporter._thread_code-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DBusExporter._thread_code-expanded"><a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line">                <tt class="py-name">dbus</tt><tt class="py-op">.</tt><tt class="py-name">mainloop</tt><tt class="py-op">.</tt><tt class="py-name">glib</tt><tt class="py-op">.</tt><tt class="py-name">DBusGMainLoop</tt><tt class="py-op">(</tt><tt class="py-name">set_as_default</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno">91</tt>  <tt class="py-line"> </tt>
+<a name="L92"></a><tt class="py-lineno">92</tt>  <tt class="py-line">                <tt class="py-name">bus</tt> <tt class="py-op">=</tt> <tt class="py-name">dbus</tt><tt class="py-op">.</tt><tt class="py-name">SystemBus</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno">93</tt>  <tt class="py-line">                <tt id="link-10" class="py-name"><a title="tuned.exports.dbus_exporter.DBusExporter.bus_name" class="py-name" href="#" onclick="return doclink('link-10', 'bus_name', 'link-2');">bus_name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dbus</tt><tt class="py-op">.</tt><tt class="py-name">service</tt><tt class="py-op">.</tt><tt class="py-name">BusName</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_bus_name</tt><tt class="py-op">,</tt> <tt class="py-name">bus</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno">94</tt>  <tt class="py-line">                <tt class="py-name">bus_object</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dbus_object_cls</tt><tt class="py-op">(</tt><tt class="py-name">bus</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_object_name</tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name"><a title="tuned.exports.dbus_exporter.DBusExporter.bus_name" class="py-name" href="#" onclick="return doclink('link-11', 'bus_name', 'link-2');">bus_name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno">95</tt>  <tt class="py-line"> </tt>
+<a name="L96"></a><tt class="py-lineno">96</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_main_loop</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method tuned.daemon.application.Application.run()=tuned.daemon.application.Application-class.html#run,Method tuned.daemon.controller.Controller.run()=tuned.daemon.controller.Controller-class.html#run"><a title="tuned.daemon.application.Application.run
+tuned.daemon.controller.Controller.run" class="py-name" href="#" onclick="return doclink('link-12', 'run', 'link-12');">run</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno">97</tt>  <tt class="py-line">                <tt class="py-keyword">del</tt> <tt class="py-name">bus_object</tt> </tt>
+</div></div><a name="L98"></a><tt class="py-lineno">98</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

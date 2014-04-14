@@ -8,6 +8,7 @@ DBUS_OBJECT = "/Tuned"
 DEFAULT_PROFILE = "balanced"
 DEFAULT_STORAGE_FILE = "/run/tuned/save.pickle"
 LOAD_DIRECTORIES = ["/usr/lib/tuned", "/etc/tuned"]
+PLUGINS_STORE = ["/usr/lib/python*/site-packages/tuned/plugins/"]
 CONF_PROFILE_FILE = "/tuned.conf"
 # number of backups
 LOG_FILE_COUNT = 2
