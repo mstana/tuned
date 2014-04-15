@@ -22,6 +22,7 @@ import tuned.daemon.daemon as daemon
 import tuned.utils.commands as commands
 import tuned.admin.dbus_controller
 import tuned_gtk.profileLoader
+import tuned_gtk.gui_plugin_loader
 
 from tuned_gtk.managerException import ManagerException
 
@@ -59,6 +60,7 @@ class Base(object):
 
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
         self.manager = tuned_gtk.profileLoader.ProfileLoader(tuned.consts.LOAD_DIRECTORIES)
+        self.plugin_loader = tuned_gtk.gui_plugin_loader.GuiPluginLoader()
         self.builder = Gtk.Builder()
         self.builder.add_from_file("tuned-gui.glade")
         self.builder.connect_signals(self)
@@ -138,6 +140,7 @@ class Base(object):
         #
         #    SET WIDGETS
         #
+
         
         self.dict_profiles = {}
 #         TO DO: DO IT IN BETTER WAY! Q: How to set up value in combobox if I know text not possition in liststore?
@@ -151,16 +154,34 @@ class Base(object):
             i = i+1
             self.profile_name_store.append([profile])
         
+        
+        self.treestore_plugins = Gtk.ListStore(GObject.TYPE_STRING)
+        self.treestore_plugins.append([None])
+        
+        for plugin in self.plugin_loader.plugins:
+            print plugin.name
+            self.treestore_plugins.append([plugin.name])
+        
+        self.combobox_plugins = self.builder.get_object("comboboxPlugins")
+        self.combobox_plugins.set_model(self.treestore_plugins)
+        cell = Gtk.CellRendererText()
+        self.combobox_plugins.pack_start(cell, True)
+        self.combobox_plugins.add_attribute(cell,'text', 0 )
+        
+        self.combobox_main_plugins = self.builder.get_object("comboboxMainPlugins")
+        self.combobox_main_plugins.set_model(self.treestore_plugins)
+        cell = Gtk.CellRendererText()
+        self.combobox_main_plugins.pack_start(cell, True)
+        self.combobox_main_plugins.add_attribute(cell,'text', 0 )
+        
         self.combobox_include_profile.set_model(self.profile_name_store)
         cell = Gtk.CellRendererText()
         self.combobox_include_profile.pack_start(cell, True)
         self.combobox_include_profile.add_attribute(cell,'text', 0 )
 
-
         self.treestore_profile_manager = Gtk.ListStore(GObject.TYPE_STRING)
         self.treeview_profile_manager.append_column(Gtk.TreeViewColumn("Profile", Gtk.CellRendererText(), text=0))
         self.treeview_profile_manager.set_model(self.treestore_profile_manager)
-
 
         for profile in self.manager.get_names():
             self.treestore_profile_manager.append([profile])
@@ -276,10 +297,6 @@ class Base(object):
 
         self.button_add_plugin = self.builder.get_object("buttonAddPluginDialog")
         self.button_cancel_add_plugin_dialog = self.builder.get_object("buttonCloseAddPlugin")        
-
-        self.combobox_plugins = self.builder.get_object("comboboxPlugins")
-        self.combobox_plugins.set_model(self.treestore_actual_plugins)
-
         self.button_cancel_add_plugin_dialog.connect('clicked', lambda d: self.dialog_add_plugin.hide())
         self.button_add_plugin.connect('clicked', self.execute_add_plugin_dialog_choose)
         
@@ -388,6 +405,9 @@ class Base(object):
             try:
                 included = profile.options["include"]
                 profile.options["include"]
+#                 do in better way man!
+
+
                 self.combobox_include_profile.set_active(self.dict_profiles[profile.options["include"]])
             except KeyError:
                 self.combobox_include_profile.set_active(0)
@@ -395,9 +415,9 @@ class Base(object):
             self.window_profile_editor.show()
         else:
             self.error_dialog("You can not update Factory profile", "")
-            
-            
-            
+
+
+
     def execute_change_profile(self, profile):
         self.spinner_fast_change_profile.show()
         self.spinner_fast_change_profile.start()

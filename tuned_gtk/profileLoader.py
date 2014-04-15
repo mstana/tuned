@@ -31,7 +31,7 @@ class ProfileLoader(object):
             return f.read()
 
     def set_raw_profile(self, profile_name, config):
-
+        
         profilePath = self._locate_profile_path(profile_name)
 
         if (profilePath == tuned.consts.LOAD_DIRECTORIES[1]):
@@ -40,13 +40,6 @@ class ProfileLoader(object):
                 f.write(config)
         else:
             raise managerException.ManagerException(profile_name + " profile is stored in "+ profilePath + " and can not be storet do this location")
-
-    def test_print_all_loaded(self):
-        print "test begin"  
-        for profile, config in self.profiles.items():             
-            print profile + " " + str(config.units.keys())
-        print "test done"
-
 
     def load_profile_config(self, profile_name, path):
         conf_path = path + "/" + profile_name + "/tuned.conf"     
