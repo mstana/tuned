@@ -163,9 +163,7 @@ class Base(object):
         
         self.combobox_plugins = self.builder.get_object("comboboxPlugins")
         self.combobox_plugins.set_model(self.treestore_plugins)
-        cell = Gtk.CellRendererText()
-        self.combobox_plugins.pack_start(cell, True)
-        self.combobox_plugins.add_attribute(cell,'text', 0 )
+
         
         self.combobox_main_plugins = self.builder.get_object("comboboxMainPlugins")
         self.combobox_main_plugins.set_model(self.treestore_plugins)
@@ -221,10 +219,10 @@ class Base(object):
 
         self.button_confirm_profile_create = self.builder.get_object("buttonConfirmProfileCreate")
         self.button_confirm_profile_update = self.builder.get_object("buttonConfirmProfileUpdate")
-        
+
         self.button_confirm_profile_create.connect("clicked", self.execute_make_profile)
         self.button_confirm_profile_update.connect("clicked", self.execute_modify_profile)
-        
+
 
         self.main_window.connect("destroy", Gtk.main_quit)
         self.main_window.show()
@@ -290,85 +288,38 @@ class Base(object):
         self.window_profile_editor_raw.show_all()  
 
 
-    def execute_choose_plugin_dialog(self):
+    def choose_plugin_dialog(self):
 
         self.button_add_plugin = self.builder.get_object("buttonAddPluginDialog")
         self.button_cancel_add_plugin_dialog = self.builder.get_object("buttonCloseAddPlugin")        
         self.button_cancel_add_plugin_dialog.connect('clicked', lambda d: self.dialog_add_plugin.hide())
-        self.button_add_plugin.connect('clicked', self.execute_add_plugin_dialog_choose)
+        
         
         self.dialog_add_plugin.connect('destroy', lambda d: self.dialog_add_plugin.hide())
-
+        self.button_add_plugin.connect('clicked', lambda d: self.dialog_add_plugin.hide())
+        
         self.dialog_add_plugin.run()
         self.dialog_add_plugin.hide()
+        
+        return self.combobox_plugins.get_active_text()
 
-    def execute_add_plugin_dialog_choose(self, data):            
-        if (self.combobox_plugins.get_active() == -1 or
-           self.combobox_plugins.get_active() == None):
-            self.error_dialog("No plugin selected", "To add plugin You have to select one.")
-        else:     
-            self.dialog_add_plugin.hide()
-            return self.combobox_plugins.get_active()
+        
 
     def execute_add_plugin_to_notebook(self, data):
 
-        plugin = self.execute_choose_plugin_dialog() 
-
-        if (plugin == None):
+        plugin_name = self.choose_plugin_dialog() 
+        if (plugin_name == -1 or plugin_name == None):
+            self.error_dialog("No plugin selected", "To add plugin You have to select one.")
             return
         
-        treestore = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)        
-#         TO DO: store data to treestore - option, value for plugin
+        plugin_to_tab = None
+        for plugin in self.plugin_loader.plugins:
+            if plugin.name == plugin_name:
+                plugin_to_tab = plugin
 
-        plugin_data = self.plugin_loader.load_plugin(plugin)
-        print plugin_data
-        
-        treestore.append(["testOption","testValue"])
-
-        treeview = Gtk.TreeView(treestore) 
-        renderer = Gtk.CellRendererText()
-        column_option = Gtk.TreeViewColumn("Option", renderer, text=0)
-        column_value = Gtk.TreeViewColumn("Value", renderer, text=1)
-        treeview.append_column(column_value)
-        treeview.append_column(column_option)
-        
-#         TO DO: Store Name of plugin
-        plugin_name = Gtk.Label(plugin.name)
-        
-        
-        
-#         add plugin to profile backend
-        
-        self.notebook_plugins.append_page_menu( treeview, plugin_name, None)
+        self.notebook_plugins.append_page_menu( self.make_treestore_for_data(plugin_to_tab._get_config_options()) , Gtk.Label(plugin_to_tab.name), None)
         self.notebook_plugins.show_all()
-        
-        
-        
-#         profile = self.manager.get_profile("powersave")
-#         print profile.name
-#         
-#         
-#         print "units -------------"
-#         
-#         for name, unit in profile.units.items():
-#             print "======================================================================"
-#             print name # name of section - sysctl
-#             
-#             print 
-#             print "options: " + str(unit._options) # option = value
-#             print "------"
-#             print "name: " + str(unit.name)
-#             print "------"
-#             print "type: " + str(unit.type)
-#             print "------"
-#             print "enabled: " + str(unit.enabled)
-#             print "------"
-#             print "replace: " + str(unit.replace)
-#             print "------"
-#             print "devices: " + str(unit.devices)
-#             
-#         print "done"
-#         
+
 
         
     
@@ -379,9 +330,9 @@ class Base(object):
         end = text_buffer.get_end_iter()
         profile_name = self.get_treeview_selected()
         self.manager.set_raw_profile(profile_name, text_buffer.get_text(start,end, True))
-        
-        
 #         refresh window_profile_editor
+
+
     
     def execute_create_profile(self, button):
         self.reset_values_window_edit_profile()
@@ -404,50 +355,6 @@ class Base(object):
         if iter is None:
             self.error_dialog("No profile selected", "")
         return self.treestore_profile_manager.get_value(iter, 0)
-
-
-    def unit_to_plugin(self, profile_units):
-        """
-        conver units to plugins 
-        """        
-        
-        print profile_units
-        
-        plugins = self.plugin_loader.plugins
-        
-        active_plugins = set()
-        
-        for name, unit in profile_units.items():
-            for plugin in plugins:
-                if (plugin.name == unit.name):
-#                     firt set up values of plugin and then add
-#                     options: {'kernel.sched_autogroup_enabled': '1'}
-                    print str(plugin.name) + str(unit.name)
-                    
-                    print "options " + str(plugin._get_config_options())
-
-                    active_plugins.add(plugin)
-            
-            
-            print "======================================================================"
-            print name # name of section - sysctl
-            
-            print 
-            print "options: " + str(unit._options) # option = value
-            print "------"
-            print "name: " + str(unit.name)
-            print "------"
-            print "type: " + str(unit.type)
-            print "------"
-            print "enabled: " + str(unit.enabled)
-            print "------"
-            print "replace: " + str(unit.replace)
-            print "------"
-            print "devices: " + str(unit.devices)
-            
-        print "done"
-        
-        return plugins
 
 
     def execute_update_profile(self, button):
@@ -484,18 +391,18 @@ class Base(object):
                 self.combobox_include_profile.set_active(0)
 
             for name, unit in profile.units.items():
-                self.notebook_plugins.append_page_menu(self.make_treestore_for_profile_unit(unit),Gtk.Label(unit.name), None)
+                self.notebook_plugins.append_page_menu(self.make_treestore_for_data(unit.options),Gtk.Label(unit.name), None)
 
             self.notebook_plugins.show_all()
             self.window_profile_editor.show()
         else:
             self.error_dialog("You can not update Factory profile", "")
 
-    def make_treestore_for_profile_unit(self, profile_unit):
+    def make_treestore_for_data(self, data):
 
         treestore = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)                
-        for option, value in profile_unit.options.items():
-            treestore.append([value,option])
+        for option, value in data.items():
+            treestore.append([str(value),option])
         
         treeview = Gtk.TreeView(treestore) 
         renderer = Gtk.CellRendererText()
