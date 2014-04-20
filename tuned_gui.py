@@ -63,7 +63,7 @@ class Base(object):
         self.plugin_loader = tuned_gtk.gui_plugin_loader.GuiPluginLoader()
         self.builder = Gtk.Builder()
         self.builder.add_from_file("tuned-gui.glade")
-        self.builder.connect_signals(self)
+        self.builder.connect_signals(self)        
         #
         #    WINDOW MAIN
         #
@@ -154,7 +154,6 @@ class Base(object):
             i = i+1
             self.profile_name_store.append([profile])
         
-        
         self.treestore_plugins = Gtk.ListStore(GObject.TYPE_STRING)
         self.treestore_plugins.append([None])
         
@@ -232,7 +231,7 @@ class Base(object):
 
     
     def execute_make_profile(self, button):
-        raise Exception()
+        raise NotImplemented()
     
     def execute_modify_profile(self, button):
         
@@ -246,8 +245,6 @@ class Base(object):
         except ManagerException:
             self.error_dialog("You can not do this.", "info")
         
-        
-            
         
         
     def on_delete_event(self, window, data):
@@ -306,7 +303,8 @@ class Base(object):
         self.dialog_add_plugin.hide()
 
     def execute_add_plugin_dialog_choose(self, data):            
-        if (self.combobox_plugins.get_active() == -1):
+        if (self.combobox_plugins.get_active() == -1 or
+           self.combobox_plugins.get_active() == None):
             self.error_dialog("No plugin selected", "To add plugin You have to select one.")
         else:     
             self.dialog_add_plugin.hide()
@@ -321,9 +319,12 @@ class Base(object):
         
         treestore = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)        
 #         TO DO: store data to treestore - option, value for plugin
+
+        plugin_data = self.plugin_loader.load_plugin(plugin)
+        print plugin_data
+        
         treestore.append(["testOption","testValue"])
 
-            
         treeview = Gtk.TreeView(treestore) 
         renderer = Gtk.CellRendererText()
         column_option = Gtk.TreeViewColumn("Option", renderer, text=0)
@@ -332,7 +333,7 @@ class Base(object):
         treeview.append_column(column_option)
         
 #         TO DO: Store Name of plugin
-        plugin_name = Gtk.Label(plugin)
+        plugin_name = Gtk.Label(plugin.name)
         
         
         
@@ -340,6 +341,35 @@ class Base(object):
         
         self.notebook_plugins.append_page_menu( treeview, plugin_name, None)
         self.notebook_plugins.show_all()
+        
+        
+        
+#         profile = self.manager.get_profile("powersave")
+#         print profile.name
+#         
+#         
+#         print "units -------------"
+#         
+#         for name, unit in profile.units.items():
+#             print "======================================================================"
+#             print name # name of section - sysctl
+#             
+#             print 
+#             print "options: " + str(unit._options) # option = value
+#             print "------"
+#             print "name: " + str(unit.name)
+#             print "------"
+#             print "type: " + str(unit.type)
+#             print "------"
+#             print "enabled: " + str(unit.enabled)
+#             print "------"
+#             print "replace: " + str(unit.replace)
+#             print "------"
+#             print "devices: " + str(unit.devices)
+#             
+#         print "done"
+#         
+
         
     
     def execute_apply_window_profile_editor_raw(self, data):
@@ -360,20 +390,12 @@ class Base(object):
         self.button_open_raw.hide()
         self.window_profile_editor.show()
 
+
     def reset_values_window_edit_profile(self):
         self.entry_profile_name.set_text("")
         self.combobox_include_profile.set_active(0)
         for child in self.notebook_plugins.get_children():
             self.notebook_plugins.remove(child)
-
-
-
-# 
-#         self.label1 = self.builder.get_object("label12")
-# 
-#         self.notebook_plugins.append_page_menu(temp, None, self.label1)
-# 
-#         self.notebook_plugins.show_all()
 
 
     def get_treeview_selected(self):
@@ -383,18 +405,69 @@ class Base(object):
             self.error_dialog("No profile selected", "")
         return self.treestore_profile_manager.get_value(iter, 0)
 
+
+    def unit_to_plugin(self, profile_units):
+        """
+        conver units to plugins 
+        """        
+        
+        print profile_units
+        
+        plugins = self.plugin_loader.plugins
+        
+        active_plugins = set()
+        
+        for name, unit in profile_units.items():
+            for plugin in plugins:
+                if (plugin.name == unit.name):
+#                     firt set up values of plugin and then add
+#                     options: {'kernel.sched_autogroup_enabled': '1'}
+                    print str(plugin.name) + str(unit.name)
+                    
+                    print "options " + str(plugin._get_config_options())
+
+                    active_plugins.add(plugin)
+            
+            
+            print "======================================================================"
+            print name # name of section - sysctl
+            
+            print 
+            print "options: " + str(unit._options) # option = value
+            print "------"
+            print "name: " + str(unit.name)
+            print "------"
+            print "type: " + str(unit.type)
+            print "------"
+            print "enabled: " + str(unit.enabled)
+            print "------"
+            print "replace: " + str(unit.replace)
+            print "------"
+            print "devices: " + str(unit.devices)
+            
+        print "done"
+        
+        return plugins
+
+
     def execute_update_profile(self, button):
         
         self.button_confirm_profile_create.hide()
         self.button_confirm_profile_update.show()
         self.button_open_raw.show()
-        profile_name = self.get_treeview_selected()
+        label12 = self.builder.get_object("label12")
+        label12.set_text("Update Profile")
         
+        for child in self.notebook_plugins.get_children():
+            self.notebook_plugins.remove(child)
+
+        profile_name = self.get_treeview_selected()
+
         if profile_name == None :
             self.error_dialog("No profile Selected", "To update profile please select profile.")
             return
         if (self._get_active_profile_name() == profile_name):
-            self.error_dialog("You can not update active profile", "Please deactivate profile by choosind another!")
+            self.error_dialog("You can not update active profile", "Please deactivate profile by choosing another!")
             return
         
         if (self.manager.is_profile_removable(profile_name)):
@@ -406,17 +479,32 @@ class Base(object):
                 included = profile.options["include"]
                 profile.options["include"]
 #                 do in better way man!
-
-
                 self.combobox_include_profile.set_active(self.dict_profiles[profile.options["include"]])
             except KeyError:
                 self.combobox_include_profile.set_active(0)
-    #    plugins
+
+            for name, unit in profile.units.items():
+                self.notebook_plugins.append_page_menu(self.make_treestore_for_profile_unit(unit),Gtk.Label(unit.name), None)
+
+            self.notebook_plugins.show_all()
             self.window_profile_editor.show()
         else:
             self.error_dialog("You can not update Factory profile", "")
 
+    def make_treestore_for_profile_unit(self, profile_unit):
 
+        treestore = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)                
+        for option, value in profile_unit.options.items():
+            treestore.append([value,option])
+        
+        treeview = Gtk.TreeView(treestore) 
+        renderer = Gtk.CellRendererText()
+        column_option = Gtk.TreeViewColumn("Option", renderer, text=0)
+        column_value = Gtk.TreeViewColumn("Value", renderer, text=1)
+        treeview.append_column(column_value)
+        treeview.append_column(column_option)
+
+        return treeview
 
     def execute_change_profile(self, profile):
         self.spinner_fast_change_profile.show()
@@ -439,15 +527,11 @@ class Base(object):
         elif switch == self.switch_tuned_startup_start_stop:
             if self.switch_tuned_startup_start_stop.get_active():
                 subprocess.call(["systemctl", "enable", "tuned"])
-#                 print "Control statement: systemctl enable tuned"
             else:
                 subprocess.call(["systemctl", "disable", "tuned"])
-#                 print "Control statement: systemctl disable tuned"
 
 
-    def execute_about(self, widget):
-        self.about_dialog.run()
-        self.about_dialog.hide()
+
 
     def find_process(self, processId):
         self.ps = subprocess.Popen("ps -ef | grep "+processId, shell=True, stdout=subprocess.PIPE)
@@ -478,6 +562,10 @@ class Base(object):
         self.messagedialog_pperation_error.format_secondary_text(info)
         self.messagedialog_pperation_error.run()
         self.messagedialog_pperation_error.hide()
+    
+    def execute_about(self, widget):
+        self.about_dialog.run()
+        self.about_dialog.hide()
 
 if __name__ == '__main__':
 

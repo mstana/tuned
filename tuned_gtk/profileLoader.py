@@ -16,8 +16,6 @@ class ProfileLoader(object):
     """
     Profiles loader for GUI Gtk purposes.
     """
-
-
     profiles = {}
 
     def __init__(self, directories):
@@ -62,6 +60,9 @@ class ProfileLoader(object):
 #                 return config
 #             
 #         return profile_config
+
+
+
     def _locate_profile_path(self, profileName):
         for d in self.directories:
             for profile in os.listdir(d):
