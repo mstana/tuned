@@ -29,9 +29,8 @@ class ProfileLoader(object):
             return f.read()
 
     def set_raw_profile(self, profile_name, config):
-        
         profilePath = self._locate_profile_path(profile_name)
-
+        self.get_profile(profile_name).
         if (profilePath == tuned.consts.LOAD_DIRECTORIES[1]):
             file = profilePath +"/" + profile_name +"/"+ "tuned.conf"
             with open(file, 'w') as f:
@@ -44,24 +43,6 @@ class ProfileLoader(object):
 
         profile_config = configobj.ConfigObj(conf_path)
         return profile_config
-
-
-#         FLAT VERSION
-#  
-#         conf_path = path + "/" + profile_name + "/tuned.conf"        
-#         profile_config = configobj.ConfigObj(conf_path)
-#         for section in profile_config:
-#             if (section == "main"):
-#                 print profile_config[section]
-#                 
-#                 config = self.load_profile_config(profile_config[section]["include"], 
-#                                                     self._locate_profile_path(profile_config[section]["include"]))                
-#                 config.merge(profile_config)
-#                 return config
-#             
-#         return profile_config
-
-
 
     def _locate_profile_path(self, profileName):
         for d in self.directories:
@@ -154,6 +135,7 @@ class ProfileLoader(object):
             return True
         else:
             return False
+
 
         
 # if __name__ == '__main__':

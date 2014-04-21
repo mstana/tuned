@@ -2,6 +2,100 @@
 <!-- Generated with glade 3.16.1 -->
 <interface>
   <requires lib="gtk+" version="3.8"/>
+  <object class="GtkDialog" id="changeValueDialog">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox4">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area4">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="buttonApplyChangeValue">
+                <property name="label">gtk-apply</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="buttonCancel1">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box10">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="labelTextDialogChangeValue">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">20</property>
+                <property name="margin_bottom">20</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="entry1">
+                <property name="width_request">300</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="margin_top">30</property>
+                <property name="margin_bottom">30</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkDialog" id="dialogAddPlugin">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
@@ -35,7 +129,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="gtk_widget_destroy" swapped="no"/>
+                <signal name="clicked" handler="gtk_false" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -504,6 +598,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="vexpand">True</property>
+                        <property name="enable_grid_lines">both</property>
+                        <property name="activate_on_single_click">True</property>
                         <child internal-child="selection">
                           <object class="GtkTreeSelection" id="treeview-selection"/>
                         </child>
