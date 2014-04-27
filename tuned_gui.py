@@ -57,8 +57,13 @@ AUTHORS = [
 
 
 class Base(object):
+    
+    """
+    GUI class for program Tuned.
+    """
 
     def __init__(self):
+        
 
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
         self.manager = tuned_gtk.profileLoader.ProfileLoader(tuned.consts.LOAD_DIRECTORIES)
@@ -66,6 +71,14 @@ class Base(object):
         self.builder = Gtk.Builder()
         self.builder.add_from_file("tuned-gui.glade")
         self.builder.connect_signals(self)        
+        
+        print "Here are supproted devices: "
+        
+        for plugin in self.plugin_loader.plugins:
+            try:
+                print plugin._get_config_options()
+            except:
+                print "no value for " + str(plugin.name)
         #
         #    WINDOW MAIN
         #
@@ -80,11 +93,13 @@ class Base(object):
         self.notebook_plugins = self.builder.get_object("notebookPlugins")
 
         self.button_add_plugin = self.builder.get_object("buttonAddPlugin")
+        self.button_remove_plugin = self.builder.get_object("buttonRemovePlugin")
         self.button_open_raw = self.builder.get_object("buttonOpenRaw")
         self.button_cancel = self.builder.get_object("buttonCancel")
 
         self.button_open_raw.connect("clicked", self.execute_open_raw_button)
         self.button_add_plugin.connect("clicked", self.execute_add_plugin_to_notebook)
+        self.button_remove_plugin.connect("clicked", self.execute_remove_plugin_from_notebook)
         self.button_cancel.connect("clicked", self.execute_cancel_window_profile_editor)
         #
         #    WINDOW PROFILE EDITOR RAW
@@ -229,6 +244,9 @@ class Base(object):
             for o in self.active_profile.units[u].options:
                 text += "\n"+ o + " = " + self.active_profile.units[u].options[o]
                 text += "\n"
+        label9 = self.builder.get_object("label9")
+        label9.set_text(text)    
+        
 
     def _get_active_profile_name(self):
         return self.manager.get_profile(self.controller.active_profile()).name
@@ -286,6 +304,22 @@ class Base(object):
                 self.notebook_plugins.append_page_menu( self.make_treestore_for_data(plugin_to_tab._get_config_options()) , Gtk.Label(plugin_to_tab.name), Gtk.Label(plugin_to_tab.name))
                 self.notebook_plugins.show_all()
 
+    def execute_remove_plugin_from_notebook(self, data):  
+
+        treestore = Gtk.ListStore(GObject.TYPE_STRING)
+        for children in self.notebook_plugins.get_children():
+            treestore.append([self.notebook_plugins.get_menu_label_text(children)])
+        self.combobox_plugins.set_model(treestore)
+        result = self.choose_plugin_dialog()
+
+        selected = self.combobox_plugins.get_active_text()
+        for children in self.notebook_plugins.get_children():
+            if (self.notebook_plugins.get_menu_label_text(children) == selected):
+                self.notebook_plugins.remove(children)
+        self.combobox_plugins.set_model(self.treestore_plugins)
+#        TO DO: treba este refresh tohto profilu v hlavnom okne
+
+        
     def execute_apply_window_profile_editor_raw(self, data):
         text_buffer = self.textview1.get_buffer()
         start = text_buffer.get_start_iter()
@@ -301,10 +335,10 @@ class Base(object):
         self.button_confirm_profile_create.show()
         self.button_confirm_profile_update.hide()
         self.button_open_raw.hide()
-        
+
         for child in self.notebook_plugins.get_children():
             self.notebook_plugins.remove(child)
-        
+
         self.window_profile_editor.show()
 
     def reset_values_window_edit_profile(self):
@@ -313,8 +347,10 @@ class Base(object):
         for child in self.notebook_plugins.get_children():
             self.notebook_plugins.remove(child)
 
-
     def get_treeview_selected(self):
+        """
+        Return value of treeview which is selected at calling moment of this function.
+        """
         selection = self.treeview_profile_manager.get_selection()
         (model, iter) = selection.get_selected()
         if iter is None:
@@ -330,9 +366,10 @@ class Base(object):
                     if item[0] == profile_name:
                         iter = self.treestore_profile_manager.get_iter(item.path)
                         self.treestore_profile_manager.remove(iter)
-                except:
+                except KeyError:
                     raise KeyError(" this cant happen ")
-
+                except:
+                    pass
             self.manager.update_profile(prof)
             self.treestore_profile_manager.append([prof.name])
             self.window_profile_editor.hide()
@@ -360,6 +397,7 @@ class Base(object):
         try:
             prof = self.data_to_profile_config()
             self.manager.save_profile(prof)
+            self.manager._load_all_profiles()
             self.treestore_profile_manager.append([prof.name])
             self.window_profile_editor.hide()
         except:
@@ -403,6 +441,9 @@ class Base(object):
             self.error_dialog("You can not update Factory profile", "")
 
     def make_treestore_for_data(self, data):
+        """
+        This prepare treestore and treeview for data and return treeview
+        """
         treestore = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)                
         for option, value in data.items():
             treestore.append([str(value),option])
@@ -418,13 +459,17 @@ class Base(object):
 
         return treeview
 
-    def execute_change_profile(self, profile):
+    def execute_change_profile(self, button):
         self.spinner_fast_change_profile.show()
         self.spinner_fast_change_profile.start()
-        if profile is not None:
-            self.controller.switch_profile(self.comboboxtext1.get_active_text())
-            self.label_actual_profile.set_text(self.controller.active_profile())
-        self.refresh_summary_of_actual_profile()
+        if button is not None:
+            text = self.comboboxtext1.get_active_text()
+            if text is not None:
+                self.controller.switch_profile(text)
+                self.label_actual_profile.set_text(self.controller.active_profile())
+                self.refresh_summary_of_actual_profile()
+            else:
+                self.error_dialog("No profile selected", "")
         self.spinner_fast_change_profile.stop()
         self.spinner_fast_change_profile.hide()
 
@@ -464,8 +509,13 @@ class Base(object):
         if subprocess.call(["systemctl", "status", service]) == 0:
             return True
         return False
+    
+
 
     def error_dialog(self, error, info):
+        """
+        General error dialog with two fields. Primary and secondary text fields.
+        """
         self.messagedialog_pperation_error.set_markup(error)
         self.messagedialog_pperation_error.format_secondary_text(info)
         self.messagedialog_pperation_error.run()
@@ -475,8 +525,12 @@ class Base(object):
         self.about_dialog.run()
         self.about_dialog.hide()
 
-
     def change_value_dialog(self, tree_view, path, treeview_column):
+    
+        """
+        Shows up dialog after double click on treeview which has to be stored in notebook of plugins. 
+        This dialog allows you to chagne specific option's value in plugin.
+        """
         model = tree_view.get_model() 
         dialog = self.builder.get_object("changeValueDialog")
         button_apply = self.builder.get_object("buttonApplyChangeValue")
@@ -497,7 +551,12 @@ class Base(object):
         button_cancel.disconnect(signal_id_apply)
         button_apply.disconnect(signal_id_apply1)
 
+
+
     def choose_plugin_dialog(self):
+        """
+        Shows up dialog with combobox where are stored plugins avaible to add.
+        """
         self.button_add_plugin = self.builder.get_object("buttonAddPluginDialog")
         self.button_cancel_add_plugin_dialog = self.builder.get_object("buttonCloseAddPlugin")        
         self.button_cancel_add_plugin_dialog.connect('clicked', lambda d: self.dialog_add_plugin.hide())
