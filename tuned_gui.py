@@ -22,7 +22,7 @@ import tuned.version as ver
 import tuned.daemon.daemon as daemon
 import tuned.utils.commands as commands
 import tuned.admin.dbus_controller
-import tuned_gtk.profileLoader
+import tuned_gtk.gui_profile_loader
 import tuned_gtk.gui_plugin_loader
 import tuned.profiles.profile as profile
 
@@ -63,22 +63,14 @@ class Base(object):
     """
 
     def __init__(self):
-        
+
 
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
-        self.manager = tuned_gtk.profileLoader.ProfileLoader(tuned.consts.LOAD_DIRECTORIES)
+        self.manager = tuned_gtk.gui_profile_loader.GuiProfileLoader(tuned.consts.LOAD_DIRECTORIES)
         self.plugin_loader = tuned_gtk.gui_plugin_loader.GuiPluginLoader()
         self.builder = Gtk.Builder()
         self.builder.add_from_file("tuned-gui.glade")
         self.builder.connect_signals(self)        
-        
-        print "Here are supproted devices: "
-        
-        for plugin in self.plugin_loader.plugins:
-            try:
-                print plugin._get_config_options()
-            except:
-                print "no value for " + str(plugin.name)
         #
         #    WINDOW MAIN
         #
@@ -112,6 +104,11 @@ class Base(object):
         self.button_cancel_raw.connect("clicked", self.execute_cancel_window_profile_editor_raw)
         self.textview1 = self.builder.get_object("textview1")
         self.textview1.set_editable(True)
+
+        self.textview_plugin_avaible_text = self.builder.get_object("textviewPluginAvaibleText")
+        self.textview_plugin_documentation_text = self.builder.get_object("textviewPluginDocumentationText")
+        self.textview_plugin_avaible_text.set_editable(False)
+        self.textview_plugin_documentation_text.set_editable(False)
         #
         #    DIALOG ABOUT
         #
@@ -158,12 +155,9 @@ class Base(object):
         self.treestore_actual_plugins = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)
         self.treestore_profile_manager = Gtk.ListStore(GObject.TYPE_STRING)
 
-
-
         self.treestore_plugins = Gtk.ListStore(GObject.TYPE_STRING)
         self.treestore_plugins.append([None])
         for plugin in self.plugin_loader.plugins:
-            print plugin.name
             self.treestore_plugins.append([plugin.name])
 
         self.combobox_plugins = self.builder.get_object("comboboxPlugins")
@@ -172,9 +166,7 @@ class Base(object):
 
         self.combobox_main_plugins = self.builder.get_object("comboboxMainPlugins")
         self.combobox_main_plugins.set_model(self.treestore_plugins)
-        cell = Gtk.CellRendererText()
-        self.combobox_main_plugins.pack_start(cell, True)
-        self.combobox_main_plugins.add_attribute(cell,'text', 0 )
+        self.combobox_main_plugins.connect("changed", self.on_changed_combobox_plugins)
 
         self.combobox_include_profile.set_model(self.treestore_profile_manager)
         cell = Gtk.CellRendererText()
@@ -227,10 +219,24 @@ class Base(object):
 
         self.button_confirm_profile_create.connect("clicked", self.on_click_button_confirm_profile_create)
         self.button_confirm_profile_update.connect("clicked", self.on_click_button_confirm_profile_update)
+        
+        self.treeview_profile_manager.connect('row-activated',lambda x, y, z: self.execute_update_profile(x))
 
         self.main_window.connect("destroy", Gtk.main_quit)
         self.main_window.show()
 
+    def on_changed_combobox_plugins(self, combo):
+
+        plugin = self.plugin_loader.get_plugin(self.combobox_main_plugins.get_active_text())
+        if plugin == None:
+            self.textview_plugin_avaible_text.get_buffer().set_text("")
+            self.textview_plugin_documentation_text.get_buffer().set_text("")
+            return
+        options = '\n'.join("%s = %r" % (key,val) for (key,val) in plugin._get_config_options().iteritems())
+        
+        self.textview_plugin_avaible_text.get_buffer().set_text(options)
+        self.textview_plugin_documentation_text.get_buffer().set_text(plugin.__doc__)
+   
     def on_delete_event(self, window, data):
         window.hide()
         return True
@@ -246,7 +252,6 @@ class Base(object):
                 text += "\n"
         label9 = self.builder.get_object("label9")
         label9.set_text(text)    
-        
 
     def _get_active_profile_name(self):
         return self.manager.get_profile(self.controller.active_profile()).name
@@ -257,6 +262,13 @@ class Base(object):
             if (self._get_active_profile_name() == profile):
                 self.error_dialog("You can not remove active profile", "Please deactivate profile by choosind another!")
                 return
+            if (profile == None):
+                self.error_dialog("No profile selected!", "")
+                return
+            if (profile == self.editing_profile_name):
+                self.error_dialog("You are ediding " + self.editing_profile_name + " profile.", "Please close edit window and try again.")
+                return
+                pass
             self.manager.remove_profile(profile)
             for item in self.treestore_profile_manager:
                 if item[0] == profile:
@@ -271,38 +283,29 @@ class Base(object):
     def execute_cancel_window_profile_editor_raw(self, button):
         self.window_profile_editor_raw.close()      
 
-    def execute_open_raw_button(self, data):
+    def execute_open_raw_button(self, button):
         profile_name = self.get_treeview_selected()
         text_buffer = self.textview1.get_buffer()
         text_buffer.set_text(self.manager.get_raw_profile(profile_name))
         self.window_profile_editor_raw.show_all()          
 
-    def on_click_choose_plugin_dialog_add_button(self, data):
-        plugin_name = self.combobox_plugins.get_active_text()
-        if (plugin_name == -1 or plugin_name == None):
-            self.error_dialog("No plugin selected", "To add plugin You have to select one.")
-        else: 
-            self.dialog_add_plugin.hide()
-            self.active_combo_text = self.combobox_plugins.get_active_text()
 
-    def execute_add_plugin_to_notebook(self, data):
-        self.choose_plugin_dialog()
-        plugin_name = self.active_combo_text
 
-#      TO DO:   toto nechceme aby prebehlo ked choose_plugin dialog vrati cancel alebo 
-        if plugin_name == None:
-            self.error_dialog("Please, choose some plugin" , "")
-        plugin_to_tab = None
-        for plugin in self.plugin_loader.plugins:
-            if plugin.name == plugin_name:
-                for children in self.notebook_plugins:
+    def execute_add_plugin_to_notebook(self, button):        
 
-                    if plugin_name == self.notebook_plugins.get_menu_label_text(children):
-                        self.error_dialog("Plugin " + plugin_name + " is already in profile." , "")
-                        return
-                plugin_to_tab = plugin
-                self.notebook_plugins.append_page_menu( self.make_treestore_for_data(plugin_to_tab._get_config_options()) , Gtk.Label(plugin_to_tab.name), Gtk.Label(plugin_to_tab.name))
-                self.notebook_plugins.show_all()
+        if (self.choose_plugin_dialog() == 1):
+            plugin_name = self.combobox_plugins.get_active_text()
+            plugin_to_tab = None
+            for plugin in self.plugin_loader.plugins:
+                if plugin.name == plugin_name:
+                    for children in self.notebook_plugins:
+                        if plugin_name == self.notebook_plugins.get_menu_label_text(children):
+                            self.error_dialog("Plugin " + plugin_name + " is already in profile." , "")
+                            return
+                    plugin_to_tab = plugin
+                    self.notebook_plugins.append_page_menu( self.make_treestore_for_data(plugin_to_tab._get_config_options()) , Gtk.Label(plugin_to_tab.name), Gtk.Label(plugin_to_tab.name))
+                    self.notebook_plugins.show_all()
+
 
     def execute_remove_plugin_from_notebook(self, data):  
 
@@ -310,15 +313,17 @@ class Base(object):
         for children in self.notebook_plugins.get_children():
             treestore.append([self.notebook_plugins.get_menu_label_text(children)])
         self.combobox_plugins.set_model(treestore)
-        result = self.choose_plugin_dialog()
-
-        selected = self.combobox_plugins.get_active_text()
-        for children in self.notebook_plugins.get_children():
-            if (self.notebook_plugins.get_menu_label_text(children) == selected):
-                self.notebook_plugins.remove(children)
-        self.combobox_plugins.set_model(self.treestore_plugins)
-#        TO DO: treba este refresh tohto profilu v hlavnom okne
-
+        
+        response_of_dialog =  self.choose_plugin_dialog()
+        
+        if (response_of_dialog == 1):
+#             ok button pressed
+            selected = self.combobox_plugins.get_active_text()
+            for children in self.notebook_plugins.get_children():
+                if (self.notebook_plugins.get_menu_label_text(children) == selected):
+                    self.notebook_plugins.remove(children)
+            self.combobox_plugins.set_model(self.treestore_plugins)
+    #        TO DO: treba este refresh tohto profilu v hlavnom okne        
         
     def execute_apply_window_profile_editor_raw(self, data):
         text_buffer = self.textview1.get_buffer()
@@ -368,9 +373,8 @@ class Base(object):
                         self.treestore_profile_manager.remove(iter)
                 except KeyError:
                     raise KeyError(" this cant happen ")
-                except:
-                    pass
-            self.manager.update_profile(prof)
+
+            self.manager.update_profile(profile_name, prof)
             self.treestore_profile_manager.append([prof.name])
             self.window_profile_editor.hide()
 
@@ -400,7 +404,7 @@ class Base(object):
             self.manager._load_all_profiles()
             self.treestore_profile_manager.append([prof.name])
             self.window_profile_editor.hide()
-        except:
+        except ManagerException: 
             self.error_dialog("Profile with name " + prof.name + " already exist.", "Please choose another name for profile")
 
     def execute_update_profile(self, button):        
@@ -413,16 +417,16 @@ class Base(object):
         for child in self.notebook_plugins.get_children():
             self.notebook_plugins.remove(child)
 
-        profile_name = self.get_treeview_selected()
+        self.editing_profile_name = self.get_treeview_selected()
 
-        if profile_name == None :
+        if self.editing_profile_name == None :
             self.error_dialog("No profile Selected", "To update profile please select profile.")
             return
-        if (self._get_active_profile_name() == profile_name):
+        if (self._get_active_profile_name() == self.editing_profile_name):
             self.error_dialog("You can not update active profile", "Please deactivate profile by choosing another!")
             return
-        if (self.manager.is_profile_removable(profile_name)):
-            profile = self.manager.get_profile(profile_name)
+        if (self.manager.is_profile_removable(self.editing_profile_name)):
+            profile = self.manager.get_profile(self.editing_profile_name)
             self.entry_profile_name.set_text(profile.name)
             model = self.combobox_include_profile.get_model()
             selected = 0
@@ -456,7 +460,6 @@ class Base(object):
         treeview.append_column(column_option)
         treeview.enable_grid_lines = True
         treeview.connect('row-activated', self.change_value_dialog)
-
         return treeview
 
     def execute_change_profile(self, button):
@@ -526,7 +529,7 @@ class Base(object):
         self.about_dialog.hide()
 
     def change_value_dialog(self, tree_view, path, treeview_column):
-    
+     
         """
         Shows up dialog after double click on treeview which has to be stored in notebook of plugins. 
         This dialog allows you to chagne specific option's value in plugin.
@@ -537,34 +540,30 @@ class Base(object):
         button_cancel = self.builder.get_object("buttonCancel1")
         entry1 = self.builder.get_object("entry1")
         text = self.builder.get_object("labelTextDialogChangeValue")
-
+ 
         text.set_text(model.get_value(model.get_iter(path), 1))
         entry1.set_text(model.get_value(model.get_iter(path), 0))
-
+ 
         dialog.connect('destroy', lambda d: dialog.hide())
         button_cancel.connect('clicked', lambda d: dialog.hide())
-        signal_id_apply = button_apply.connect('clicked',lambda x : dialog.hide() )
-        signal_id_apply1 = button_apply.connect('clicked', lambda d: model.set_value(model.get_iter(path), 0, entry1.get_text()))
 
-        dialog.run()
+        if (dialog.run() == 1 ):
+            model.set_value(model.get_iter(path), 0, entry1.get_text())
+
         dialog.hide()
-        button_cancel.disconnect(signal_id_apply)
-        button_apply.disconnect(signal_id_apply1)
-
-
 
     def choose_plugin_dialog(self):
         """
         Shows up dialog with combobox where are stored plugins avaible to add.
         """
+        self.combobox_plugins.set_active(0)
         self.button_add_plugin = self.builder.get_object("buttonAddPluginDialog")
         self.button_cancel_add_plugin_dialog = self.builder.get_object("buttonCloseAddPlugin")        
         self.button_cancel_add_plugin_dialog.connect('clicked', lambda d: self.dialog_add_plugin.hide())
         self.dialog_add_plugin.connect('destroy', lambda d: self.dialog_add_plugin.hide())
-        self.button_add_plugin.connect('clicked', self.on_click_choose_plugin_dialog_add_button)
-        return self.dialog_add_plugin.run()
+        response = self.dialog_add_plugin.run()
         self.dialog_add_plugin.hide()
-
+        return response
 
 
 if __name__ == '__main__':

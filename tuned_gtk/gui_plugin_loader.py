@@ -21,7 +21,7 @@ from validate import Validator
 
 import tuned.plugins as Plugins
 
-# from tuned_gtk.profileLoader import ProfileLoader
+# from tuned_gtk.gui_profile_loader import ProfileLoader
 
 __all__ = ["GTKPluginLoader"]
 
@@ -43,6 +43,7 @@ class GuiPluginLoader(PluginLoader):
         Constructor
         '''
         self._plugins = set()
+        self.plugins_doc = {}
 
         storage_provider = storage.PickleProvider()
         storage_factory = storage.Factory(storage_provider)
@@ -53,7 +54,9 @@ class GuiPluginLoader(PluginLoader):
 
         self.repo = repository.Repository(monitors_repository, storage_factory, hardware_inventory, device_matcher, plugin_instance_factory, self._set_loader_parameters())
         self.create_all(self._import_plugin_names())
-        
+
+
+
 
     @property
     def plugins(self):
@@ -69,31 +72,30 @@ class GuiPluginLoader(PluginLoader):
             try:
                 self._plugins.add(self.repo.create(plugin_name))
             except ImportError:
-                pass
-#                 print str(ImportError) + plugin_name
+                print str(ImportError) + plugin_name
             except tuned.plugins.exceptions.NotSupportedPluginException:
-                pass
+                print plugin_name + " is not supported!"
 
     def _import_plugin_names(self): 
 #     scan dir and find names to load
         names = []
         for name in os.listdir(Plugins.__path__[0]):
-            
             file = name.split("plugin_").pop()
-            
             if  file.endswith(".py"):
-
                 file_name, file_extension = os.path.splitext(file)
+                
                 names.append(file_name)
         return names
 
-
+    def get_plugin(self, plugin_name):
+        for plugin in self.plugins:
+            if plugin_name == plugin.name:
+                return plugin
 
     def _load_global_config(self, file_name = consts.GLOBAL_CONFIG_FILE):
         """
         Loads global configuration file.
         """
-#         log.debug("reading and parsing global configuration file '%s'" % consts.GLOBAL_CONFIG_FILE)
         try:
             config = ConfigObj(file_name, configspec=global_config_spec, raise_errors = True, file_error = True)
         except IOError as e:
@@ -103,18 +105,4 @@ class GuiPluginLoader(PluginLoader):
         vdt = Validator()
         if (not config.validate(vdt, copy=True)):
             raise TunedException("Global tuned configuration file '%s' is not valid." % file_name)
-        return config
-
-# if __name__ == "__main__":
-#          
-#     pl = GuiPluginLoader()
-#  
-#     pl._import_plugin_names()
-#      
-#     print "Here it is:"
-# #     print plugin._get_config_options()
-#      
-#      
-#     print pl.plugins
-#     raw_input("press enter")
-    
+        return config    

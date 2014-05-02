@@ -12,7 +12,7 @@ import tuned.consts
 import shutil
 import managerException
 
-class ProfileLoader(object):
+class GuiProfileLoader(object):
     """
     Profiles loader for GUI Gtk purposes.
     """
@@ -76,6 +76,7 @@ class ProfileLoader(object):
         try:
             config["main"] = profile.options
         except KeyError:
+            config["main"] = ""
             pass #profile dont have main section 
 
         for name, unit in profile.units.items():
@@ -87,27 +88,34 @@ class ProfileLoader(object):
 #             mozes prepisat ale nesmies na nejaky co uz existuje!
             raise managerException.ManagerException("Profile Exists already")
         config.write()
+        self._refresh_profiles()
 
-    def update_profile(self, profile):
-                
+    def _refresh_profiles(self):
+        self.profiles = {}
+        self._load_all_profiles()
+
+    def update_profile(self, profile_name, profile):
+
+        if profile_name not in self.get_names():
+            raise managerException.ManagerException("Profile: "+ profile_name +" is not in profiles")
+        
         path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name     
         config = configobj.ConfigObj()
-        config.filename = path + tuned.consts.CONF_PROFILE_FILE
+        config.filename = path + "/tuned.conf"
         config.initial_comment = "#", "tuned configuration","#"
-        
         try:
             config["main"] = profile.options
         except KeyError:
-            pass #profile dont have main section 
-
+            pass
         for name, unit in profile.units.items():
             config[name] = unit.options
-#         hej, vazne chces prepisat? -> ano prepiseme, nie neprepiseme
-
-        os.makedirs(path)  
+            
+            
+        if not os.path.exists(path): 
+            os.makedirs(path)            
         config.write()
+        self._refresh_profiles()
 
-        
     def get_names(self):
         return self.profiles.keys()
     
@@ -131,7 +139,7 @@ class ProfileLoader(object):
             raise managerException.ManagerException(profileName + " profile is stored in "+ profilePath)
     
     def is_profile_removable(self, profile_name):
-        #            profile is in /etc/profile
+        #  profile is in /etc/profile
         profilePath = self._locate_profile_path(profile_name)
         if (profilePath == tuned.consts.LOAD_DIRECTORIES[1]):
             return True
@@ -139,15 +147,8 @@ class ProfileLoader(object):
             return False
 
 
-        
-# if __name__ == '__main__':
-#        
-#     if os.geteuid() != 0:
-#         os.error("Superuser permissions are required to run the daemon.")
-#         sys.exit(1)
-#  
-#        
-#     t = ProfileLoader(tuned.consts.LOAD_DIRECTORIES)
-# 
-#     print t.get_raw_profile("myprofile")
-#     t.set_raw_profile("myprofile", "a")
+if __name__ == '__main__':
+    pr = GuiProfileLoader(tuned.consts.LOAD_DIRECTORIES)
+    pr._load_all_profiles()
+    pr.update_profile(pr.profiles["aaaa"])
+    
