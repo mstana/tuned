@@ -147,7 +147,7 @@ class Base(object):
         self.switch_tuned_startup_start_stop = self.builder.get_object("switch_tuned_startup_start_stop")
         self.active_combo_text = None
         self.treeview_profile_manager = self.builder.get_object("treeviewProfileManager")
-
+        
         self.treeview_actual_plugins = self.builder.get_object("treeviewActualPlugins")
         #
         #    SET WIDGETS
@@ -187,7 +187,9 @@ class Base(object):
 
         self.label_actual_profile.set_text(self.controller.active_profile())
         self.label_recommended_profile.set_text(self.controller.recommend_profile())
-        self.refresh_summary_of_actual_profile()
+        self.listbox_summary_of_active_profile = self.builder.get_object("listboxSummaryOfActiveProfile")
+
+        self.data_for_listbox_summary_of_active_profile()
 
         self.comboboxtext1.set_model(self.treestore_profile_manager)
 #             TO DO: probably exist better way to print this
@@ -207,8 +209,8 @@ class Base(object):
         self.comboboxtext1.set_active(0)
         self.button_fast_change_profile.connect("clicked", self.execute_change_profile)
 
-        self.switch_tuned_start_stop.connect('button-press-event', self.execute_switch_tuned)
-        self.switch_tuned_startup_start_stop.connect('button-press-event', self.execute_switch_tuned)
+        self.switch_tuned_start_stop.connect('notify::active', self.execute_switch_tuned)
+        self.switch_tuned_startup_start_stop.connect('notify::active', self.execute_switch_tuned)
 
         self.button_create_profile.connect('clicked', self.execute_create_profile)
         self.button_upadte_selected_profile.connect('clicked', self.execute_update_profile)
@@ -219,24 +221,79 @@ class Base(object):
 
         self.button_confirm_profile_create.connect("clicked", self.on_click_button_confirm_profile_create)
         self.button_confirm_profile_update.connect("clicked", self.on_click_button_confirm_profile_update)
-        
-        self.treeview_profile_manager.connect('row-activated',lambda x, y, z: self.execute_update_profile(x))
+        self.editing_profile_name = self.get_treeview_selected()
 
+#         self.treeview_profile_manager.connect('row-activated',lambda x,y,z: self.execute_update_profile(x,y))
+#  TO DO: need to be fixed! - double click on treeview
         self.main_window.connect("destroy", Gtk.main_quit)
         self.main_window.show()
 
-    def on_changed_combobox_plugins(self, combo):
+    def data_for_listbox_summary_of_active_profile(self):
+        self.active_profile = self.manager.get_profile(self.controller.active_profile())
+        self.label_summary_profile.set_text(self.active_profile.name)
 
+        row = Gtk.ListBoxRow()
+        box = Gtk.Box(orientation = Gtk.Orientation.HORIZONTAL, spacing = 1)
+        plugin_name = Gtk.Label("Plugin Name")
+        plugin_option = Gtk.Label("Plugin Options")
+        box.pack_start(plugin_name, True, True, 0)
+        box.pack_start(plugin_option, True, True, 0)
+        row.add(box)
+        self.listbox_summary_of_active_profile.add(row)
+        self.listbox_summary_of_active_profile.add(Gtk.Separator())
+        for u in self.active_profile.units:
+            row = Gtk.ListBoxRow()
+            hbox = Gtk.Box(orientation = Gtk.Orientation.HORIZONTAL, spacing = 1)
+
+            hbox.set_homogeneous(True)
+            row.add(hbox)
+
+            label = Gtk.Label(u)
+            label.set_justify(Gtk.Justification.CENTER)
+
+            hbox.pack_start(label, False, True, 1)
+            hbox.pack_start(Gtk.VSeparator(), False, True, 1)
+
+            grid = Gtk.Box(orientation = Gtk.Orientation.VERTICAL, spacing = 10)
+            for o in self.active_profile.units[u].options:
+                label_option = Gtk.Label(o + " = " + self.active_profile.units[u].options[o], xalign=0)
+                label_option.set_justify(Gtk.Justification.LEFT)
+                grid.pack_start(label_option, False, True, 0)
+
+            hbox.pack_start(grid, False, True, 0)
+            self.listbox_summary_of_active_profile.add(row)
+            self.listbox_summary_of_active_profile.add(Gtk.Separator())
+            
+        self.listbox_summary_of_active_profile.show_all()
+        
+    def on_treeview_button_press_event(self, treeview, event):
+        popup = Gtk.Menu()
+        popup.append(Gtk.MenuItem('add'))
+        popup.append(Gtk.MenuItem('delete'))
+        
+        if event.button == 3:
+            x = int(event.x)
+            y = int(event.y)
+            time = event.time
+            pthinfo = treeview.get_path_at_pos(x, y)
+            if pthinfo is not None:
+                path, col, cellx, celly = pthinfo
+                treeview.grab_focus()
+                treeview.set_cursor( path, col, 0)
+                popup.popup( None, None, lambda menu, data: (event.get_root_coords()[0], event.get_root_coords()[1], True), None, event.button, event.time)
+            return True
+
+    def on_changed_combobox_plugins(self, combo):
         plugin = self.plugin_loader.get_plugin(self.combobox_main_plugins.get_active_text())
         if plugin == None:
             self.textview_plugin_avaible_text.get_buffer().set_text("")
             self.textview_plugin_documentation_text.get_buffer().set_text("")
             return
         options = '\n'.join("%s = %r" % (key,val) for (key,val) in plugin._get_config_options().iteritems())
-        
+
         self.textview_plugin_avaible_text.get_buffer().set_text(options)
         self.textview_plugin_documentation_text.get_buffer().set_text(plugin.__doc__)
-   
+
     def on_delete_event(self, window, data):
         window.hide()
         return True
@@ -291,8 +348,7 @@ class Base(object):
 
 
 
-    def execute_add_plugin_to_notebook(self, button):        
-
+    def execute_add_plugin_to_notebook(self, button):
         if (self.choose_plugin_dialog() == 1):
             plugin_name = self.combobox_plugins.get_active_text()
             plugin_to_tab = None
@@ -303,19 +359,17 @@ class Base(object):
                             self.error_dialog("Plugin " + plugin_name + " is already in profile." , "")
                             return
                     plugin_to_tab = plugin
-                    self.notebook_plugins.append_page_menu( self.make_treestore_for_data(plugin_to_tab._get_config_options()) , Gtk.Label(plugin_to_tab.name), Gtk.Label(plugin_to_tab.name))
+                    self.notebook_plugins.append_page_menu( self.treeview_for_data(plugin_to_tab._get_config_options()) , Gtk.Label(plugin_to_tab.name), Gtk.Label(plugin_to_tab.name))
                     self.notebook_plugins.show_all()
 
-
-    def execute_remove_plugin_from_notebook(self, data):  
-
+    def execute_remove_plugin_from_notebook(self, data):
         treestore = Gtk.ListStore(GObject.TYPE_STRING)
         for children in self.notebook_plugins.get_children():
             treestore.append([self.notebook_plugins.get_menu_label_text(children)])
         self.combobox_plugins.set_model(treestore)
-        
+
         response_of_dialog =  self.choose_plugin_dialog()
-        
+
         if (response_of_dialog == 1):
 #             ok button pressed
             selected = self.combobox_plugins.get_active_text()
@@ -323,8 +377,7 @@ class Base(object):
                 if (self.notebook_plugins.get_menu_label_text(children) == selected):
                     self.notebook_plugins.remove(children)
             self.combobox_plugins.set_model(self.treestore_plugins)
-    #        TO DO: treba este refresh tohto profilu v hlavnom okne        
-        
+
     def execute_apply_window_profile_editor_raw(self, data):
         text_buffer = self.textview1.get_buffer()
         start = text_buffer.get_start_iter()
@@ -334,7 +387,7 @@ class Base(object):
         self.error_dialog("Profile Editor will be closed.", "for next updates reopen profile.")
         self.window_profile_editor.hide()
 #         refresh window_profile_editor
-    
+
     def execute_create_profile(self, button):
         self.reset_values_window_edit_profile()
         self.button_confirm_profile_create.show()
@@ -372,7 +425,7 @@ class Base(object):
                         iter = self.treestore_profile_manager.get_iter(item.path)
                         self.treestore_profile_manager.remove(iter)
                 except KeyError:
-                    raise KeyError(" this cant happen ")
+                    raise KeyError("this cant happen")
 
             self.manager.update_profile(profile_name, prof)
             self.treestore_profile_manager.append([prof.name])
@@ -407,7 +460,14 @@ class Base(object):
         except ManagerException: 
             self.error_dialog("Profile with name " + prof.name + " already exist.", "Please choose another name for profile")
 
-    def execute_update_profile(self, button):        
+    def execute_update_profile(self, data): 
+
+
+
+#         if (self.treeview_profile_manager.get_activate_on_single_click()):
+#             print "returning"
+#             print self.treeview_profile_manager.get_activate_on_single_click()
+#             return
         self.button_confirm_profile_create.hide()
         self.button_confirm_profile_update.show()
         self.button_open_raw.show()
@@ -438,20 +498,19 @@ class Base(object):
                     pass   
             self.combobox_include_profile.set_active(selected)
             for name, unit in profile.units.items():
-                self.notebook_plugins.append_page_menu(self.make_treestore_for_data(unit.options),Gtk.Label(unit.name), Gtk.Label(unit.name))
+                self.notebook_plugins.append_page_menu(self.treeview_for_data(unit.options),Gtk.Label(unit.name), Gtk.Label(unit.name))
             self.notebook_plugins.show_all()
             self.window_profile_editor.show()
         else:
             self.error_dialog("You can not update Factory profile", "")
 
-    def make_treestore_for_data(self, data):
+    def treeview_for_data(self, data):
         """
         This prepare treestore and treeview for data and return treeview
         """
         treestore = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)                
         for option, value in data.items():
             treestore.append([str(value),option])
-        
         treeview = Gtk.TreeView(treestore) 
         renderer = Gtk.CellRendererText()
         column_option = Gtk.TreeViewColumn("Option", renderer, text=0)
@@ -460,6 +519,7 @@ class Base(object):
         treeview.append_column(column_option)
         treeview.enable_grid_lines = True
         treeview.connect('row-activated', self.change_value_dialog)
+        treeview.connect('button_press_event', self.on_treeview_button_press_event)
         return treeview
 
     def execute_change_profile(self, button):
@@ -476,7 +536,7 @@ class Base(object):
         self.spinner_fast_change_profile.stop()
         self.spinner_fast_change_profile.hide()
 
-    def execute_switch_tuned(self, switch, no_idea_argument2):
+    def execute_switch_tuned(self, switch, data):
         if switch == self.switch_tuned_start_stop:
             if self.switch_tuned_start_stop.get_active():
                 subprocess.call(["service", "tuned", "stop"])
@@ -504,15 +564,16 @@ class Base(object):
             return False
 
     def is_service_running(self, service):
+#         TO DO: fix this!
         if subprocess.call(["service", service, "status"]) == 0:
-            return True
-        return False
+            return False
+        return True
 
     def service_run_on_start_up(self, service):
+#         TO DO: fix this! 
         if subprocess.call(["systemctl", "status", service]) == 0:
             return True
         return False
-    
 
 
     def error_dialog(self, error, info):

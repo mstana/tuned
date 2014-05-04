@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.16.1 -->
 <interface>
-  <requires lib="gtk+" version="3.8"/>
+  <requires lib="gtk+" version="3.10"/>
+  <object class="GtkAboutDialog" id="aboutdialog1">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <property name="program_name">Tuned Manager</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="aboutdialog-vbox1">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="aboutdialog-action_area1">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkDialog" id="changeValueDialog">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
@@ -195,6 +222,7 @@
   </object>
   <object class="GtkWindow" id="mainWindow">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Tuned Manager</property>
     <property name="default_width">600</property>
     <property name="default_height">800</property>
     <property name="has_resize_grip">False</property>
@@ -407,15 +435,11 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label9">
+                      <object class="GtkListBox" id="listboxSummaryOfActiveProfile">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="halign">start</property>
-                        <property name="margin_left">100</property>
-                        <property name="margin_right">100</property>
-                        <property name="margin_top">20</property>
-                        <property name="margin_bottom">20</property>
-                        <property name="label" translatable="yes">label</property>
+                        <property name="selection_mode">none</property>
+                        <property name="activate_on_single_click">False</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -557,6 +581,7 @@
                         <property name="can_focus">True</property>
                         <property name="vexpand">True</property>
                         <property name="enable_grid_lines">both</property>
+                        <property name="enable_tree_lines">True</property>
                         <property name="activate_on_single_click">True</property>
                         <child internal-child="selection">
                           <object class="GtkTreeSelection" id="treeview-selection"/>
@@ -614,7 +639,7 @@
                         <property name="can_focus">False</property>
                         <property name="margin_top">30</property>
                         <property name="margin_bottom">10</property>
-                        <property name="label" translatable="yes">Avaible values to set</property>
+                        <property name="label" translatable="yes">Default values and options to set</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -709,12 +734,14 @@
             <property name="hexpand">True</property>
             <child>
               <object class="GtkLabel" id="label15">
-                <property name="width_request">200</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">start</property>
+                <property name="halign">end</property>
                 <property name="valign">end</property>
-                <property name="label" translatable="yes">Actual Profile:</property>
+                <property name="margin_left">30</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">5</property>
+                <property name="label" translatable="yes">Actual Profile:  </property>
                 <property name="justify">fill</property>
               </object>
               <packing>
@@ -728,13 +755,16 @@
               <object class="GtkLabel" id="label14">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">end</property>
                 <property name="valign">end</property>
                 <property name="margin_left">30</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">5</property>
                 <property name="hexpand">True</property>
-                <property name="label" translatable="yes">Recomended Profile:</property>
+                <property name="label" translatable="yes">Recomended Profile:  </property>
               </object>
               <packing>
-                <property name="left_attach">2</property>
+                <property name="left_attach">3</property>
                 <property name="top_attach">0</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
@@ -742,12 +772,13 @@
             </child>
             <child>
               <object class="GtkLabel" id="label_actual_profile">
-                <property name="width_request">200</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">end</property>
-                <property name="hexpand">True</property>
+                <property name="margin_right">40</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">5</property>
                 <property name="lines">75</property>
               </object>
               <packing>
@@ -759,27 +790,13 @@
             </child>
             <child>
               <object class="GtkLabel" id="label_recommemnded_profile">
-                <property name="width_request">150</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">end</property>
-                <property name="hexpand">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label13">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="valign">end</property>
-                <property name="hexpand">True</property>
-                <property name="label" translatable="yes">DBUS Status:</property>
+                <property name="margin_right">40</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">5</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
@@ -789,13 +806,58 @@
               </packing>
             </child>
             <child>
+              <object class="GtkLabel" id="label13">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="valign">end</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">5</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">DBUS Status:</property>
+              </object>
+              <packing>
+                <property name="left_attach">6</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkLabel" id="label_dbus_status">
-                <property name="width_request">80</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">end</property>
-                <property name="hexpand">True</property>
+                <property name="margin_right">10</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">5</property>
+              </object>
+              <packing>
+                <property name="left_attach">7</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="separator10">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="separator11">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="left_attach">5</property>
@@ -813,7 +875,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkSeparator" id="separator2">
+          <object class="GtkSeparator" id="separator3">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>
@@ -824,20 +886,11 @@
           </packing>
         </child>
         <child>
-          <object class="GtkSeparator" id="separator3">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">5</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkGrid" id="grid1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_top">2</property>
+            <property name="margin_bottom">2</property>
             <child>
               <object class="GtkButton" id="buttonFastChangeProfile">
                 <property name="label" translatable="yes">Change Profile</property>
@@ -869,6 +922,7 @@
               <object class="GtkLabel" id="label2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_left">10</property>
                 <property name="label" translatable="yes">Profile: </property>
                 <property name="angle">0.089999999999999997</property>
               </object>
@@ -901,7 +955,47 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
             <property name="position">6</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMessageDialog" id="messagedialog1">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="messagedialog-vbox3">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="messagedialog-action_area3">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </object>
@@ -1010,6 +1104,7 @@
   </object>
   <object class="GtkWindow" id="windowProfileEditor">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Profile Editor</property>
     <property name="destroy_with_parent">True</property>
     <child>
       <object class="GtkGrid" id="grid4">
