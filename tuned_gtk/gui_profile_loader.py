@@ -1,5 +1,6 @@
+#!/usr/bin/env python
 '''
-Created on Mar 29, 2014
+Created on Mar 13, 2014
 
 @author: mstana
 '''
@@ -41,10 +42,8 @@ class GuiProfileLoader(object):
 
     def load_profile_config(self, profile_name, path):
         conf_path = path + "/" + profile_name + "/tuned.conf"     
-
         profile_config = configobj.ConfigObj(conf_path)
         return profile_config
-
 
     def _locate_profile_path(self, profileName):
         for d in self.directories:
@@ -65,23 +64,20 @@ class GuiProfileLoader(object):
 #                         raise managerException.ManagerException("Can not make profile")
 #                         print "can not make \""+ profile +"\" profile without correct config with path: " + d
 
-
     def save_profile(self, profile):
-                
         path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name     
         config = configobj.ConfigObj()
         config.filename = path + tuned.consts.CONF_PROFILE_FILE
         config.initial_comment = "#", "tuned configuration","#"
-        
+
         try:
             config["main"] = profile.options
         except KeyError:
             config["main"] = ""
-            pass #profile dont have main section 
+            pass #profile dont have main section
 
         for name, unit in profile.units.items():
             config[name] = unit.options
-            
         if not os.path.exists(path): 
             os.makedirs(path)  
         else:
@@ -95,10 +91,8 @@ class GuiProfileLoader(object):
         self._load_all_profiles()
 
     def update_profile(self, profile_name, profile):
-
         if profile_name not in self.get_names():
             raise managerException.ManagerException("Profile: "+ profile_name +" is not in profiles")
-        
         path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name     
         config = configobj.ConfigObj()
         config.filename = path + "/tuned.conf"
@@ -109,35 +103,31 @@ class GuiProfileLoader(object):
             pass
         for name, unit in profile.units.items():
             config[name] = unit.options
-            
-            
+
         if not os.path.exists(path): 
             os.makedirs(path)            
         config.write()
         self._refresh_profiles()
 
     def get_names(self):
-        return self.profiles.keys()
-    
+        return self.profiles.keys()    
     
     def get_profile(self, profile):
         return self.profiles[profile]
     
-    
     def add_profile(self, profile):
         self.profiles[profile.name] = profile
         self.save_profile(profile)
-    
+
     def remove_profile(self, profileName):
-        
         profilePath = self._locate_profile_path(profileName)
-    
+
         if (self.is_profile_removable(profileName)):
             shutil.rmtree(profilePath + "/" + profileName)
             self._load_all_profiles()
         else:
             raise managerException.ManagerException(profileName + " profile is stored in "+ profilePath)
-    
+
     def is_profile_removable(self, profile_name):
         #  profile is in /etc/profile
         profilePath = self._locate_profile_path(profile_name)
@@ -145,10 +135,13 @@ class GuiProfileLoader(object):
             return True
         else:
             return False
-
-
-if __name__ == '__main__':
-    pr = GuiProfileLoader(tuned.consts.LOAD_DIRECTORIES)
-    pr._load_all_profiles()
-    pr.update_profile(pr.profiles["aaaa"])
+        
+    def is_profile_factory(self, profile_name):
+        #  profile is in /usr/lib/tuned
+        return not self.is_profile_removable(profile_name)
+    
+    
+    
+    
+    
     

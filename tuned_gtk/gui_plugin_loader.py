@@ -1,11 +1,12 @@
+#!/usr/bin/env python
 '''
-Created on Apr 12, 2014
+Created on Mar 30, 2014
 
 @author: mstana
 '''
 
 import os
-
+from validate import Validator
 
 import tuned.plugins.base
 import tuned.consts as consts
@@ -17,16 +18,11 @@ import tuned.exceptions as TunedException
 from tuned import plugins 
 from tuned.utils.plugin_loader import PluginLoader
 from tuned import storage, units, monitors, plugins, profiles, exports, hardware
-from validate import Validator
+
 
 import tuned.plugins as Plugins
 
-# from tuned_gtk.gui_profile_loader import ProfileLoader
-
 __all__ = ["GTKPluginLoader"]
-
-
-# log = tuned.logs.get()
 
 global_config_spec = ["dynamic_tuning = boolean(default=%s)" % consts.CFG_DEF_DYNAMIC_TUNING,
             "sleep_interval = integer(default=%s)" % consts.CFG_DEF_SLEEP_INTERVAL,
@@ -36,7 +32,6 @@ class GuiPluginLoader(PluginLoader):
     '''
     Class for scan, import and load actual avaible plugins.
     '''
-
 
     def __init__(self):
         '''
@@ -55,17 +50,30 @@ class GuiPluginLoader(PluginLoader):
         self.repo = repository.Repository(monitors_repository, storage_factory, hardware_inventory, device_matcher, plugin_instance_factory, self._set_loader_parameters())
         self.create_all(self._import_plugin_names())
 
-
-
-
     @property
     def plugins(self):
         return self.repo.plugins
 
     def _set_loader_parameters(self):
+        '''
+        Sets private atributes.
+        '''
         self._namespace = "tuned.plugins"
         self._prefix = "plugin_"
+        self._sufix = ".py"
         self._interface = tuned.plugins.base.Plugin
+
+    def _import_plugin_names(self): 
+        '''
+        Scan directories and find names to load
+        '''
+        names = []
+        for name in os.listdir(Plugins.__path__[0]):
+            file = name.split(self._prefix).pop()
+            if  file.endswith(self._sufix):
+                file_name, file_extension = os.path.splitext(file)
+                names.append(file_name)
+        return names
 
     def create_all(self, names):
         for plugin_name in names:
@@ -76,16 +84,6 @@ class GuiPluginLoader(PluginLoader):
             except tuned.plugins.exceptions.NotSupportedPluginException:
                 print plugin_name + " is not supported!"
 
-    def _import_plugin_names(self): 
-#     scan dir and find names to load
-        names = []
-        for name in os.listdir(Plugins.__path__[0]):
-            file = name.split("plugin_").pop()
-            if  file.endswith(".py"):
-                file_name, file_extension = os.path.splitext(file)
-                
-                names.append(file_name)
-        return names
 
     def get_plugin(self, plugin_name):
         for plugin in self.plugins:

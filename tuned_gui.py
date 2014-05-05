@@ -198,7 +198,7 @@ class Base(object):
 #       TO DO:  need Add check if its correct in system
 #       just ask system if for some properties
 
-        self.switch_tuned_start_stop.set_active(self.is_service_running("tuned"))
+        self.switch_tuned_start_stop.set_active(True)
         self.switch_tuned_startup_start_stop.set_active(self.service_run_on_start_up("tuned"))
         #
         #    CONNECTIONS
@@ -229,13 +229,23 @@ class Base(object):
         self.main_window.show()
 
     def data_for_listbox_summary_of_active_profile(self):
+        """
+        This add rows to object listbox_summary_of_active_profile. 
+        Row consist of grid. Inside grid on first possition is label, second possition is vertical grid.
+        label = name of plugin
+        verical grid consist of labels where are stored values for plugin option and value.
+        
+        This method is emited after change profile and on startup of app. 
+        """
         self.active_profile = self.manager.get_profile(self.controller.active_profile())
         self.label_summary_profile.set_text(self.active_profile.name)
 
         row = Gtk.ListBoxRow()
-        box = Gtk.Box(orientation = Gtk.Orientation.HORIZONTAL, spacing = 1)
-        plugin_name = Gtk.Label("Plugin Name")
-        plugin_option = Gtk.Label("Plugin Options")
+        box = Gtk.Box(orientation = Gtk.Orientation.HORIZONTAL, spacing = 0)
+        plugin_name = Gtk.Label()
+        plugin_name.set_markup("<b>Plugin Name</b>")
+        plugin_option = Gtk.Label()
+        plugin_option.set_markup("<b>Plugin Options</b>")
         box.pack_start(plugin_name, True, True, 0)
         box.pack_start(plugin_option, True, True, 0)
         row.add(box)
@@ -243,21 +253,23 @@ class Base(object):
         self.listbox_summary_of_active_profile.add(Gtk.Separator())
         for u in self.active_profile.units:
             row = Gtk.ListBoxRow()
-            hbox = Gtk.Box(orientation = Gtk.Orientation.HORIZONTAL, spacing = 1)
+            hbox = Gtk.Box(orientation = Gtk.Orientation.HORIZONTAL, spacing = 0)
 
             hbox.set_homogeneous(True)
             row.add(hbox)
 
-            label = Gtk.Label(u)
+            label = Gtk.Label()
+            label.set_markup(u)
             label.set_justify(Gtk.Justification.CENTER)
 
             hbox.pack_start(label, False, True, 1)
             hbox.pack_start(Gtk.VSeparator(), False, True, 1)
 
-            grid = Gtk.Box(orientation = Gtk.Orientation.VERTICAL, spacing = 10)
+            grid = Gtk.Box(orientation = Gtk.Orientation.VERTICAL, spacing = 0)
             for o in self.active_profile.units[u].options:
-                label_option = Gtk.Label(o + " = " + self.active_profile.units[u].options[o], xalign=0)
+                label_option = Gtk.Label()
                 label_option.set_justify(Gtk.Justification.LEFT)
+                label_option.set_markup(o + " = " + "<b>" + self.active_profile.units[u].options[o] + "</b>")
                 grid.pack_start(label_option, False, True, 0)
 
             hbox.pack_start(grid, False, True, 0)
@@ -298,18 +310,6 @@ class Base(object):
         window.hide()
         return True
 
-    def refresh_summary_of_actual_profile(self):
-        self.active_profile = self.manager.get_profile(self.controller.active_profile())
-        self.label_summary_profile.set_text(self.active_profile.name)
-        text = ""
-        for u in self.active_profile.units:
-            text += "\n" + u + "\n" + "___________" + "\n"
-            for o in self.active_profile.units[u].options:
-                text += "\n"+ o + " = " + self.active_profile.units[u].options[o]
-                text += "\n"
-        label9 = self.builder.get_object("label9")
-        label9.set_text(text)    
-
     def _get_active_profile_name(self):
         return self.manager.get_profile(self.controller.active_profile()).name
 
@@ -325,7 +325,6 @@ class Base(object):
             if (profile == self.editing_profile_name):
                 self.error_dialog("You are ediding " + self.editing_profile_name + " profile.", "Please close edit window and try again.")
                 return
-                pass
             self.manager.remove_profile(profile)
             for item in self.treestore_profile_manager:
                 if item[0] == profile:
@@ -335,10 +334,10 @@ class Base(object):
             self.error_dialog("Profile can not be remove", ex.__str__())
 
     def execute_cancel_window_profile_editor(self, button):
-        self.window_profile_editor.close()
-
+        self.window_profile_editor.hide()
+        
     def execute_cancel_window_profile_editor_raw(self, button):
-        self.window_profile_editor_raw.close()      
+        self.window_profile_editor_raw.hide()      
 
     def execute_open_raw_button(self, button):
         profile_name = self.get_treeview_selected()
@@ -386,6 +385,7 @@ class Base(object):
         self.manager.set_raw_profile(profile_name, text_buffer.get_text(start,end, True))
         self.error_dialog("Profile Editor will be closed.", "for next updates reopen profile.")
         self.window_profile_editor.hide()
+        self.window_profile_editor_raw.hide()
 #         refresh window_profile_editor
 
     def execute_create_profile(self, button):
@@ -563,18 +563,11 @@ class Base(object):
         else:
             return False
 
-    def is_service_running(self, service):
-#         TO DO: fix this!
-        if subprocess.call(["service", service, "status"]) == 0:
-            return False
-        return True
-
-    def service_run_on_start_up(self, service):
-#         TO DO: fix this! 
-        if subprocess.call(["systemctl", "status", service]) == 0:
+    def service_run_on_start_up(self, service): 
+        temp = subprocess.call(["systemctl", "is-enabled", service])
+        if (temp == 0):
             return True
         return False
-
 
     def error_dialog(self, error, info):
         """
