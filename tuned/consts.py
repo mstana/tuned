@@ -16,6 +16,8 @@ LOG_FILE_MAXBYTES = 100*1000
 LOG_FILE = "/var/log/tuned/tuned.log"
 PID_FILE = "/run/tuned/tuned.pid"
 SYSTEM_RELEASE_FILE = "/etc/system-release-cpe"
+PREFIX_FACTORY = "Factory"
+PREFIX_USER = "User"
 
 # default configuration
 CFG_DEF_DYNAMIC_TUNING = True

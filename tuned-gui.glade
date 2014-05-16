@@ -243,7 +243,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem_quit">
+                      <object class="GtkImageMenuItem" id="imagemenuitemQuit">
                         <property name="label">gtk-quit</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -266,7 +266,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem_about">
+                      <object class="GtkImageMenuItem" id="imagemenuitemAbout">
                         <property name="label">gtk-about</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -327,7 +327,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkSwitch" id="switch_tuned_start_stop">
+                          <object class="GtkSwitch" id="switchTunedStartStop">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="halign">start</property>
@@ -344,7 +344,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkSwitch" id="switch_tuned_startup_start_stop">
+                          <object class="GtkSwitch" id="switchTunedStartupStartStop">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="halign">start</property>
@@ -404,7 +404,7 @@
                         <property name="halign">center</property>
                         <property name="valign">start</property>
                         <child>
-                          <object class="GtkLabel" id="summary_profile_name">
+                          <object class="GtkLabel" id="summaryProfileName">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">label</property>
@@ -447,7 +447,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="summary_included_profile_name">
+                          <object class="GtkLabel" id="summaryIncludedProfileName">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_bottom">15</property>
@@ -866,7 +866,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_dbus_status">
+              <object class="GtkLabel" id="labelDbusStatus">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
@@ -949,7 +949,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkComboBoxText" id="comboboxtext1">
+              <object class="GtkComboBoxText" id="comboboxtextFastChangeProfile">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
@@ -1079,7 +1079,7 @@
       <object class="GtkTreeSelection" id="treeview-selection2"/>
     </child>
   </object>
-  <object class="GtkDialog" id="tuned_daemon_exception_dialog">
+  <object class="GtkDialog" id="tunedDaemonExceptionDialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="type_hint">dialog</property>
@@ -1143,7 +1143,7 @@
     </child>
     <action-widgets>
       <action-widget response="0">turn_daemon_on_button</action-widget>
-      <action-widget response="-1">cancel_button</action-widget>
+      <action-widget response="0">cancel_button</action-widget>
     </action-widgets>
   </object>
   <object class="GtkWindow" id="windowProfileEditor">
@@ -1155,7 +1155,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkLabel" id="label12">
+          <object class="GtkLabel" id="labelUpdateProfile">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_top">20</property>
@@ -1390,35 +1390,6 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkLabel" id="label22">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">end</property>
-                <property name="margin_left">60</property>
-                <property name="label" translatable="yes">Included profile: </property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBox" id="comboboxIncludeProfile">
-                <property name="width_request">150</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">end</property>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel" id="label23">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -1440,6 +1411,40 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="comboboxIncludeProfile">
+                <property name="width_request">150</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="togglebuttonIncludeProfile">
+                <property name="label" translatable="yes">Include</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">start</property>
+                <property name="valign">end</property>
+                <property name="margin_left">10</property>
+                <property name="margin_right">10</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
                 <property name="top_attach">0</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
@@ -1497,7 +1502,7 @@
             <property name="can_focus">True</property>
             <property name="shadow_type">in</property>
             <child>
-              <object class="GtkTextView" id="textview1">
+              <object class="GtkTextView" id="textviewProfileConfigRaw">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="margin_left">5</property>
