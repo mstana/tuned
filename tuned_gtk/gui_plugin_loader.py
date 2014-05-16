@@ -80,9 +80,12 @@ class GuiPluginLoader(PluginLoader):
             try:
                 self._plugins.add(self.repo.create(plugin_name))
             except ImportError:
-                print str(ImportError) + plugin_name
+                pass
+#                 problem with importing of plugin
+#                 print str(ImportError) + plugin_name
             except tuned.plugins.exceptions.NotSupportedPluginException:
-                print plugin_name + " is not supported!"
+                pass
+#                 print plugin_name + " is not supported!"
 
 
     def get_plugin(self, plugin_name):

@@ -59,7 +59,8 @@ class GuiProfileLoader(object):
                     try:
                         self.profiles[profile] = p.Profile(profile,self.load_profile_config(profile, d))
                     except configobj.ParseError:
-                        print "can not make \""+ profile +"\" profile without correct config on path: " + d 
+                        pass
+#                         print "can not make \""+ profile +"\" profile without correct config on path: " + d 
 #                     except:
 #                         raise managerException.ManagerException("Can not make profile")
 #                         print "can not make \""+ profile +"\" profile without correct config with path: " + d

@@ -28,9 +28,6 @@ import tuned.profiles.profile as profile
 
 from tuned_gtk.managerException import ManagerException
 
-
-
-
 LICENSE = "licence"
 NAME = "TUNED"
 VERSION = "TUNED 2.3.0"
@@ -64,13 +61,12 @@ class Base(object):
 
     def __init__(self):
 
-
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
         self.manager = tuned_gtk.gui_profile_loader.GuiProfileLoader(tuned.consts.LOAD_DIRECTORIES)
         self.plugin_loader = tuned_gtk.gui_plugin_loader.GuiPluginLoader()
         self.builder = Gtk.Builder()
         self.builder.add_from_file("tuned-gui.glade")
-        self.builder.connect_signals(self)        
+        self.builder.connect_signals(self)
         #
         #    WINDOW MAIN
         #
@@ -120,12 +116,11 @@ class Base(object):
         self.about_dialog.set_copyright(COPYRIGHT)
         self.about_dialog.set_authors(AUTHORS)
         #
-        #    DIALOG MESSAGE ERROR
+        #    DIALOGS
         #
         self.messagedialog_pperation_error = self.builder.get_object("messagedialogOperationError")
-        #
-        #    DIALOG MESSAGE ADD PLUGIN
-        #        
+        self.tuned_daemon_exception_dialog = self.builder.get_object("tuned_daemon_exception_dialog")
+
         self.dialog_add_plugin = self.builder.get_object("dialogAddPlugin")
         #
         #    GET WIDGETS
@@ -137,6 +132,7 @@ class Base(object):
         self.label_recommended_profile = self.builder.get_object("label_recommemnded_profile")
         self.label_dbus_status = self.builder.get_object("label_dbus_status")
         self.label_summary_profile = self.builder.get_object("summary_profile_name")
+        self.label_summary_included_profile = self.builder.get_object("summary_included_profile_name")
 
         self.comboboxtext1 = self.builder.get_object("comboboxtext1")
         self.button_fast_change_profile = self.builder.get_object("buttonFastChangeProfile")
@@ -145,40 +141,37 @@ class Base(object):
 
         self.switch_tuned_start_stop = self.builder.get_object("switch_tuned_start_stop")
         self.switch_tuned_startup_start_stop = self.builder.get_object("switch_tuned_startup_start_stop")
-        self.active_combo_text = None
+
         self.treeview_profile_manager = self.builder.get_object("treeviewProfileManager")
-        
         self.treeview_actual_plugins = self.builder.get_object("treeviewActualPlugins")
         #
         #    SET WIDGETS
         #
-        self.treestore_actual_plugins = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)
-        self.treestore_profile_manager = Gtk.ListStore(GObject.TYPE_STRING)
-
+        if (not self.is_tuned_connection_ok()):
+            self.error_dialog("Tuned is shutting down.", "Reason: missing communication with Tuned daemon.")
+            return
+        self.treestore_profiles = Gtk.ListStore(GObject.TYPE_STRING)
         self.treestore_plugins = Gtk.ListStore(GObject.TYPE_STRING)
-        self.treestore_plugins.append([None])
         for plugin in self.plugin_loader.plugins:
             self.treestore_plugins.append([plugin.name])
-
         self.combobox_plugins = self.builder.get_object("comboboxPlugins")
         self.combobox_plugins.set_model(self.treestore_plugins)
-
 
         self.combobox_main_plugins = self.builder.get_object("comboboxMainPlugins")
         self.combobox_main_plugins.set_model(self.treestore_plugins)
         self.combobox_main_plugins.connect("changed", self.on_changed_combobox_plugins)
 
-        self.combobox_include_profile.set_model(self.treestore_profile_manager)
+        self.combobox_include_profile.set_model(self.treestore_profiles)
         cell = Gtk.CellRendererText()
         self.combobox_include_profile.pack_start(cell, True)
         self.combobox_include_profile.add_attribute(cell,'text', 0 )
 
-        
+
         self.treeview_profile_manager.append_column(Gtk.TreeViewColumn("Profile", Gtk.CellRendererText(), text=0))
-        self.treeview_profile_manager.set_model(self.treestore_profile_manager)
-        self.treestore_profile_manager.append([None])
+        self.treeview_profile_manager.set_model(self.treestore_profiles)
+
         for profile in self.manager.get_names():
-            self.treestore_profile_manager.append([profile])
+            self.treestore_profiles.append([profile])
         self.treeview_profile_manager.get_selection().select_path(0)
 
         self.button_create_profile = self.builder.get_object("buttonCreateProfile")
@@ -190,13 +183,8 @@ class Base(object):
         self.listbox_summary_of_active_profile = self.builder.get_object("listboxSummaryOfActiveProfile")
 
         self.data_for_listbox_summary_of_active_profile()
-
-        self.comboboxtext1.set_model(self.treestore_profile_manager)
-#             TO DO: probably exist better way to print this
+        self.comboboxtext1.set_model(self.treestore_profiles)
         self.label_dbus_status.set_text(str(bool(self.controller.is_running())))
-
-#       TO DO:  need Add check if its correct in system
-#       just ask system if for some properties
 
         self.switch_tuned_start_stop.set_active(True)
         self.switch_tuned_startup_start_stop.set_active(self.service_run_on_start_up("tuned"))
@@ -206,7 +194,7 @@ class Base(object):
         self.imagemenuitem_quit.connect("activate", Gtk.main_quit)
         self.imagemenuitem_about.connect("activate", self.execute_about)
 
-        self.comboboxtext1.set_active(0)
+        self.comboboxtext1.set_active(self.get_iter_from_model_by_name(self.comboboxtext1.get_model(), self.controller.active_profile()))
         self.button_fast_change_profile.connect("clicked", self.execute_change_profile)
 
         self.switch_tuned_start_stop.connect('notify::active', self.execute_switch_tuned)
@@ -227,6 +215,37 @@ class Base(object):
 #  TO DO: need to be fixed! - double click on treeview
         self.main_window.connect("destroy", Gtk.main_quit)
         self.main_window.show()
+        Gtk.main()
+        
+        
+    def get_iter_from_model_by_name(self, model, item_name):
+        '''
+        Return iter from model selected by name of item in this model
+        '''
+        model = self.combobox_include_profile.get_model()
+        selected = 0
+        for item in model:
+            try: 
+                if item[0] == item_name:
+                    selected = int(item.path.to_string())     
+            except KeyError:
+                pass
+        return selected
+
+    def is_tuned_connection_ok(self):  
+        try:
+            self.controller.is_running()
+            return True
+        except tuned.admin.exceptions.TunedAdminDBusException:
+            response = self.tuned_daemon_exception_dialog.run()
+            if (response == 0):
+#                 button Turn ON pressed
+#                 switch_tuned_start_stop notify the switch which call funcion start_tuned
+                self.switch_tuned_start_stop.set_active(True)
+                self.tuned_daemon_exception_dialog.hide()
+                return True
+            self.tuned_daemon_exception_dialog.hide()
+            return False
 
     def data_for_listbox_summary_of_active_profile(self):
         """
@@ -237,10 +256,20 @@ class Base(object):
         
         This method is emited after change profile and on startup of app. 
         """
-        self.active_profile = self.manager.get_profile(self.controller.active_profile())
-        self.label_summary_profile.set_text(self.active_profile.name)
+        for row in self.listbox_summary_of_active_profile:
+            self.listbox_summary_of_active_profile.remove(row)
 
-        row = Gtk.ListBoxRow()
+        if (self.is_tuned_connection_ok()):
+            self.active_profile = self.manager.get_profile(self.controller.active_profile())
+        else:
+            self.active_profile = None
+        self.label_summary_profile.set_text(self.active_profile.name)
+        try:
+            self.label_summary_included_profile.set_text(self.active_profile.options["include"])
+        except:
+            self.label_summary_included_profile.set_text("None")
+
+        row = Gtk.ListBoxRow()        
         box = Gtk.Box(orientation = Gtk.Orientation.HORIZONTAL, spacing = 0)
         plugin_name = Gtk.Label()
         plugin_name.set_markup("<b>Plugin Name</b>")
@@ -249,40 +278,43 @@ class Base(object):
         box.pack_start(plugin_name, True, True, 0)
         box.pack_start(plugin_option, True, True, 0)
         row.add(box)
+
         self.listbox_summary_of_active_profile.add(row)
-        self.listbox_summary_of_active_profile.add(Gtk.Separator())
+
+        sep = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL)
+        self.listbox_summary_of_active_profile.add(sep)
+        sep.show()
+
         for u in self.active_profile.units:
             row = Gtk.ListBoxRow()
             hbox = Gtk.Box(orientation = Gtk.Orientation.HORIZONTAL, spacing = 0)
-
             hbox.set_homogeneous(True)
             row.add(hbox)
-
             label = Gtk.Label()
             label.set_markup(u)
-            label.set_justify(Gtk.Justification.CENTER)
-
+            label.set_justify(Gtk.Justification.LEFT)
             hbox.pack_start(label, False, True, 1)
-            hbox.pack_start(Gtk.VSeparator(), False, True, 1)
 
             grid = Gtk.Box(orientation = Gtk.Orientation.VERTICAL, spacing = 0)
+            grid.set_homogeneous(True)
             for o in self.active_profile.units[u].options:
                 label_option = Gtk.Label()
-                label_option.set_justify(Gtk.Justification.LEFT)
                 label_option.set_markup(o + " = " + "<b>" + self.active_profile.units[u].options[o] + "</b>")
                 grid.pack_start(label_option, False, True, 0)
 
             hbox.pack_start(grid, False, True, 0)
             self.listbox_summary_of_active_profile.add(row)
-            self.listbox_summary_of_active_profile.add(Gtk.Separator())
-            
+            separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL)
+            self.listbox_summary_of_active_profile.add(separator)
+            separator.show()
+
         self.listbox_summary_of_active_profile.show_all()
-        
+
     def on_treeview_button_press_event(self, treeview, event):
         popup = Gtk.Menu()
         popup.append(Gtk.MenuItem('add'))
         popup.append(Gtk.MenuItem('delete'))
-        
+
         if event.button == 3:
             x = int(event.x)
             y = int(event.y)
@@ -326,10 +358,10 @@ class Base(object):
                 self.error_dialog("You are ediding " + self.editing_profile_name + " profile.", "Please close edit window and try again.")
                 return
             self.manager.remove_profile(profile)
-            for item in self.treestore_profile_manager:
+            for item in self.treestore_profiles:
                 if item[0] == profile:
-                    iter = self.treestore_profile_manager.get_iter(item.path)
-                    self.treestore_profile_manager.remove(iter)
+                    iter = self.treestore_profiles.get_iter(item.path)
+                    self.treestore_profiles.remove(iter)
         except ManagerException as ex:
             self.error_dialog("Profile can not be remove", ex.__str__())
 
@@ -343,9 +375,7 @@ class Base(object):
         profile_name = self.get_treeview_selected()
         text_buffer = self.textview1.get_buffer()
         text_buffer.set_text(self.manager.get_raw_profile(profile_name))
-        self.window_profile_editor_raw.show_all()          
-
-
+        self.window_profile_editor_raw.show_all()
 
     def execute_add_plugin_to_notebook(self, button):
         if (self.choose_plugin_dialog() == 1):
@@ -396,7 +426,6 @@ class Base(object):
 
         for child in self.notebook_plugins.get_children():
             self.notebook_plugins.remove(child)
-
         self.window_profile_editor.show()
 
     def reset_values_window_edit_profile(self):
@@ -413,22 +442,22 @@ class Base(object):
         (model, iter) = selection.get_selected()
         if iter is None:
             self.error_dialog("No profile selected", "")
-        return self.treestore_profile_manager.get_value(iter, 0)
+        return self.treestore_profiles.get_value(iter, 0)
 
     def on_click_button_confirm_profile_update(self, data):                
             profile_name = self.get_treeview_selected()
             prof = self.data_to_profile_config()
             self.manager.remove_profile(profile_name)
-            for item in self.treestore_profile_manager:
+            for item in self.treestore_profiles:
                 try: 
                     if item[0] == profile_name:
-                        iter = self.treestore_profile_manager.get_iter(item.path)
-                        self.treestore_profile_manager.remove(iter)
+                        iter = self.treestore_profiles.get_iter(item.path)
+                        self.treestore_profiles.remove(iter)
                 except KeyError:
                     raise KeyError("this cant happen")
 
             self.manager.update_profile(profile_name, prof)
-            self.treestore_profile_manager.append([prof.name])
+            self.treestore_profiles.append([prof.name])
             self.window_profile_editor.hide()
 
     def data_to_profile_config(self):
@@ -446,7 +475,6 @@ class Base(object):
             for item in children.get_model():
                 if item[0] != "None":
                     acumulate_options[item[1]]= item[0]
-
             config[self.notebook_plugins.get_menu_label_text(children)] = acumulate_options    
         return profile.Profile(name, config)
 
@@ -455,15 +483,12 @@ class Base(object):
             prof = self.data_to_profile_config()
             self.manager.save_profile(prof)
             self.manager._load_all_profiles()
-            self.treestore_profile_manager.append([prof.name])
+            self.treestore_profiles.append([prof.name])
             self.window_profile_editor.hide()
         except ManagerException: 
             self.error_dialog("Profile with name " + prof.name + " already exist.", "Please choose another name for profile")
 
     def execute_update_profile(self, data): 
-
-
-
 #         if (self.treeview_profile_manager.get_activate_on_single_click()):
 #             print "returning"
 #             print self.treeview_profile_manager.get_activate_on_single_click()
@@ -498,7 +523,7 @@ class Base(object):
                     pass   
             self.combobox_include_profile.set_active(selected)
             for name, unit in profile.units.items():
-                self.notebook_plugins.append_page_menu(self.treeview_for_data(unit.options),Gtk.Label(unit.name), Gtk.Label(unit.name))
+                self.notebook_plugins.append_page_menu(self.treeview_for_data(unit.options), Gtk.Label(unit.name), Gtk.Label(unit.name))
             self.notebook_plugins.show_all()
             self.window_profile_editor.show()
         else:
@@ -528,9 +553,12 @@ class Base(object):
         if button is not None:
             text = self.comboboxtext1.get_active_text()
             if text is not None:
-                self.controller.switch_profile(text)
-                self.label_actual_profile.set_text(self.controller.active_profile())
-                self.refresh_summary_of_actual_profile()
+                if self.is_tuned_connection_ok():
+                    self.controller.switch_profile(text)
+                    self.label_actual_profile.set_text(self.controller.active_profile())
+                    self.data_for_listbox_summary_of_active_profile()
+                else:
+                    self.label_actual_profile.set_text("")
             else:
                 self.error_dialog("No profile selected", "")
         self.spinner_fast_change_profile.stop()
@@ -538,16 +566,20 @@ class Base(object):
 
     def execute_switch_tuned(self, switch, data):
         if switch == self.switch_tuned_start_stop:
+#             starts or stop tuned daemon
             if self.switch_tuned_start_stop.get_active():
-                subprocess.call(["service", "tuned", "stop"])
+                self.start_tuned()
             else:
-                subprocess.call(["service", "tuned", "start"])
-                self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
+                subprocess.call(["service", "tuned", "stop"])
+                self.error_dialog("Tuned Daemon is turned off", "Support of tuned is not running.")
         elif switch == self.switch_tuned_startup_start_stop:
+#             switch option for start tuned on start up
             if self.switch_tuned_startup_start_stop.get_active():
                 subprocess.call(["systemctl", "enable", "tuned"])
             else:
                 subprocess.call(["systemctl", "disable", "tuned"])
+        else:
+            raise NotImplemented
 
     def find_process(self, processId):
         self.ps = subprocess.Popen("ps -ef | grep "+processId, shell=True, stdout=subprocess.PIPE)
@@ -556,14 +588,10 @@ class Base(object):
         self.ps.wait()
         return self.output
 
-    def is_process_running(self, processId):
-        self.output = self.find_process(processId)
-        if re.search(processId, self.output) is None:
-            return True
-        else:
-            return False
-
     def service_run_on_start_up(self, service): 
+        """
+        Depends on if tuned is set to run on startup of system return true if yes, else return false
+        """
         temp = subprocess.call(["systemctl", "is-enabled", service])
         if (temp == 0):
             return True
@@ -583,10 +611,9 @@ class Base(object):
         self.about_dialog.hide()
 
     def change_value_dialog(self, tree_view, path, treeview_column):
-     
         """
         Shows up dialog after double click on treeview which has to be stored in notebook of plugins. 
-        This dialog allows you to chagne specific option's value in plugin.
+        Th``` dialog allows you to chagne specific option's value in plugin.
         """
         model = tree_view.get_model() 
         dialog = self.builder.get_object("changeValueDialog")
@@ -594,16 +621,15 @@ class Base(object):
         button_cancel = self.builder.get_object("buttonCancel1")
         entry1 = self.builder.get_object("entry1")
         text = self.builder.get_object("labelTextDialogChangeValue")
- 
+
         text.set_text(model.get_value(model.get_iter(path), 1))
         entry1.set_text(model.get_value(model.get_iter(path), 0))
- 
+
         dialog.connect('destroy', lambda d: dialog.hide())
         button_cancel.connect('clicked', lambda d: dialog.hide())
 
         if (dialog.run() == 1 ):
             model.set_value(model.get_iter(path), 0, entry1.get_text())
-
         dialog.hide()
 
     def choose_plugin_dialog(self):
@@ -619,6 +645,9 @@ class Base(object):
         self.dialog_add_plugin.hide()
         return response
 
+    def start_tuned(self):
+        subprocess.call(["service", "tuned", "start"])
+        self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
 
 if __name__ == '__main__':
 
@@ -626,8 +655,4 @@ if __name__ == '__main__':
         print os.error("Superuser permissions are required to run the daemon.")
         print "Aplication ends."
         sys.exit(1)
-
-    subprocess.call(["service", "tuned", "start"])
     base = Base()
-
-    Gtk.main()
