@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.plugins.plugin_mounts</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.plugins-module.html">Package&nbsp;plugins</a> ::
+        Module&nbsp;plugin_mounts
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.plugins.plugin_mounts-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.plugins.plugin_mounts-module.html">Module tuned.plugins.plugin_mounts</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module tuned.monitors.base=tuned.monitors.base-module.html,Module tuned.plugins.base=tuned.plugins.base-module.html"><a title="tuned.monitors.base
+tuned.plugins.base" class="py-name" href="#" onclick="return doclink('link-0', 'base', 'link-0');">base</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Module tuned.plugins.decorators=tuned.plugins.decorators-module.html"><a title="tuned.plugins.decorators" class="py-name" href="#" onclick="return doclink('link-1', 'decorators', 'link-1');">decorators</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">subprocess</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Popen</tt><tt class="py-op">,</tt><tt class="py-name">PIPE</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Package tuned=tuned-module.html"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-2', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module tuned.logs=tuned.logs-module.html"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-3', 'logs', 'link-3');">logs</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-4" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-4', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package tuned.utils=tuned.utils-module.html"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-5', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module tuned.utils.commands=tuned.utils.commands-module.html"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-6', 'commands', 'link-6');">commands</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">glob</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable tuned.daemon.application.log=tuned.daemon.application-module.html#log,Variable tuned.daemon.controller.log=tuned.daemon.controller-module.html#log,Variable tuned.daemon.daemon.log=tuned.daemon.daemon-module.html#log,Method tuned.exceptions.TunedException.log()=tuned.exceptions.TunedException-class.html#log,Variable tuned.hardware.inventory.log=tuned.hardware.inventory-module.html#log,Variable tuned.monitors.base.log=tuned.monitors.base-module.html#log,Variable tuned.monitors.repository.log=tuned.monitors.repository-module.html#log,Variable tuned.plugins.base.log=tuned.plugins.base-module.html#log,Variable tuned.plugins.hotplug.log=tuned.plugins.hotplug-module.html#log,Variable tuned.plugins.plugin_audio.log=tuned.plugins.plugin_audio-module.html#log,Variable tuned.plugins.plugin_cpu.log=tuned.plugins.plugin_cpu-module.html#log,Variable tuned.plugins.plugin_disk.log=tuned.plugins.plugin_disk-module.html#log,Variable tuned.plugins.plugin_eeepc_she.log=tuned.plugins.plugin_eeepc_she-module.html#log,Variable tuned.plugins.plugin_mounts.log=tuned.plugins.plugin_mounts-module.html#log,Variable tuned.plugins.plugin_net.log=tuned.plugins.plugin_net-module.html#log,Variable tuned.plugins.plugin_script.log=tuned.plugins.plugin_script-module.html#log,Variable tuned.plugins.plugin_sysctl.log=tuned.plugins.plugin_sysctl-module.html#log,Variable tuned.plugins.plugin_sysfs.log=tuned.plugins.plugin_sysfs-module.html#log,Variable tuned.plugins.plugin_usb.log=tuned.plugins.plugin_usb-module.html#log,Variable tuned.plugins.plugin_video.log=tuned.plugins.plugin_video-module.html#log,Variable tuned.plugins.plugin_vm.log=tuned.plugins.plugin_vm-module.html#log,Variable tuned.plugins.repository.log=tuned.plugins.repository-module.html#log,Variable tuned.profiles.loader.log=tuned.profiles.loader-module.html#log,Variable tuned.storage.pickle_provider.log=tuned.storage.pickle_provider-module.html#log,Variable tuned.units.manager.log=tuned.units.manager-module.html#log,Variable tuned.utils.commands.log=tuned.utils.commands-module.html#log,Variable tuned.utils.nettool.log=tuned.utils.nettool-module.html#log,Variable tuned.utils.plugin_loader.log=tuned.utils.plugin_loader-module.html#log"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-7', 'log', 'link-7');">log</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-8', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-9', 'logs', 'link-3');">logs</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-10', 'get', 'link-10');">get</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="MountsPlugin"></a><div id="MountsPlugin-def"><a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt> <a class="py-toggle" href="#" id="MountsPlugin-toggle" onclick="return toggle('MountsPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html">MountsPlugin</a><tt class="py-op">(</tt><tt class="py-base-class">base</tt><tt class="py-op">.</tt><tt class="py-base-class">Plugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="MountsPlugin-expanded"><a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">        Plugin for tuning options of mount-points.</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="MountsPlugin._generate_mountpoint_topology"></a><div id="MountsPlugin._generate_mountpoint_topology-def"><a name="L16"></a><tt class="py-lineno"> 16</tt> <a class="py-toggle" href="#" id="MountsPlugin._generate_mountpoint_topology-toggle" onclick="return toggle('MountsPlugin._generate_mountpoint_topology');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html#_generate_mountpoint_topology">_generate_mountpoint_topology</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin._generate_mountpoint_topology-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="MountsPlugin._generate_mountpoint_topology-expanded"><a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">                Gets the information about disks, partitions and mountpoints. Stores information about used filesystem and</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">                creates a list of all underlying devices (in case of LVM) for each mountpoint.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">                <tt class="py-name">mountpoint_topology</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">                <tt class="py-name">current_disk</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">                <tt class="py-name">stdout</tt><tt class="py-op">,</tt> <tt class="py-name">stderr</tt> <tt class="py-op">=</tt> <tt class="py-name">Popen</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">"/usr/bin/lsblk"</tt><tt class="py-op">,</tt> <tt class="py-string">"-rno"</tt><tt class="py-op">,</tt> <tt class="py-string">"TYPE,RM,KNAME,FSTYPE,MOUNTPOINT"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">stdout</tt><tt class="py-op">=</tt><tt class="py-name">PIPE</tt><tt class="py-op">,</tt> <tt class="py-name">stderr</tt><tt class="py-op">=</tt><tt class="py-name">PIPE</tt><tt class="py-op">,</tt> <tt class="py-name">close_fds</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">communicate</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">columns</tt> <tt class="py-keyword">in</tt> <tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">line</tt><tt class="py-op">:</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">stdout</tt><tt class="py-op">.</tt><tt class="py-name">splitlines</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">                        <tt class="py-name">device_type</tt><tt class="py-op">,</tt> <tt class="py-name">device_removable</tt><tt class="py-op">,</tt> <tt class="py-name">device_name</tt> <tt class="py-op">=</tt> <tt class="py-name">columns</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">                        <tt class="py-name">filesystem</tt> <tt class="py-op">=</tt> <tt class="py-name">columns</tt><tt class="py-op">[</tt><tt class="py-number">3</tt><tt class="py-op">]</tt> <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">columns</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">3</tt> <tt class="py-keyword">else</tt> <tt class="py-name">None</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">                        <tt class="py-name">mountpoint</tt> <tt class="py-op">=</tt> <tt class="py-name">columns</tt><tt class="py-op">[</tt><tt class="py-number">4</tt><tt class="py-op">]</tt> <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">columns</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">4</tt> <tt class="py-keyword">else</tt> <tt class="py-name">None</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">device_type</tt> <tt class="py-op">==</tt> <tt class="py-string">"disk"</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">                                <tt class="py-name">current_disk</tt> <tt class="py-op">=</tt> <tt class="py-name">device_name</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">                                <tt class="py-keyword">continue</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">                        <tt class="py-comment"># skip removable, skip nonpartitions</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">device_removable</tt> <tt class="py-op">==</tt> <tt class="py-string">"1"</tt> <tt class="py-keyword">or</tt> <tt class="py-name">device_type</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">"part"</tt><tt class="py-op">,</tt> <tt class="py-string">"lvm"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">                                <tt class="py-keyword">continue</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">mountpoint</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt> <tt class="py-keyword">or</tt> <tt class="py-name">mountpoint</tt> <tt class="py-op">==</tt> <tt class="py-string">"[SWAP]"</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                                <tt class="py-keyword">continue</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                        <tt class="py-name">mountpoint_topology</tt><tt class="py-op">.</tt><tt class="py-name">setdefault</tt><tt class="py-op">(</tt><tt class="py-name">mountpoint</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">"disks"</tt><tt class="py-op">:</tt> <tt id="link-11" class="py-name" targets="Method tuned.storage.interfaces.Provider.set()=tuned.storage.interfaces.Provider-class.html#set,Method tuned.storage.pickle_provider.PickleProvider.set()=tuned.storage.pickle_provider.PickleProvider-class.html#set,Method tuned.storage.storage.Storage.set()=tuned.storage.storage.Storage-class.html#set"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-11', 'set', 'link-11');">set</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"device_name"</tt><tt class="py-op">:</tt> <tt class="py-name">device_name</tt><tt class="py-op">,</tt> <tt class="py-string">"filesystem"</tt><tt class="py-op">:</tt> <tt class="py-name">filesystem</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">                        <tt class="py-name">mountpoint_topology</tt><tt class="py-op">[</tt><tt class="py-name">mountpoint</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"disks"</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">current_disk</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">_mountpoint_topology</tt> <tt class="py-op">=</tt> <tt class="py-name">mountpoint_topology</tt> </tt>
+</div><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="MountsPlugin._init_devices"></a><div id="MountsPlugin._init_devices-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="MountsPlugin._init_devices-toggle" onclick="return toggle('MountsPlugin._init_devices');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html#_init_devices">_init_devices</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin._init_devices-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="MountsPlugin._init_devices-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Class Method tuned.plugins.plugin_mounts.MountsPlugin._generate_mountpoint_topology()=tuned.plugins.plugin_mounts.MountsPlugin-class.html#_generate_mountpoint_topology"><a title="tuned.plugins.plugin_mounts.MountsPlugin._generate_mountpoint_topology" class="py-name" href="#" onclick="return doclink('link-12', '_generate_mountpoint_topology', 'link-12');">_generate_mountpoint_topology</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Variable tuned.profiles.unit.Unit._devices=tuned.profiles.unit.Unit-class.html#_devices"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-13', '_devices', 'link-13');">_devices</a></tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-14', 'set', 'link-11');">set</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_mountpoint_topology</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_assigned_devices</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-15', 'set', 'link-11');">set</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_free_devices</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-16', '_devices', 'link-13');">_devices</a></tt><tt class="py-op">.</tt><tt class="py-name">copy</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="MountsPlugin._get_config_options"></a><div id="MountsPlugin._get_config_options-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="MountsPlugin._get_config_options-toggle" onclick="return toggle('MountsPlugin._get_config_options');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html#_get_config_options">_get_config_options</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin._get_config_options-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="MountsPlugin._get_config_options-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-op">{</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                        <tt class="py-string">"disable_barriers"</tt><tt class="py-op">:</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                <tt class="py-op">}</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="MountsPlugin._instance_init"></a><div id="MountsPlugin._instance_init-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="MountsPlugin._instance_init-toggle" onclick="return toggle('MountsPlugin._instance_init');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html#_instance_init">_instance_init</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin._instance_init-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="MountsPlugin._instance_init-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                <tt id="link-17" class="py-name" targets="Package tuned.plugins.instance=tuned.plugins.instance-module.html,Module tuned.plugins.instance.instance=tuned.plugins.instance.instance-module.html"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-17', 'instance', 'link-17');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_has_dynamic_tuning</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                <tt id="link-18" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-18', 'instance', 'link-17');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_has_static_tuning</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<a name="MountsPlugin._instance_cleanup"></a><div id="MountsPlugin._instance_cleanup-def"><a name="L61"></a><tt class="py-lineno"> 61</tt> <a class="py-toggle" href="#" id="MountsPlugin._instance_cleanup-toggle" onclick="return toggle('MountsPlugin._instance_cleanup');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html#_instance_cleanup">_instance_cleanup</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin._instance_cleanup-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="MountsPlugin._instance_cleanup-expanded"><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="MountsPlugin._get_device_cache_type"></a><div id="MountsPlugin._get_device_cache_type-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="MountsPlugin._get_device_cache_type-toggle" onclick="return toggle('MountsPlugin._get_device_cache_type');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html#_get_device_cache_type">_get_device_cache_type</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin._get_device_cache_type-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="MountsPlugin._get_device_cache_type-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">                Get device cache type. This will work only for devices on SCSI kernel subsystem.</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">                <tt class="py-name">source_filenames</tt> <tt class="py-op">=</tt> <tt class="py-name">glob</tt><tt class="py-op">.</tt><tt class="py-name">glob</tt><tt class="py-op">(</tt><tt class="py-string">"/sys/block/%s/device/scsi_disk/*/cache_type"</tt> <tt class="py-op">%</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">source_filename</tt> <tt class="py-keyword">in</tt> <tt class="py-name">source_filenames</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt id="link-19" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-19', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-20', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-21', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">read_file</tt><tt class="py-op">(</tt><tt class="py-name">source_filename</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"> </tt>
+<a name="MountsPlugin._mountpoint_has_writeback_cache"></a><div id="MountsPlugin._mountpoint_has_writeback_cache-def"><a name="L73"></a><tt class="py-lineno"> 73</tt> <a class="py-toggle" href="#" id="MountsPlugin._mountpoint_has_writeback_cache-toggle" onclick="return toggle('MountsPlugin._mountpoint_has_writeback_cache');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html#_mountpoint_has_writeback_cache">_mountpoint_has_writeback_cache</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">mountpoint</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin._mountpoint_has_writeback_cache-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="MountsPlugin._mountpoint_has_writeback_cache-expanded"><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">                Checks if the device has 'write back' cache. If the cache type cannot be determined, asume some other cache.</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">device</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_mountpoint_topology</tt><tt class="py-op">[</tt><tt class="py-name">mountpoint</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"disks"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method tuned.plugins.plugin_mounts.MountsPlugin._get_device_cache_type()=tuned.plugins.plugin_mounts.MountsPlugin-class.html#_get_device_cache_type"><a title="tuned.plugins.plugin_mounts.MountsPlugin._get_device_cache_type" class="py-name" href="#" onclick="return doclink('link-22', '_get_device_cache_type', 'link-22');">_get_device_cache_type</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"write back"</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                                <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="MountsPlugin._mountpoint_has_barriers"></a><div id="MountsPlugin._mountpoint_has_barriers-def"><a name="L82"></a><tt class="py-lineno"> 82</tt> <a class="py-toggle" href="#" id="MountsPlugin._mountpoint_has_barriers-toggle" onclick="return toggle('MountsPlugin._mountpoint_has_barriers');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html#_mountpoint_has_barriers">_mountpoint_has_barriers</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">mountpoint</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin._mountpoint_has_barriers-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="MountsPlugin._mountpoint_has_barriers-expanded"><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">                Checks if a given mountpoint is mounted with barriers enabled or disabled.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-string">"/proc/mounts"</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">mounts_file</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                        <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt class="py-name">mounts_file</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                                <tt class="py-comment"># device mountpoint filesystem options dump check</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                                <tt class="py-name">columns</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                                <tt class="py-keyword">if</tt> <tt class="py-name">columns</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">!=</tt> <tt class="py-string">"/"</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">                                        <tt class="py-keyword">continue</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                                <tt class="py-keyword">if</tt> <tt class="py-name">columns</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-name">mountpoint</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                                        <tt class="py-name">option_list</tt> <tt class="py-op">=</tt> <tt class="py-name">columns</tt><tt class="py-op">[</tt><tt class="py-number">3</tt><tt class="py-op">]</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                                        <tt class="py-keyword">break</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                                <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                <tt id="link-23" class="py-name" targets="Variable tuned.plugins.instance.instance.Instance.options=tuned.plugins.instance.instance.Instance-class.html#options,Variable tuned.profiles.profile.Profile.options=tuned.profiles.profile.Profile-class.html#options,Variable tuned.profiles.unit.Unit.options=tuned.profiles.unit.Unit-class.html#options"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-23', 'options', 'link-23');">options</a></tt> <tt class="py-op">=</tt> <tt class="py-name">option_list</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">","</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">option</tt> <tt class="py-keyword">in</tt> <tt id="link-24" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-24', 'options', 'link-23');">options</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                        <tt class="py-op">(</tt><tt id="link-25" class="py-name" targets="Variable tuned.plugins.base.Plugin.name=tuned.plugins.base.Plugin-class.html#name,Variable tuned.plugins.instance.instance.Instance.name=tuned.plugins.instance.instance.Instance-class.html#name,Variable tuned.profiles.profile.Profile.name=tuned.profiles.profile.Profile-class.html#name,Variable tuned.profiles.unit.Unit.name=tuned.profiles.unit.Unit-class.html#name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-25', 'name', 'link-25');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">sep</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">option</tt><tt class="py-op">.</tt><tt class="py-name">partition</tt><tt class="py-op">(</tt><tt class="py-string">"="</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">                        <tt class="py-comment"># nobarrier barrier=0</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt id="link-26" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-26', 'name', 'link-25');">name</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"nobarrier"</tt> <tt class="py-keyword">or</tt> <tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-27', 'name', 'link-25');">name</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"barrier"</tt> <tt class="py-keyword">and</tt> <tt class="py-name">value</tt> <tt class="py-op">==</tt> <tt class="py-string">"0"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                                <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                        <tt class="py-comment"># barrier barrier=1</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                        <tt class="py-keyword">elif</tt> <tt id="link-28" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-28', 'name', 'link-25');">name</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"barrier"</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">                                <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">                        <tt class="py-comment"># default</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="MountsPlugin._remount_partition"></a><div id="MountsPlugin._remount_partition-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="MountsPlugin._remount_partition-toggle" onclick="return toggle('MountsPlugin._remount_partition');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html#_remount_partition">_remount_partition</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">partition</tt><tt class="py-op">,</tt> <tt class="py-param">options</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin._remount_partition-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="MountsPlugin._remount_partition-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">                Remounts partition.</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">                <tt class="py-name">remount_command</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"/usr/bin/mount"</tt><tt class="py-op">,</tt> <tt class="py-name">partition</tt><tt class="py-op">,</tt> <tt class="py-string">"-o"</tt><tt class="py-op">,</tt> <tt class="py-string">"remount,%s"</tt> <tt class="py-op">%</tt> <tt id="link-29" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-29', 'options', 'link-23');">options</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">                <tt id="link-30" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-30', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-31', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-32', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-name">remount_command</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">command_custom</tt><tt class="py-op">(</tt><tt class="py-string">"disable_barriers"</tt><tt class="py-op">,</tt> <tt class="py-name">per_device</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="MountsPlugin._disable_barriers"></a><div id="MountsPlugin._disable_barriers-def"><a name="L119"></a><tt class="py-lineno">119</tt> <a class="py-toggle" href="#" id="MountsPlugin._disable_barriers-toggle" onclick="return toggle('MountsPlugin._disable_barriers');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_mounts.MountsPlugin-class.html#_disable_barriers">_disable_barriers</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">start</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">,</tt> <tt class="py-param">mountpoint</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MountsPlugin._disable_barriers-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="MountsPlugin._disable_barriers-expanded"><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">                <tt class="py-name">storage_key</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method tuned.plugins.base.Plugin._storage_key()=tuned.plugins.base.Plugin-class.html#_storage_key"><a title="tuned.plugins.base.Plugin._storage_key" class="py-name" href="#" onclick="return doclink('link-33', '_storage_key', 'link-33');">_storage_key</a></tt><tt class="py-op">(</tt><tt class="py-string">"disable_barriers"</tt><tt class="py-op">,</tt> <tt class="py-name">mountpoint</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">                <tt class="py-name">force</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"force"</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">                <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">force</tt> <tt class="py-keyword">or</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method tuned.plugins.base.Plugin._option_bool()=tuned.plugins.base.Plugin-class.html#_option_bool"><a title="tuned.plugins.base.Plugin._option_bool" class="py-name" href="#" onclick="return doclink('link-34', '_option_bool', 'link-34');">_option_bool</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-35" class="py-name" targets="Method tuned.admin.dbus_controller.DBusController.start()=tuned.admin.dbus_controller.DBusController-class.html#start,Method tuned.daemon.controller.Controller.start()=tuned.daemon.controller.Controller-class.html#start,Method tuned.daemon.daemon.Daemon.start()=tuned.daemon.daemon.Daemon-class.html#start,Method tuned.exports.controller.ExportsController.start()=tuned.exports.controller.ExportsController-class.html#start,Method tuned.exports.dbus_exporter.DBusExporter.start()=tuned.exports.dbus_exporter.DBusExporter-class.html#start,Method tuned.exports.interfaces.ExporterInterface.start()=tuned.exports.interfaces.ExporterInterface-class.html#start,Function tuned.exports.start()=tuned.exports-module.html#start"><a title="tuned.admin.dbus_controller.DBusController.start
+tuned.daemon.controller.Controller.start
+tuned.daemon.daemon.Daemon.start
+tuned.exports.controller.ExportsController.start
+tuned.exports.dbus_exporter.DBusExporter.start
+tuned.exports.interfaces.ExporterInterface.start
+tuned.exports.start" class="py-name" href="#" onclick="return doclink('link-35', 'start', 'link-35');">start</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">value</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">                                <tt class="py-keyword">return</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">                        <tt class="py-name">reject_reason</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_mountpoint_topology</tt><tt class="py-op">[</tt><tt class="py-name">mountpoint</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"filesystem"</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">"ext"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">                                <tt class="py-name">reject_reason</tt> <tt class="py-op">=</tt> <tt class="py-string">"filesystem not supported"</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">                        <tt class="py-keyword">elif</tt> <tt class="py-keyword">not</tt> <tt class="py-name">force</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Method tuned.plugins.plugin_mounts.MountsPlugin._mountpoint_has_writeback_cache()=tuned.plugins.plugin_mounts.MountsPlugin-class.html#_mountpoint_has_writeback_cache"><a title="tuned.plugins.plugin_mounts.MountsPlugin._mountpoint_has_writeback_cache" class="py-name" href="#" onclick="return doclink('link-36', '_mountpoint_has_writeback_cache', 'link-36');">_mountpoint_has_writeback_cache</a></tt><tt class="py-op">(</tt><tt class="py-name">mountpoint</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">                                <tt class="py-name">reject_reason</tt> <tt class="py-op">=</tt> <tt class="py-string">"device uses write back cache"</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">                        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">                                <tt class="py-name">original_value</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method tuned.plugins.plugin_mounts.MountsPlugin._mountpoint_has_barriers()=tuned.plugins.plugin_mounts.MountsPlugin-class.html#_mountpoint_has_barriers"><a title="tuned.plugins.plugin_mounts.MountsPlugin._mountpoint_has_barriers" class="py-name" href="#" onclick="return doclink('link-37', '_mountpoint_has_barriers', 'link-37');">_mountpoint_has_barriers</a></tt><tt class="py-op">(</tt><tt class="py-name">mountpoint</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">                                <tt class="py-keyword">if</tt> <tt class="py-name">original_value</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">                                        <tt class="py-name">reject_reason</tt> <tt class="py-op">=</tt> <tt class="py-string">"unknown current setting"</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">                                <tt class="py-keyword">elif</tt> <tt class="py-name">original_value</tt> <tt class="py-op">==</tt> <tt class="py-name">False</tt><tt class="py-op">:</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                                        <tt class="py-name">reject_reason</tt> <tt class="py-op">=</tt> <tt class="py-string">"barriers already disabled"</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">reject_reason</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">                                <tt id="link-38" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-38', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"not disabling barriers on '%s' (%s)"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">mountpoint</tt><tt class="py-op">,</tt> <tt class="py-name">reject_reason</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">                                <tt class="py-keyword">return</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_storage</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-39', 'set', 'link-11');">set</a></tt><tt class="py-op">(</tt><tt class="py-name">storage_key</tt><tt class="py-op">,</tt> <tt class="py-name">original_value</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">                        <tt id="link-40" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-40', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"disabling barriers on '%s'"</tt> <tt class="py-op">%</tt> <tt class="py-name">mountpoint</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Method tuned.plugins.plugin_mounts.MountsPlugin._remount_partition()=tuned.plugins.plugin_mounts.MountsPlugin-class.html#_remount_partition"><a title="tuned.plugins.plugin_mounts.MountsPlugin._remount_partition" class="py-name" href="#" onclick="return doclink('link-41', '_remount_partition', 'link-41');">_remount_partition</a></tt><tt class="py-op">(</tt><tt class="py-name">mountpoint</tt><tt class="py-op">,</tt> <tt class="py-string">"barrier=0"</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">                        <tt class="py-name">original_value</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_storage</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-42', 'get', 'link-10');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">storage_key</tt><tt class="py-op">)</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">original_value</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">                                <tt class="py-keyword">return</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">                        <tt id="link-43" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-43', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"enabling barriers on '%s'"</tt> <tt class="py-op">%</tt> <tt class="py-name">mountpoint</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="tuned.plugins.plugin_mounts.MountsPlugin._remount_partition" class="py-name" href="#" onclick="return doclink('link-44', '_remount_partition', 'link-41');">_remount_partition</a></tt><tt class="py-op">(</tt><tt class="py-name">mountpoint</tt><tt class="py-op">,</tt> <tt class="py-string">"barrier=1"</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_storage</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Method tuned.storage.interfaces.Provider.unset()=tuned.storage.interfaces.Provider-class.html#unset,Method tuned.storage.pickle_provider.PickleProvider.unset()=tuned.storage.pickle_provider.PickleProvider-class.html#unset,Method tuned.storage.storage.Storage.unset()=tuned.storage.storage.Storage-class.html#unset"><a title="tuned.storage.interfaces.Provider.unset
+tuned.storage.pickle_provider.PickleProvider.unset
+tuned.storage.storage.Storage.unset" class="py-name" href="#" onclick="return doclink('link-45', 'unset', 'link-45');">unset</a></tt><tt class="py-op">(</tt><tt class="py-name">storage_key</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

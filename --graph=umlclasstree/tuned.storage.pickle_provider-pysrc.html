@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.storage.pickle_provider</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.storage-module.html">Package&nbsp;storage</a> ::
+        Module&nbsp;pickle_provider
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.storage.pickle_provider-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.storage.pickle_provider-module.html">Module tuned.storage.pickle_provider</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module tuned.exports.interfaces=tuned.exports.interfaces-module.html,Module tuned.storage.interfaces=tuned.storage.interfaces-module.html"><a title="tuned.exports.interfaces
+tuned.storage.interfaces" class="py-name" href="#" onclick="return doclink('link-0', 'interfaces', 'link-0');">interfaces</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Package tuned=tuned-module.html"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-1', 'tuned', 'link-1');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module tuned.logs=tuned.logs-module.html"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-2', 'logs', 'link-2');">logs</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">pickle</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-3" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-3', 'tuned', 'link-1');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module tuned.consts=tuned.consts-module.html"><a title="tuned.consts" class="py-name" href="#" onclick="return doclink('link-4', 'consts', 'link-4');">consts</a></tt> <tt class="py-keyword">as</tt> <tt id="link-5" class="py-name"><a title="tuned.consts" class="py-name" href="#" onclick="return doclink('link-5', 'consts', 'link-4');">consts</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable tuned.daemon.application.log=tuned.daemon.application-module.html#log,Variable tuned.daemon.controller.log=tuned.daemon.controller-module.html#log,Variable tuned.daemon.daemon.log=tuned.daemon.daemon-module.html#log,Method tuned.exceptions.TunedException.log()=tuned.exceptions.TunedException-class.html#log,Variable tuned.hardware.inventory.log=tuned.hardware.inventory-module.html#log,Variable tuned.monitors.base.log=tuned.monitors.base-module.html#log,Variable tuned.monitors.repository.log=tuned.monitors.repository-module.html#log,Variable tuned.plugins.base.log=tuned.plugins.base-module.html#log,Variable tuned.plugins.hotplug.log=tuned.plugins.hotplug-module.html#log,Variable tuned.plugins.plugin_audio.log=tuned.plugins.plugin_audio-module.html#log,Variable tuned.plugins.plugin_cpu.log=tuned.plugins.plugin_cpu-module.html#log,Variable tuned.plugins.plugin_disk.log=tuned.plugins.plugin_disk-module.html#log,Variable tuned.plugins.plugin_eeepc_she.log=tuned.plugins.plugin_eeepc_she-module.html#log,Variable tuned.plugins.plugin_mounts.log=tuned.plugins.plugin_mounts-module.html#log,Variable tuned.plugins.plugin_net.log=tuned.plugins.plugin_net-module.html#log,Variable tuned.plugins.plugin_script.log=tuned.plugins.plugin_script-module.html#log,Variable tuned.plugins.plugin_sysctl.log=tuned.plugins.plugin_sysctl-module.html#log,Variable tuned.plugins.plugin_sysfs.log=tuned.plugins.plugin_sysfs-module.html#log,Variable tuned.plugins.plugin_usb.log=tuned.plugins.plugin_usb-module.html#log,Variable tuned.plugins.plugin_video.log=tuned.plugins.plugin_video-module.html#log,Variable tuned.plugins.plugin_vm.log=tuned.plugins.plugin_vm-module.html#log,Variable tuned.plugins.repository.log=tuned.plugins.repository-module.html#log,Variable tuned.profiles.loader.log=tuned.profiles.loader-module.html#log,Variable tuned.storage.pickle_provider.log=tuned.storage.pickle_provider-module.html#log,Variable tuned.units.manager.log=tuned.units.manager-module.html#log,Variable tuned.utils.commands.log=tuned.utils.commands-module.html#log,Variable tuned.utils.nettool.log=tuned.utils.nettool-module.html#log,Variable tuned.utils.plugin_loader.log=tuned.utils.plugin_loader-module.html#log"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-6', 'log', 'link-6');">log</a></tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-7', 'tuned', 'link-1');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-8', 'logs', 'link-2');">logs</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-9', 'get', 'link-9');">get</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="PickleProvider"></a><div id="PickleProvider-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="PickleProvider-toggle" onclick="return toggle('PickleProvider');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.storage.pickle_provider.PickleProvider-class.html">PickleProvider</a><tt class="py-op">(</tt><tt class="py-base-class">interfaces</tt><tt class="py-op">.</tt><tt class="py-base-class">Provider</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PickleProvider-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="PickleProvider-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">__slots__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"_path"</tt><tt class="py-op">,</tt> <tt class="py-string">"_data"</tt><tt class="py-op">]</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="PickleProvider.__init__"></a><div id="PickleProvider.__init__-def"><a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="PickleProvider.__init__-toggle" onclick="return toggle('PickleProvider.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.pickle_provider.PickleProvider-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">path</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PickleProvider.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="PickleProvider.__init__-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">path</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">                        <tt class="py-name">path</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="tuned.consts" class="py-name" href="#" onclick="return doclink('link-10', 'consts', 'link-4');">consts</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Variable tuned.consts.DEFAULT_STORAGE_FILE=tuned.consts-module.html#DEFAULT_STORAGE_FILE"><a title="tuned.consts.DEFAULT_STORAGE_FILE" class="py-name" href="#" onclick="return doclink('link-11', 'DEFAULT_STORAGE_FILE', 'link-11');">DEFAULT_STORAGE_FILE</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Variable tuned.storage.pickle_provider.PickleProvider._path=tuned.storage.pickle_provider.PickleProvider-class.html#_path"><a title="tuned.storage.pickle_provider.PickleProvider._path" class="py-name" href="#" onclick="return doclink('link-12', '_path', 'link-12');">_path</a></tt> <tt class="py-op">=</tt> <tt class="py-name">path</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Variable tuned.storage.pickle_provider.PickleProvider._data=tuned.storage.pickle_provider.PickleProvider-class.html#_data"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-13', '_data', 'link-13');">_data</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+</div><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="PickleProvider.set"></a><div id="PickleProvider.set-def"><a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="PickleProvider.set-toggle" onclick="return toggle('PickleProvider.set');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.pickle_provider.PickleProvider-class.html#set">set</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">namespace</tt><tt class="py-op">,</tt> <tt class="py-param">option</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PickleProvider.set-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="PickleProvider.set-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-14', '_data', 'link-13');">_data</a></tt><tt class="py-op">.</tt><tt class="py-name">setdefault</tt><tt class="py-op">(</tt><tt class="py-name">namespace</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-15', '_data', 'link-13');">_data</a></tt><tt class="py-op">[</tt><tt class="py-name">namespace</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">option</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="PickleProvider.get"></a><div id="PickleProvider.get-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="PickleProvider.get-toggle" onclick="return toggle('PickleProvider.get');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.pickle_provider.PickleProvider-class.html#get">get</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">namespace</tt><tt class="py-op">,</tt> <tt class="py-param">option</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PickleProvider.get-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="PickleProvider.get-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-16', '_data', 'link-13');">_data</a></tt><tt class="py-op">.</tt><tt class="py-name">setdefault</tt><tt class="py-op">(</tt><tt class="py-name">namespace</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-17', '_data', 'link-13');">_data</a></tt><tt class="py-op">[</tt><tt class="py-name">namespace</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-18', 'get', 'link-9');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">option</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="PickleProvider.unset"></a><div id="PickleProvider.unset-def"><a name="L26"></a><tt class="py-lineno">26</tt> <a class="py-toggle" href="#" id="PickleProvider.unset-toggle" onclick="return toggle('PickleProvider.unset');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.pickle_provider.PickleProvider-class.html#unset">unset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">namespace</tt><tt class="py-op">,</tt> <tt class="py-param">option</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PickleProvider.unset-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="PickleProvider.unset-expanded"><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-19', '_data', 'link-13');">_data</a></tt><tt class="py-op">.</tt><tt class="py-name">setdefault</tt><tt class="py-op">(</tt><tt class="py-name">namespace</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">option</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-20', '_data', 'link-13');">_data</a></tt><tt class="py-op">[</tt><tt class="py-name">namespace</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">                        <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-21', '_data', 'link-13');">_data</a></tt><tt class="py-op">[</tt><tt class="py-name">namespace</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">option</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="PickleProvider.save"></a><div id="PickleProvider.save-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="PickleProvider.save-toggle" onclick="return toggle('PickleProvider.save');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.pickle_provider.PickleProvider-class.html#save">save</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PickleProvider.save-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="PickleProvider.save-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">                <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                        <tt id="link-22" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-22', 'log', 'link-6');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">"Saving %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-23', '_data', 'link-13');">_data</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                        <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._path" class="py-name" href="#" onclick="return doclink('link-24', '_path', 'link-12');">_path</a></tt><tt class="py-op">,</tt> <tt class="py-string">"w"</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">f</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">                                <tt class="py-name">pickle</tt><tt class="py-op">.</tt><tt class="py-name">dump</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-25', '_data', 'link-13');">_data</a></tt><tt class="py-op">,</tt> <tt class="py-name">f</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt> <tt class="py-op">(</tt><tt class="py-name">OSError</tt><tt class="py-op">,</tt> <tt class="py-name">IOError</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                        <tt id="link-26" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-26', 'log', 'link-6');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">error</tt><tt class="py-op">(</tt><tt class="py-string">"Error saving storage file '%s': %s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._path" class="py-name" href="#" onclick="return doclink('link-27', '_path', 'link-12');">_path</a></tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="PickleProvider.load"></a><div id="PickleProvider.load-def"><a name="L39"></a><tt class="py-lineno">39</tt> <a class="py-toggle" href="#" id="PickleProvider.load-toggle" onclick="return toggle('PickleProvider.load');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.pickle_provider.PickleProvider-class.html#load">load</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PickleProvider.load-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="PickleProvider.load-expanded"><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                        <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._path" class="py-name" href="#" onclick="return doclink('link-28', '_path', 'link-12');">_path</a></tt><tt class="py-op">,</tt> <tt class="py-string">"r"</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">f</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">                                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-29', '_data', 'link-13');">_data</a></tt> <tt class="py-op">=</tt> <tt class="py-name">pickle</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method tuned.profiles.loader.Loader.load()=tuned.profiles.loader.Loader-class.html#load,Method tuned.storage.interfaces.Provider.load()=tuned.storage.interfaces.Provider-class.html#load,Method tuned.storage.pickle_provider.PickleProvider.load()=tuned.storage.pickle_provider.PickleProvider-class.html#load"><a title="tuned.profiles.loader.Loader.load
+tuned.storage.interfaces.Provider.load
+tuned.storage.pickle_provider.PickleProvider.load" class="py-name" href="#" onclick="return doclink('link-30', 'load', 'link-30');">load</a></tt><tt class="py-op">(</tt><tt class="py-name">f</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt> <tt class="py-op">(</tt><tt class="py-name">OSError</tt><tt class="py-op">,</tt> <tt class="py-name">IOError</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">                        <tt id="link-31" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-31', 'log', 'link-6');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">"Error loading storage file '%s': %s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._path" class="py-name" href="#" onclick="return doclink('link-32', '_path', 'link-12');">_path</a></tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-33', '_data', 'link-13');">_data</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt> <tt class="py-name">EOFError</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-34', '_data', 'link-13');">_data</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt>
+<a name="PickleProvider.clear"></a><div id="PickleProvider.clear-def"><a name="L49"></a><tt class="py-lineno">49</tt> <a class="py-toggle" href="#" id="PickleProvider.clear-toggle" onclick="return toggle('PickleProvider.clear');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.pickle_provider.PickleProvider-class.html#clear">clear</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PickleProvider.clear-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="PickleProvider.clear-expanded"><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._data" class="py-name" href="#" onclick="return doclink('link-35', '_data', 'link-13');">_data</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Method tuned.storage.interfaces.Provider.clear()=tuned.storage.interfaces.Provider-class.html#clear,Method tuned.storage.pickle_provider.PickleProvider.clear()=tuned.storage.pickle_provider.PickleProvider-class.html#clear"><a title="tuned.storage.interfaces.Provider.clear
+tuned.storage.pickle_provider.PickleProvider.clear" class="py-name" href="#" onclick="return doclink('link-36', 'clear', 'link-36');">clear</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">unlink</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._path" class="py-name" href="#" onclick="return doclink('link-37', '_path', 'link-12');">_path</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt> <tt class="py-op">(</tt><tt class="py-name">OSError</tt><tt class="py-op">,</tt> <tt class="py-name">IOError</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                        <tt id="link-38" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-38', 'log', 'link-6');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">"Error removing storage file '%s': %s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="tuned.storage.pickle_provider.PickleProvider._path" class="py-name" href="#" onclick="return doclink('link-39', '_path', 'link-12');">_path</a></tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

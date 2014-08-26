@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.profiles.loader</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.profiles-module.html">Package&nbsp;profiles</a> ::
+        Module&nbsp;loader
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.profiles.loader-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.profiles.loader-module.html">Module tuned.profiles.loader</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package tuned=tuned-module.html"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-0', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Method tuned.admin.dbus_controller.DBusController.profiles()=tuned.admin.dbus_controller.DBusController-class.html#profiles,Method tuned.daemon.controller.Controller.profiles()=tuned.daemon.controller.Controller-class.html#profiles,Package tuned.profiles=tuned.profiles-module.html"><a title="tuned.admin.dbus_controller.DBusController.profiles
+tuned.daemon.controller.Controller.profiles
+tuned.profiles" class="py-name" href="#" onclick="return doclink('link-1', 'profiles', 'link-1');">profiles</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method tuned.admin.admin.Admin.profile()=tuned.admin.admin.Admin-class.html#profile,Variable tuned.daemon.daemon.Daemon.profile=tuned.daemon.daemon.Daemon-class.html#profile,Module tuned.profiles.profile=tuned.profiles.profile-module.html"><a title="tuned.admin.admin.Admin.profile
+tuned.daemon.daemon.Daemon.profile
+tuned.profiles.profile" class="py-name" href="#" onclick="return doclink('link-2', 'profile', 'link-2');">profile</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">configobj</tt> <tt class="py-keyword">import</tt> <tt class="py-name">ConfigObj</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">collections</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-3" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-3', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module tuned.logs=tuned.logs-module.html"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-4', 'logs', 'link-4');">logs</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-5', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="tuned.admin.dbus_controller.DBusController.profiles
+tuned.daemon.controller.Controller.profiles
+tuned.profiles" class="py-name" href="#" onclick="return doclink('link-6', 'profiles', 'link-1');">profiles</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Module tuned.admin.exceptions=tuned.admin.exceptions-module.html,Module tuned.exceptions=tuned.exceptions-module.html,Module tuned.plugins.exceptions=tuned.plugins.exceptions-module.html,Module tuned.profiles.exceptions=tuned.profiles.exceptions-module.html"><a title="tuned.admin.exceptions
+tuned.exceptions
+tuned.plugins.exceptions
+tuned.profiles.exceptions" class="py-name" href="#" onclick="return doclink('link-7', 'exceptions', 'link-7');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-8" class="py-name" targets="Class tuned.profiles.exceptions.InvalidProfileException=tuned.profiles.exceptions.InvalidProfileException-class.html"><a title="tuned.profiles.exceptions.InvalidProfileException" class="py-name" href="#" onclick="return doclink('link-8', 'InvalidProfileException', 'link-8');">InvalidProfileException</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable tuned.daemon.application.log=tuned.daemon.application-module.html#log,Variable tuned.daemon.controller.log=tuned.daemon.controller-module.html#log,Variable tuned.daemon.daemon.log=tuned.daemon.daemon-module.html#log,Method tuned.exceptions.TunedException.log()=tuned.exceptions.TunedException-class.html#log,Variable tuned.hardware.inventory.log=tuned.hardware.inventory-module.html#log,Variable tuned.monitors.base.log=tuned.monitors.base-module.html#log,Variable tuned.monitors.repository.log=tuned.monitors.repository-module.html#log,Variable tuned.plugins.base.log=tuned.plugins.base-module.html#log,Variable tuned.plugins.hotplug.log=tuned.plugins.hotplug-module.html#log,Variable tuned.plugins.plugin_audio.log=tuned.plugins.plugin_audio-module.html#log,Variable tuned.plugins.plugin_cpu.log=tuned.plugins.plugin_cpu-module.html#log,Variable tuned.plugins.plugin_disk.log=tuned.plugins.plugin_disk-module.html#log,Variable tuned.plugins.plugin_eeepc_she.log=tuned.plugins.plugin_eeepc_she-module.html#log,Variable tuned.plugins.plugin_mounts.log=tuned.plugins.plugin_mounts-module.html#log,Variable tuned.plugins.plugin_net.log=tuned.plugins.plugin_net-module.html#log,Variable tuned.plugins.plugin_script.log=tuned.plugins.plugin_script-module.html#log,Variable tuned.plugins.plugin_sysctl.log=tuned.plugins.plugin_sysctl-module.html#log,Variable tuned.plugins.plugin_sysfs.log=tuned.plugins.plugin_sysfs-module.html#log,Variable tuned.plugins.plugin_usb.log=tuned.plugins.plugin_usb-module.html#log,Variable tuned.plugins.plugin_video.log=tuned.plugins.plugin_video-module.html#log,Variable tuned.plugins.plugin_vm.log=tuned.plugins.plugin_vm-module.html#log,Variable tuned.plugins.repository.log=tuned.plugins.repository-module.html#log,Variable tuned.profiles.loader.log=tuned.profiles.loader-module.html#log,Variable tuned.storage.pickle_provider.log=tuned.storage.pickle_provider-module.html#log,Variable tuned.units.manager.log=tuned.units.manager-module.html#log,Variable tuned.utils.commands.log=tuned.utils.commands-module.html#log,Variable tuned.utils.nettool.log=tuned.utils.nettool-module.html#log,Variable tuned.utils.plugin_loader.log=tuned.utils.plugin_loader-module.html#log"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-9', 'log', 'link-9');">log</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-10', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-11', 'logs', 'link-4');">logs</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-12', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="Loader"></a><div id="Loader-def"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="Loader-toggle" onclick="return toggle('Loader');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.profiles.loader.Loader-class.html">Loader</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Loader-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Loader-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">        Profiles loader.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">__slots__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"_profile_locator"</tt><tt class="py-op">,</tt> <tt class="py-string">"_profile_merger"</tt><tt class="py-op">,</tt> <tt class="py-string">"_profile_factory"</tt><tt class="py-op">]</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="Loader.__init__"></a><div id="Loader.__init__-def"><a name="L19"></a><tt class="py-lineno">19</tt> <a class="py-toggle" href="#" id="Loader.__init__-toggle" onclick="return toggle('Loader.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.profiles.loader.Loader-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">profile_locator</tt><tt class="py-op">,</tt> <tt class="py-param">profile_factory</tt><tt class="py-op">,</tt> <tt class="py-param">profile_merger</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Loader.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Loader.__init__-expanded"><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Variable tuned.profiles.loader.Loader._profile_locator=tuned.profiles.loader.Loader-class.html#_profile_locator"><a title="tuned.profiles.loader.Loader._profile_locator" class="py-name" href="#" onclick="return doclink('link-13', '_profile_locator', 'link-13');">_profile_locator</a></tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name" targets="Variable tuned.profiles.loader.Loader.profile_locator=tuned.profiles.loader.Loader-class.html#profile_locator"><a title="tuned.profiles.loader.Loader.profile_locator" class="py-name" href="#" onclick="return doclink('link-14', 'profile_locator', 'link-14');">profile_locator</a></tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Variable tuned.profiles.loader.Loader._profile_factory=tuned.profiles.loader.Loader-class.html#_profile_factory"><a title="tuned.profiles.loader.Loader._profile_factory" class="py-name" href="#" onclick="return doclink('link-15', '_profile_factory', 'link-15');">_profile_factory</a></tt> <tt class="py-op">=</tt> <tt class="py-name">profile_factory</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Variable tuned.profiles.loader.Loader._profile_merger=tuned.profiles.loader.Loader-class.html#_profile_merger"><a title="tuned.profiles.loader.Loader._profile_merger" class="py-name" href="#" onclick="return doclink('link-16', '_profile_merger', 'link-16');">_profile_merger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">profile_merger</tt> </tt>
+</div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="Loader._create_profile"></a><div id="Loader._create_profile-def"><a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="Loader._create_profile-toggle" onclick="return toggle('Loader._create_profile');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.profiles.loader.Loader-class.html#_create_profile">_create_profile</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">profile_name</tt><tt class="py-op">,</tt> <tt class="py-param">config</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Loader._create_profile-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Loader._create_profile-expanded"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-17" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-17', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="tuned.admin.dbus_controller.DBusController.profiles
+tuned.daemon.controller.Controller.profiles
+tuned.profiles" class="py-name" href="#" onclick="return doclink('link-18', 'profiles', 'link-1');">profiles</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="tuned.admin.admin.Admin.profile
+tuned.daemon.daemon.Daemon.profile
+tuned.profiles.profile" class="py-name" href="#" onclick="return doclink('link-19', 'profile', 'link-2');">profile</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Class tuned.profiles.profile.Profile=tuned.profiles.profile.Profile-class.html"><a title="tuned.profiles.profile.Profile" class="py-name" href="#" onclick="return doclink('link-20', 'Profile', 'link-20');">Profile</a></tt><tt class="py-op">(</tt><tt class="py-name">profile_name</tt><tt class="py-op">,</tt> <tt class="py-name">config</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="Loader.safe_name"></a><div id="Loader.safe_name-def"><a name="L28"></a><tt class="py-lineno">28</tt> <a class="py-toggle" href="#" id="Loader.safe_name-toggle" onclick="return toggle('Loader.safe_name');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.profiles.loader.Loader-class.html#safe_name">safe_name</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">profile_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Loader.safe_name-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Loader.safe_name-expanded"><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method tuned.hardware.device_matcher.DeviceMatcher.match()=tuned.hardware.device_matcher.DeviceMatcher-class.html#match"><a title="tuned.hardware.device_matcher.DeviceMatcher.match" class="py-name" href="#" onclick="return doclink('link-21', 'match', 'link-21');">match</a></tt><tt class="py-op">(</tt><tt class="py-string">r'^[a-zA-Z0-9_.-]+$'</tt><tt class="py-op">,</tt> <tt class="py-name">profile_name</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Loader.profile_locator"></a><div id="Loader.profile_locator-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="Loader.profile_locator-toggle" onclick="return toggle('Loader.profile_locator');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.profiles.loader.Loader-class.html#profile_locator">profile_locator</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Loader.profile_locator-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Loader.profile_locator-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="tuned.profiles.loader.Loader._profile_locator" class="py-name" href="#" onclick="return doclink('link-22', '_profile_locator', 'link-13');">_profile_locator</a></tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="Loader.load"></a><div id="Loader.load-def"><a name="L35"></a><tt class="py-lineno">35</tt> <a class="py-toggle" href="#" id="Loader.load-toggle" onclick="return toggle('Loader.load');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.profiles.loader.Loader-class.html#load">load</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">profile_names</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Loader.load-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Loader.load-expanded"><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-23" class="py-name" targets="Variable tuned.profiles.unit.Unit.type=tuned.profiles.unit.Unit-class.html#type"><a title="tuned.profiles.unit.Unit.type" class="py-name" href="#" onclick="return doclink('link-23', 'type', 'link-23');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">profile_names</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt id="link-24" class="py-name" targets="Method tuned.admin.admin.Admin.list()=tuned.admin.admin.Admin-class.html#list"><a title="tuned.admin.admin.Admin.list" class="py-name" href="#" onclick="return doclink('link-24', 'list', 'link-24');">list</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                        <tt class="py-name">profile_names</tt> <tt class="py-op">=</tt> <tt class="py-name">profile_names</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                <tt class="py-name">profile_names</tt> <tt class="py-op">=</tt> <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Class Method tuned.profiles.loader.Loader.safe_name()=tuned.profiles.loader.Loader-class.html#safe_name"><a title="tuned.profiles.loader.Loader.safe_name" class="py-name" href="#" onclick="return doclink('link-25', 'safe_name', 'link-25');">safe_name</a></tt><tt class="py-op">,</tt> <tt class="py-name">profile_names</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">profile_names</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                        <tt class="py-keyword">raise</tt> <tt id="link-26" class="py-name"><a title="tuned.profiles.exceptions.InvalidProfileException" class="py-name" href="#" onclick="return doclink('link-26', 'InvalidProfileException', 'link-8');">InvalidProfileException</a></tt><tt class="py-op">(</tt><tt class="py-string">"No profile or invalid profiles were specified."</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">profile_names</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">                        <tt id="link-27" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-27', 'log', 'link-9');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"loading profiles: %s"</tt> <tt class="py-op">%</tt> <tt class="py-string">", "</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">profile_names</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">                        <tt id="link-28" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-28', 'log', 'link-9');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"loading profile: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">profile_names</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">                <tt id="link-29" class="py-name"><a title="tuned.admin.dbus_controller.DBusController.profiles
+tuned.daemon.controller.Controller.profiles
+tuned.profiles" class="py-name" href="#" onclick="return doclink('link-29', 'profiles', 'link-1');">profiles</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">                <tt class="py-name">processed_files</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method tuned.profiles.loader.Loader._load_profile()=tuned.profiles.loader.Loader-class.html#_load_profile"><a title="tuned.profiles.loader.Loader._load_profile" class="py-name" href="#" onclick="return doclink('link-30', '_load_profile', 'link-30');">_load_profile</a></tt><tt class="py-op">(</tt><tt class="py-name">profile_names</tt><tt class="py-op">,</tt> <tt id="link-31" class="py-name"><a title="tuned.admin.dbus_controller.DBusController.profiles
+tuned.daemon.controller.Controller.profiles
+tuned.profiles" class="py-name" href="#" onclick="return doclink('link-31', 'profiles', 'link-1');">profiles</a></tt><tt class="py-op">,</tt> <tt class="py-name">processed_files</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="tuned.admin.dbus_controller.DBusController.profiles
+tuned.daemon.controller.Controller.profiles
+tuned.profiles" class="py-name" href="#" onclick="return doclink('link-32', 'profiles', 'link-1');">profiles</a></tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                        <tt class="py-name">final_profile</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="tuned.profiles.loader.Loader._profile_merger" class="py-name" href="#" onclick="return doclink('link-33', '_profile_merger', 'link-16');">_profile_merger</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method tuned.profiles.merger.Merger.merge()=tuned.profiles.merger.Merger-class.html#merge"><a title="tuned.profiles.merger.Merger.merge" class="py-name" href="#" onclick="return doclink('link-34', 'merge', 'link-34');">merge</a></tt><tt class="py-op">(</tt><tt id="link-35" class="py-name"><a title="tuned.admin.dbus_controller.DBusController.profiles
+tuned.daemon.controller.Controller.profiles
+tuned.profiles" class="py-name" href="#" onclick="return doclink('link-35', 'profiles', 'link-1');">profiles</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                        <tt class="py-name">final_profile</tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name"><a title="tuned.admin.dbus_controller.DBusController.profiles
+tuned.daemon.controller.Controller.profiles
+tuned.profiles" class="py-name" href="#" onclick="return doclink('link-36', 'profiles', 'link-1');">profiles</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">                <tt class="py-name">final_profile</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Variable tuned.plugins.base.Plugin.name=tuned.plugins.base.Plugin-class.html#name,Variable tuned.plugins.instance.instance.Instance.name=tuned.plugins.instance.instance.Instance-class.html#name,Variable tuned.profiles.profile.Profile.name=tuned.profiles.profile.Profile-class.html#name,Variable tuned.profiles.unit.Unit.name=tuned.profiles.unit.Unit-class.html#name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-37', 'name', 'link-37');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">" "</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">profile_names</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">final_profile</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt>
+<a name="Loader._load_profile"></a><div id="Loader._load_profile-def"><a name="L59"></a><tt class="py-lineno">59</tt> <a class="py-toggle" href="#" id="Loader._load_profile-toggle" onclick="return toggle('Loader._load_profile');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.profiles.loader.Loader-class.html#_load_profile">_load_profile</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">profile_names</tt><tt class="py-op">,</tt> <tt class="py-param">profiles</tt><tt class="py-op">,</tt> <tt class="py-param">processed_files</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Loader._load_profile-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Loader._load_profile-expanded"><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt id="link-38" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-38', 'name', 'link-37');">name</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">profile_names</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">                        <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="tuned.profiles.loader.Loader._profile_locator" class="py-name" href="#" onclick="return doclink('link-39', '_profile_locator', 'link-13');">_profile_locator</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Method tuned.profiles.locator.Locator.get_config()=tuned.profiles.locator.Locator-class.html#get_config"><a title="tuned.profiles.locator.Locator.get_config" class="py-name" href="#" onclick="return doclink('link-40', 'get_config', 'link-40');">get_config</a></tt><tt class="py-op">(</tt><tt id="link-41" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-41', 'name', 'link-37');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">processed_files</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">filename</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">                                <tt class="py-keyword">raise</tt> <tt id="link-42" class="py-name"><a title="tuned.profiles.exceptions.InvalidProfileException" class="py-name" href="#" onclick="return doclink('link-42', 'InvalidProfileException', 'link-8');">InvalidProfileException</a></tt><tt class="py-op">(</tt><tt class="py-string">"Cannot find profile '%s' in '%s'."</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-43" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-43', 'name', 'link-37');">name</a></tt><tt class="py-op">,</tt> <tt id="link-44" class="py-name"><a title="tuned.admin.admin.Admin.list" class="py-name" href="#" onclick="return doclink('link-44', 'list', 'link-24');">list</a></tt><tt class="py-op">(</tt><tt class="py-name">reversed</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="tuned.profiles.loader.Loader._profile_locator" class="py-name" href="#" onclick="return doclink('link-45', '_profile_locator', 'link-13');">_profile_locator</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Variable tuned.profiles.locator.Locator._load_directories=tuned.profiles.locator.Locator-class.html#_load_directories"><a title="tuned.profiles.locator.Locator._load_directories" class="py-name" href="#" onclick="return doclink('link-46', '_load_directories', 'link-46');">_load_directories</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">                        <tt class="py-name">processed_files</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">                        <tt class="py-name">config</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method tuned.profiles.loader.Loader._load_config_data()=tuned.profiles.loader.Loader-class.html#_load_config_data"><a title="tuned.profiles.loader.Loader._load_config_data" class="py-name" href="#" onclick="return doclink('link-47', '_load_config_data', 'link-47');">_load_config_data</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">                        <tt id="link-48" class="py-name"><a title="tuned.admin.admin.Admin.profile
+tuned.daemon.daemon.Daemon.profile
+tuned.profiles.profile" class="py-name" href="#" onclick="return doclink('link-48', 'profile', 'link-2');">profile</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="tuned.profiles.loader.Loader._profile_factory" class="py-name" href="#" onclick="return doclink('link-49', '_profile_factory', 'link-15');">_profile_factory</a></tt><tt class="py-op">.</tt><tt id="link-50" class="py-name" targets="Method tuned.hardware.inventory._MonitorObserverFactory.create()=tuned.hardware.inventory._MonitorObserverFactory-class.html#create,Method tuned.monitors.repository.Repository.create()=tuned.monitors.repository.Repository-class.html#create,Method tuned.plugins.instance.factory.Factory.create()=tuned.plugins.instance.factory.Factory-class.html#create,Method tuned.plugins.repository.Repository.create()=tuned.plugins.repository.Repository-class.html#create,Method tuned.profiles.factory.Factory.create()=tuned.profiles.factory.Factory-class.html#create,Method tuned.storage.factory.Factory.create()=tuned.storage.factory.Factory-class.html#create,Method tuned.storage.interfaces.Factory.create()=tuned.storage.interfaces.Factory-class.html#create,Method tuned.units.manager.Manager.create()=tuned.units.manager.Manager-class.html#create"><a title="tuned.hardware.inventory._MonitorObserverFactory.create
+tuned.monitors.repository.Repository.create
+tuned.plugins.instance.factory.Factory.create
+tuned.plugins.repository.Repository.create
+tuned.profiles.factory.Factory.create
+tuned.storage.factory.Factory.create
+tuned.storage.interfaces.Factory.create
+tuned.units.manager.Manager.create" class="py-name" href="#" onclick="return doclink('link-50', 'create', 'link-50');">create</a></tt><tt class="py-op">(</tt><tt id="link-51" class="py-name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-51', 'name', 'link-37');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">config</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-string">"include"</tt> <tt class="py-keyword">in</tt> <tt id="link-52" class="py-name"><a title="tuned.admin.admin.Admin.profile
+tuned.daemon.daemon.Daemon.profile
+tuned.profiles.profile" class="py-name" href="#" onclick="return doclink('link-52', 'profile', 'link-2');">profile</a></tt><tt class="py-op">.</tt><tt id="link-53" class="py-name" targets="Variable tuned.plugins.instance.instance.Instance.options=tuned.plugins.instance.instance.Instance-class.html#options,Variable tuned.profiles.profile.Profile.options=tuned.profiles.profile.Profile-class.html#options,Variable tuned.profiles.unit.Unit.options=tuned.profiles.unit.Unit-class.html#options"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-53', 'options', 'link-53');">options</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">                                <tt class="py-name">include_name</tt> <tt class="py-op">=</tt> <tt id="link-54" class="py-name"><a title="tuned.admin.admin.Admin.profile
+tuned.daemon.daemon.Daemon.profile
+tuned.profiles.profile" class="py-name" href="#" onclick="return doclink('link-54', 'profile', 'link-2');">profile</a></tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-55', 'options', 'link-53');">options</a></tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-string">"include"</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">                                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="tuned.profiles.loader.Loader._load_profile" class="py-name" href="#" onclick="return doclink('link-56', '_load_profile', 'link-30');">_load_profile</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">include_name</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt id="link-57" class="py-name"><a title="tuned.admin.dbus_controller.DBusController.profiles
+tuned.daemon.controller.Controller.profiles
+tuned.profiles" class="py-name" href="#" onclick="return doclink('link-57', 'profiles', 'link-1');">profiles</a></tt><tt class="py-op">,</tt> <tt class="py-name">processed_files</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">                        <tt id="link-58" class="py-name"><a title="tuned.admin.dbus_controller.DBusController.profiles
+tuned.daemon.controller.Controller.profiles
+tuned.profiles" class="py-name" href="#" onclick="return doclink('link-58', 'profiles', 'link-1');">profiles</a></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-59" class="py-name"><a title="tuned.admin.admin.Admin.profile
+tuned.daemon.daemon.Daemon.profile
+tuned.profiles.profile" class="py-name" href="#" onclick="return doclink('link-59', 'profile', 'link-2');">profile</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"> </tt>
+<a name="Loader._load_config_data"></a><div id="Loader._load_config_data-def"><a name="L74"></a><tt class="py-lineno">74</tt> <a class="py-toggle" href="#" id="Loader._load_config_data-toggle" onclick="return toggle('Loader._load_config_data');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.profiles.loader.Loader-class.html#_load_config_data">_load_config_data</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">file_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Loader._load_config_data-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Loader._load_config_data-expanded"><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">                <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">                        <tt class="py-name">config_obj</tt> <tt class="py-op">=</tt> <tt class="py-name">ConfigObj</tt><tt class="py-op">(</tt><tt class="py-name">file_name</tt><tt class="py-op">,</tt> <tt class="py-name">raise_errors</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt> <tt class="py-name">ConfigObjError</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">                        <tt class="py-keyword">raise</tt> <tt id="link-60" class="py-name"><a title="tuned.profiles.exceptions.InvalidProfileException" class="py-name" href="#" onclick="return doclink('link-60', 'InvalidProfileException', 'link-8');">InvalidProfileException</a></tt><tt class="py-op">(</tt><tt class="py-string">"Cannot parse '%s'."</tt> <tt class="py-op">%</tt> <tt class="py-name">file_name</tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">                <tt class="py-name">config</tt> <tt class="py-op">=</tt> <tt class="py-name">collections</tt><tt class="py-op">.</tt><tt class="py-name">OrderedDict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">section</tt> <tt class="py-keyword">in</tt> <tt class="py-name">config_obj</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">                        <tt class="py-name">config</tt><tt class="py-op">[</tt><tt class="py-name">section</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">collections</tt><tt class="py-op">.</tt><tt class="py-name">OrderedDict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">                        <tt class="py-keyword">for</tt> <tt class="py-name">option</tt> <tt class="py-keyword">in</tt> <tt class="py-name">config_obj</tt><tt class="py-op">[</tt><tt class="py-name">section</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">                                <tt class="py-name">config</tt><tt class="py-op">[</tt><tt class="py-name">section</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">option</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">config_obj</tt><tt class="py-op">[</tt><tt class="py-name">section</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">option</tt><tt class="py-op">]</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line">                <tt class="py-comment"># TODO: HACK, this needs to be solved in a better way (better config parser)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">unit_name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">config</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-string">"script"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">config</tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-name">config</tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-61', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"script"</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line">                                <tt class="py-name">dir_name</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">dirname</tt><tt class="py-op">(</tt><tt class="py-name">file_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line">                                <tt class="py-name">script_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">dir_name</tt><tt class="py-op">,</tt> <tt class="py-name">config</tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"script"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno">91</tt>  <tt class="py-line">                                <tt class="py-name">config</tt><tt class="py-op">[</tt><tt class="py-name">unit_name</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"script"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">normpath</tt><tt class="py-op">(</tt><tt class="py-name">script_path</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L92"></a><tt class="py-lineno">92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno">93</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">config</tt> </tt>
+</div></div><a name="L94"></a><tt class="py-lineno">94</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

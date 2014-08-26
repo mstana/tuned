@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.storage.storage</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.storage-module.html">Package&nbsp;storage</a> ::
+        Module&nbsp;storage
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.storage.storage-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.storage.storage-module.html">Module tuned.storage.storage</a></h1>
+<pre class="py-src">
+<a name="Storage"></a><div id="Storage-def"><a name="L1"></a><tt class="py-lineno"> 1</tt> <a class="py-toggle" href="#" id="Storage-toggle" onclick="return toggle('Storage');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.storage.storage.Storage-class.html">Storage</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Storage-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Storage-expanded"><a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line">        <tt class="py-name">__slots__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"_storage_provider"</tt><tt class="py-op">,</tt> <tt class="py-string">"_namespace"</tt><tt class="py-op">]</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="Storage.__init__"></a><div id="Storage.__init__-def"><a name="L4"></a><tt class="py-lineno"> 4</tt> <a class="py-toggle" href="#" id="Storage.__init__-toggle" onclick="return toggle('Storage.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.storage.Storage-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">storage_provider</tt><tt class="py-op">,</tt> <tt class="py-param">namespace</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Storage.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Storage.__init__-expanded"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Variable tuned.storage.factory.Factory._storage_provider=tuned.storage.factory.Factory-class.html#_storage_provider,Variable tuned.storage.storage.Storage._storage_provider=tuned.storage.storage.Storage-class.html#_storage_provider"><a title="tuned.storage.factory.Factory._storage_provider
+tuned.storage.storage.Storage._storage_provider" class="py-name" href="#" onclick="return doclink('link-0', '_storage_provider', 'link-0');">_storage_provider</a></tt> <tt class="py-op">=</tt> <tt class="py-name">storage_provider</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Variable tuned.storage.storage.Storage._namespace=tuned.storage.storage.Storage-class.html#_namespace,Variable tuned.utils.plugin_loader.PluginLoader._namespace=tuned.utils.plugin_loader.PluginLoader-class.html#_namespace"><a title="tuned.storage.storage.Storage._namespace
+tuned.utils.plugin_loader.PluginLoader._namespace" class="py-name" href="#" onclick="return doclink('link-1', '_namespace', 'link-1');">_namespace</a></tt> <tt class="py-op">=</tt> <tt class="py-name">namespace</tt> </tt>
+</div><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="Storage.set"></a><div id="Storage.set-def"><a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="Storage.set-toggle" onclick="return toggle('Storage.set');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.storage.Storage-class.html#set">set</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">option</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Storage.set-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Storage.set-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name"><a title="tuned.storage.factory.Factory._storage_provider
+tuned.storage.storage.Storage._storage_provider" class="py-name" href="#" onclick="return doclink('link-2', '_storage_provider', 'link-0');">_storage_provider</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method tuned.storage.interfaces.Provider.set()=tuned.storage.interfaces.Provider-class.html#set,Method tuned.storage.pickle_provider.PickleProvider.set()=tuned.storage.pickle_provider.PickleProvider-class.html#set,Method tuned.storage.storage.Storage.set()=tuned.storage.storage.Storage-class.html#set"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-3', 'set', 'link-3');">set</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="tuned.storage.storage.Storage._namespace
+tuned.utils.plugin_loader.PluginLoader._namespace" class="py-name" href="#" onclick="return doclink('link-4', '_namespace', 'link-1');">_namespace</a></tt><tt class="py-op">,</tt> <tt class="py-name">option</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="Storage.get"></a><div id="Storage.get-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="Storage.get-toggle" onclick="return toggle('Storage.get');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.storage.Storage-class.html#get">get</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">option</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Storage.get-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Storage.get-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="tuned.storage.factory.Factory._storage_provider
+tuned.storage.storage.Storage._storage_provider" class="py-name" href="#" onclick="return doclink('link-5', '_storage_provider', 'link-0');">_storage_provider</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-6', 'get', 'link-6');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="tuned.storage.storage.Storage._namespace
+tuned.utils.plugin_loader.PluginLoader._namespace" class="py-name" href="#" onclick="return doclink('link-7', '_namespace', 'link-1');">_namespace</a></tt><tt class="py-op">,</tt> <tt class="py-name">option</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="Storage.unset"></a><div id="Storage.unset-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="Storage.unset-toggle" onclick="return toggle('Storage.unset');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.storage.storage.Storage-class.html#unset">unset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">option</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Storage.unset-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Storage.unset-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="tuned.storage.factory.Factory._storage_provider
+tuned.storage.storage.Storage._storage_provider" class="py-name" href="#" onclick="return doclink('link-8', '_storage_provider', 'link-0');">_storage_provider</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method tuned.storage.interfaces.Provider.unset()=tuned.storage.interfaces.Provider-class.html#unset,Method tuned.storage.pickle_provider.PickleProvider.unset()=tuned.storage.pickle_provider.PickleProvider-class.html#unset,Method tuned.storage.storage.Storage.unset()=tuned.storage.storage.Storage-class.html#unset"><a title="tuned.storage.interfaces.Provider.unset
+tuned.storage.pickle_provider.PickleProvider.unset
+tuned.storage.storage.Storage.unset" class="py-name" href="#" onclick="return doclink('link-9', 'unset', 'link-9');">unset</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="tuned.storage.storage.Storage._namespace
+tuned.utils.plugin_loader.PluginLoader._namespace" class="py-name" href="#" onclick="return doclink('link-10', '_namespace', 'link-1');">_namespace</a></tt><tt class="py-op">,</tt> <tt class="py-name">option</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

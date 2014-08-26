@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class Hierarchy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">&nbsp;</td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="class-tree.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<center><b>
+ [ <a href="module-tree.html">Module Hierarchy</a>
+ | <a href="class-tree.html">Class Hierarchy</a> ]
+</b></center><br />
+<h1 class="epydoc">Class Hierarchy</h1>
+<ul class="nomargin-top">
+    <li> <strong class="uidlink"><a href="tuned.utils.nettool.Nettool-class.html" onclick="show_private();">tuned.utils.nettool.Nettool</a></strong>
+    </li>
+    <li> <strong class="uidlink">object</strong>:
+      <em class="summary">The most base type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.admin.admin.Admin-class.html">tuned.admin.admin.Admin</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.daemon.application.Application-class.html">tuned.daemon.application.Application</a></strong>
+    </li>
+    <li> <strong class="uidlink">exceptions.BaseException</strong>:
+      <em class="summary">Common base class for all exceptions</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.Exception</strong>:
+      <em class="summary">Common base class for all non-exit exceptions.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.exceptions.TunedException-class.html">tuned.exceptions.TunedException</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.profiles.exceptions.InvalidProfileException-class.html">tuned.profiles.exceptions.InvalidProfileException</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.exceptions.NotSupportedPluginException-class.html">tuned.plugins.exceptions.NotSupportedPluginException</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.admin.exceptions.TunedAdminDBusException-class.html">tuned.admin.exceptions.TunedAdminDBusException</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.admin.exceptions.TunedAdminException-class.html">tuned.admin.exceptions.TunedAdminException</a></strong>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.admin.dbus_controller.DBusController-class.html">tuned.admin.dbus_controller.DBusController</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.daemon.daemon.Daemon-class.html">tuned.daemon.daemon.Daemon</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.hardware.device_matcher.DeviceMatcher-class.html">tuned.hardware.device_matcher.DeviceMatcher</a></strong>:
+      <em class="summary">Device name matching against the devices specification in tuning 
+        profiles.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.exports.interfaces.ExportableInterface-class.html">tuned.exports.interfaces.ExportableInterface</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.daemon.controller.Controller-class.html">tuned.daemon.controller.Controller</a></strong>:
+      <em class="summary">Controller's purpose is to keep the program running, start/stop the
+        tuning, and export the controller interface (currently only over 
+        D-Bus).</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.exports.interfaces.ExporterInterface-class.html">tuned.exports.interfaces.ExporterInterface</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.exports.dbus_exporter.DBusExporter-class.html">tuned.exports.dbus_exporter.DBusExporter</a></strong>:
+      <em class="summary">Export method calls through DBus Interface.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.profiles.factory.Factory-class.html">tuned.profiles.factory.Factory</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.storage.interfaces.Factory-class.html">tuned.storage.interfaces.Factory</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.storage.factory.Factory-class.html">tuned.storage.factory.Factory</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.instance.factory.Factory-class.html">tuned.plugins.instance.factory.Factory</a></strong>
+    </li>
+    <li> <strong class="uidlink">logging.Filterer</strong>:
+      <em class="summary">A base class for loggers and handlers which allows them to share 
+        common code.</em>
+    <ul>
+    <li> <strong class="uidlink">logging.Logger</strong>:
+      <em class="summary">Instances of the Logger class represent a single logging channel.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.logs.TunedLogger-class.html">tuned.logs.TunedLogger</a></strong>:
+      <em class="summary">Custom tuned daemon logger class.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.instance.instance.Instance-class.html">tuned.plugins.instance.instance.Instance</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.hardware.inventory.Inventory-class.html">tuned.hardware.inventory.Inventory</a></strong>:
+      <em class="summary">Inventory object can handle information about available hardware 
+        devices.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.profiles.loader.Loader-class.html">tuned.profiles.loader.Loader</a></strong>:
+      <em class="summary">Profiles loader.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.profiles.locator.Locator-class.html">tuned.profiles.locator.Locator</a></strong>:
+      <em class="summary">Profiles locator and enumerator.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.units.manager.Manager-class.html">tuned.units.manager.Manager</a></strong>:
+      <em class="summary">Manager creates plugin instances and keeps a track of them.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.profiles.merger.Merger-class.html">tuned.profiles.merger.Merger</a></strong>:
+      <em class="summary">Tool for merging multiple profiles into one.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.monitors.base.Monitor-class.html">tuned.monitors.base.Monitor</a></strong>:
+      <em class="summary">Base class for all monitors.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.monitors.monitor_disk.DiskMonitor-class.html">tuned.monitors.monitor_disk.DiskMonitor</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.monitors.monitor_load.LoadMonitor-class.html">tuned.monitors.monitor_load.LoadMonitor</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.monitors.monitor_net.NetMonitor-class.html">tuned.monitors.monitor_net.NetMonitor</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.base.Plugin-class.html">tuned.plugins.base.Plugin</a></strong>:
+      <em class="summary">Base class for all plugins.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_audio.AudioPlugin-class.html">tuned.plugins.plugin_audio.AudioPlugin</a></strong>:
+      <em class="summary">Plugin for tuning audio cards powersaving options.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html">tuned.plugins.plugin_cpu.CPULatencyPlugin</a></strong>:
+      <em class="summary">Plugin for tuning CPU options.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html">tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin</a></strong>:
+      <em class="summary">Plugin for tuning FSB (front side bus) speed on Asus EEE PCs with 
+        SHE (Super Hybrid Engine) support.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_mounts.MountsPlugin-class.html">tuned.plugins.plugin_mounts.MountsPlugin</a></strong>:
+      <em class="summary">Plugin for tuning options of mount-points.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_net.NetTuningPlugin-class.html">tuned.plugins.plugin_net.NetTuningPlugin</a></strong>:
+      <em class="summary">Plugin for ethernet card options tuning.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.hotplug.Plugin-class.html">tuned.plugins.hotplug.Plugin</a></strong>:
+      <em class="summary">Base class for plugins with device hotpluging support.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_disk.DiskPlugin-class.html">tuned.plugins.plugin_disk.DiskPlugin</a></strong>:
+      <em class="summary">Plugin for tuning options of disks.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_script.ScriptPlugin-class.html">tuned.plugins.plugin_script.ScriptPlugin</a></strong>:
+      <em class="summary">Plugin for running custom scripts with profile activation and 
+        deactivation.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_sysctl.SysctlPlugin-class.html">tuned.plugins.plugin_sysctl.SysctlPlugin</a></strong>:
+      <em class="summary">Plugin for applying custom sysctl options.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_sysfs.SysfsPlugin-class.html">tuned.plugins.plugin_sysfs.SysfsPlugin</a></strong>:
+      <em class="summary">Plugin for applying custom sysfs options, using specific plugins is
+        preferred.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_usb.USBPlugin-class.html">tuned.plugins.plugin_usb.USBPlugin</a></strong>:
+      <em class="summary">Plugin for tuning various options of USB subsystem.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_vm.VMPlugin-class.html">tuned.plugins.plugin_vm.VMPlugin</a></strong>:
+      <em class="summary">Plugin for tuning memory management.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.plugins.plugin_video.VideoPlugin-class.html">tuned.plugins.plugin_video.VideoPlugin</a></strong>:
+      <em class="summary">Plugin for tuning powersave options for some graphic cards.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.utils.plugin_loader.PluginLoader-class.html">tuned.utils.plugin_loader.PluginLoader</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.plugins.repository.Repository-class.html">tuned.plugins.repository.Repository</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.monitors.repository.Repository-class.html">tuned.monitors.repository.Repository</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.profiles.profile.Profile-class.html">tuned.profiles.profile.Profile</a></strong>:
+      <em class="summary">Representation of a tuning profile.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.storage.interfaces.Provider-class.html">tuned.storage.interfaces.Provider</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.storage.pickle_provider.PickleProvider-class.html">tuned.storage.pickle_provider.PickleProvider</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.patterns.Singleton-class.html">tuned.patterns.Singleton</a></strong>:
+      <em class="summary">Singleton design pattern.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="tuned.exports.controller.ExportsController-class.html">tuned.exports.controller.ExportsController</a></strong>:
+      <em class="summary">Controls and manages object interface exporting.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.storage.storage.Storage-class.html">tuned.storage.storage.Storage</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.profiles.unit.Unit-class.html">tuned.profiles.unit.Unit</a></strong>:
+      <em class="summary">Unit description.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="tuned.hardware.inventory._MonitorObserverFactory-class.html" onclick="show_private();">tuned.hardware.inventory._MonitorObserverFactory</a></strong>
+    </li>
+    </ul>
+    </li>
+</ul>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:45 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

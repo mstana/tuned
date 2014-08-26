@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.plugins.plugin_eeepc_she</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.plugins-module.html">Package&nbsp;plugins</a> ::
+        Module&nbsp;plugin_eeepc_she
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.plugins.plugin_eeepc_she-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.plugins.plugin_eeepc_she-module.html">Module tuned.plugins.plugin_eeepc_she</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module tuned.monitors.base=tuned.monitors.base-module.html,Module tuned.plugins.base=tuned.plugins.base-module.html"><a title="tuned.monitors.base
+tuned.plugins.base" class="py-name" href="#" onclick="return doclink('link-0', 'base', 'link-0');">base</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module tuned.admin.exceptions=tuned.admin.exceptions-module.html,Module tuned.exceptions=tuned.exceptions-module.html,Module tuned.plugins.exceptions=tuned.plugins.exceptions-module.html,Module tuned.profiles.exceptions=tuned.profiles.exceptions-module.html"><a title="tuned.admin.exceptions
+tuned.exceptions
+tuned.plugins.exceptions
+tuned.profiles.exceptions" class="py-name" href="#" onclick="return doclink('link-1', 'exceptions', 'link-1');">exceptions</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Package tuned=tuned-module.html"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-2', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module tuned.logs=tuned.logs-module.html"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-3', 'logs', 'link-3');">logs</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-4" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-4', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package tuned.utils=tuned.utils-module.html"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-5', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module tuned.utils.commands=tuned.utils.commands-module.html"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-6', 'commands', 'link-6');">commands</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable tuned.daemon.application.log=tuned.daemon.application-module.html#log,Variable tuned.daemon.controller.log=tuned.daemon.controller-module.html#log,Variable tuned.daemon.daemon.log=tuned.daemon.daemon-module.html#log,Method tuned.exceptions.TunedException.log()=tuned.exceptions.TunedException-class.html#log,Variable tuned.hardware.inventory.log=tuned.hardware.inventory-module.html#log,Variable tuned.monitors.base.log=tuned.monitors.base-module.html#log,Variable tuned.monitors.repository.log=tuned.monitors.repository-module.html#log,Variable tuned.plugins.base.log=tuned.plugins.base-module.html#log,Variable tuned.plugins.hotplug.log=tuned.plugins.hotplug-module.html#log,Variable tuned.plugins.plugin_audio.log=tuned.plugins.plugin_audio-module.html#log,Variable tuned.plugins.plugin_cpu.log=tuned.plugins.plugin_cpu-module.html#log,Variable tuned.plugins.plugin_disk.log=tuned.plugins.plugin_disk-module.html#log,Variable tuned.plugins.plugin_eeepc_she.log=tuned.plugins.plugin_eeepc_she-module.html#log,Variable tuned.plugins.plugin_mounts.log=tuned.plugins.plugin_mounts-module.html#log,Variable tuned.plugins.plugin_net.log=tuned.plugins.plugin_net-module.html#log,Variable tuned.plugins.plugin_script.log=tuned.plugins.plugin_script-module.html#log,Variable tuned.plugins.plugin_sysctl.log=tuned.plugins.plugin_sysctl-module.html#log,Variable tuned.plugins.plugin_sysfs.log=tuned.plugins.plugin_sysfs-module.html#log,Variable tuned.plugins.plugin_usb.log=tuned.plugins.plugin_usb-module.html#log,Variable tuned.plugins.plugin_video.log=tuned.plugins.plugin_video-module.html#log,Variable tuned.plugins.plugin_vm.log=tuned.plugins.plugin_vm-module.html#log,Variable tuned.plugins.repository.log=tuned.plugins.repository-module.html#log,Variable tuned.profiles.loader.log=tuned.profiles.loader-module.html#log,Variable tuned.storage.pickle_provider.log=tuned.storage.pickle_provider-module.html#log,Variable tuned.units.manager.log=tuned.units.manager-module.html#log,Variable tuned.utils.commands.log=tuned.utils.commands-module.html#log,Variable tuned.utils.nettool.log=tuned.utils.nettool-module.html#log,Variable tuned.utils.plugin_loader.log=tuned.utils.plugin_loader-module.html#log"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-7', 'log', 'link-7');">log</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-8', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-9', 'logs', 'link-3');">logs</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-10', 'get', 'link-10');">get</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="EeePCSHEPlugin"></a><div id="EeePCSHEPlugin-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="EeePCSHEPlugin-toggle" onclick="return toggle('EeePCSHEPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html">EeePCSHEPlugin</a><tt class="py-op">(</tt><tt class="py-base-class">base</tt><tt class="py-op">.</tt><tt class="py-base-class">Plugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EeePCSHEPlugin-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="EeePCSHEPlugin-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">        Plugin for tuning FSB (front side bus) speed on Asus EEE PCs with SHE (Super Hybrid Engine) support.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="EeePCSHEPlugin.__init__"></a><div id="EeePCSHEPlugin.__init__-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="EeePCSHEPlugin.__init__-toggle" onclick="return toggle('EeePCSHEPlugin.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EeePCSHEPlugin.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="EeePCSHEPlugin.__init__-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_control_file</tt> <tt class="py-op">=</tt> <tt class="py-string">"/sys/devices/platform/eeepc/cpufv"</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_control_file</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_control_file</tt> <tt class="py-op">=</tt> <tt class="py-string">"/sys/devices/platform/eeepc-wmi/cpufv"</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_control_file</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">                        <tt class="py-keyword">raise</tt> <tt id="link-11" class="py-name"><a title="tuned.admin.exceptions
+tuned.exceptions
+tuned.plugins.exceptions
+tuned.profiles.exceptions" class="py-name" href="#" onclick="return doclink('link-11', 'exceptions', 'link-1');">exceptions</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Class tuned.plugins.exceptions.NotSupportedPluginException=tuned.plugins.exceptions.NotSupportedPluginException-class.html"><a title="tuned.plugins.exceptions.NotSupportedPluginException" class="py-name" href="#" onclick="return doclink('link-12', 'NotSupportedPluginException', 'link-12');">NotSupportedPluginException</a></tt><tt class="py-op">(</tt><tt class="py-string">"Plugin is not supported on your hardware."</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                <tt class="py-name">super</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method tuned.admin.admin.Admin.__init__()=tuned.admin.admin.Admin-class.html#__init__,Method tuned.admin.dbus_controller.DBusController.__init__()=tuned.admin.dbus_controller.DBusController-class.html#__init__,Method tuned.daemon.application.Application.__init__()=tuned.daemon.application.Application-class.html#__init__,Method tuned.daemon.controller.Controller.__init__()=tuned.daemon.controller.Controller-class.html#__init__,Method tuned.daemon.daemon.Daemon.__init__()=tuned.daemon.daemon.Daemon-class.html#__init__,Method tuned.exports.controller.ExportsController.__init__()=tuned.exports.controller.ExportsController-class.html#__init__,Method tuned.exports.dbus_exporter.DBusExporter.__init__()=tuned.exports.dbus_exporter.DBusExporter-class.html#__init__,Method tuned.hardware.inventory.Inventory.__init__()=tuned.hardware.inventory.Inventory-class.html#__init__,Method tuned.logs.TunedLogger.__init__()=tuned.logs.TunedLogger-class.html#__init__,Method tuned.monitors.base.Monitor.__init__()=tuned.monitors.base.Monitor-class.html#__init__,Method tuned.monitors.repository.Repository.__init__()=tuned.monitors.repository.Repository-class.html#__init__,Method tuned.patterns.Singleton.__init__()=tuned.patterns.Singleton-class.html#__init__,Method tuned.plugins.base.Plugin.__init__()=tuned.plugins.base.Plugin-class.html#__init__,Method tuned.plugins.hotplug.Plugin.__init__()=tuned.plugins.hotplug.Plugin-class.html#__init__,Method tuned.plugins.instance.instance.Instance.__init__()=tuned.plugins.instance.instance.Instance-class.html#__init__,Method tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#__init__,Method tuned.plugins.plugin_disk.DiskPlugin.__init__()=tuned.plugins.plugin_disk.DiskPlugin-class.html#__init__,Method tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__()=tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#__init__,Method tuned.plugins.plugin_net.NetTuningPlugin.__init__()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#__init__,Method tuned.plugins.plugin_sysctl.SysctlPlugin.__init__()=tuned.plugins.plugin_sysctl.SysctlPlugin-class.html#__init__,Method tuned.plugins.plugin_sysfs.SysfsPlugin.__init__()=tuned.plugins.plugin_sysfs.SysfsPlugin-class.html#__init__,Method tuned.plugins.repository.Repository.__init__()=tuned.plugins.repository.Repository-class.html#__init__,Method tuned.profiles.loader.Loader.__init__()=tuned.profiles.loader.Loader-class.html#__init__,Method tuned.profiles.locator.Locator.__init__()=tuned.profiles.locator.Locator-class.html#__init__,Method tuned.profiles.merger.Merger.__init__()=tuned.profiles.merger.Merger-class.html#__init__,Method tuned.profiles.profile.Profile.__init__()=tuned.profiles.profile.Profile-class.html#__init__,Method tuned.profiles.unit.Unit.__init__()=tuned.profiles.unit.Unit-class.html#__init__,Method tuned.storage.factory.Factory.__init__()=tuned.storage.factory.Factory-class.html#__init__,Method tuned.storage.pickle_provider.PickleProvider.__init__()=tuned.storage.pickle_provider.PickleProvider-class.html#__init__,Method tuned.storage.storage.Storage.__init__()=tuned.storage.storage.Storage-class.html#__init__,Method tuned.units.manager.Manager.__init__()=tuned.units.manager.Manager-class.html#__init__,Method tuned.utils.nettool.Nettool.__init__()=tuned.utils.nettool.Nettool-class.html#__init__,Method tuned.utils.plugin_loader.PluginLoader.__init__()=tuned.utils.plugin_loader.PluginLoader-class.html#__init__"><a title="tuned.admin.admin.Admin.__init__
+tuned.admin.dbus_controller.DBusController.__init__
+tuned.daemon.application.Application.__init__
+tuned.daemon.controller.Controller.__init__
+tuned.daemon.daemon.Daemon.__init__
+tuned.exports.controller.ExportsController.__init__
+tuned.exports.dbus_exporter.DBusExporter.__init__
+tuned.hardware.inventory.Inventory.__init__
+tuned.logs.TunedLogger.__init__
+tuned.monitors.base.Monitor.__init__
+tuned.monitors.repository.Repository.__init__
+tuned.patterns.Singleton.__init__
+tuned.plugins.base.Plugin.__init__
+tuned.plugins.hotplug.Plugin.__init__
+tuned.plugins.instance.instance.Instance.__init__
+tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__
+tuned.plugins.plugin_disk.DiskPlugin.__init__
+tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__
+tuned.plugins.plugin_net.NetTuningPlugin.__init__
+tuned.plugins.plugin_sysctl.SysctlPlugin.__init__
+tuned.plugins.plugin_sysfs.SysfsPlugin.__init__
+tuned.plugins.repository.Repository.__init__
+tuned.profiles.loader.Loader.__init__
+tuned.profiles.locator.Locator.__init__
+tuned.profiles.merger.Merger.__init__
+tuned.profiles.profile.Profile.__init__
+tuned.profiles.unit.Unit.__init__
+tuned.storage.factory.Factory.__init__
+tuned.storage.pickle_provider.PickleProvider.__init__
+tuned.storage.storage.Storage.__init__
+tuned.units.manager.Manager.__init__
+tuned.utils.nettool.Nettool.__init__
+tuned.utils.plugin_loader.PluginLoader.__init__" class="py-name" href="#" onclick="return doclink('link-13', '__init__', 'link-13');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="EeePCSHEPlugin._get_config_options"></a><div id="EeePCSHEPlugin._get_config_options-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="EeePCSHEPlugin._get_config_options-toggle" onclick="return toggle('EeePCSHEPlugin._get_config_options');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#_get_config_options">_get_config_options</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EeePCSHEPlugin._get_config_options-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="EeePCSHEPlugin._get_config_options-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-op">{</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                        <tt class="py-string">"load_threshold_normal"</tt>    <tt class="py-op">:</tt> <tt class="py-number">0.6</tt><tt class="py-op">,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">                        <tt class="py-string">"load_threshold_powersave"</tt> <tt class="py-op">:</tt> <tt class="py-number">0.4</tt><tt class="py-op">,</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                        <tt class="py-string">"she_powersave"</tt>            <tt class="py-op">:</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                        <tt class="py-string">"she_normal"</tt>               <tt class="py-op">:</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt class="py-op">}</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="EeePCSHEPlugin._instance_init"></a><div id="EeePCSHEPlugin._instance_init-def"><a name="L30"></a><tt class="py-lineno">30</tt> <a class="py-toggle" href="#" id="EeePCSHEPlugin._instance_init-toggle" onclick="return toggle('EeePCSHEPlugin._instance_init');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#_instance_init">_instance_init</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EeePCSHEPlugin._instance_init-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="EeePCSHEPlugin._instance_init-expanded"><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">                <tt id="link-14" class="py-name" targets="Package tuned.plugins.instance=tuned.plugins.instance-module.html,Module tuned.plugins.instance.instance=tuned.plugins.instance.instance-module.html"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-14', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_has_static_tuning</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">                <tt id="link-15" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-15', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_has_dynamic_tuning</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                <tt id="link-16" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-16', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_she_mode</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                <tt id="link-17" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-17', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_monitors_repository</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method tuned.hardware.inventory._MonitorObserverFactory.create()=tuned.hardware.inventory._MonitorObserverFactory-class.html#create,Method tuned.monitors.repository.Repository.create()=tuned.monitors.repository.Repository-class.html#create,Method tuned.plugins.instance.factory.Factory.create()=tuned.plugins.instance.factory.Factory-class.html#create,Method tuned.plugins.repository.Repository.create()=tuned.plugins.repository.Repository-class.html#create,Method tuned.profiles.factory.Factory.create()=tuned.profiles.factory.Factory-class.html#create,Method tuned.storage.factory.Factory.create()=tuned.storage.factory.Factory-class.html#create,Method tuned.storage.interfaces.Factory.create()=tuned.storage.interfaces.Factory-class.html#create,Method tuned.units.manager.Manager.create()=tuned.units.manager.Manager-class.html#create"><a title="tuned.hardware.inventory._MonitorObserverFactory.create
+tuned.monitors.repository.Repository.create
+tuned.plugins.instance.factory.Factory.create
+tuned.plugins.repository.Repository.create
+tuned.profiles.factory.Factory.create
+tuned.storage.factory.Factory.create
+tuned.storage.interfaces.Factory.create
+tuned.units.manager.Manager.create" class="py-name" href="#" onclick="return doclink('link-18', 'create', 'link-18');">create</a></tt><tt class="py-op">(</tt><tt class="py-string">"load"</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="EeePCSHEPlugin._instance_cleanup"></a><div id="EeePCSHEPlugin._instance_cleanup-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="EeePCSHEPlugin._instance_cleanup-toggle" onclick="return toggle('EeePCSHEPlugin._instance_cleanup');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#_instance_cleanup">_instance_cleanup</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EeePCSHEPlugin._instance_cleanup-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="EeePCSHEPlugin._instance_cleanup-expanded"><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-19" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-19', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_monitors_repository</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method tuned.monitors.repository.Repository.delete()=tuned.monitors.repository.Repository-class.html#delete,Method tuned.plugins.repository.Repository.delete()=tuned.plugins.repository.Repository-class.html#delete"><a title="tuned.monitors.repository.Repository.delete
+tuned.plugins.repository.Repository.delete" class="py-name" href="#" onclick="return doclink('link-20', 'delete', 'link-20');">delete</a></tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-21', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                        <tt id="link-22" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-22', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="EeePCSHEPlugin._instance_update_dynamic"></a><div id="EeePCSHEPlugin._instance_update_dynamic-def"><a name="L41"></a><tt class="py-lineno">41</tt> <a class="py-toggle" href="#" id="EeePCSHEPlugin._instance_update_dynamic-toggle" onclick="return toggle('EeePCSHEPlugin._instance_update_dynamic');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#_instance_update_dynamic">_instance_update_dynamic</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EeePCSHEPlugin._instance_update_dynamic-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="EeePCSHEPlugin._instance_update_dynamic-expanded"><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">                <tt id="link-23" class="py-name" targets="Method tuned.profiles.loader.Loader.load()=tuned.profiles.loader.Loader-class.html#load,Method tuned.storage.interfaces.Provider.load()=tuned.storage.interfaces.Provider-class.html#load,Method tuned.storage.pickle_provider.PickleProvider.load()=tuned.storage.pickle_provider.PickleProvider-class.html#load"><a title="tuned.profiles.loader.Loader.load
+tuned.storage.interfaces.Provider.load
+tuned.storage.pickle_provider.PickleProvider.load" class="py-name" href="#" onclick="return doclink('link-23', 'load', 'link-23');">load</a></tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-24', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method tuned.monitors.base.Monitor.get_load()=tuned.monitors.base.Monitor-class.html#get_load"><a title="tuned.monitors.base.Monitor.get_load" class="py-name" href="#" onclick="return doclink('link-25', 'get_load', 'link-25');">get_load</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">"system"</tt><tt class="py-op">]</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-26" class="py-name"><a title="tuned.profiles.loader.Loader.load
+tuned.storage.interfaces.Provider.load
+tuned.storage.pickle_provider.PickleProvider.load" class="py-name" href="#" onclick="return doclink('link-26', 'load', 'link-23');">load</a></tt> <tt class="py-op">&lt;=</tt> <tt id="link-27" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-27', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Variable tuned.plugins.instance.instance.Instance.options=tuned.plugins.instance.instance.Instance-class.html#options,Variable tuned.profiles.profile.Profile.options=tuned.profiles.profile.Profile-class.html#options,Variable tuned.profiles.unit.Unit.options=tuned.profiles.unit.Unit-class.html#options"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-28', 'options', 'link-28');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"load_threshold_powersave"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin._set_she_mode()=tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#_set_she_mode"><a title="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin._set_she_mode" class="py-name" href="#" onclick="return doclink('link-29', '_set_she_mode', 'link-29');">_set_she_mode</a></tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-30', 'instance', 'link-14');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-string">"powersave"</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt id="link-31" class="py-name"><a title="tuned.profiles.loader.Loader.load
+tuned.storage.interfaces.Provider.load
+tuned.storage.pickle_provider.PickleProvider.load" class="py-name" href="#" onclick="return doclink('link-31', 'load', 'link-23');">load</a></tt> <tt class="py-op">&gt;=</tt> <tt id="link-32" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-32', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-33', 'options', 'link-28');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"load_threshold_normal"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin._set_she_mode" class="py-name" href="#" onclick="return doclink('link-34', '_set_she_mode', 'link-29');">_set_she_mode</a></tt><tt class="py-op">(</tt><tt id="link-35" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-35', 'instance', 'link-14');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-string">"normal"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt>
+<a name="EeePCSHEPlugin._instance_unapply_dynamic"></a><div id="EeePCSHEPlugin._instance_unapply_dynamic-def"><a name="L48"></a><tt class="py-lineno">48</tt> <a class="py-toggle" href="#" id="EeePCSHEPlugin._instance_unapply_dynamic-toggle" onclick="return toggle('EeePCSHEPlugin._instance_unapply_dynamic');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#_instance_unapply_dynamic">_instance_unapply_dynamic</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EeePCSHEPlugin._instance_unapply_dynamic-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="EeePCSHEPlugin._instance_unapply_dynamic-expanded"><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">                <tt class="py-comment"># FIXME: restore previous value</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin._set_she_mode" class="py-name" href="#" onclick="return doclink('link-36', '_set_she_mode', 'link-29');">_set_she_mode</a></tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-37', 'instance', 'link-14');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-string">"normal"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="EeePCSHEPlugin._set_she_mode"></a><div id="EeePCSHEPlugin._set_she_mode-def"><a name="L52"></a><tt class="py-lineno">52</tt> <a class="py-toggle" href="#" id="EeePCSHEPlugin._set_she_mode-toggle" onclick="return toggle('EeePCSHEPlugin._set_she_mode');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#_set_she_mode">_set_she_mode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">new_mode</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EeePCSHEPlugin._set_she_mode-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="EeePCSHEPlugin._set_she_mode-expanded"><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">                <tt class="py-name">new_mode_numeric</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt id="link-38" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-38', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-39', 'options', 'link-28');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"she_%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">new_mode</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-40" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-40', 'instance', 'link-14');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_she_mode</tt> <tt class="py-op">!=</tt> <tt class="py-name">new_mode_numeric</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">                        <tt id="link-41" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-41', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"new eeepc_she mode %s (%d) "</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">new_mode</tt><tt class="py-op">,</tt> <tt class="py-name">new_mode_numeric</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">                        <tt id="link-42" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-42', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-43', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-44', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">write_to_file</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_control_file</tt><tt class="py-op">,</tt> <tt class="py-string">"%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">new_mode_numeric</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_she_mode</tt> <tt class="py-op">=</tt> <tt class="py-name">new_mode_numeric</tt> </tt>
+</div></div><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

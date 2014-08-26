@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.plugins.hotplug</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.plugins-module.html">Package&nbsp;plugins</a> ::
+        Module&nbsp;hotplug
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.plugins.hotplug-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.plugins.hotplug-module.html">Module tuned.plugins.hotplug</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module tuned.monitors.base=tuned.monitors.base-module.html,Module tuned.plugins.base=tuned.plugins.base-module.html"><a title="tuned.monitors.base
+tuned.plugins.base" class="py-name" href="#" onclick="return doclink('link-0', 'base', 'link-0');">base</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Package tuned=tuned-module.html"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-1', 'tuned', 'link-1');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module tuned.logs=tuned.logs-module.html"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-2', 'logs', 'link-2');">logs</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable tuned.daemon.application.log=tuned.daemon.application-module.html#log,Variable tuned.daemon.controller.log=tuned.daemon.controller-module.html#log,Variable tuned.daemon.daemon.log=tuned.daemon.daemon-module.html#log,Method tuned.exceptions.TunedException.log()=tuned.exceptions.TunedException-class.html#log,Variable tuned.hardware.inventory.log=tuned.hardware.inventory-module.html#log,Variable tuned.monitors.base.log=tuned.monitors.base-module.html#log,Variable tuned.monitors.repository.log=tuned.monitors.repository-module.html#log,Variable tuned.plugins.base.log=tuned.plugins.base-module.html#log,Variable tuned.plugins.hotplug.log=tuned.plugins.hotplug-module.html#log,Variable tuned.plugins.plugin_audio.log=tuned.plugins.plugin_audio-module.html#log,Variable tuned.plugins.plugin_cpu.log=tuned.plugins.plugin_cpu-module.html#log,Variable tuned.plugins.plugin_disk.log=tuned.plugins.plugin_disk-module.html#log,Variable tuned.plugins.plugin_eeepc_she.log=tuned.plugins.plugin_eeepc_she-module.html#log,Variable tuned.plugins.plugin_mounts.log=tuned.plugins.plugin_mounts-module.html#log,Variable tuned.plugins.plugin_net.log=tuned.plugins.plugin_net-module.html#log,Variable tuned.plugins.plugin_script.log=tuned.plugins.plugin_script-module.html#log,Variable tuned.plugins.plugin_sysctl.log=tuned.plugins.plugin_sysctl-module.html#log,Variable tuned.plugins.plugin_sysfs.log=tuned.plugins.plugin_sysfs-module.html#log,Variable tuned.plugins.plugin_usb.log=tuned.plugins.plugin_usb-module.html#log,Variable tuned.plugins.plugin_video.log=tuned.plugins.plugin_video-module.html#log,Variable tuned.plugins.plugin_vm.log=tuned.plugins.plugin_vm-module.html#log,Variable tuned.plugins.repository.log=tuned.plugins.repository-module.html#log,Variable tuned.profiles.loader.log=tuned.profiles.loader-module.html#log,Variable tuned.storage.pickle_provider.log=tuned.storage.pickle_provider-module.html#log,Variable tuned.units.manager.log=tuned.units.manager-module.html#log,Variable tuned.utils.commands.log=tuned.utils.commands-module.html#log,Variable tuned.utils.nettool.log=tuned.utils.nettool-module.html#log,Variable tuned.utils.plugin_loader.log=tuned.utils.plugin_loader-module.html#log"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-3', 'log', 'link-3');">log</a></tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-4', 'tuned', 'link-1');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-5', 'logs', 'link-2');">logs</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-6', 'get', 'link-6');">get</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="Plugin"></a><div id="Plugin-def"><a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="Plugin-toggle" onclick="return toggle('Plugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.plugins.hotplug.Plugin-class.html">Plugin</a><tt class="py-op">(</tt><tt class="py-base-class">base</tt><tt class="py-op">.</tt><tt class="py-base-class">Plugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plugin-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Plugin-expanded"><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">        Base class for plugins with device hotpluging support.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="Plugin.__init__"></a><div id="Plugin.__init__-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="Plugin.__init__-toggle" onclick="return toggle('Plugin.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.hotplug.Plugin-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plugin.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Plugin.__init__-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-7" class="py-name" targets="Class tuned.plugins.base.Plugin=tuned.plugins.base.Plugin-class.html,Class tuned.plugins.hotplug.Plugin=tuned.plugins.hotplug.Plugin-class.html"><a title="tuned.plugins.base.Plugin
+tuned.plugins.hotplug.Plugin" class="py-name" href="#" onclick="return doclink('link-7', 'Plugin', 'link-7');">Plugin</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method tuned.admin.admin.Admin.__init__()=tuned.admin.admin.Admin-class.html#__init__,Method tuned.admin.dbus_controller.DBusController.__init__()=tuned.admin.dbus_controller.DBusController-class.html#__init__,Method tuned.daemon.application.Application.__init__()=tuned.daemon.application.Application-class.html#__init__,Method tuned.daemon.controller.Controller.__init__()=tuned.daemon.controller.Controller-class.html#__init__,Method tuned.daemon.daemon.Daemon.__init__()=tuned.daemon.daemon.Daemon-class.html#__init__,Method tuned.exports.controller.ExportsController.__init__()=tuned.exports.controller.ExportsController-class.html#__init__,Method tuned.exports.dbus_exporter.DBusExporter.__init__()=tuned.exports.dbus_exporter.DBusExporter-class.html#__init__,Method tuned.hardware.inventory.Inventory.__init__()=tuned.hardware.inventory.Inventory-class.html#__init__,Method tuned.logs.TunedLogger.__init__()=tuned.logs.TunedLogger-class.html#__init__,Method tuned.monitors.base.Monitor.__init__()=tuned.monitors.base.Monitor-class.html#__init__,Method tuned.monitors.repository.Repository.__init__()=tuned.monitors.repository.Repository-class.html#__init__,Method tuned.patterns.Singleton.__init__()=tuned.patterns.Singleton-class.html#__init__,Method tuned.plugins.base.Plugin.__init__()=tuned.plugins.base.Plugin-class.html#__init__,Method tuned.plugins.hotplug.Plugin.__init__()=tuned.plugins.hotplug.Plugin-class.html#__init__,Method tuned.plugins.instance.instance.Instance.__init__()=tuned.plugins.instance.instance.Instance-class.html#__init__,Method tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#__init__,Method tuned.plugins.plugin_disk.DiskPlugin.__init__()=tuned.plugins.plugin_disk.DiskPlugin-class.html#__init__,Method tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__()=tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#__init__,Method tuned.plugins.plugin_net.NetTuningPlugin.__init__()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#__init__,Method tuned.plugins.plugin_sysctl.SysctlPlugin.__init__()=tuned.plugins.plugin_sysctl.SysctlPlugin-class.html#__init__,Method tuned.plugins.plugin_sysfs.SysfsPlugin.__init__()=tuned.plugins.plugin_sysfs.SysfsPlugin-class.html#__init__,Method tuned.plugins.repository.Repository.__init__()=tuned.plugins.repository.Repository-class.html#__init__,Method tuned.profiles.loader.Loader.__init__()=tuned.profiles.loader.Loader-class.html#__init__,Method tuned.profiles.locator.Locator.__init__()=tuned.profiles.locator.Locator-class.html#__init__,Method tuned.profiles.merger.Merger.__init__()=tuned.profiles.merger.Merger-class.html#__init__,Method tuned.profiles.profile.Profile.__init__()=tuned.profiles.profile.Profile-class.html#__init__,Method tuned.profiles.unit.Unit.__init__()=tuned.profiles.unit.Unit-class.html#__init__,Method tuned.storage.factory.Factory.__init__()=tuned.storage.factory.Factory-class.html#__init__,Method tuned.storage.pickle_provider.PickleProvider.__init__()=tuned.storage.pickle_provider.PickleProvider-class.html#__init__,Method tuned.storage.storage.Storage.__init__()=tuned.storage.storage.Storage-class.html#__init__,Method tuned.units.manager.Manager.__init__()=tuned.units.manager.Manager-class.html#__init__,Method tuned.utils.nettool.Nettool.__init__()=tuned.utils.nettool.Nettool-class.html#__init__,Method tuned.utils.plugin_loader.PluginLoader.__init__()=tuned.utils.plugin_loader.PluginLoader-class.html#__init__"><a title="tuned.admin.admin.Admin.__init__
+tuned.admin.dbus_controller.DBusController.__init__
+tuned.daemon.application.Application.__init__
+tuned.daemon.controller.Controller.__init__
+tuned.daemon.daemon.Daemon.__init__
+tuned.exports.controller.ExportsController.__init__
+tuned.exports.dbus_exporter.DBusExporter.__init__
+tuned.hardware.inventory.Inventory.__init__
+tuned.logs.TunedLogger.__init__
+tuned.monitors.base.Monitor.__init__
+tuned.monitors.repository.Repository.__init__
+tuned.patterns.Singleton.__init__
+tuned.plugins.base.Plugin.__init__
+tuned.plugins.hotplug.Plugin.__init__
+tuned.plugins.instance.instance.Instance.__init__
+tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__
+tuned.plugins.plugin_disk.DiskPlugin.__init__
+tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__
+tuned.plugins.plugin_net.NetTuningPlugin.__init__
+tuned.plugins.plugin_sysctl.SysctlPlugin.__init__
+tuned.plugins.plugin_sysfs.SysfsPlugin.__init__
+tuned.plugins.repository.Repository.__init__
+tuned.profiles.loader.Loader.__init__
+tuned.profiles.locator.Locator.__init__
+tuned.profiles.merger.Merger.__init__
+tuned.profiles.profile.Profile.__init__
+tuned.profiles.unit.Unit.__init__
+tuned.storage.factory.Factory.__init__
+tuned.storage.pickle_provider.PickleProvider.__init__
+tuned.storage.storage.Storage.__init__
+tuned.units.manager.Manager.__init__
+tuned.utils.nettool.Nettool.__init__
+tuned.utils.plugin_loader.PluginLoader.__init__" class="py-name" href="#" onclick="return doclink('link-8', '__init__', 'link-8');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method tuned.plugins.hotplug.Plugin._hardware_events_init()=tuned.plugins.hotplug.Plugin-class.html#_hardware_events_init,Method tuned.plugins.plugin_disk.DiskPlugin._hardware_events_init()=tuned.plugins.plugin_disk.DiskPlugin-class.html#_hardware_events_init"><a title="tuned.plugins.hotplug.Plugin._hardware_events_init
+tuned.plugins.plugin_disk.DiskPlugin._hardware_events_init" class="py-name" href="#" onclick="return doclink('link-9', '_hardware_events_init', 'link-9');">_hardware_events_init</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="Plugin.cleanup"></a><div id="Plugin.cleanup-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="Plugin.cleanup-toggle" onclick="return toggle('Plugin.cleanup');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.hotplug.Plugin-class.html#cleanup">cleanup</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plugin.cleanup-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Plugin.cleanup-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="tuned.plugins.base.Plugin
+tuned.plugins.hotplug.Plugin" class="py-name" href="#" onclick="return doclink('link-10', 'Plugin', 'link-7');">Plugin</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method tuned.monitors.base.Monitor.cleanup()=tuned.monitors.base.Monitor-class.html#cleanup,Method tuned.plugins.base.Plugin.cleanup()=tuned.plugins.base.Plugin-class.html#cleanup,Method tuned.plugins.hotplug.Plugin.cleanup()=tuned.plugins.hotplug.Plugin-class.html#cleanup"><a title="tuned.monitors.base.Monitor.cleanup
+tuned.plugins.base.Plugin.cleanup
+tuned.plugins.hotplug.Plugin.cleanup" class="py-name" href="#" onclick="return doclink('link-11', 'cleanup', 'link-11');">cleanup</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method tuned.plugins.hotplug.Plugin._hardware_events_cleanup()=tuned.plugins.hotplug.Plugin-class.html#_hardware_events_cleanup,Method tuned.plugins.plugin_disk.DiskPlugin._hardware_events_cleanup()=tuned.plugins.plugin_disk.DiskPlugin-class.html#_hardware_events_cleanup"><a title="tuned.plugins.hotplug.Plugin._hardware_events_cleanup
+tuned.plugins.plugin_disk.DiskPlugin._hardware_events_cleanup" class="py-name" href="#" onclick="return doclink('link-12', '_hardware_events_cleanup', 'link-12');">_hardware_events_cleanup</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="Plugin._hardware_events_init"></a><div id="Plugin._hardware_events_init-def"><a name="L19"></a><tt class="py-lineno">19</tt> <a class="py-toggle" href="#" id="Plugin._hardware_events_init-toggle" onclick="return toggle('Plugin._hardware_events_init');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.hotplug.Plugin-class.html#_hardware_events_init">_hardware_events_init</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plugin._hardware_events_init-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Plugin._hardware_events_init-expanded"><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="Plugin._hardware_events_cleanup"></a><div id="Plugin._hardware_events_cleanup-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="Plugin._hardware_events_cleanup-toggle" onclick="return toggle('Plugin._hardware_events_cleanup');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.hotplug.Plugin-class.html#_hardware_events_cleanup">_hardware_events_cleanup</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plugin._hardware_events_cleanup-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Plugin._hardware_events_cleanup-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="Plugin._hardware_events_callback"></a><div id="Plugin._hardware_events_callback-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="Plugin._hardware_events_callback-toggle" onclick="return toggle('Plugin._hardware_events_callback');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.hotplug.Plugin-class.html#_hardware_events_callback">_hardware_events_callback</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plugin._hardware_events_callback-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Plugin._hardware_events_callback-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">event</tt> <tt class="py-op">==</tt> <tt class="py-string">"add"</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                        <tt id="link-13" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-13', 'log', 'link-3');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"device '%s' added"</tt> <tt class="py-op">%</tt> <tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">sys_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method tuned.plugins.hotplug.Plugin._add_device()=tuned.plugins.hotplug.Plugin-class.html#_add_device"><a title="tuned.plugins.hotplug.Plugin._add_device" class="py-name" href="#" onclick="return doclink('link-14', '_add_device', 'link-14');">_add_device</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">event</tt> <tt class="py-op">==</tt> <tt class="py-string">"remove"</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">                        <tt id="link-15" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-15', 'log', 'link-3');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"device '%s' removed"</tt> <tt class="py-op">%</tt> <tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">sys_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method tuned.plugins.hotplug.Plugin._remove_device()=tuned.plugins.hotplug.Plugin-class.html#_remove_device"><a title="tuned.plugins.hotplug.Plugin._remove_device" class="py-name" href="#" onclick="return doclink('link-16', '_remove_device', 'link-16');">_remove_device</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="Plugin._add_device"></a><div id="Plugin._add_device-def"><a name="L33"></a><tt class="py-lineno">33</tt> <a class="py-toggle" href="#" id="Plugin._add_device-toggle" onclick="return toggle('Plugin._add_device');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.hotplug.Plugin-class.html#_add_device">_add_device</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plugin._add_device-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Plugin._add_device-expanded"><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                <tt class="py-name">device_name</tt> <tt class="py-op">=</tt> <tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">sys_name</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">device_name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Variable tuned.profiles.unit.Unit._devices=tuned.profiles.unit.Unit-class.html#_devices"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-17', '_devices', 'link-17');">_devices</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-18', '_devices', 'link-17');">_devices</a></tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">instance_name</tt><tt class="py-op">,</tt> <tt id="link-19" class="py-name" targets="Package tuned.plugins.instance=tuned.plugins.instance-module.html,Module tuned.plugins.instance.instance=tuned.plugins.instance.instance-module.html"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-19', 'instance', 'link-19');">instance</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">reversed</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_instances</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_device_matcher</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method tuned.hardware.device_matcher.DeviceMatcher.match()=tuned.hardware.device_matcher.DeviceMatcher-class.html#match"><a title="tuned.hardware.device_matcher.DeviceMatcher.match" class="py-name" href="#" onclick="return doclink('link-20', 'match', 'link-20');">match</a></tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-21', 'instance', 'link-19');">instance</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Variable tuned.plugins.instance.instance.Instance.devices_expression=tuned.plugins.instance.instance.Instance-class.html#devices_expression"><a title="tuned.plugins.instance.instance.Instance.devices_expression" class="py-name" href="#" onclick="return doclink('link-22', 'devices_expression', 'link-22');">devices_expression</a></tt><tt class="py-op">,</tt> <tt class="py-name">device_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">                                <tt id="link-23" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-23', 'log', 'link-3');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"instance %s: adding new device %s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">instance_name</tt><tt class="py-op">,</tt> <tt class="py-name">device_name</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">                                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_assigned_devices</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">                                <tt id="link-24" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-24', 'instance', 'link-19');">instance</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Variable tuned.monitors.base.Monitor.devices=tuned.monitors.base.Monitor-class.html#devices,Variable tuned.plugins.instance.instance.Instance.devices=tuned.plugins.instance.instance.Instance-class.html#devices,Variable tuned.profiles.unit.Unit.devices=tuned.profiles.unit.Unit-class.html#devices"><a title="tuned.monitors.base.Monitor.devices
+tuned.plugins.instance.instance.Instance.devices
+tuned.profiles.unit.Unit.devices" class="py-name" href="#" onclick="return doclink('link-25', 'devices', 'link-25');">devices</a></tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">                                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method tuned.plugins.hotplug.Plugin._added_device_apply_tuning()=tuned.plugins.hotplug.Plugin-class.html#_added_device_apply_tuning,Method tuned.plugins.plugin_disk.DiskPlugin._added_device_apply_tuning()=tuned.plugins.plugin_disk.DiskPlugin-class.html#_added_device_apply_tuning"><a title="tuned.plugins.hotplug.Plugin._added_device_apply_tuning
+tuned.plugins.plugin_disk.DiskPlugin._added_device_apply_tuning" class="py-name" href="#" onclick="return doclink('link-26', '_added_device_apply_tuning', 'link-26');">_added_device_apply_tuning</a></tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-27', 'instance', 'link-19');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">                                <tt class="py-keyword">break</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">                        <tt id="link-28" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-28', 'log', 'link-3');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">"no instance wants %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_free_devices</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt>
+<a name="Plugin._remove_device"></a><div id="Plugin._remove_device-def"><a name="L51"></a><tt class="py-lineno">51</tt> <a class="py-toggle" href="#" id="Plugin._remove_device-toggle" onclick="return toggle('Plugin._remove_device');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.hotplug.Plugin-class.html#_remove_device">_remove_device</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plugin._remove_device-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Plugin._remove_device-expanded"><a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                <tt class="py-name">device_name</tt> <tt class="py-op">=</tt> <tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">sys_name</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">device_name</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-29', '_devices', 'link-17');">_devices</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt id="link-30" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-30', 'instance', 'link-19');">instance</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_instances</tt><tt class="py-op">.</tt><tt class="py-name">values</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">device_name</tt> <tt class="py-keyword">in</tt> <tt id="link-31" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-31', 'instance', 'link-19');">instance</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="tuned.monitors.base.Monitor.devices
+tuned.plugins.instance.instance.Instance.devices
+tuned.profiles.unit.Unit.devices" class="py-name" href="#" onclick="return doclink('link-32', 'devices', 'link-25');">devices</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">                                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method tuned.plugins.hotplug.Plugin._removed_device_unapply_tuning()=tuned.plugins.hotplug.Plugin-class.html#_removed_device_unapply_tuning,Method tuned.plugins.plugin_disk.DiskPlugin._removed_device_unapply_tuning()=tuned.plugins.plugin_disk.DiskPlugin-class.html#_removed_device_unapply_tuning"><a title="tuned.plugins.hotplug.Plugin._removed_device_unapply_tuning
+tuned.plugins.plugin_disk.DiskPlugin._removed_device_unapply_tuning" class="py-name" href="#" onclick="return doclink('link-33', '_removed_device_unapply_tuning', 'link-33');">_removed_device_unapply_tuning</a></tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-34', 'instance', 'link-19');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">                                <tt id="link-35" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-35', 'instance', 'link-19');">instance</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="tuned.monitors.base.Monitor.devices
+tuned.plugins.instance.instance.Instance.devices
+tuned.profiles.unit.Unit.devices" class="py-name" href="#" onclick="return doclink('link-36', 'devices', 'link-25');">devices</a></tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">                                <tt id="link-37" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-37', 'instance', 'link-19');">instance</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method tuned.admin.admin.Admin.active()=tuned.admin.admin.Admin-class.html#active,Variable tuned.plugins.instance.instance.Instance.active=tuned.plugins.instance.instance.Instance-class.html#active"><a title="tuned.admin.admin.Admin.active
+tuned.plugins.instance.instance.Instance.active" class="py-name" href="#" onclick="return doclink('link-38', 'active', 'link-38');">active</a></tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-39" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-39', 'instance', 'link-19');">instance</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="tuned.monitors.base.Monitor.devices
+tuned.plugins.instance.instance.Instance.devices
+tuned.profiles.unit.Unit.devices" class="py-name" href="#" onclick="return doclink('link-40', 'devices', 'link-25');">devices</a></tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">                                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_assigned_devices</tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">                                <tt class="py-keyword">break</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_free_devices</tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-41', '_devices', 'link-17');">_devices</a></tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="Plugin._added_device_apply_tuning"></a><div id="Plugin._added_device_apply_tuning-def"><a name="L68"></a><tt class="py-lineno">68</tt> <a class="py-toggle" href="#" id="Plugin._added_device_apply_tuning-toggle" onclick="return toggle('Plugin._added_device_apply_tuning');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.hotplug.Plugin-class.html#_added_device_apply_tuning">_added_device_apply_tuning</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plugin._added_device_apply_tuning-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Plugin._added_device_apply_tuning-expanded"><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Method tuned.plugins.base.Plugin._execute_all_device_commands()=tuned.plugins.base.Plugin-class.html#_execute_all_device_commands"><a title="tuned.plugins.base.Plugin._execute_all_device_commands" class="py-name" href="#" onclick="return doclink('link-42', '_execute_all_device_commands', 'link-42');">_execute_all_device_commands</a></tt><tt class="py-op">(</tt><tt id="link-43" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-43', 'instance', 'link-19');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-name">device_name</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method tuned.plugins.base.Plugin._instance_apply_dynamic()=tuned.plugins.base.Plugin-class.html#_instance_apply_dynamic,Method tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_apply_dynamic()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_apply_dynamic,Method tuned.plugins.plugin_net.NetTuningPlugin._instance_apply_dynamic()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#_instance_apply_dynamic"><a title="tuned.plugins.base.Plugin._instance_apply_dynamic
+tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_apply_dynamic
+tuned.plugins.plugin_net.NetTuningPlugin._instance_apply_dynamic" class="py-name" href="#" onclick="return doclink('link-44', '_instance_apply_dynamic', 'link-44');">_instance_apply_dynamic</a></tt><tt class="py-op">(</tt><tt id="link-45" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-45', 'instance', 'link-19');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt>
+<a name="Plugin._removed_device_unapply_tuning"></a><div id="Plugin._removed_device_unapply_tuning-def"><a name="L72"></a><tt class="py-lineno">72</tt> <a class="py-toggle" href="#" id="Plugin._removed_device_unapply_tuning-toggle" onclick="return toggle('Plugin._removed_device_unapply_tuning');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.hotplug.Plugin-class.html#_removed_device_unapply_tuning">_removed_device_unapply_tuning</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plugin._removed_device_unapply_tuning-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Plugin._removed_device_unapply_tuning-expanded"><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Method tuned.plugins.base.Plugin._instance_unapply_dynamic()=tuned.plugins.base.Plugin-class.html#_instance_unapply_dynamic,Method tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_unapply_dynamic()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_unapply_dynamic,Method tuned.plugins.plugin_disk.DiskPlugin._instance_unapply_dynamic()=tuned.plugins.plugin_disk.DiskPlugin-class.html#_instance_unapply_dynamic,Method tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin._instance_unapply_dynamic()=tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#_instance_unapply_dynamic,Method tuned.plugins.plugin_net.NetTuningPlugin._instance_unapply_dynamic()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#_instance_unapply_dynamic"><a title="tuned.plugins.base.Plugin._instance_unapply_dynamic
+tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_unapply_dynamic
+tuned.plugins.plugin_disk.DiskPlugin._instance_unapply_dynamic
+tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin._instance_unapply_dynamic
+tuned.plugins.plugin_net.NetTuningPlugin._instance_unapply_dynamic" class="py-name" href="#" onclick="return doclink('link-46', '_instance_unapply_dynamic', 'link-46');">_instance_unapply_dynamic</a></tt><tt class="py-op">(</tt><tt id="link-47" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-47', 'instance', 'link-19');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-name">device_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Method tuned.plugins.base.Plugin._cleanup_all_device_commands()=tuned.plugins.base.Plugin-class.html#_cleanup_all_device_commands"><a title="tuned.plugins.base.Plugin._cleanup_all_device_commands" class="py-name" href="#" onclick="return doclink('link-48', '_cleanup_all_device_commands', 'link-48');">_cleanup_all_device_commands</a></tt><tt class="py-op">(</tt><tt id="link-49" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-49', 'instance', 'link-19');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-name">device_name</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

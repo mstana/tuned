@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.plugins.repository</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.plugins-module.html">Package&nbsp;plugins</a> ::
+        Module&nbsp;repository
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.plugins.repository-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.plugins.repository-module.html">Module tuned.plugins.repository</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package tuned=tuned-module.html"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-0', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package tuned.utils=tuned.utils-module.html"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-1', 'utils', 'link-1');">utils</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module tuned.utils.plugin_loader=tuned.utils.plugin_loader-module.html"><a title="tuned.utils.plugin_loader" class="py-name" href="#" onclick="return doclink('link-2', 'plugin_loader', 'link-2');">plugin_loader</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class tuned.utils.plugin_loader.PluginLoader=tuned.utils.plugin_loader.PluginLoader-class.html"><a title="tuned.utils.plugin_loader.PluginLoader" class="py-name" href="#" onclick="return doclink('link-3', 'PluginLoader', 'link-3');">PluginLoader</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-4" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-4', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package tuned.plugins=tuned.plugins-module.html,Variable tuned.plugins.repository.Repository.plugins=tuned.plugins.repository.Repository-class.html#plugins,Variable tuned.units.manager.Manager.plugins=tuned.units.manager.Manager-class.html#plugins"><a title="tuned.plugins
+tuned.plugins.repository.Repository.plugins
+tuned.units.manager.Manager.plugins" class="py-name" href="#" onclick="return doclink('link-5', 'plugins', 'link-5');">plugins</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module tuned.monitors.base=tuned.monitors.base-module.html,Module tuned.plugins.base=tuned.plugins.base-module.html"><a title="tuned.monitors.base
+tuned.plugins.base" class="py-name" href="#" onclick="return doclink('link-6', 'base', 'link-6');">base</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-7" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-7', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module tuned.logs=tuned.logs-module.html"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-8', 'logs', 'link-8');">logs</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable tuned.daemon.application.log=tuned.daemon.application-module.html#log,Variable tuned.daemon.controller.log=tuned.daemon.controller-module.html#log,Variable tuned.daemon.daemon.log=tuned.daemon.daemon-module.html#log,Method tuned.exceptions.TunedException.log()=tuned.exceptions.TunedException-class.html#log,Variable tuned.hardware.inventory.log=tuned.hardware.inventory-module.html#log,Variable tuned.monitors.base.log=tuned.monitors.base-module.html#log,Variable tuned.monitors.repository.log=tuned.monitors.repository-module.html#log,Variable tuned.plugins.base.log=tuned.plugins.base-module.html#log,Variable tuned.plugins.hotplug.log=tuned.plugins.hotplug-module.html#log,Variable tuned.plugins.plugin_audio.log=tuned.plugins.plugin_audio-module.html#log,Variable tuned.plugins.plugin_cpu.log=tuned.plugins.plugin_cpu-module.html#log,Variable tuned.plugins.plugin_disk.log=tuned.plugins.plugin_disk-module.html#log,Variable tuned.plugins.plugin_eeepc_she.log=tuned.plugins.plugin_eeepc_she-module.html#log,Variable tuned.plugins.plugin_mounts.log=tuned.plugins.plugin_mounts-module.html#log,Variable tuned.plugins.plugin_net.log=tuned.plugins.plugin_net-module.html#log,Variable tuned.plugins.plugin_script.log=tuned.plugins.plugin_script-module.html#log,Variable tuned.plugins.plugin_sysctl.log=tuned.plugins.plugin_sysctl-module.html#log,Variable tuned.plugins.plugin_sysfs.log=tuned.plugins.plugin_sysfs-module.html#log,Variable tuned.plugins.plugin_usb.log=tuned.plugins.plugin_usb-module.html#log,Variable tuned.plugins.plugin_video.log=tuned.plugins.plugin_video-module.html#log,Variable tuned.plugins.plugin_vm.log=tuned.plugins.plugin_vm-module.html#log,Variable tuned.plugins.repository.log=tuned.plugins.repository-module.html#log,Variable tuned.profiles.loader.log=tuned.profiles.loader-module.html#log,Variable tuned.storage.pickle_provider.log=tuned.storage.pickle_provider-module.html#log,Variable tuned.units.manager.log=tuned.units.manager-module.html#log,Variable tuned.utils.commands.log=tuned.utils.commands-module.html#log,Variable tuned.utils.nettool.log=tuned.utils.nettool-module.html#log,Variable tuned.utils.plugin_loader.log=tuned.utils.plugin_loader-module.html#log"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-9', 'log', 'link-9');">log</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-10', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-11', 'logs', 'link-8');">logs</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-12', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"Repository"</tt><tt class="py-op">]</tt> </tt>
+<a name="Repository"></a><div id="Repository-def"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="Repository-toggle" onclick="return toggle('Repository');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.plugins.repository.Repository-class.html">Repository</a><tt class="py-op">(</tt><tt class="py-base-class">PluginLoader</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Repository-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Repository-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="Repository.__init__"></a><div id="Repository.__init__-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="Repository.__init__-toggle" onclick="return toggle('Repository.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.repository.Repository-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">monitor_repository</tt><tt class="py-op">,</tt> <tt class="py-param">storage_factory</tt><tt class="py-op">,</tt> <tt class="py-param">hardware_inventory</tt><tt class="py-op">,</tt> <tt class="py-param">device_matcher</tt><tt class="py-op">,</tt> <tt class="py-param">plugin_instance_factory</tt><tt class="py-op">,</tt> <tt class="py-param">global_cfg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Repository.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Repository.__init__-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                <tt class="py-name">super</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method tuned.admin.admin.Admin.__init__()=tuned.admin.admin.Admin-class.html#__init__,Method tuned.admin.dbus_controller.DBusController.__init__()=tuned.admin.dbus_controller.DBusController-class.html#__init__,Method tuned.daemon.application.Application.__init__()=tuned.daemon.application.Application-class.html#__init__,Method tuned.daemon.controller.Controller.__init__()=tuned.daemon.controller.Controller-class.html#__init__,Method tuned.daemon.daemon.Daemon.__init__()=tuned.daemon.daemon.Daemon-class.html#__init__,Method tuned.exports.controller.ExportsController.__init__()=tuned.exports.controller.ExportsController-class.html#__init__,Method tuned.exports.dbus_exporter.DBusExporter.__init__()=tuned.exports.dbus_exporter.DBusExporter-class.html#__init__,Method tuned.hardware.inventory.Inventory.__init__()=tuned.hardware.inventory.Inventory-class.html#__init__,Method tuned.logs.TunedLogger.__init__()=tuned.logs.TunedLogger-class.html#__init__,Method tuned.monitors.base.Monitor.__init__()=tuned.monitors.base.Monitor-class.html#__init__,Method tuned.monitors.repository.Repository.__init__()=tuned.monitors.repository.Repository-class.html#__init__,Method tuned.patterns.Singleton.__init__()=tuned.patterns.Singleton-class.html#__init__,Method tuned.plugins.base.Plugin.__init__()=tuned.plugins.base.Plugin-class.html#__init__,Method tuned.plugins.hotplug.Plugin.__init__()=tuned.plugins.hotplug.Plugin-class.html#__init__,Method tuned.plugins.instance.instance.Instance.__init__()=tuned.plugins.instance.instance.Instance-class.html#__init__,Method tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#__init__,Method tuned.plugins.plugin_disk.DiskPlugin.__init__()=tuned.plugins.plugin_disk.DiskPlugin-class.html#__init__,Method tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__()=tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#__init__,Method tuned.plugins.plugin_net.NetTuningPlugin.__init__()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#__init__,Method tuned.plugins.plugin_sysctl.SysctlPlugin.__init__()=tuned.plugins.plugin_sysctl.SysctlPlugin-class.html#__init__,Method tuned.plugins.plugin_sysfs.SysfsPlugin.__init__()=tuned.plugins.plugin_sysfs.SysfsPlugin-class.html#__init__,Method tuned.plugins.repository.Repository.__init__()=tuned.plugins.repository.Repository-class.html#__init__,Method tuned.profiles.loader.Loader.__init__()=tuned.profiles.loader.Loader-class.html#__init__,Method tuned.profiles.locator.Locator.__init__()=tuned.profiles.locator.Locator-class.html#__init__,Method tuned.profiles.merger.Merger.__init__()=tuned.profiles.merger.Merger-class.html#__init__,Method tuned.profiles.profile.Profile.__init__()=tuned.profiles.profile.Profile-class.html#__init__,Method tuned.profiles.unit.Unit.__init__()=tuned.profiles.unit.Unit-class.html#__init__,Method tuned.storage.factory.Factory.__init__()=tuned.storage.factory.Factory-class.html#__init__,Method tuned.storage.pickle_provider.PickleProvider.__init__()=tuned.storage.pickle_provider.PickleProvider-class.html#__init__,Method tuned.storage.storage.Storage.__init__()=tuned.storage.storage.Storage-class.html#__init__,Method tuned.units.manager.Manager.__init__()=tuned.units.manager.Manager-class.html#__init__,Method tuned.utils.nettool.Nettool.__init__()=tuned.utils.nettool.Nettool-class.html#__init__,Method tuned.utils.plugin_loader.PluginLoader.__init__()=tuned.utils.plugin_loader.PluginLoader-class.html#__init__"><a title="tuned.admin.admin.Admin.__init__
+tuned.admin.dbus_controller.DBusController.__init__
+tuned.daemon.application.Application.__init__
+tuned.daemon.controller.Controller.__init__
+tuned.daemon.daemon.Daemon.__init__
+tuned.exports.controller.ExportsController.__init__
+tuned.exports.dbus_exporter.DBusExporter.__init__
+tuned.hardware.inventory.Inventory.__init__
+tuned.logs.TunedLogger.__init__
+tuned.monitors.base.Monitor.__init__
+tuned.monitors.repository.Repository.__init__
+tuned.patterns.Singleton.__init__
+tuned.plugins.base.Plugin.__init__
+tuned.plugins.hotplug.Plugin.__init__
+tuned.plugins.instance.instance.Instance.__init__
+tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__
+tuned.plugins.plugin_disk.DiskPlugin.__init__
+tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__
+tuned.plugins.plugin_net.NetTuningPlugin.__init__
+tuned.plugins.plugin_sysctl.SysctlPlugin.__init__
+tuned.plugins.plugin_sysfs.SysfsPlugin.__init__
+tuned.plugins.repository.Repository.__init__
+tuned.profiles.loader.Loader.__init__
+tuned.profiles.locator.Locator.__init__
+tuned.profiles.merger.Merger.__init__
+tuned.profiles.profile.Profile.__init__
+tuned.profiles.unit.Unit.__init__
+tuned.storage.factory.Factory.__init__
+tuned.storage.pickle_provider.PickleProvider.__init__
+tuned.storage.storage.Storage.__init__
+tuned.units.manager.Manager.__init__
+tuned.utils.nettool.Nettool.__init__
+tuned.utils.plugin_loader.PluginLoader.__init__" class="py-name" href="#" onclick="return doclink('link-13', '__init__', 'link-13');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_plugins</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name" targets="Method tuned.storage.interfaces.Provider.set()=tuned.storage.interfaces.Provider-class.html#set,Method tuned.storage.pickle_provider.PickleProvider.set()=tuned.storage.pickle_provider.PickleProvider-class.html#set,Method tuned.storage.storage.Storage.set()=tuned.storage.storage.Storage-class.html#set"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-14', 'set', 'link-14');">set</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_monitor_repository</tt> <tt class="py-op">=</tt> <tt class="py-name">monitor_repository</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_storage_factory</tt> <tt class="py-op">=</tt> <tt class="py-name">storage_factory</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_hardware_inventory</tt> <tt class="py-op">=</tt> <tt class="py-name">hardware_inventory</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_device_matcher</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name" targets="Module tuned.hardware.device_matcher=tuned.hardware.device_matcher-module.html"><a title="tuned.hardware.device_matcher" class="py-name" href="#" onclick="return doclink('link-15', 'device_matcher', 'link-15');">device_matcher</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_plugin_instance_factory</tt> <tt class="py-op">=</tt> <tt class="py-name">plugin_instance_factory</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_global_cfg</tt> <tt class="py-op">=</tt> <tt class="py-name">global_cfg</tt> </tt>
+</div><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Repository.plugins"></a><div id="Repository.plugins-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="Repository.plugins-toggle" onclick="return toggle('Repository.plugins');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.repository.Repository-class.html#plugins">plugins</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Repository.plugins-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Repository.plugins-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_plugins</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="Repository._set_loader_parameters"></a><div id="Repository._set_loader_parameters-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="Repository._set_loader_parameters-toggle" onclick="return toggle('Repository._set_loader_parameters');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.repository.Repository-class.html#_set_loader_parameters">_set_loader_parameters</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Repository._set_loader_parameters-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Repository._set_loader_parameters-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Variable tuned.storage.storage.Storage._namespace=tuned.storage.storage.Storage-class.html#_namespace,Variable tuned.utils.plugin_loader.PluginLoader._namespace=tuned.utils.plugin_loader.PluginLoader-class.html#_namespace"><a title="tuned.storage.storage.Storage._namespace
+tuned.utils.plugin_loader.PluginLoader._namespace" class="py-name" href="#" onclick="return doclink('link-16', '_namespace', 'link-16');">_namespace</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"tuned.plugins"</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Variable tuned.utils.plugin_loader.PluginLoader._prefix=tuned.utils.plugin_loader.PluginLoader-class.html#_prefix"><a title="tuned.utils.plugin_loader.PluginLoader._prefix" class="py-name" href="#" onclick="return doclink('link-17', '_prefix', 'link-17');">_prefix</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"plugin_"</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Variable tuned.utils.plugin_loader.PluginLoader._interface=tuned.utils.plugin_loader.PluginLoader-class.html#_interface"><a title="tuned.utils.plugin_loader.PluginLoader._interface" class="py-name" href="#" onclick="return doclink('link-18', '_interface', 'link-18');">_interface</a></tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-19', 'tuned', 'link-0');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="tuned.plugins
+tuned.plugins.repository.Repository.plugins
+tuned.units.manager.Manager.plugins" class="py-name" href="#" onclick="return doclink('link-20', 'plugins', 'link-5');">plugins</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="tuned.monitors.base
+tuned.plugins.base" class="py-name" href="#" onclick="return doclink('link-21', 'base', 'link-6');">base</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Class tuned.plugins.base.Plugin=tuned.plugins.base.Plugin-class.html,Class tuned.plugins.hotplug.Plugin=tuned.plugins.hotplug.Plugin-class.html"><a title="tuned.plugins.base.Plugin
+tuned.plugins.hotplug.Plugin" class="py-name" href="#" onclick="return doclink('link-22', 'Plugin', 'link-22');">Plugin</a></tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="Repository.create"></a><div id="Repository.create-def"><a name="L30"></a><tt class="py-lineno">30</tt> <a class="py-toggle" href="#" id="Repository.create-toggle" onclick="return toggle('Repository.create');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.repository.Repository-class.html#create">create</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">plugin_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Repository.create-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Repository.create-expanded"><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">                <tt id="link-23" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-23', 'log', 'link-9');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">"creating plugin %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">plugin_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">                <tt class="py-name">plugin_cls</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method tuned.utils.plugin_loader.PluginLoader.load_plugin()=tuned.utils.plugin_loader.PluginLoader-class.html#load_plugin"><a title="tuned.utils.plugin_loader.PluginLoader.load_plugin" class="py-name" href="#" onclick="return doclink('link-24', 'load_plugin', 'link-24');">load_plugin</a></tt><tt class="py-op">(</tt><tt class="py-name">plugin_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                <tt class="py-name">plugin_instance</tt> <tt class="py-op">=</tt> <tt class="py-name">plugin_cls</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_monitor_repository</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_storage_factory</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_hardware_inventory</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_device_matcher</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_plugin_instance_factory</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_global_cfg</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_plugins</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">plugin_instance</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">plugin_instance</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="Repository.delete"></a><div id="Repository.delete-def"><a name="L37"></a><tt class="py-lineno">37</tt> <a class="py-toggle" href="#" id="Repository.delete-toggle" onclick="return toggle('Repository.delete');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.repository.Repository-class.html#delete">delete</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">plugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Repository.delete-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Repository.delete-expanded"><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                <tt class="py-keyword">assert</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">plugin</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="tuned.utils.plugin_loader.PluginLoader._interface" class="py-name" href="#" onclick="return doclink('link-25', '_interface', 'link-18');">_interface</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                <tt id="link-26" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-26', 'log', 'link-9');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">"removing plugin %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">plugin</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt class="py-name">plugin</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Method tuned.monitors.base.Monitor.cleanup()=tuned.monitors.base.Monitor-class.html#cleanup,Method tuned.plugins.base.Plugin.cleanup()=tuned.plugins.base.Plugin-class.html#cleanup,Method tuned.plugins.hotplug.Plugin.cleanup()=tuned.plugins.hotplug.Plugin-class.html#cleanup"><a title="tuned.monitors.base.Monitor.cleanup
+tuned.plugins.base.Plugin.cleanup
+tuned.plugins.hotplug.Plugin.cleanup" class="py-name" href="#" onclick="return doclink('link-27', 'cleanup', 'link-27');">cleanup</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_plugins</tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt class="py-name">plugin</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:46 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

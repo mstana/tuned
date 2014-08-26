@@ -1,0 +1,1063 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.plugins.base.Plugin</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.plugins-module.html">Package&nbsp;plugins</a> ::
+        <a href="tuned.plugins.base-module.html">Module&nbsp;base</a> ::
+        Class&nbsp;Plugin
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.plugins.base.Plugin-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Plugin</h1><p class="nomargin-top"><span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">Plugin</strong>
+</pre>
+
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="tuned.plugins.plugin_sysfs.SysfsPlugin-class.html">plugin_sysfs.SysfsPlugin</a></li><li>, <a href="tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html">plugin_eeepc_she.EeePCSHEPlugin</a></li><li>, <a href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html">plugin_cpu.CPULatencyPlugin</a></li><li>, <a href="tuned.plugins.plugin_usb.USBPlugin-class.html">plugin_usb.USBPlugin</a></li><li>, <a href="tuned.plugins.plugin_net.NetTuningPlugin-class.html">plugin_net.NetTuningPlugin</a></li><li>, <a href="tuned.plugins.hotplug.Plugin-class.html">hotplug.Plugin</a></li><li>, <a href="tuned.plugins.plugin_sysctl.SysctlPlugin-class.html">plugin_sysctl.SysctlPlugin</a></li><li>, <a href="tuned.plugins.plugin_audio.AudioPlugin-class.html">plugin_audio.AudioPlugin</a></li><li>, <a href="tuned.plugins.plugin_mounts.MountsPlugin-class.html">plugin_mounts.MountsPlugin</a></li><li>, <a href="tuned.plugins.plugin_script.ScriptPlugin-class.html">plugin_script.ScriptPlugin</a></li><li>, <a href="tuned.plugins.plugin_vm.VMPlugin-class.html">plugin_vm.VMPlugin</a></li><li>, <a href="tuned.plugins.plugin_video.VideoPlugin-class.html">plugin_video.VideoPlugin</a></li>  </ul>
+</dd></dl>
+
+<hr />
+<p>Base class for all plugins.</p>
+  <p>Plugins change various system settings in order to get desired 
+  performance or power saving. Plugins use Monitor objects to get 
+  information from the running system.</p>
+  <p>Intentionally a lot of logic is included in the plugin to increase 
+  plugin flexibility.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="tuned.plugins.base.Plugin-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">monitors_repository</span>,
+        <span class="summary-sig-arg">storage_factory</span>,
+        <span class="summary-sig-arg">hardware_inventory</span>,
+        <span class="summary-sig-arg">device_matcher</span>,
+        <span class="summary-sig-arg">instance_factory</span>,
+        <span class="summary-sig-arg">global_cfg</span>)</span><br />
+      Plugin constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="cleanup"></a><span class="summary-sig-name">cleanup</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.cleanup">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_get_config_options"></a><span class="summary-sig-name">_get_config_options</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Default configuration options for the plugin.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._get_config_options">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="tuned.plugins.base.Plugin-class.html#_get_config_options_used_by_dynamic" class="summary-sig-name" onclick="show_private();">_get_config_options_used_by_dynamic</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      List of config options used by dynamic tuning.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._get_config_options_used_by_dynamic">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_get_effective_options"></a><span class="summary-sig-name">_get_effective_options</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">options</span>)</span><br />
+      Merge provided options with plugin default options.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._get_effective_options">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_option_bool"></a><span class="summary-sig-name">_option_bool</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._option_bool">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="create_instance"></a><span class="summary-sig-name">create_instance</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">devices_expression</span>,
+        <span class="summary-sig-arg">options</span>)</span><br />
+      Create new instance of the plugin and seize the devices.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.create_instance">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="destroy_instance"></a><span class="summary-sig-name">destroy_instance</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span><br />
+      Destroy existing instance.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.destroy_instance">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="initialize_instances"></a><span class="summary-sig-name">initialize_instances</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Initialize all created instances.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.initialize_instances">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="destroy_instances"></a><span class="summary-sig-name">destroy_instances</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Destroy all instances.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.destroy_instances">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_destroy_instance"></a><span class="summary-sig-name">_destroy_instance</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._destroy_instance">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_instance_init"></a><span class="summary-sig-name">_instance_init</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._instance_init">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_instance_cleanup"></a><span class="summary-sig-name">_instance_cleanup</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._instance_cleanup">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_init_devices"></a><span class="summary-sig-name">_init_devices</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._init_devices">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_devices_supported"></a><span class="summary-sig-name">_devices_supported</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._devices_supported">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_get_matching_devices"></a><span class="summary-sig-name">_get_matching_devices</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">devices</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._get_matching_devices">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="assign_free_devices"></a><span class="summary-sig-name">assign_free_devices</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.assign_free_devices">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="release_devices"></a><span class="summary-sig-name">release_devices</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.release_devices">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_run_for_each_device"></a><span class="summary-sig-name">_run_for_each_device</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">callback</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._run_for_each_device">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="instance_apply_tuning"></a><span class="summary-sig-name">instance_apply_tuning</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span><br />
+      Apply static and dynamic tuning if the plugin instance is active.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.instance_apply_tuning">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="instance_update_tuning"></a><span class="summary-sig-name">instance_update_tuning</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span><br />
+      Apply dynamic tuning if the plugin instance is active.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.instance_update_tuning">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="instance_unapply_tuning"></a><span class="summary-sig-name">instance_unapply_tuning</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span><br />
+      Remove all tunings applied by the plugin instance.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.instance_unapply_tuning">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_instance_apply_static"></a><span class="summary-sig-name">_instance_apply_static</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._instance_apply_static">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_instance_unapply_static"></a><span class="summary-sig-name">_instance_unapply_static</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._instance_unapply_static">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_instance_apply_dynamic"></a><span class="summary-sig-name">_instance_apply_dynamic</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">device</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._instance_apply_dynamic">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_instance_unapply_dynamic"></a><span class="summary-sig-name">_instance_unapply_dynamic</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">device</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._instance_unapply_dynamic">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_instance_update_dynamic"></a><span class="summary-sig-name">_instance_update_dynamic</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">device</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._instance_update_dynamic">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_init_commands"></a><span class="summary-sig-name">_init_commands</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Initialize commands.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._init_commands">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_autoregister_commands"></a><span class="summary-sig-name">_autoregister_commands</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Register all commands marked using @command_set, @command_get, and 
+      @command_custom decorators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._autoregister_commands">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_check_commands"></a><span class="summary-sig-name">_check_commands</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Check if all commands are defined correctly.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._check_commands">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_storage_key"></a><span class="summary-sig-name">_storage_key</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance_name</span>,
+        <span class="summary-sig-arg">command_name</span>,
+        <span class="summary-sig-arg">device_name</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._storage_key">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_storage_set"></a><span class="summary-sig-name">_storage_set</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">command</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">device_name</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._storage_set">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_storage_get"></a><span class="summary-sig-name">_storage_get</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">command</span>,
+        <span class="summary-sig-arg">device_name</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._storage_get">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_storage_unset"></a><span class="summary-sig-name">_storage_unset</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">command</span>,
+        <span class="summary-sig-arg">device_name</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._storage_unset">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_execute_all_non_device_commands"></a><span class="summary-sig-name">_execute_all_non_device_commands</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._execute_all_non_device_commands">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_execute_all_device_commands"></a><span class="summary-sig-name">_execute_all_device_commands</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">devices</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._execute_all_device_commands">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_save_current_value"></a><span class="summary-sig-name">_save_current_value</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">command</span>,
+        <span class="summary-sig-arg">device</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._save_current_value">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_execute_device_command"></a><span class="summary-sig-name">_execute_device_command</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">command</span>,
+        <span class="summary-sig-arg">device</span>,
+        <span class="summary-sig-arg">new_value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._execute_device_command">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_execute_non_device_command"></a><span class="summary-sig-name">_execute_non_device_command</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">command</span>,
+        <span class="summary-sig-arg">new_value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._execute_non_device_command">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_cleanup_all_non_device_commands"></a><span class="summary-sig-name">_cleanup_all_non_device_commands</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._cleanup_all_non_device_commands">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_cleanup_all_device_commands"></a><span class="summary-sig-name">_cleanup_all_device_commands</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">devices</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._cleanup_all_device_commands">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_cleanup_device_command"></a><span class="summary-sig-name">_cleanup_device_command</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">command</span>,
+        <span class="summary-sig-arg">device</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._cleanup_device_command">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_cleanup_non_device_command"></a><span class="summary-sig-name">_cleanup_non_device_command</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">instance</span>,
+        <span class="summary-sig-arg">command</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._cleanup_non_device_command">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="tuned.plugins.base.Plugin-class.html#name" class="summary-name">name</a>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">monitors_repository</span>,
+        <span class="sig-arg">storage_factory</span>,
+        <span class="sig-arg">hardware_inventory</span>,
+        <span class="sig-arg">device_matcher</span>,
+        <span class="sig-arg">instance_factory</span>,
+        <span class="sig-arg">global_cfg</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Plugin constructor.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_get_config_options_used_by_dynamic"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_get_config_options_used_by_dynamic</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="tuned.plugins.base-pysrc.html#Plugin._get_config_options_used_by_dynamic">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>List of config options used by dynamic tuning. Their previous values 
+  will be automatically saved and restored.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="name"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">name</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.name(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:45 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

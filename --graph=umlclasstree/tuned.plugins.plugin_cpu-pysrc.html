@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>tuned.plugins.plugin_cpu</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="tuned-module.html">Package&nbsp;tuned</a> ::
+        <a href="tuned.plugins-module.html">Package&nbsp;plugins</a> ::
+        Module&nbsp;plugin_cpu
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="tuned.plugins.plugin_cpu-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="tuned.plugins.plugin_cpu-module.html">Module tuned.plugins.plugin_cpu</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module tuned.monitors.base=tuned.monitors.base-module.html,Module tuned.plugins.base=tuned.plugins.base-module.html"><a title="tuned.monitors.base
+tuned.plugins.base" class="py-name" href="#" onclick="return doclink('link-0', 'base', 'link-0');">base</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Module tuned.plugins.decorators=tuned.plugins.decorators-module.html"><a title="tuned.plugins.decorators" class="py-name" href="#" onclick="return doclink('link-1', 'decorators', 'link-1');">decorators</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Package tuned=tuned-module.html"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-2', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module tuned.logs=tuned.logs-module.html"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-3', 'logs', 'link-3');">logs</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-4" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-4', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package tuned.utils=tuned.utils-module.html"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-5', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module tuned.utils.commands=tuned.utils.commands-module.html"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-6', 'commands', 'link-6');">commands</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">struct</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable tuned.daemon.application.log=tuned.daemon.application-module.html#log,Variable tuned.daemon.controller.log=tuned.daemon.controller-module.html#log,Variable tuned.daemon.daemon.log=tuned.daemon.daemon-module.html#log,Method tuned.exceptions.TunedException.log()=tuned.exceptions.TunedException-class.html#log,Variable tuned.hardware.inventory.log=tuned.hardware.inventory-module.html#log,Variable tuned.monitors.base.log=tuned.monitors.base-module.html#log,Variable tuned.monitors.repository.log=tuned.monitors.repository-module.html#log,Variable tuned.plugins.base.log=tuned.plugins.base-module.html#log,Variable tuned.plugins.hotplug.log=tuned.plugins.hotplug-module.html#log,Variable tuned.plugins.plugin_audio.log=tuned.plugins.plugin_audio-module.html#log,Variable tuned.plugins.plugin_cpu.log=tuned.plugins.plugin_cpu-module.html#log,Variable tuned.plugins.plugin_disk.log=tuned.plugins.plugin_disk-module.html#log,Variable tuned.plugins.plugin_eeepc_she.log=tuned.plugins.plugin_eeepc_she-module.html#log,Variable tuned.plugins.plugin_mounts.log=tuned.plugins.plugin_mounts-module.html#log,Variable tuned.plugins.plugin_net.log=tuned.plugins.plugin_net-module.html#log,Variable tuned.plugins.plugin_script.log=tuned.plugins.plugin_script-module.html#log,Variable tuned.plugins.plugin_sysctl.log=tuned.plugins.plugin_sysctl-module.html#log,Variable tuned.plugins.plugin_sysfs.log=tuned.plugins.plugin_sysfs-module.html#log,Variable tuned.plugins.plugin_usb.log=tuned.plugins.plugin_usb-module.html#log,Variable tuned.plugins.plugin_video.log=tuned.plugins.plugin_video-module.html#log,Variable tuned.plugins.plugin_vm.log=tuned.plugins.plugin_vm-module.html#log,Variable tuned.plugins.repository.log=tuned.plugins.repository-module.html#log,Variable tuned.profiles.loader.log=tuned.profiles.loader-module.html#log,Variable tuned.storage.pickle_provider.log=tuned.storage.pickle_provider-module.html#log,Variable tuned.units.manager.log=tuned.units.manager-module.html#log,Variable tuned.utils.commands.log=tuned.utils.commands-module.html#log,Variable tuned.utils.nettool.log=tuned.utils.nettool-module.html#log,Variable tuned.utils.plugin_loader.log=tuned.utils.plugin_loader-module.html#log"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-7', 'log', 'link-7');">log</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-8', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="tuned.logs" class="py-name" href="#" onclick="return doclink('link-9', 'logs', 'link-3');">logs</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method tuned.storage.interfaces.Provider.get()=tuned.storage.interfaces.Provider-class.html#get,Method tuned.storage.pickle_provider.PickleProvider.get()=tuned.storage.pickle_provider.PickleProvider-class.html#get,Method tuned.storage.storage.Storage.get()=tuned.storage.storage.Storage-class.html#get"><a title="tuned.storage.interfaces.Provider.get
+tuned.storage.pickle_provider.PickleProvider.get
+tuned.storage.storage.Storage.get" class="py-name" href="#" onclick="return doclink('link-10', 'get', 'link-10');">get</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="CPULatencyPlugin"></a><div id="CPULatencyPlugin-def"><a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"># TODO: force_latency -&gt; command</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment">#       intel_pstate</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin-toggle" onclick="return toggle('CPULatencyPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html">CPULatencyPlugin</a><tt class="py-op">(</tt><tt class="py-base-class">base</tt><tt class="py-op">.</tt><tt class="py-base-class">Plugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="CPULatencyPlugin-expanded"><a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">        Plugin for tuning CPU options. Powersaving, governor, required latency, etc.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin.__init__"></a><div id="CPULatencyPlugin.__init__-def"><a name="L19"></a><tt class="py-lineno"> 19</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin.__init__-toggle" onclick="return toggle('CPULatencyPlugin.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin.__init__-expanded"><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">                <tt class="py-name">super</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method tuned.admin.admin.Admin.__init__()=tuned.admin.admin.Admin-class.html#__init__,Method tuned.admin.dbus_controller.DBusController.__init__()=tuned.admin.dbus_controller.DBusController-class.html#__init__,Method tuned.daemon.application.Application.__init__()=tuned.daemon.application.Application-class.html#__init__,Method tuned.daemon.controller.Controller.__init__()=tuned.daemon.controller.Controller-class.html#__init__,Method tuned.daemon.daemon.Daemon.__init__()=tuned.daemon.daemon.Daemon-class.html#__init__,Method tuned.exports.controller.ExportsController.__init__()=tuned.exports.controller.ExportsController-class.html#__init__,Method tuned.exports.dbus_exporter.DBusExporter.__init__()=tuned.exports.dbus_exporter.DBusExporter-class.html#__init__,Method tuned.hardware.inventory.Inventory.__init__()=tuned.hardware.inventory.Inventory-class.html#__init__,Method tuned.logs.TunedLogger.__init__()=tuned.logs.TunedLogger-class.html#__init__,Method tuned.monitors.base.Monitor.__init__()=tuned.monitors.base.Monitor-class.html#__init__,Method tuned.monitors.repository.Repository.__init__()=tuned.monitors.repository.Repository-class.html#__init__,Method tuned.patterns.Singleton.__init__()=tuned.patterns.Singleton-class.html#__init__,Method tuned.plugins.base.Plugin.__init__()=tuned.plugins.base.Plugin-class.html#__init__,Method tuned.plugins.hotplug.Plugin.__init__()=tuned.plugins.hotplug.Plugin-class.html#__init__,Method tuned.plugins.instance.instance.Instance.__init__()=tuned.plugins.instance.instance.Instance-class.html#__init__,Method tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#__init__,Method tuned.plugins.plugin_disk.DiskPlugin.__init__()=tuned.plugins.plugin_disk.DiskPlugin-class.html#__init__,Method tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__()=tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#__init__,Method tuned.plugins.plugin_net.NetTuningPlugin.__init__()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#__init__,Method tuned.plugins.plugin_sysctl.SysctlPlugin.__init__()=tuned.plugins.plugin_sysctl.SysctlPlugin-class.html#__init__,Method tuned.plugins.plugin_sysfs.SysfsPlugin.__init__()=tuned.plugins.plugin_sysfs.SysfsPlugin-class.html#__init__,Method tuned.plugins.repository.Repository.__init__()=tuned.plugins.repository.Repository-class.html#__init__,Method tuned.profiles.loader.Loader.__init__()=tuned.profiles.loader.Loader-class.html#__init__,Method tuned.profiles.locator.Locator.__init__()=tuned.profiles.locator.Locator-class.html#__init__,Method tuned.profiles.merger.Merger.__init__()=tuned.profiles.merger.Merger-class.html#__init__,Method tuned.profiles.profile.Profile.__init__()=tuned.profiles.profile.Profile-class.html#__init__,Method tuned.profiles.unit.Unit.__init__()=tuned.profiles.unit.Unit-class.html#__init__,Method tuned.storage.factory.Factory.__init__()=tuned.storage.factory.Factory-class.html#__init__,Method tuned.storage.pickle_provider.PickleProvider.__init__()=tuned.storage.pickle_provider.PickleProvider-class.html#__init__,Method tuned.storage.storage.Storage.__init__()=tuned.storage.storage.Storage-class.html#__init__,Method tuned.units.manager.Manager.__init__()=tuned.units.manager.Manager-class.html#__init__,Method tuned.utils.nettool.Nettool.__init__()=tuned.utils.nettool.Nettool-class.html#__init__,Method tuned.utils.plugin_loader.PluginLoader.__init__()=tuned.utils.plugin_loader.PluginLoader-class.html#__init__"><a title="tuned.admin.admin.Admin.__init__
+tuned.admin.dbus_controller.DBusController.__init__
+tuned.daemon.application.Application.__init__
+tuned.daemon.controller.Controller.__init__
+tuned.daemon.daemon.Daemon.__init__
+tuned.exports.controller.ExportsController.__init__
+tuned.exports.dbus_exporter.DBusExporter.__init__
+tuned.hardware.inventory.Inventory.__init__
+tuned.logs.TunedLogger.__init__
+tuned.monitors.base.Monitor.__init__
+tuned.monitors.repository.Repository.__init__
+tuned.patterns.Singleton.__init__
+tuned.plugins.base.Plugin.__init__
+tuned.plugins.hotplug.Plugin.__init__
+tuned.plugins.instance.instance.Instance.__init__
+tuned.plugins.plugin_cpu.CPULatencyPlugin.__init__
+tuned.plugins.plugin_disk.DiskPlugin.__init__
+tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin.__init__
+tuned.plugins.plugin_net.NetTuningPlugin.__init__
+tuned.plugins.plugin_sysctl.SysctlPlugin.__init__
+tuned.plugins.plugin_sysfs.SysfsPlugin.__init__
+tuned.plugins.repository.Repository.__init__
+tuned.profiles.loader.Loader.__init__
+tuned.profiles.locator.Locator.__init__
+tuned.profiles.merger.Merger.__init__
+tuned.profiles.profile.Profile.__init__
+tuned.profiles.unit.Unit.__init__
+tuned.storage.factory.Factory.__init__
+tuned.storage.pickle_provider.PickleProvider.__init__
+tuned.storage.storage.Storage.__init__
+tuned.units.manager.Manager.__init__
+tuned.utils.nettool.Nettool.__init__
+tuned.utils.plugin_loader.PluginLoader.__init__" class="py-name" href="#" onclick="return doclink('link-11', '__init__', 'link-11');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_cpupower</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_energy_perf_bias</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_intel_pstate</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_min_perf_pct_save</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_max_perf_pct_save</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_no_turbo_save</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._init_devices"></a><div id="CPULatencyPlugin._init_devices-def"><a name="L30"></a><tt class="py-lineno"> 30</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._init_devices-toggle" onclick="return toggle('CPULatencyPlugin._init_devices');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_init_devices">_init_devices</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._init_devices-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._init_devices-expanded"><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Variable tuned.profiles.unit.Unit._devices=tuned.profiles.unit.Unit-class.html#_devices"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-12', '_devices', 'link-12');">_devices</a></tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name" targets="Method tuned.storage.interfaces.Provider.set()=tuned.storage.interfaces.Provider-class.html#set,Method tuned.storage.pickle_provider.PickleProvider.set()=tuned.storage.pickle_provider.PickleProvider-class.html#set,Method tuned.storage.storage.Storage.set()=tuned.storage.storage.Storage-class.html#set"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-13', 'set', 'link-13');">set</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">                <tt class="py-comment"># current list of devices</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">device</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_hardware_inventory</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method tuned.hardware.inventory.Inventory.get_devices()=tuned.hardware.inventory.Inventory-class.html#get_devices"><a title="tuned.hardware.inventory.Inventory.get_devices" class="py-name" href="#" onclick="return doclink('link-14', 'get_devices', 'link-14');">get_devices</a></tt><tt class="py-op">(</tt><tt class="py-string">"cpu"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-15', '_devices', 'link-12');">_devices</a></tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">sys_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_assigned_devices</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="tuned.storage.interfaces.Provider.set
+tuned.storage.pickle_provider.PickleProvider.set
+tuned.storage.storage.Storage.set" class="py-name" href="#" onclick="return doclink('link-16', 'set', 'link-13');">set</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_free_devices</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="tuned.profiles.unit.Unit._devices" class="py-name" href="#" onclick="return doclink('link-17', '_devices', 'link-12');">_devices</a></tt><tt class="py-op">.</tt><tt class="py-name">copy</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._get_config_options"></a><div id="CPULatencyPlugin._get_config_options-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._get_config_options-toggle" onclick="return toggle('CPULatencyPlugin._get_config_options');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_get_config_options">_get_config_options</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._get_config_options-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._get_config_options-expanded"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-op">{</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                        <tt class="py-string">"load_threshold"</tt>      <tt class="py-op">:</tt> <tt class="py-number">0.2</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">                        <tt class="py-string">"latency_low"</tt>         <tt class="py-op">:</tt> <tt class="py-number">100</tt><tt class="py-op">,</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                        <tt class="py-string">"latency_high"</tt>        <tt class="py-op">:</tt> <tt class="py-number">1000</tt><tt class="py-op">,</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                        <tt class="py-string">"force_latency"</tt>       <tt class="py-op">:</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                        <tt class="py-string">"governor"</tt>            <tt class="py-op">:</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                        <tt class="py-string">"energy_perf_bias"</tt>    <tt class="py-op">:</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                        <tt class="py-string">"min_perf_pct"</tt>        <tt class="py-op">:</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                        <tt class="py-string">"max_perf_pct"</tt>        <tt class="py-op">:</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                        <tt class="py-string">"no_turbo"</tt>            <tt class="py-op">:</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt class="py-op">}</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._check_cpupower"></a><div id="CPULatencyPlugin._check_cpupower-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._check_cpupower-toggle" onclick="return toggle('CPULatencyPlugin._check_cpupower');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_check_cpupower">_check_cpupower</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._check_cpupower-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._check_cpupower-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-18" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-18', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-19', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-20', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">"cpupower"</tt><tt class="py-op">,</tt> <tt class="py-string">"frequency-info"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_cpupower</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_cpupower</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                        <tt id="link-21" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-21', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"using sysfs fallback, is cpupower installed?"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._check_energy_perf_bias"></a><div id="CPULatencyPlugin._check_energy_perf_bias-def"><a name="L59"></a><tt class="py-lineno"> 59</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._check_energy_perf_bias-toggle" onclick="return toggle('CPULatencyPlugin._check_energy_perf_bias');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_check_energy_perf_bias">_check_energy_perf_bias</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._check_energy_perf_bias-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._check_energy_perf_bias-expanded"><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_energy_perf_bias</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                <tt class="py-name">retcode</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-22', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-23', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-24', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">"x86_energy_perf_policy"</tt><tt class="py-op">,</tt> <tt class="py-string">"-r"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">retcode</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_energy_perf_bias</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">retcode</tt> <tt class="py-op">==</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                        <tt id="link-25" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-25', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"error executing x86_energy_perf_policy tool, ignoring CPU energy performance bias, is the tool installed?"</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">                        <tt id="link-26" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-26', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"your CPU doesn't support MSR_IA32_ENERGY_PERF_BIAS, ignoring CPU energy performance bias"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._check_intel_pstate"></a><div id="CPULatencyPlugin._check_intel_pstate-def"><a name="L69"></a><tt class="py-lineno"> 69</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._check_intel_pstate-toggle" onclick="return toggle('CPULatencyPlugin._check_intel_pstate');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_check_intel_pstate">_check_intel_pstate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._check_intel_pstate-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._check_intel_pstate-expanded"><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_intel_pstate</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-string">"/sys/devices/system/cpu/intel_pstate"</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_intel_pstate</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                        <tt id="link-27" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-27', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"intel_pstate detected"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._instance_init"></a><div id="CPULatencyPlugin._instance_init-def"><a name="L74"></a><tt class="py-lineno"> 74</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._instance_init-toggle" onclick="return toggle('CPULatencyPlugin._instance_init');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_init">_instance_init</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._instance_init-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._instance_init-expanded"><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                <tt id="link-28" class="py-name" targets="Package tuned.plugins.instance=tuned.plugins.instance-module.html,Module tuned.plugins.instance.instance=tuned.plugins.instance.instance-module.html"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-28', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_has_static_tuning</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">                <tt id="link-29" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-29', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_has_dynamic_tuning</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                <tt class="py-comment"># only the first instance of the plugin can control the latency</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_instances</tt><tt class="py-op">.</tt><tt class="py-name">values</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt id="link-30" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-30', 'instance', 'link-28');">instance</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                        <tt id="link-31" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-31', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_first_instance</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_cpu_latency_fd</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-string">"/dev/cpu_dma_latency"</tt><tt class="py-op">,</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">O_WRONLY</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_latency</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt id="link-32" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-32', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Variable tuned.plugins.instance.instance.Instance.options=tuned.plugins.instance.instance.Instance-class.html#options,Variable tuned.profiles.profile.Profile.options=tuned.profiles.profile.Profile-class.html#options,Variable tuned.profiles.unit.Unit.options=tuned.profiles.unit.Unit-class.html#options"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-33', 'options', 'link-33');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"force_latency"</tt><tt class="py-op">]</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                                <tt id="link-34" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-34', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_monitors_repository</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Method tuned.hardware.inventory._MonitorObserverFactory.create()=tuned.hardware.inventory._MonitorObserverFactory-class.html#create,Method tuned.monitors.repository.Repository.create()=tuned.monitors.repository.Repository-class.html#create,Method tuned.plugins.instance.factory.Factory.create()=tuned.plugins.instance.factory.Factory-class.html#create,Method tuned.plugins.repository.Repository.create()=tuned.plugins.repository.Repository-class.html#create,Method tuned.profiles.factory.Factory.create()=tuned.profiles.factory.Factory-class.html#create,Method tuned.storage.factory.Factory.create()=tuned.storage.factory.Factory-class.html#create,Method tuned.storage.interfaces.Factory.create()=tuned.storage.interfaces.Factory-class.html#create,Method tuned.units.manager.Manager.create()=tuned.units.manager.Manager-class.html#create"><a title="tuned.hardware.inventory._MonitorObserverFactory.create
+tuned.monitors.repository.Repository.create
+tuned.plugins.instance.factory.Factory.create
+tuned.plugins.repository.Repository.create
+tuned.profiles.factory.Factory.create
+tuned.storage.factory.Factory.create
+tuned.storage.interfaces.Factory.create
+tuned.units.manager.Manager.create" class="py-name" href="#" onclick="return doclink('link-35', 'create', 'link-35');">create</a></tt><tt class="py-op">(</tt><tt class="py-string">"load"</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                                <tt id="link-36" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-36', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_has_dynamic_tuning</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                                <tt id="link-37" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-37', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                        <tt class="py-comment"># Check for cpupower, use workaround if not available</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method tuned.plugins.plugin_cpu.CPULatencyPlugin._check_cpupower()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_check_cpupower"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._check_cpupower" class="py-name" href="#" onclick="return doclink('link-38', '_check_cpupower', 'link-38');">_check_cpupower</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                        <tt class="py-comment"># Check for x86_energy_perf_policy, ignore if not available / supported</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method tuned.plugins.plugin_cpu.CPULatencyPlugin._check_energy_perf_bias()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_check_energy_perf_bias"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._check_energy_perf_bias" class="py-name" href="#" onclick="return doclink('link-39', '_check_energy_perf_bias', 'link-39');">_check_energy_perf_bias</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                        <tt class="py-comment"># Check for intel_pstate</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Method tuned.plugins.plugin_cpu.CPULatencyPlugin._check_intel_pstate()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_check_intel_pstate"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._check_intel_pstate" class="py-name" href="#" onclick="return doclink('link-40', '_check_intel_pstate', 'link-40');">_check_intel_pstate</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                        <tt id="link-41" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-41', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_first_instance</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                        <tt id="link-42" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-42', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"Latency settings from non-first CPU plugin instance '%s' will be ignored."</tt> <tt class="py-op">%</tt> <tt id="link-43" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-43', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Variable tuned.plugins.base.Plugin.name=tuned.plugins.base.Plugin-class.html#name,Variable tuned.plugins.instance.instance.Instance.name=tuned.plugins.instance.instance.Instance-class.html#name,Variable tuned.profiles.profile.Profile.name=tuned.profiles.profile.Profile-class.html#name,Variable tuned.profiles.unit.Unit.name=tuned.profiles.unit.Unit-class.html#name"><a title="tuned.plugins.base.Plugin.name
+tuned.plugins.instance.instance.Instance.name
+tuned.profiles.profile.Profile.name
+tuned.profiles.unit.Unit.name" class="py-name" href="#" onclick="return doclink('link-44', 'name', 'link-44');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                <tt id="link-45" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-45', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_first_device</tt> <tt class="py-op">=</tt> <tt id="link-46" class="py-name" targets="Method tuned.admin.admin.Admin.list()=tuned.admin.admin.Admin-class.html#list"><a title="tuned.admin.admin.Admin.list" class="py-name" href="#" onclick="return doclink('link-46', 'list', 'link-46');">list</a></tt><tt class="py-op">(</tt><tt id="link-47" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-47', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Variable tuned.monitors.base.Monitor.devices=tuned.monitors.base.Monitor-class.html#devices,Variable tuned.plugins.instance.instance.Instance.devices=tuned.plugins.instance.instance.Instance-class.html#devices,Variable tuned.profiles.unit.Unit.devices=tuned.profiles.unit.Unit-class.html#devices"><a title="tuned.monitors.base.Monitor.devices
+tuned.plugins.instance.instance.Instance.devices
+tuned.profiles.unit.Unit.devices" class="py-name" href="#" onclick="return doclink('link-48', 'devices', 'link-48');">devices</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._instance_cleanup"></a><div id="CPULatencyPlugin._instance_cleanup-def"><a name="L102"></a><tt class="py-lineno">102</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._instance_cleanup-toggle" onclick="return toggle('CPULatencyPlugin._instance_cleanup');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_cleanup">_instance_cleanup</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._instance_cleanup-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._instance_cleanup-expanded"><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-49" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-49', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_first_instance</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_cpu_latency_fd</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt id="link-50" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-50', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">                                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_monitors_repository</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Method tuned.monitors.repository.Repository.delete()=tuned.monitors.repository.Repository-class.html#delete,Method tuned.plugins.repository.Repository.delete()=tuned.plugins.repository.Repository-class.html#delete"><a title="tuned.monitors.repository.Repository.delete
+tuned.plugins.repository.Repository.delete" class="py-name" href="#" onclick="return doclink('link-51', 'delete', 'link-51');">delete</a></tt><tt class="py-op">(</tt><tt id="link-52" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-52', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._instance_apply_static"></a><div id="CPULatencyPlugin._instance_apply_static-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._instance_apply_static-toggle" onclick="return toggle('CPULatencyPlugin._instance_apply_static');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_apply_static">_instance_apply_static</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._instance_apply_static-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._instance_apply_static-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-53" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-53', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_first_instance</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_intel_pstate</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_min_perf_pct_save</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Method tuned.plugins.plugin_cpu.CPULatencyPlugin._get_intel_pstate_attr()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_get_intel_pstate_attr"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._get_intel_pstate_attr" class="py-name" href="#" onclick="return doclink('link-54', '_get_intel_pstate_attr', 'link-54');">_get_intel_pstate_attr</a></tt><tt class="py-op">(</tt><tt class="py-string">"min_perf_pct"</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_max_perf_pct_save</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._get_intel_pstate_attr" class="py-name" href="#" onclick="return doclink('link-55', '_get_intel_pstate_attr', 'link-54');">_get_intel_pstate_attr</a></tt><tt class="py-op">(</tt><tt class="py-string">"max_perf_pct"</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_no_turbo_save</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._get_intel_pstate_attr" class="py-name" href="#" onclick="return doclink('link-56', '_get_intel_pstate_attr', 'link-54');">_get_intel_pstate_attr</a></tt><tt class="py-op">(</tt><tt class="py-string">"no_turbo"</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">                <tt class="py-name">super</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name" targets="Method tuned.plugins.base.Plugin._instance_apply_static()=tuned.plugins.base.Plugin-class.html#_instance_apply_static,Method tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_apply_static()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_apply_static,Method tuned.plugins.plugin_script.ScriptPlugin._instance_apply_static()=tuned.plugins.plugin_script.ScriptPlugin-class.html#_instance_apply_static,Method tuned.plugins.plugin_sysctl.SysctlPlugin._instance_apply_static()=tuned.plugins.plugin_sysctl.SysctlPlugin-class.html#_instance_apply_static,Method tuned.plugins.plugin_sysfs.SysfsPlugin._instance_apply_static()=tuned.plugins.plugin_sysfs.SysfsPlugin-class.html#_instance_apply_static"><a title="tuned.plugins.base.Plugin._instance_apply_static
+tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_apply_static
+tuned.plugins.plugin_script.ScriptPlugin._instance_apply_static
+tuned.plugins.plugin_sysctl.SysctlPlugin._instance_apply_static
+tuned.plugins.plugin_sysfs.SysfsPlugin._instance_apply_static" class="py-name" href="#" onclick="return doclink('link-57', '_instance_apply_static', 'link-57');">_instance_apply_static</a></tt><tt class="py-op">(</tt><tt id="link-58" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-58', 'instance', 'link-28');">instance</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-59" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-59', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_first_instance</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">                <tt class="py-name">force_latency_value</tt> <tt class="py-op">=</tt> <tt id="link-60" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-60', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-61', 'options', 'link-33');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"force_latency"</tt><tt class="py-op">]</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">force_latency_value</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Method tuned.plugins.plugin_cpu.CPULatencyPlugin._set_latency()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_set_latency"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._set_latency" class="py-name" href="#" onclick="return doclink('link-62', '_set_latency', 'link-62');">_set_latency</a></tt><tt class="py-op">(</tt><tt class="py-name">force_latency_value</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_intel_pstate</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name" targets="Method tuned.plugins.plugin_cpu.CPULatencyPlugin._set_intel_pstate_attr()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_set_intel_pstate_attr"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._set_intel_pstate_attr" class="py-name" href="#" onclick="return doclink('link-63', '_set_intel_pstate_attr', 'link-63');">_set_intel_pstate_attr</a></tt><tt class="py-op">(</tt><tt class="py-string">"min_perf_pct"</tt><tt class="py-op">,</tt> <tt id="link-64" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-64', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-65', 'options', 'link-33');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"min_perf_pct"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._set_intel_pstate_attr" class="py-name" href="#" onclick="return doclink('link-66', '_set_intel_pstate_attr', 'link-63');">_set_intel_pstate_attr</a></tt><tt class="py-op">(</tt><tt class="py-string">"max_perf_pct"</tt><tt class="py-op">,</tt> <tt id="link-67" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-67', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt id="link-68" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-68', 'options', 'link-33');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"max_perf_pct"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-69" class="py-name"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._set_intel_pstate_attr" class="py-name" href="#" onclick="return doclink('link-69', '_set_intel_pstate_attr', 'link-63');">_set_intel_pstate_attr</a></tt><tt class="py-op">(</tt><tt class="py-string">"no_turbo"</tt><tt class="py-op">,</tt> <tt id="link-70" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-70', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt id="link-71" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-71', 'options', 'link-33');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"no_turbo"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._instance_unapply_static"></a><div id="CPULatencyPlugin._instance_unapply_static-def"><a name="L127"></a><tt class="py-lineno">127</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._instance_unapply_static-toggle" onclick="return toggle('CPULatencyPlugin._instance_unapply_static');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_unapply_static">_instance_unapply_static</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._instance_unapply_static-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._instance_unapply_static-expanded"><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">                <tt class="py-name">super</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-72" class="py-name" targets="Method tuned.plugins.base.Plugin._instance_unapply_static()=tuned.plugins.base.Plugin-class.html#_instance_unapply_static,Method tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_unapply_static()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_unapply_static,Method tuned.plugins.plugin_script.ScriptPlugin._instance_unapply_static()=tuned.plugins.plugin_script.ScriptPlugin-class.html#_instance_unapply_static,Method tuned.plugins.plugin_sysctl.SysctlPlugin._instance_unapply_static()=tuned.plugins.plugin_sysctl.SysctlPlugin-class.html#_instance_unapply_static,Method tuned.plugins.plugin_sysfs.SysfsPlugin._instance_unapply_static()=tuned.plugins.plugin_sysfs.SysfsPlugin-class.html#_instance_unapply_static"><a title="tuned.plugins.base.Plugin._instance_unapply_static
+tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_unapply_static
+tuned.plugins.plugin_script.ScriptPlugin._instance_unapply_static
+tuned.plugins.plugin_sysctl.SysctlPlugin._instance_unapply_static
+tuned.plugins.plugin_sysfs.SysfsPlugin._instance_unapply_static" class="py-name" href="#" onclick="return doclink('link-72', '_instance_unapply_static', 'link-72');">_instance_unapply_static</a></tt><tt class="py-op">(</tt><tt id="link-73" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-73', 'instance', 'link-28');">instance</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-74" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-74', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_first_instance</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_intel_pstate</tt><tt class="py-op">:</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-75" class="py-name"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._set_intel_pstate_attr" class="py-name" href="#" onclick="return doclink('link-75', '_set_intel_pstate_attr', 'link-63');">_set_intel_pstate_attr</a></tt><tt class="py-op">(</tt><tt class="py-string">"min_perf_pct"</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_min_perf_pct_save</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._set_intel_pstate_attr" class="py-name" href="#" onclick="return doclink('link-76', '_set_intel_pstate_attr', 'link-63');">_set_intel_pstate_attr</a></tt><tt class="py-op">(</tt><tt class="py-string">"max_perf_pct"</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_max_perf_pct_save</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-77" class="py-name"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._set_intel_pstate_attr" class="py-name" href="#" onclick="return doclink('link-77', '_set_intel_pstate_attr', 'link-63');">_set_intel_pstate_attr</a></tt><tt class="py-op">(</tt><tt class="py-string">"no_turbo"</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_no_turbo_save</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._instance_apply_dynamic"></a><div id="CPULatencyPlugin._instance_apply_dynamic-def"><a name="L135"></a><tt class="py-lineno">135</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._instance_apply_dynamic-toggle" onclick="return toggle('CPULatencyPlugin._instance_apply_dynamic');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_apply_dynamic">_instance_apply_dynamic</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._instance_apply_dynamic-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._instance_apply_dynamic-expanded"><a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-78" class="py-name" targets="Method tuned.plugins.base.Plugin._instance_update_dynamic()=tuned.plugins.base.Plugin-class.html#_instance_update_dynamic,Method tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_update_dynamic()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_update_dynamic,Method tuned.plugins.plugin_disk.DiskPlugin._instance_update_dynamic()=tuned.plugins.plugin_disk.DiskPlugin-class.html#_instance_update_dynamic,Method tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin._instance_update_dynamic()=tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin-class.html#_instance_update_dynamic,Method tuned.plugins.plugin_net.NetTuningPlugin._instance_update_dynamic()=tuned.plugins.plugin_net.NetTuningPlugin-class.html#_instance_update_dynamic"><a title="tuned.plugins.base.Plugin._instance_update_dynamic
+tuned.plugins.plugin_cpu.CPULatencyPlugin._instance_update_dynamic
+tuned.plugins.plugin_disk.DiskPlugin._instance_update_dynamic
+tuned.plugins.plugin_eeepc_she.EeePCSHEPlugin._instance_update_dynamic
+tuned.plugins.plugin_net.NetTuningPlugin._instance_update_dynamic" class="py-name" href="#" onclick="return doclink('link-78', '_instance_update_dynamic', 'link-78');">_instance_update_dynamic</a></tt><tt class="py-op">(</tt><tt id="link-79" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-79', 'instance', 'link-28');">instance</a></tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._instance_update_dynamic"></a><div id="CPULatencyPlugin._instance_update_dynamic-def"><a name="L138"></a><tt class="py-lineno">138</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._instance_update_dynamic-toggle" onclick="return toggle('CPULatencyPlugin._instance_update_dynamic');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_update_dynamic">_instance_update_dynamic</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._instance_update_dynamic-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._instance_update_dynamic-expanded"><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                <tt class="py-keyword">assert</tt><tt class="py-op">(</tt><tt id="link-80" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-80', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_first_instance</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">device</tt> <tt class="py-op">!=</tt> <tt id="link-81" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-81', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_first_device</tt><tt class="py-op">:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">                <tt id="link-82" class="py-name" targets="Method tuned.profiles.loader.Loader.load()=tuned.profiles.loader.Loader-class.html#load,Method tuned.storage.interfaces.Provider.load()=tuned.storage.interfaces.Provider-class.html#load,Method tuned.storage.pickle_provider.PickleProvider.load()=tuned.storage.pickle_provider.PickleProvider-class.html#load"><a title="tuned.profiles.loader.Loader.load
+tuned.storage.interfaces.Provider.load
+tuned.storage.pickle_provider.PickleProvider.load" class="py-name" href="#" onclick="return doclink('link-82', 'load', 'link-82');">load</a></tt> <tt class="py-op">=</tt> <tt id="link-83" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-83', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt class="py-name">_load_monitor</tt><tt class="py-op">.</tt><tt id="link-84" class="py-name" targets="Method tuned.monitors.base.Monitor.get_load()=tuned.monitors.base.Monitor-class.html#get_load"><a title="tuned.monitors.base.Monitor.get_load" class="py-name" href="#" onclick="return doclink('link-84', 'get_load', 'link-84');">get_load</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">"system"</tt><tt class="py-op">]</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-85" class="py-name"><a title="tuned.profiles.loader.Loader.load
+tuned.storage.interfaces.Provider.load
+tuned.storage.pickle_provider.PickleProvider.load" class="py-name" href="#" onclick="return doclink('link-85', 'load', 'link-82');">load</a></tt> <tt class="py-op">&lt;</tt> <tt id="link-86" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-86', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt id="link-87" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-87', 'options', 'link-33');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"load_threshold"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-88" class="py-name"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._set_latency" class="py-name" href="#" onclick="return doclink('link-88', '_set_latency', 'link-62');">_set_latency</a></tt><tt class="py-op">(</tt><tt id="link-89" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-89', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt id="link-90" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-90', 'options', 'link-33');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"latency_high"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-91" class="py-name"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._set_latency" class="py-name" href="#" onclick="return doclink('link-91', '_set_latency', 'link-62');">_set_latency</a></tt><tt class="py-op">(</tt><tt id="link-92" class="py-name"><a title="tuned.plugins.instance
+tuned.plugins.instance.instance" class="py-name" href="#" onclick="return doclink('link-92', 'instance', 'link-28');">instance</a></tt><tt class="py-op">.</tt><tt id="link-93" class="py-name"><a title="tuned.plugins.instance.instance.Instance.options
+tuned.profiles.profile.Profile.options
+tuned.profiles.unit.Unit.options" class="py-name" href="#" onclick="return doclink('link-93', 'options', 'link-33');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"latency_low"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._instance_unapply_dynamic"></a><div id="CPULatencyPlugin._instance_unapply_dynamic-def"><a name="L149"></a><tt class="py-lineno">149</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._instance_unapply_dynamic-toggle" onclick="return toggle('CPULatencyPlugin._instance_unapply_dynamic');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_instance_unapply_dynamic">_instance_unapply_dynamic</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._instance_unapply_dynamic-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._instance_unapply_dynamic-expanded"><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._get_intel_pstate_attr"></a><div id="CPULatencyPlugin._get_intel_pstate_attr-def"><a name="L152"></a><tt class="py-lineno">152</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._get_intel_pstate_attr-toggle" onclick="return toggle('CPULatencyPlugin._get_intel_pstate_attr');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_get_intel_pstate_attr">_get_intel_pstate_attr</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">attr</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._get_intel_pstate_attr-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._get_intel_pstate_attr-expanded"><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-94" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-94', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-95" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-95', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-96" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-96', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">read_file</tt><tt class="py-op">(</tt><tt class="py-string">"/sys/devices/system/cpu/intel_pstate/%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">attr</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._set_intel_pstate_attr"></a><div id="CPULatencyPlugin._set_intel_pstate_attr-def"><a name="L155"></a><tt class="py-lineno">155</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._set_intel_pstate_attr-toggle" onclick="return toggle('CPULatencyPlugin._set_intel_pstate_attr');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_set_intel_pstate_attr">_set_intel_pstate_attr</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">attr</tt><tt class="py-op">,</tt> <tt class="py-param">val</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._set_intel_pstate_attr-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._set_intel_pstate_attr-expanded"><a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">val</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">                        <tt id="link-97" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-97', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-98" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-98', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-99', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">write_to_file</tt><tt class="py-op">(</tt><tt class="py-string">"/sys/devices/system/cpu/intel_pstate/%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">attr</tt><tt class="py-op">,</tt> <tt class="py-name">val</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._set_latency"></a><div id="CPULatencyPlugin._set_latency-def"><a name="L159"></a><tt class="py-lineno">159</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._set_latency-toggle" onclick="return toggle('CPULatencyPlugin._set_latency');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_set_latency">_set_latency</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">latency</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._set_latency-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._set_latency-expanded"><a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">                <tt class="py-name">latency</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">latency</tt><tt class="py-op">)</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_latency</tt> <tt class="py-op">!=</tt> <tt class="py-name">latency</tt><tt class="py-op">:</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">                        <tt id="link-100" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-100', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"setting new cpu latency %d"</tt> <tt class="py-op">%</tt> <tt class="py-name">latency</tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">                        <tt class="py-name">latency_bin</tt> <tt class="py-op">=</tt> <tt class="py-name">struct</tt><tt class="py-op">.</tt><tt class="py-name">pack</tt><tt class="py-op">(</tt><tt class="py-string">"i"</tt><tt class="py-op">,</tt> <tt class="py-name">latency</tt><tt class="py-op">)</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">                        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_cpu_latency_fd</tt><tt class="py-op">,</tt> <tt class="py-name">latency_bin</tt><tt class="py-op">)</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_latency</tt> <tt class="py-op">=</tt> <tt class="py-name">latency</tt> </tt>
+</div><a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"> </tt>
+<a name="CPULatencyPlugin._get_available_governors"></a><div id="CPULatencyPlugin._get_available_governors-def"><a name="L167"></a><tt class="py-lineno">167</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._get_available_governors-toggle" onclick="return toggle('CPULatencyPlugin._get_available_governors');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_get_available_governors">_get_available_governors</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._get_available_governors-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._get_available_governors-expanded"><a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-101" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-101', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-102" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-102', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-103" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-103', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">read_file</tt><tt class="py-op">(</tt><tt class="py-string">"/sys/devices/system/cpu/%s/cpufreq/scaling_available_governors"</tt> <tt class="py-op">%</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">command_set</tt><tt class="py-op">(</tt><tt class="py-string">"governor"</tt><tt class="py-op">,</tt> <tt class="py-name">per_device</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="CPULatencyPlugin._set_governor"></a><div id="CPULatencyPlugin._set_governor-def"><a name="L171"></a><tt class="py-lineno">171</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._set_governor-toggle" onclick="return toggle('CPULatencyPlugin._set_governor');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_set_governor">_set_governor</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">governor</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._set_governor-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._set_governor-expanded"><a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">governor</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-104" class="py-name" targets="Method tuned.plugins.plugin_cpu.CPULatencyPlugin._get_available_governors()=tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_get_available_governors"><a title="tuned.plugins.plugin_cpu.CPULatencyPlugin._get_available_governors" class="py-name" href="#" onclick="return doclink('link-104', '_get_available_governors', 'link-104');">_get_available_governors</a></tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">                        <tt id="link-105" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-105', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"ignoring governor '%s' on cpu '%s', it is not supported"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">governor</tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">                <tt id="link-106" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-106', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"setting governor '%s' on cpu '%s'"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">governor</tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_cpupower</tt><tt class="py-op">:</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">                        <tt class="py-name">cpu_id</tt> <tt class="py-op">=</tt> <tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">lstrip</tt><tt class="py-op">(</tt><tt class="py-string">"cpu"</tt><tt class="py-op">)</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">                        <tt id="link-107" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-107', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-108" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-108', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-109" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-109', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">"cpupower"</tt><tt class="py-op">,</tt> <tt class="py-string">"-c"</tt><tt class="py-op">,</tt> <tt class="py-name">cpu_id</tt><tt class="py-op">,</tt> <tt class="py-string">"frequency-set"</tt><tt class="py-op">,</tt> <tt class="py-string">"-g"</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">governor</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">                        <tt id="link-110" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-110', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-111" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-111', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-112" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-112', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">write_to_file</tt><tt class="py-op">(</tt><tt class="py-string">"/sys/devices/system/cpu/%s/cpufreq/scaling_governor"</tt> <tt class="py-op">%</tt> <tt class="py-name">device</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">governor</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">command_get</tt><tt class="py-op">(</tt><tt class="py-string">"governor"</tt><tt class="py-op">)</tt> </tt>
+<a name="CPULatencyPlugin._get_governor"></a><div id="CPULatencyPlugin._get_governor-def"><a name="L183"></a><tt class="py-lineno">183</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._get_governor-toggle" onclick="return toggle('CPULatencyPlugin._get_governor');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_get_governor">_get_governor</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._get_governor-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._get_governor-expanded"><a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">                <tt class="py-name">governor</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_cpupower</tt><tt class="py-op">:</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">                        <tt class="py-name">cpu_id</tt> <tt class="py-op">=</tt> <tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">lstrip</tt><tt class="py-op">(</tt><tt class="py-string">"cpu"</tt><tt class="py-op">)</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">                        <tt class="py-name">retcode</tt><tt class="py-op">,</tt> <tt class="py-name">lines</tt> <tt class="py-op">=</tt> <tt id="link-113" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-113', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-114" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-114', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-115" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-115', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">"cpupower"</tt><tt class="py-op">,</tt> <tt class="py-string">"-c"</tt><tt class="py-op">,</tt> <tt class="py-name">cpu_id</tt><tt class="py-op">,</tt> <tt class="py-string">"frequency-info"</tt><tt class="py-op">,</tt> <tt class="py-string">"-p"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">retcode</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">                                <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt class="py-name">lines</tt><tt class="py-op">.</tt><tt class="py-name">splitlines</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">                                        <tt class="py-keyword">if</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">"analyzing"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">                                                <tt class="py-keyword">continue</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">                                        <tt class="py-name">l</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">                                        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">l</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">                                                <tt class="py-name">governor</tt> <tt class="py-op">=</tt> <tt class="py-name">l</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">                                                <tt class="py-keyword">break</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">                        <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt id="link-116" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-116', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-117" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-117', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-118" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-118', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">read_file</tt><tt class="py-op">(</tt><tt class="py-string">"/sys/devices/system/cpu/%s/cpufreq/scaling_governor"</tt> <tt class="py-op">%</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">                                <tt class="py-name">governor</tt> <tt class="py-op">=</tt> <tt class="py-name">data</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">governor</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">                        <tt id="link-119" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-119', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">error</tt><tt class="py-op">(</tt><tt class="py-string">"could not get current governor on cpu '%s'"</tt> <tt class="py-op">%</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">governor</tt> </tt>
+</div><a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">command_set</tt><tt class="py-op">(</tt><tt class="py-string">"energy_perf_bias"</tt><tt class="py-op">,</tt> <tt class="py-name">per_device</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="CPULatencyPlugin._set_energy_perf_bias"></a><div id="CPULatencyPlugin._set_energy_perf_bias-def"><a name="L208"></a><tt class="py-lineno">208</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._set_energy_perf_bias-toggle" onclick="return toggle('CPULatencyPlugin._set_energy_perf_bias');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_set_energy_perf_bias">_set_energy_perf_bias</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">energy_perf_bias</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._set_energy_perf_bias-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._set_energy_perf_bias-expanded"><a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_energy_perf_bias</tt><tt class="py-op">:</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">                        <tt id="link-120" class="py-name"><a title="tuned.daemon.application.log
+tuned.daemon.controller.log
+tuned.daemon.daemon.log
+tuned.exceptions.TunedException.log
+tuned.hardware.inventory.log
+tuned.monitors.base.log
+tuned.monitors.repository.log
+tuned.plugins.base.log
+tuned.plugins.hotplug.log
+tuned.plugins.plugin_audio.log
+tuned.plugins.plugin_cpu.log
+tuned.plugins.plugin_disk.log
+tuned.plugins.plugin_eeepc_she.log
+tuned.plugins.plugin_mounts.log
+tuned.plugins.plugin_net.log
+tuned.plugins.plugin_script.log
+tuned.plugins.plugin_sysctl.log
+tuned.plugins.plugin_sysfs.log
+tuned.plugins.plugin_usb.log
+tuned.plugins.plugin_video.log
+tuned.plugins.plugin_vm.log
+tuned.plugins.repository.log
+tuned.profiles.loader.log
+tuned.storage.pickle_provider.log
+tuned.units.manager.log
+tuned.utils.commands.log
+tuned.utils.nettool.log
+tuned.utils.plugin_loader.log" class="py-name" href="#" onclick="return doclink('link-120', 'log', 'link-7');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"setting energy_perf_bias '%s' on cpu '%s'"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">energy_perf_bias</tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">                        <tt class="py-name">cpu_id</tt> <tt class="py-op">=</tt> <tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">lstrip</tt><tt class="py-op">(</tt><tt class="py-string">"cpu"</tt><tt class="py-op">)</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">                        <tt id="link-121" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-121', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-122" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-122', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-123" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-123', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">"x86_energy_perf_policy"</tt><tt class="py-op">,</tt> <tt class="py-string">"-c"</tt><tt class="py-op">,</tt> <tt class="py-name">cpu_id</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">energy_perf_bias</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">command_get</tt><tt class="py-op">(</tt><tt class="py-string">"energy_perf_bias"</tt><tt class="py-op">)</tt> </tt>
+<a name="CPULatencyPlugin._get_energy_perf_bias"></a><div id="CPULatencyPlugin._get_energy_perf_bias-def"><a name="L215"></a><tt class="py-lineno">215</tt> <a class="py-toggle" href="#" id="CPULatencyPlugin._get_energy_perf_bias-toggle" onclick="return toggle('CPULatencyPlugin._get_energy_perf_bias');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="tuned.plugins.plugin_cpu.CPULatencyPlugin-class.html#_get_energy_perf_bias">_get_energy_perf_bias</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CPULatencyPlugin._get_energy_perf_bias-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="CPULatencyPlugin._get_energy_perf_bias-expanded"><a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">                <tt class="py-name">energy_perf_bias</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_has_energy_perf_bias</tt><tt class="py-op">:</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">                        <tt class="py-name">cpu_id</tt> <tt class="py-op">=</tt> <tt class="py-name">device</tt><tt class="py-op">.</tt><tt class="py-name">lstrip</tt><tt class="py-op">(</tt><tt class="py-string">"cpu"</tt><tt class="py-op">)</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">                        <tt class="py-name">retcode</tt><tt class="py-op">,</tt> <tt class="py-name">lines</tt> <tt class="py-op">=</tt> <tt id="link-124" class="py-name"><a title="tuned" class="py-name" href="#" onclick="return doclink('link-124', 'tuned', 'link-2');">tuned</a></tt><tt class="py-op">.</tt><tt id="link-125" class="py-name"><a title="tuned.utils" class="py-name" href="#" onclick="return doclink('link-125', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-126" class="py-name"><a title="tuned.utils.commands" class="py-name" href="#" onclick="return doclink('link-126', 'commands', 'link-6');">commands</a></tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">"x86_energy_perf_policy"</tt><tt class="py-op">,</tt> <tt class="py-string">"-c"</tt><tt class="py-op">,</tt> <tt class="py-name">cpu_id</tt><tt class="py-op">,</tt> <tt class="py-string">"-r"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">retcode</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">                                <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt class="py-name">lines</tt><tt class="py-op">.</tt><tt class="py-name">splitlines</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">                                        <tt class="py-name">l</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">                                        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">l</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">2</tt><tt class="py-op">:</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">                                                <tt class="py-name">energy_perf_bias</tt> <tt class="py-op">=</tt> <tt class="py-name">l</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">                                                <tt class="py-keyword">break</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">energy_perf_bias</tt> </tt>
+</div></div><a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="tuned-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Apr 14 00:30:45 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
