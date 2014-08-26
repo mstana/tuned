@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4003bdd8-0d17-432f-93fd-57f93ee41122" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/tuned-master.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-    </list>
+    <list default="true" id="4003bdd8-0d17-432f-93fd-57f93ee41122" name="Default" comment="" />
     <ignored path="tuned-master.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,14 +33,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tuned_gui.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="tuned_gui.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tuned_gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24342105" vertical-offset="9888" max-vertical-offset="10935">
-              <caret line="674" column="88" selection-start-line="674" selection-start-column="88" selection-end-line="674" selection-end-column="88" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="9888" max-vertical-offset="10935">
+              <caret line="681" column="27" selection-start-line="681" selection-start-column="27" selection-end-line="681" selection-end-column="27" />
               <folding>
                 <element signature="e#74#113#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__builtin__.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$USER_HOME$/.PyCharm30/system/python_stubs/-1247972723/__builtin__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5964912" vertical-offset="161" max-vertical-offset="77265">
+              <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,8 +80,8 @@
       <file leaf-file-name="tuned-gui.glade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tuned-gui.glade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.851851" vertical-offset="16390" max-vertical-offset="25455">
-              <caret line="1114" column="0" selection-start-line="1114" selection-start-column="0" selection-end-line="1114" selection-end-column="0" />
+            <state vertical-scroll-proportion="-11.851851" vertical-offset="16420" max-vertical-offset="25470">
+              <caret line="1116" column="0" selection-start-line="1116" selection-start-column="0" selection-end-line="1116" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -650,8 +653,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tuned-gui.glade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.851851" vertical-offset="16390" max-vertical-offset="25455">
-          <caret line="1114" column="0" selection-start-line="1114" selection-start-column="0" selection-end-line="1114" selection-end-column="0" />
+        <state vertical-scroll-proportion="-11.851851" vertical-offset="16420" max-vertical-offset="25470">
+          <caret line="1116" column="0" selection-start-line="1116" selection-start-column="0" selection-end-line="1116" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -692,11 +695,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tuned_gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24342105" vertical-offset="9888" max-vertical-offset="10935">
-          <caret line="674" column="88" selection-start-line="674" selection-start-column="88" selection-end-line="674" selection-end-column="88" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="9888" max-vertical-offset="10935">
+          <caret line="681" column="27" selection-start-line="681" selection-start-column="27" selection-end-line="681" selection-end-column="27" />
           <folding>
             <element signature="e#74#113#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm30/system/python_stubs/-1247972723/__builtin__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5964912" vertical-offset="161" max-vertical-offset="77265">
+          <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
