@@ -12,7 +12,10 @@ class ManagerException(Exception):
         self.code = code
         
     def __str__(self):
+<<<<<<< HEAD
         return repr(self.code)
 
     def ProfileAlreadyExists(self):
+=======
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         return repr(self.code)

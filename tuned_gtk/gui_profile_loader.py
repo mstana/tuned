@@ -65,6 +65,7 @@ class GuiProfileLoader(object):
 #                         raise managerException.ManagerException("Can not make profile")
 #                         print "can not make \""+ profile +"\" profile without correct config with path: " + d
 
+<<<<<<< HEAD
     def _refresh_profiles(self):
         self.profiles = {}
         self._load_all_profiles()
@@ -72,6 +73,10 @@ class GuiProfileLoader(object):
 
     def save_profile(self, profile):
         path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name
+=======
+    def save_profile(self, profile):
+        path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name     
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         config = configobj.ConfigObj()
         config.filename = path + tuned.consts.CONF_PROFILE_FILE
         config.initial_comment = "#", "tuned configuration","#"
@@ -80,6 +85,7 @@ class GuiProfileLoader(object):
             config["main"] = profile.options
         except KeyError:
             config["main"] = ""
+<<<<<<< HEAD
             #profile dont have main section
             pass
         for name, unit in profile.units.items():
@@ -96,13 +102,38 @@ class GuiProfileLoader(object):
         if profile_name not in self.get_names():
             raise managerException.ManagerException("Profile: "+ profile_name +" is not in profiles")
         path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name
+=======
+            pass #profile dont have main section
+
+        for name, unit in profile.units.items():
+            config[name] = unit.options
+        if not os.path.exists(path): 
+            os.makedirs(path)  
+        else:
+#             mozes prepisat ale nesmies na nejaky co uz existuje!
+            raise managerException.ManagerException("Profile Exists already")
+        config.write()
+        self._refresh_profiles()
+
+    def _refresh_profiles(self):
+        self.profiles = {}
+        self._load_all_profiles()
+
+    def update_profile(self, profile_name, profile):
+        if profile_name not in self.get_names():
+            raise managerException.ManagerException("Profile: "+ profile_name +" is not in profiles")
+        path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name     
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         config = configobj.ConfigObj()
         config.filename = path + "/tuned.conf"
         config.initial_comment = "#", "tuned configuration","#"
         try:
             config["main"] = profile.options
         except KeyError:
+<<<<<<< HEAD
             #profile dont have main section
+=======
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
             pass
         for name, unit in profile.units.items():
             config[name] = unit.options

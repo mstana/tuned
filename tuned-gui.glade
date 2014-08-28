@@ -29,6 +29,7 @@
       </object>
     </child>
   </object>
+<<<<<<< HEAD
   <object class="GtkAction" id="addPluginValue"/>
   <object class="GtkMenu" id="menuAddPluginValue">
     <property name="visible">True</property>
@@ -51,6 +52,8 @@
       </object>
     </child>
   </object>
+=======
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
   <object class="GtkDialog" id="changeValueDialog">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
@@ -163,12 +166,19 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="buttonAddPluginDialog">
+<<<<<<< HEAD
                 <property name="label">gtk-add</property>
+=======
+                <property name="label">gtk-ok</property>
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+<<<<<<< HEAD
                 <property name="image_position">bottom</property>
+=======
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -243,6 +253,7 @@
       <action-widget response="-1">buttonCloseAddPlugin</action-widget>
     </action-widgets>
   </object>
+<<<<<<< HEAD
   <object class="GtkDialog" id="dialogAddPluginValue">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
@@ -336,6 +347,8 @@
       <action-widget response="-1">button2</action-widget>
     </action-widgets>
   </object>
+=======
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
   <object class="GtkWindow" id="mainWindow">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Tuned Manager</property>
@@ -926,7 +939,11 @@
               </packing>
             </child>
             <child>
+<<<<<<< HEAD
               <object class="GtkLabel" id="labelActualProfile">
+=======
+              <object class="GtkLabel" id="label_actual_profile">
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
@@ -1186,7 +1203,10 @@
       </object>
     </child>
   </object>
+<<<<<<< HEAD
   <object class="GtkAction" id="removePluginAction"/>
+=======
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
   <object class="GtkTreeStore" id="treestoreActualPlugins"/>
   <object class="GtkTreeView" id="treeviewActualPlugins">
     <property name="visible">True</property>

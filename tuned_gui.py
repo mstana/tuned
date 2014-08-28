@@ -13,11 +13,21 @@ import gi.repository.Gtk as Gtk
 import subprocess
 import sys
 import os
+<<<<<<< HEAD
 
+=======
+import re
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
 import configobj
 
 import tuned.logs
 import tuned.consts as consts
+<<<<<<< HEAD
+=======
+import tuned.version as ver
+import tuned.daemon.daemon as daemon
+import tuned.utils.commands as commands
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
 import tuned.admin.dbus_controller
 import tuned_gtk.gui_profile_loader
 import tuned_gtk.gui_plugin_loader
@@ -63,6 +73,7 @@ class Base(object):
         self.plugin_loader = tuned_gtk.gui_plugin_loader.GuiPluginLoader()
         self.builder = Gtk.Builder()
         self.builder.add_from_file("tuned-gui.glade")
+<<<<<<< HEAD
         action_group = Gtk.ActionGroup("my_actions")
         self.builder.connect_signals(self)
         #
@@ -73,6 +84,10 @@ class Base(object):
         self.tuned_daemon_exception_dialog = self.builder.get_object("tunedDaemonExceptionDialog")
         self.dialog_add_plugin = self.builder.get_object("dialogAddPlugin")
         #
+=======
+        self.builder.connect_signals(self)
+        #
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         #    WINDOW MAIN
         #
         self.main_window = self.builder.get_object("mainWindow")
@@ -122,6 +137,16 @@ class Base(object):
         self.about_dialog.set_copyright(COPYRIGHT)
         self.about_dialog.set_authors(AUTHORS)
         #
+<<<<<<< HEAD
+=======
+        #    DIALOGS
+        #
+        self.messagedialog_pperation_error = self.builder.get_object("messagedialogOperationError")
+        self.tuned_daemon_exception_dialog = self.builder.get_object("tunedDaemonExceptionDialog")
+
+        self.dialog_add_plugin = self.builder.get_object("dialogAddPlugin")
+        #
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         #    GET WIDGETS
         #
         self.imagemenuitem_quit = self.builder.get_object("imagemenuitemQuit")
@@ -190,11 +215,14 @@ class Base(object):
 
         self.switch_tuned_start_stop.set_active(True)
         self.switch_tuned_startup_start_stop.set_active(self.service_run_on_start_up("tuned"))
+<<<<<<< HEAD
 
 
         self.menu_add_plugin_value = self.builder.get_object("menuAddPluginValue")
         self.add_plugin_value_action = self.builder.get_object("addPluginValue")
         self.add_plugin_value_action.connect('activate', self.add_plugin_value_to_treeview)
+=======
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         #
         #    CONNECTIONS
         #
@@ -211,6 +239,7 @@ class Base(object):
         self.button_upadte_selected_profile.connect('clicked', self.execute_update_profile)
         self.button_delete_selected_profile.connect('clicked', self.execute_remove_profile)
 
+<<<<<<< HEAD
         self.button_confirm_profile_create = self.builder.get_object('buttonConfirmProfileCreate')
         self.button_confirm_profile_update = self.builder.get_object('buttonConfirmProfileUpdate')
 
@@ -218,6 +247,14 @@ class Base(object):
         self.button_confirm_profile_update.connect('clicked', self.on_click_button_confirm_profile_update)
         self.editing_profile_name = None
         self.treeview_actual_plugins.connect('row-activated', self.on_treeview_click)
+=======
+        self.button_confirm_profile_create = self.builder.get_object("buttonConfirmProfileCreate")
+        self.button_confirm_profile_update = self.builder.get_object("buttonConfirmProfileUpdate")
+
+        self.button_confirm_profile_create.connect("clicked", self.on_click_button_confirm_profile_create)
+        self.button_confirm_profile_update.connect("clicked", self.on_click_button_confirm_profile_update)
+        self.editing_profile_name = None
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
 
 #         self.treeview_profile_manager.connect('row-activated',lambda x,y,z: self.execute_update_profile(x,y))
 #  TO DO: need to be fixed! - double click on treeview
@@ -404,7 +441,11 @@ class Base(object):
                             self.error_dialog("Plugin " + plugin_name + " is already in profile." , "")
                             return
                     plugin_to_tab = plugin
+<<<<<<< HEAD
                     self.notebook_plugins.append_page_menu(self.treeview_for_data(plugin_to_tab._get_config_options()) , Gtk.Label(plugin_to_tab.name), Gtk.Label(plugin_to_tab.name))
+=======
+                    self.notebook_plugins.append_page_menu( self.treeview_for_data(plugin_to_tab._get_config_options()) , Gtk.Label(plugin_to_tab.name), Gtk.Label(plugin_to_tab.name))
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
                     self.notebook_plugins.show_all()
 
     def execute_remove_plugin_from_notebook(self, data):
@@ -540,7 +581,10 @@ class Base(object):
                 except: 
                     pass
             self.combobox_include_profile.set_active(selected)
+<<<<<<< HEAD
             #load all values not just normal
+=======
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
             for name, unit in profile.units.items():
                 self.notebook_plugins.append_page_menu(self.treeview_for_data(unit.options), Gtk.Label(unit.name), Gtk.Label(unit.name))
             self.notebook_plugins.show_all()
@@ -552,7 +596,11 @@ class Base(object):
         """
         This prepare treestore and treeview for data and return treeview
         """
+<<<<<<< HEAD
         treestore = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)
+=======
+        treestore = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)                
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         for option, value in data.items():
             treestore.append([str(value),option])
         treeview = Gtk.TreeView(treestore) 
@@ -563,7 +611,11 @@ class Base(object):
         treeview.append_column(column_option)
         treeview.enable_grid_lines = True
         treeview.connect('row-activated', self.change_value_dialog)
+<<<<<<< HEAD
         treeview.connect('button_press_event', self.on_treeview_click)
+=======
+        treeview.connect('button_press_event', self.on_treeview_button_press_event)
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         return treeview
 
     def execute_change_profile(self, button):
@@ -641,12 +693,16 @@ class Base(object):
         text = self.builder.get_object("labelTextDialogChangeValue")
 
         text.set_text(model.get_value(model.get_iter(path), 1))
+<<<<<<< HEAD
 
         text = model.get_value(model.get_iter(path), 0)
         if text is not None:
             entry1.set_text(text)
         else:
             entry1.set_text("")
+=======
+        entry1.set_text(model.get_value(model.get_iter(path), 0))
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
 
         dialog.connect('destroy', lambda d: dialog.hide())
         button_cancel.connect('clicked', lambda d: dialog.hide())
@@ -657,7 +713,11 @@ class Base(object):
 
     def choose_plugin_dialog(self):
         """
+<<<<<<< HEAD
         Shows up dialog with combobox where are stored plugins available to add.
+=======
+        Shows up dialog with combobox where are stored plugins avaible to add.
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         """
         self.combobox_plugins.set_active(0)
         self.button_add_plugin = self.builder.get_object("buttonAddPluginDialog")
@@ -668,6 +728,7 @@ class Base(object):
         self.dialog_add_plugin.hide()
         return response
 
+<<<<<<< HEAD
 
     def on_treeview_click(self, treeview, event):
         if event.button == 3:
@@ -711,6 +772,8 @@ class Base(object):
             return True
         return False
 
+=======
+>>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
     def start_tuned(self):
         subprocess.call(["service", "tuned", "start"])
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
