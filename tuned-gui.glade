@@ -29,31 +29,8 @@
       </object>
     </child>
   </object>
-<<<<<<< HEAD
+  <object class="GtkAction" id="addCustomPluginValue"/>
   <object class="GtkAction" id="addPluginValue"/>
-  <object class="GtkMenu" id="menuAddPluginValue">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <child>
-      <object class="GtkMenuItem" id="AddPluginValueMenuItem">
-        <property name="related_action">addPluginValue</property>
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Add Value</property>
-        <property name="use_underline">True</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="DeleteValueMenuItem">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Delete Value</property>
-        <property name="use_underline">True</property>
-      </object>
-    </child>
-  </object>
-=======
->>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
   <object class="GtkDialog" id="changeValueDialog">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
@@ -152,6 +129,138 @@
       <action-widget response="-1">buttonCancel1</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkAction" id="deletePluginValue"/>
+  <object class="GtkMenu" id="menuAddPluginValue">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkMenuItem" id="AddPluginValueMenuItem">
+        <property name="related_action">addPluginValue</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Add Value</property>
+        <property name="use_underline">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="AddCustomPluginValueItem">
+        <property name="related_action">addCustomPluginValue</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Add Custom Value</property>
+        <property name="use_underline">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="menuitem4">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="DeleteValueMenuItem">
+        <property name="related_action">deletePluginValue</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Delete Value</property>
+        <property name="use_underline">True</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="dialogAddCustomPluginValue">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox8">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area8">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="button3">
+                <property name="label">gtk-add</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+                <property name="xalign">0.40999999642372131</property>
+                <property name="yalign">0.60000002384185791</property>
+                <property name="image_position">bottom</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button4">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box13">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="Choose plugin value to add:1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Choose plugin value to add:</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="entry2">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="placeholder_text" translatable="yes">Value ...</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">button3</action-widget>
+      <action-widget response="-1">button4</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkDialog" id="dialogAddPlugin">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
@@ -166,19 +275,12 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="buttonAddPluginDialog">
-<<<<<<< HEAD
-                <property name="label">gtk-add</property>
-=======
                 <property name="label">gtk-ok</property>
->>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-<<<<<<< HEAD
                 <property name="image_position">bottom</property>
-=======
->>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -253,7 +355,6 @@
       <action-widget response="-1">buttonCloseAddPlugin</action-widget>
     </action-widgets>
   </object>
-<<<<<<< HEAD
   <object class="GtkDialog" id="dialogAddPluginValue">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
@@ -314,7 +415,7 @@
               <object class="GtkLabel" id="Choose plugin value to add:">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">label</property>
+                <property name="label" translatable="yes">Choose plugin value to add:</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -347,8 +448,6 @@
       <action-widget response="-1">button2</action-widget>
     </action-widgets>
   </object>
-=======
->>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
   <object class="GtkWindow" id="mainWindow">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Tuned Manager</property>
@@ -939,11 +1038,7 @@
               </packing>
             </child>
             <child>
-<<<<<<< HEAD
               <object class="GtkLabel" id="labelActualProfile">
-=======
-              <object class="GtkLabel" id="label_actual_profile">
->>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
@@ -1203,10 +1298,6 @@
       </object>
     </child>
   </object>
-<<<<<<< HEAD
-  <object class="GtkAction" id="removePluginAction"/>
-=======
->>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
   <object class="GtkTreeStore" id="treestoreActualPlugins"/>
   <object class="GtkTreeView" id="treeviewActualPlugins">
     <property name="visible">True</property>

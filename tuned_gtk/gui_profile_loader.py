@@ -6,12 +6,11 @@ Created on Mar 13, 2014
 '''
 
 import configobj
-import os, sys
+import os
 import tuned.profiles.profile as p
-import tuned.profiles.merger as merger
 import tuned.consts
 import shutil
-import managerException
+import tuned_gtk.managerException as managerException
 
 class GuiProfileLoader(object):
     """
@@ -33,12 +32,13 @@ class GuiProfileLoader(object):
         
         profilePath = self._locate_profile_path(profile_name)
 
-        if (profilePath == tuned.consts.LOAD_DIRECTORIES[1]):
-            file = profilePath +"/" + profile_name +"/"+ "tuned.conf"
+        if profilePath == tuned.consts.LOAD_DIRECTORIES[1]:
+            file = profilePath +"/" + profile_name + "/" + "tuned.conf"
             with open(file, 'w') as f:
                 f.write(config)
         else:
-            raise managerException.ManagerException(profile_name + " profile is stored in "+ profilePath + " and can not be storet do this location")
+            raise managerException.ManagerException(
+                profile_name + " profile is stored in " + profilePath + " and can not be storet do this location")
 
     def load_profile_config(self, profile_name, path):
         conf_path = path + "/" + profile_name + "/tuned.conf"     
@@ -65,7 +65,6 @@ class GuiProfileLoader(object):
 #                         raise managerException.ManagerException("Can not make profile")
 #                         print "can not make \""+ profile +"\" profile without correct config with path: " + d
 
-<<<<<<< HEAD
     def _refresh_profiles(self):
         self.profiles = {}
         self._load_all_profiles()
@@ -73,10 +72,6 @@ class GuiProfileLoader(object):
 
     def save_profile(self, profile):
         path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name
-=======
-    def save_profile(self, profile):
-        path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name     
->>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         config = configobj.ConfigObj()
         config.filename = path + tuned.consts.CONF_PROFILE_FILE
         config.initial_comment = "#", "tuned configuration","#"
@@ -85,25 +80,26 @@ class GuiProfileLoader(object):
             config["main"] = profile.options
         except KeyError:
             config["main"] = ""
-<<<<<<< HEAD
             #profile dont have main section
             pass
         for name, unit in profile.units.items():
             config[name] = unit.options
         if not os.path.exists(path):
             os.makedirs(path)
+            print 1
         else:
+            print 2
 #             you cant rewrite profile!
-            raise managerException.ProfileAlreadyExists("Profile with name "+ profile.name +"exists already")
+            raise managerException.ManagerException("Profile with name " + profile.name + "exists already")
         config.write()
         self._refresh_profiles()
 
     def update_profile(self, profile_name, profile):
         if profile_name not in self.get_names():
-            raise managerException.ManagerException("Profile: "+ profile_name +" is not in profiles")
-        path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name
-=======
-            pass #profile dont have main section
+            raise managerException.ManagerException("Profile: " + profile_name + " is not in profiles")
+            path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name
+            pass
+            #profile dont have main section
 
         for name, unit in profile.units.items():
             config[name] = unit.options
@@ -121,19 +117,16 @@ class GuiProfileLoader(object):
 
     def update_profile(self, profile_name, profile):
         if profile_name not in self.get_names():
-            raise managerException.ManagerException("Profile: "+ profile_name +" is not in profiles")
+            raise managerException.ManagerException("Profile: " + profile_name + " is not in profiles")
         path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name     
->>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
         config = configobj.ConfigObj()
         config.filename = path + "/tuned.conf"
-        config.initial_comment = "#", "tuned configuration","#"
+        config.initial_comment = "#", "tuned configuration", "#"
         try:
             config["main"] = profile.options
         except KeyError:
-<<<<<<< HEAD
+
             #profile dont have main section
-=======
->>>>>>> ed6f8623e5434eb87149fc82ab2aac78f06322b0
             pass
         for name, unit in profile.units.items():
             config[name] = unit.options
@@ -153,19 +146,19 @@ class GuiProfileLoader(object):
         self.profiles[profile.name] = profile
         self.save_profile(profile)
 
-    def remove_profile(self, profileName):
-        profilePath = self._locate_profile_path(profileName)
+    def remove_profile(self, profile_name):
+        profile_path = self._locate_profile_path(profile_name)
 
-        if (self.is_profile_removable(profileName)):
-            shutil.rmtree(profilePath + "/" + profileName)
+        if self.is_profile_removable(profile_name):
+            shutil.rmtree(profile_path + "/" + profile_name)
             self._load_all_profiles()
         else:
-            raise managerException.ManagerException(profileName + " profile is stored in "+ profilePath)
+            raise managerException.ManagerException(profile_name + " profile is stored in " + profilePath)
 
     def is_profile_removable(self, profile_name):
         #  profile is in /etc/profile
-        profilePath = self._locate_profile_path(profile_name)
-        if (profilePath == tuned.consts.LOAD_DIRECTORIES[1]):
+        profile_path = self._locate_profile_path(profile_name)
+        if profile_path == tuned.consts.LOAD_DIRECTORIES[1]:
             return True
         else:
             return False

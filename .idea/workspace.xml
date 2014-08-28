@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4003bdd8-0d17-432f-93fd-57f93ee41122" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/INSTALL" afterPath="$PROJECT_DIR$/INSTALL" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py" afterPath="$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned_gtk/managerException.py" afterPath="$PROJECT_DIR$/tuned_gtk/managerException.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned-adm.py" afterPath="$PROJECT_DIR$/tuned-adm.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned-gui.glade" afterPath="$PROJECT_DIR$/tuned-gui.glade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned-main.conf" afterPath="$PROJECT_DIR$/tuned-main.conf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned.bash" afterPath="$PROJECT_DIR$/tuned.bash" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned.conf" afterPath="$PROJECT_DIR$/tuned.conf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned.py" afterPath="$PROJECT_DIR$/tuned.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned.service" afterPath="$PROJECT_DIR$/tuned.service" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned.spec" afterPath="$PROJECT_DIR$/tuned.spec" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned.tmpfiles" afterPath="$PROJECT_DIR$/tuned.tmpfiles" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned_gui.py" afterPath="$PROJECT_DIR$/tuned_gui.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -28,7 +37,52 @@
     <favorites_list name="tuned-master" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="tuned_gui.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tuned_gui.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.44067797" vertical-offset="11070" max-vertical-offset="11955">
+              <caret line="764" column="25" selection-start-line="764" selection-start-column="25" selection-end-line="764" selection-end-column="25" />
+              <folding>
+                <element signature="e#74#113#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gui_profile_loader.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="596" max-vertical-offset="2685">
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+              <folding>
+                <element signature="e#72#88#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="managerException.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tuned_gtk/managerException.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tuned-gui.glade" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tuned-gui.glade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.5555553" vertical-offset="1545" max-vertical-offset="27135">
+              <caret line="113" column="24" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -41,17 +95,18 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py" />
-        <option value="$PROJECT_DIR$/tuned_gtk/managerException.py" />
         <option value="$PROJECT_DIR$/tuned-gui.glade" />
+        <option value="$PROJECT_DIR$/tuned_gtk/managerException.py" />
+        <option value="$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py" />
         <option value="$PROJECT_DIR$/tuned_gui.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-4" />
+    <option name="y" value="25" />
     <option name="width" value="1928" />
-    <option name="height" value="1083" />
+    <option name="height" value="1033" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -85,6 +140,30 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="tuned-master" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuned-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuned-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuned-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuned-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tuned_gtk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -333,14 +412,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="0" width="1928" height="1083" extended-state="6" />
-    <editor active="false" />
+    <frame x="-4" y="25" width="1928" height="1033" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14947917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14947917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39939332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -348,11 +427,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -373,15 +452,54 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/tuned_gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11310">
+          <caret line="99" column="81" selection-start-line="99" selection-start-column="81" selection-end-line="99" selection-end-column="81" />
+          <folding>
+            <element signature="e#74#113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned_gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11040">
+          <caret line="24" column="34" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#74#113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned_gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="10918" max-vertical-offset="11880">
+          <caret line="773" column="0" selection-start-line="773" selection-start-column="0" selection-end-line="774" selection-end-column="7" />
+          <folding>
+            <element signature="e#74#113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned_gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="10918" max-vertical-offset="11880">
+          <caret line="773" column="0" selection-start-line="773" selection-start-column="0" selection-end-line="774" selection-end-column="7" />
+          <folding>
+            <element signature="e#74#113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tuned-adm.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245">
           <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -399,7 +517,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="77265">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -407,7 +524,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="5625">
           <caret line="45" column="27" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -415,7 +531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1710">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -423,7 +538,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="16675" max-vertical-offset="25770">
           <caret line="1133" column="0" selection-start-line="1133" selection-start-column="0" selection-end-line="1133" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -431,11 +545,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1815" max-vertical-offset="2790">
           <caret line="121" column="52" selection-start-line="121" selection-start-column="52" selection-end-line="121" selection-end-column="52" />
-          <folding>
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -443,7 +552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="390">
           <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -451,7 +559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245">
           <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -469,7 +576,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="77265">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -477,7 +583,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="5625">
           <caret line="45" column="27" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -485,7 +590,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1710">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -493,7 +597,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="16675" max-vertical-offset="25770">
           <caret line="1133" column="0" selection-start-line="1133" selection-start-column="0" selection-end-line="1133" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -501,11 +604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1815" max-vertical-offset="2790">
           <caret line="121" column="52" selection-start-line="121" selection-start-column="52" selection-end-line="121" selection-end-column="52" />
-          <folding>
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -513,7 +611,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="390">
           <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -521,7 +618,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1245">
           <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -539,11 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2325">
           <caret line="90" column="55" selection-start-line="90" selection-start-column="35" selection-end-line="90" selection-end-column="55" />
-          <folding>
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -551,7 +642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="345">
           <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -559,7 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245">
           <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -577,7 +666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1710">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -651,21 +739,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tuned_gui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42307693" vertical-offset="10918" max-vertical-offset="11880">
-          <caret line="755" column="41" selection-start-line="755" selection-start-column="41" selection-end-line="755" selection-end-column="41" />
-          <folding>
-            <element signature="e#74#113#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tuned-adm.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08004158" vertical-offset="208" max-vertical-offset="1170">
           <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -673,7 +750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="77265">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -681,7 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.56133056" vertical-offset="105" max-vertical-offset="5595">
           <caret line="45" column="27" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -689,35 +764,42 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="73" max-vertical-offset="1710">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tuned-gui.glade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33264032" vertical-offset="16675" max-vertical-offset="25770">
-          <caret line="1133" column="0" selection-start-line="1133" selection-start-column="0" selection-end-line="1133" selection-end-column="0" />
+        <state vertical-scroll-proportion="-5.5555553" vertical-offset="1545" max-vertical-offset="27135">
+          <caret line="113" column="24" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned_gtk/managerException.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08004158" vertical-offset="1648" max-vertical-offset="2700">
-          <caret line="121" column="52" selection-start-line="121" selection-start-column="52" selection-end-line="121" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="596" max-vertical-offset="2685">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
           <folding>
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1409094588523" expanded="true" signature="-1:-1" placeholder="..." />
+            <element signature="e#72#88#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tuned_gtk/managerException.py">
+    <entry file="file://$PROJECT_DIR$/tuned_gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2962578" vertical-offset="0" max-vertical-offset="962">
-          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-          <folding />
+        <state vertical-scroll-proportion="0.44067797" vertical-offset="11070" max-vertical-offset="11955">
+          <caret line="764" column="25" selection-start-line="764" selection-start-column="25" selection-end-line="764" selection-end-column="25" />
+          <folding>
+            <element signature="e#74#113#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
