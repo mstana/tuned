@@ -10,6 +10,7 @@ import gi.repository.Gtk as Gtk
 import subprocess
 import sys
 import os
+import time
 import configobj
 
 import tuned.logs
@@ -62,34 +63,35 @@ class Base(object):
             if response == 0:
 #                 button Turn ON pressed
 #                 switch_tuned_start_stop notify the switch which call funcion start_tuned
-                    self._start_tuned()
-                    self.tuned_daemon_exception_dialog.hide()
+                self._start_tuned()
+                self.tuned_daemon_exception_dialog.hide()
+                return True
             elif response == 1:
                 self.error_dialog("Tuned is shutting down.", "Reason: missing communication with Tuned daemon.")
-                return
-
+                return False
+        return True
 
 
     def __init__(self):
-
 
         active_profile = None
 
         self.builder = Gtk.Builder()
         self.builder.add_from_file("tuned-gui.glade")
-
-
         #
         #    DIALOGS
         #
         self.messagedialog_operation_error = self.builder.get_object("messagedialogOperationError")
         self.tuned_daemon_exception_dialog = self.builder.get_object("tunedDaemonExceptionDialog")
         self.dialog_add_plugin = self.builder.get_object("dialogAddPlugin")
+        self.tuned_daemon_exception_dialog.connect("destroy", lambda d: self.tuned_daemon_exception_dialog.hide())
+        self.cancel_button = self.builder.get_object("cancel_button")
+        self.cancel_button.connect("clicked", lambda d: self.tuned_daemon_exception_dialog.hide())
 
+        if not self._starting():
+            return
 
-        self._starting()
-
-
+        self.manager = tuned_gtk.gui_profile_loader.GuiProfileLoader(tuned.consts.LOAD_DIRECTORIES)
         self.manager = tuned_gtk.gui_profile_loader.GuiProfileLoader(tuned.consts.LOAD_DIRECTORIES)
         self.plugin_loader = tuned_gtk.gui_plugin_loader.GuiPluginLoader()
 
@@ -273,8 +275,7 @@ class Base(object):
 
     def is_tuned_connection_ok(self):
         """
-        Result True, False depends on if tuned daemon is running. If its not runing this method try to start tuned. If it crash from any reason
-        application will turn off.
+        Result True, False depends on if tuned daemon is running. If its not runing this method try to start tuned.
         """
         try:
             self.controller.is_running()
@@ -285,13 +286,15 @@ class Base(object):
 #                 button Turn ON pressed
 #                 switch_tuned_start_stop notify the switch which call funcion start_tuned
                 try:
-                    self.switch_tuned_start_stop.set_active(True)
+                    self._start_tuned()
                     self.tuned_daemon_exception_dialog.hide()
+                    self.switch_tuned_start_stop.set_active(True)
                     return True
                 except:
                     self.tuned_daemon_exception_dialog.hide()
                     return False
             else:
+                self.tuned_daemon_exception_dialog.hide()
                 return False
 
     def data_for_listbox_summary_of_active_profile(self):
@@ -641,7 +644,7 @@ class Base(object):
         if switch == self.switch_tuned_start_stop:
 #             starts or stop tuned daemon
             if self.switch_tuned_start_stop.get_active():
-                self.start_tuned()
+                self.is_tuned_connection_ok()
             else:
                 subprocess.call(["service", "tuned", "stop"])
                 self.error_dialog("Tuned Daemon is turned off", "Support of tuned is not running.")
@@ -795,7 +798,9 @@ class Base(object):
 
     def _start_tuned(self):
         subprocess.call(["service", "tuned", "start"])
+        time.sleep(10)
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
+
 
 if __name__ == '__main__':
 
