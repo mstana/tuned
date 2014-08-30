@@ -5,7 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py" afterPath="$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned-gui.glade" afterPath="$PROJECT_DIR$/tuned-gui.glade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tuned_gui.py" afterPath="$PROJECT_DIR$/tuned_gui.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tuned-master.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,8 +30,8 @@
       <file leaf-file-name="tuned_gui.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tuned_gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39679146" vertical-offset="8479" max-vertical-offset="11835">
-              <caret line="590" column="45" selection-start-line="590" selection-start-column="45" selection-end-line="590" selection-end-column="45" />
+            <state vertical-scroll-proportion="11.299465" vertical-offset="190" max-vertical-offset="11925">
+              <caret line="717" column="49" selection-start-line="717" selection-start-column="49" selection-end-line="717" selection-end-column="49" />
               <folding>
                 <element signature="e#71#110#0" expanded="true" />
               </folding>
@@ -40,14 +39,32 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="dbus_controller.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tuned/admin/dbus_controller.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tuned-adm.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tuned-adm.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="208" max-vertical-offset="1170">
+              <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="gui_profile_loader.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-71.111115" vertical-offset="0" max-vertical-offset="2655">
-              <caret line="128" column="48" selection-start-line="128" selection-start-column="48" selection-end-line="128" selection-end-column="48" />
-              <folding>
-                <element signature="e#72#88#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-11.518518" vertical-offset="544" max-vertical-offset="2430">
+              <caret line="62" column="31" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -55,11 +72,9 @@
       <file leaf-file-name="gui_plugin_loader.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tuned_gtk/gui_plugin_loader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.62963" vertical-offset="775" max-vertical-offset="1710">
+            <state vertical-scroll-proportion="0.0" vertical-offset="298" max-vertical-offset="1485">
               <caret line="87" column="23" selection-start-line="87" selection-start-column="18" selection-end-line="87" selection-end-column="23" />
-              <folding>
-                <element signature="e#72#81#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,8 +92,8 @@
       <file leaf-file-name="tuned-gui.glade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tuned-gui.glade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.5555553" vertical-offset="1545" max-vertical-offset="27135">
-              <caret line="113" column="24" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2010" max-vertical-offset="27600">
+              <caret line="144" column="11" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -414,7 +429,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="0" width="1928" height="1083" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -428,11 +443,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -457,6 +472,48 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/tuned_gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11835">
+          <caret line="590" column="45" selection-start-line="590" selection-start-column="45" selection-end-line="590" selection-end-column="45" />
+          <folding>
+            <element signature="e#71#110#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1920" max-vertical-offset="2655">
+          <caret line="128" column="48" selection-start-line="128" selection-start-column="48" selection-end-line="128" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned_gtk/gui_plugin_loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="775" max-vertical-offset="1710">
+          <caret line="87" column="23" selection-start-line="87" selection-start-column="18" selection-end-line="87" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned_gtk/managerException.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="390">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned-gui.glade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1545" max-vertical-offset="27135">
+          <caret line="113" column="24" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tuned_gui.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11310">
@@ -740,13 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tuned-adm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08004158" vertical-offset="208" max-vertical-offset="1170">
-          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm30/system/python_stubs/-1247972723/__builtin__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="77265">
@@ -763,8 +813,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tuned-gui.glade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.5555553" vertical-offset="1545" max-vertical-offset="27135">
-          <caret line="113" column="24" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2010" max-vertical-offset="27600">
+          <caret line="144" column="11" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned/admin/dbus_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned-adm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="208" max-vertical-offset="1170">
+          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tuned_gtk/gui_plugin_loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="775" max-vertical-offset="1710">
+          <caret line="87" column="23" selection-start-line="87" selection-start-column="18" selection-end-line="87" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -777,30 +851,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tuned_gtk/gui_plugin_loader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.62963" vertical-offset="775" max-vertical-offset="1710">
-          <caret line="87" column="23" selection-start-line="87" selection-start-column="18" selection-end-line="87" selection-end-column="23" />
-          <folding>
-            <element signature="e#72#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tuned_gtk/gui_profile_loader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-71.111115" vertical-offset="0" max-vertical-offset="2655">
-          <caret line="128" column="48" selection-start-line="128" selection-start-column="48" selection-end-line="128" selection-end-column="48" />
-          <folding>
-            <element signature="e#72#88#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-11.518518" vertical-offset="544" max-vertical-offset="2430">
+          <caret line="62" column="31" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tuned_gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39679146" vertical-offset="8479" max-vertical-offset="11835">
-          <caret line="590" column="45" selection-start-line="590" selection-start-column="45" selection-end-line="590" selection-end-column="45" />
+        <state vertical-scroll-proportion="11.299465" vertical-offset="190" max-vertical-offset="11925">
+          <caret line="717" column="49" selection-start-line="717" selection-start-column="49" selection-end-line="717" selection-end-column="49" />
           <folding>
             <element signature="e#71#110#0" expanded="true" />
           </folding>

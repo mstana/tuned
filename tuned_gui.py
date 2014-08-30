@@ -53,7 +53,8 @@ class Base(object):
     """
 
     def __init__(self):
-
+        active_profile = None
+        self.is_admin = False
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
         self.manager = tuned_gtk.gui_profile_loader.GuiProfileLoader(tuned.consts.LOAD_DIRECTORIES)
         self.plugin_loader = tuned_gtk.gui_plugin_loader.GuiPluginLoader()
@@ -66,7 +67,6 @@ class Base(object):
         #    DIALOGS
         #
         self.messagedialog_pperation_error = self.builder.get_object("messagedialogOperationError")
-
         self.tuned_daemon_exception_dialog = self.builder.get_object("tunedDaemonExceptionDialog")
         self.dialog_add_plugin = self.builder.get_object("dialogAddPlugin")
         #
@@ -146,6 +146,7 @@ class Base(object):
 
         self.switch_tuned_start_stop = self.builder.get_object("switchTunedStartStop")
         self.switch_tuned_startup_start_stop = self.builder.get_object("switchTunedStartupStartStop")
+        self.switch_tuned_admin_functions = self.builder.get_object("switchTunedAdminFunctions")
 
         self.treeview_profile_manager = self.builder.get_object("treeviewProfileManager")
         self.treeview_actual_plugins = self.builder.get_object("treeviewActualPlugins")
@@ -196,6 +197,7 @@ class Base(object):
 
         self.switch_tuned_start_stop.set_active(True)
         self.switch_tuned_startup_start_stop.set_active(self.service_run_on_start_up("tuned"))
+        self.switch_tuned_admin_functions.set_active(self.is_admin)
 
         self.menu_add_plugin_value = self.builder.get_object("menuAddPluginValue")
 
@@ -218,6 +220,7 @@ class Base(object):
 
         self.switch_tuned_start_stop.connect('notify::active', self.execute_switch_tuned)
         self.switch_tuned_startup_start_stop.connect('notify::active', self.execute_switch_tuned)
+        self.switch_tuned_admin_functions.connect('notify::active', self.execute_switch_tuned_admin_functions)
 
         self.button_create_profile.connect('clicked', self.execute_create_profile)
         self.button_upadte_selected_profile.connect('clicked', self.execute_update_profile)
@@ -295,6 +298,7 @@ class Base(object):
         try:
             self.label_summary_included_profile.set_text(self.active_profile.options["include"])
         except:
+            # keyerror probably
             self.label_summary_included_profile.set_text("None")
 
         row = Gtk.ListBoxRow()
@@ -387,7 +391,7 @@ class Base(object):
                 self.error_dialog("You are ediding " +
                                   self.editing_profile_name + " profile.", "Please close edit window and try again.")
                 return
-            self.manager.remove_profile(profile)
+            self.manager.remove_profile(profile, is_admin=self.is_admin)
             for item in self.treestore_profiles:
                 if item[0] == profile:
                     iter = self.treestore_profiles.get_iter(item.path)
@@ -479,7 +483,6 @@ class Base(object):
     def on_click_button_confirm_profile_update(self, data):
             profile_name = self.get_treeview_selected()
             prof = self.data_to_profile_config()
-            self.manager.remove_profile(profile_name)
             for item in self.treestore_profiles:
                 try:
                     if item[0] == profile_name:
@@ -488,8 +491,12 @@ class Base(object):
                 except KeyError:
                     raise KeyError("this cant happen")
 
-            self.manager.update_profile(profile_name, prof)
-            self.treestore_profiles.append([prof.name, consts.PREFIX_USER])
+            self.manager.update_profile(profile_name, prof, self.is_admin)
+            if self.manager.is_profile_factory(prof.name):
+                prefix = consts.PREFIX_FACTORY
+            else:
+                prefix = consts.PREFIX_USER
+            self.treestore_profiles.append([prof.name, prefix])
             self.window_profile_editor.hide()
 
     def data_to_profile_config(self):
@@ -544,7 +551,7 @@ class Base(object):
         if self._get_active_profile_name() == self.editing_profile_name:
             self.error_dialog("You can not update active profile", "Please deactivate profile by choosing another!")
             return
-        if self.manager.is_profile_removable(self.editing_profile_name):
+        if self.manager.is_profile_removable(self.editing_profile_name) or self.is_admin:
             profile = self.manager.get_profile(self.editing_profile_name)
             self.entry_profile_name.set_text(profile.name)
             model = self.combobox_include_profile.get_model()
@@ -555,8 +562,9 @@ class Base(object):
                     if item[0] == profile.options["include"]:
                         selected = int(item.path.to_string())
                         self.togglebutton_include_profile.set_active(True)
-                except:
+                except KeyError:
                     pass
+            #         profile dont have include section
             self.combobox_include_profile.set_active(selected)
 
             #load all values not just normal
@@ -629,6 +637,11 @@ class Base(object):
                 subprocess.call(["systemctl", "disable", "tuned"])
         else:
             raise NotImplemented
+
+    def execute_switch_tuned_admin_functions(self, switch, data):
+        self.is_admin = self.switch_tuned_admin_functions.get_active()
+
+
 
     def service_run_on_start_up(self, service):
         """
@@ -708,9 +721,7 @@ class Base(object):
                 return True
         return False
 
-
     def add_plugin_value_to_treeview(self, action):
-
         current_plugin = self.notebook_plugins.get_tab_label(
             self.notebook_plugins.get_nth_page(self.notebook_plugins.get_current_page())).get_text()
         current_plugin_options = self.plugin_loader\
@@ -738,12 +749,7 @@ class Base(object):
             return True
         return False
 
-
-
-
     def add_custom_plugin_value_to_treeview(self, action):
-
-
         curent_plugin_values_model = self.notebook_plugins.get_nth_page(
             self.notebook_plugins.get_current_page()).get_model()
 

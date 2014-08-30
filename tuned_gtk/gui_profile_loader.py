@@ -45,10 +45,10 @@ class GuiProfileLoader(object):
         profile_config = configobj.ConfigObj(conf_path)
         return profile_config
 
-    def _locate_profile_path(self, profileName):
+    def _locate_profile_path(self, profile_name):
         for d in self.directories:
             for profile in os.listdir(d):
-                if os.path.isdir(d + "/"+ profile) and profile == profileName:
+                if os.path.isdir(d + "/" + profile) and profile == profile_name:
                     path = d
         return path
 
@@ -92,50 +92,40 @@ class GuiProfileLoader(object):
         config.write()
         self._refresh_profiles()
 
-    def update_profile(self, profile_name, profile):
-        if profile_name not in self.get_names():
-            raise managerException.ManagerException("Profile: " + profile_name + " is not in profiles")
-            path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name
-            pass
-            #profile dont have main section
-
-        for name, unit in profile.units.items():
-            config[name] = unit.options
-        if not os.path.exists(path): 
-            os.makedirs(path)  
-        else:
-#             mozes prepisat ale nesmies na nejaky co uz existuje!
-            raise managerException.ManagerException("Profile Exists already")
-        config.write()
-        self._refresh_profiles()
-
     def _refresh_profiles(self):
         self.profiles = {}
         self._load_all_profiles()
 
-    def update_profile(self, profile_name, profile):
-        if profile_name not in self.get_names():
-            raise managerException.ManagerException("Profile: " + profile_name + " is not in profiles")
-        path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name     
+    def update_profile(self, old_profile_name, profile, is_admin):
+
+        if old_profile_name not in self.get_names():
+            raise managerException.ManagerException("Profile: " + old_profile_name + " is not in profiles")
+        if self.is_profile_factory(old_profile_name):
+            path = tuned.consts.LOAD_DIRECTORIES[0] + "/" + profile.name
+        else:
+            path = tuned.consts.LOAD_DIRECTORIES[1] + "/" + profile.name
+
+        if old_profile_name != profile.name:
+            self.remove_profile(old_profile_name, is_admin=is_admin)
+
         config = configobj.ConfigObj()
         config.filename = path + "/tuned.conf"
         config.initial_comment = "#", "tuned configuration", "#"
         try:
             config["main"] = profile.options
         except KeyError:
-
             #profile dont have main section
             pass
         for name, unit in profile.units.items():
             config[name] = unit.options
 
-        if not os.path.exists(path): 
-            os.makedirs(path)            
+        if not os.path.exists(path):
+            os.makedirs(path)
         config.write()
         self._refresh_profiles()
 
     def get_names(self):
-        return self.profiles.keys()    
+        return self.profiles.keys()
     
     def get_profile(self, profile):
         return self.profiles[profile]
@@ -144,10 +134,10 @@ class GuiProfileLoader(object):
         self.profiles[profile.name] = profile
         self.save_profile(profile)
 
-    def remove_profile(self, profile_name):
+    def remove_profile(self, profile_name, is_admin):
         profile_path = self._locate_profile_path(profile_name)
 
-        if self.is_profile_removable(profile_name):
+        if self.is_profile_removable(profile_name) or is_admin:
             shutil.rmtree(profile_path + "/" + profile_name)
             self._load_all_profiles()
         else:
