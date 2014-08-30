@@ -1402,7 +1402,7 @@
     </child>
     <action-widgets>
       <action-widget response="0">turn_daemon_on_button</action-widget>
-      <action-widget response="0">cancel_button</action-widget>
+      <action-widget response="1">cancel_button</action-widget>
     </action-widgets>
   </object>
   <object class="GtkWindow" id="windowProfileEditor">

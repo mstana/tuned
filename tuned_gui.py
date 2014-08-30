@@ -51,25 +51,51 @@ class Base(object):
     """
     GUI class for program Tuned.
     """
+    is_admin = False
+
+    def _starting(self):
+        try:
+            self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
+            self.controller.is_running()
+        except tuned.admin.exceptions.TunedAdminDBusException as ex:
+            response = self.tuned_daemon_exception_dialog.run()
+            if response == 0:
+#                 button Turn ON pressed
+#                 switch_tuned_start_stop notify the switch which call funcion start_tuned
+                    self._start_tuned()
+                    self.tuned_daemon_exception_dialog.hide()
+            elif response == 1:
+                self.error_dialog("Tuned is shutting down.", "Reason: missing communication with Tuned daemon.")
+                return
+
+
 
     def __init__(self):
+
+
         active_profile = None
-        self.is_admin = False
-        self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
-        self.manager = tuned_gtk.gui_profile_loader.GuiProfileLoader(tuned.consts.LOAD_DIRECTORIES)
-        self.plugin_loader = tuned_gtk.gui_plugin_loader.GuiPluginLoader()
+
         self.builder = Gtk.Builder()
         self.builder.add_from_file("tuned-gui.glade")
 
-        action_group = Gtk.ActionGroup("my_actions")
-        self.builder.connect_signals(self)
+
         #
         #    DIALOGS
         #
-        self.messagedialog_pperation_error = self.builder.get_object("messagedialogOperationError")
+        self.messagedialog_operation_error = self.builder.get_object("messagedialogOperationError")
         self.tuned_daemon_exception_dialog = self.builder.get_object("tunedDaemonExceptionDialog")
         self.dialog_add_plugin = self.builder.get_object("dialogAddPlugin")
-        #
+
+
+        self._starting()
+
+
+        self.manager = tuned_gtk.gui_profile_loader.GuiProfileLoader(tuned.consts.LOAD_DIRECTORIES)
+        self.plugin_loader = tuned_gtk.gui_plugin_loader.GuiPluginLoader()
+
+        action_group = Gtk.ActionGroup("my_actions")
+        self.builder.connect_signals(self)
+
         self.builder.connect_signals(self)
         #
         #    WINDOW MAIN
@@ -121,13 +147,6 @@ class Base(object):
         self.about_dialog.set_copyright(COPYRIGHT)
         self.about_dialog.set_authors(AUTHORS)
         #
-        #    DIALOGS
-        #
-        self.messagedialog_pperation_error = self.builder.get_object("messagedialogOperationError")
-        self.tuned_daemon_exception_dialog = self.builder.get_object("tunedDaemonExceptionDialog")
-
-        self.dialog_add_plugin = self.builder.get_object("dialogAddPlugin")
-        #
         #    GET WIDGETS
         #
         self.imagemenuitem_quit = self.builder.get_object("imagemenuitemQuit")
@@ -153,9 +172,6 @@ class Base(object):
         #
         #    SET WIDGETS
         #
-        if (not self.is_tuned_connection_ok()):
-            self.error_dialog("Tuned is shutting down.", "Reason: missing communication with Tuned daemon.")
-            return
         self.treestore_profiles = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)
         self.treestore_plugins = Gtk.ListStore(GObject.TYPE_STRING)
         for plugin in self.plugin_loader.plugins:
@@ -656,10 +672,10 @@ class Base(object):
         """
         General error dialog with two fields. Primary and secondary text fields.
         """
-        self.messagedialog_pperation_error.set_markup(error)
-        self.messagedialog_pperation_error.format_secondary_text(info)
-        self.messagedialog_pperation_error.run()
-        self.messagedialog_pperation_error.hide()
+        self.messagedialog_operation_error.set_markup(error)
+        self.messagedialog_operation_error.format_secondary_text(info)
+        self.messagedialog_operation_error.run()
+        self.messagedialog_operation_error.hide()
 
     def execute_about(self, widget):
         self.about_dialog.run()
@@ -777,7 +793,7 @@ class Base(object):
         model.remove(iter)
         return True
 
-    def start_tuned(self):
+    def _start_tuned(self):
         subprocess.call(["service", "tuned", "start"])
         self.controller = tuned.admin.DBusController(consts.DBUS_BUS, consts.DBUS_OBJECT, consts.DBUS_INTERFACE)
 
