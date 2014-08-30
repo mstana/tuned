@@ -57,7 +57,7 @@ class GuiProfileLoader(object):
             for profile in os.listdir(d):
                 if os.path.isdir(d + "/"+ profile):
                     try:
-                        self.profiles[profile] = p.Profile(profile,self.load_profile_config(profile, d))
+                        self.profiles[profile] = p.Profile(profile, self.load_profile_config(profile, d))
                     except configobj.ParseError:
                         pass
 #                         print "can not make \""+ profile +"\" profile without correct config on path: " + d 
@@ -86,9 +86,7 @@ class GuiProfileLoader(object):
             config[name] = unit.options
         if not os.path.exists(path):
             os.makedirs(path)
-            print 1
         else:
-            print 2
 #             you cant rewrite profile!
             raise managerException.ManagerException("Profile with name " + profile.name + "exists already")
         config.write()
@@ -153,7 +151,7 @@ class GuiProfileLoader(object):
             shutil.rmtree(profile_path + "/" + profile_name)
             self._load_all_profiles()
         else:
-            raise managerException.ManagerException(profile_name + " profile is stored in " + profilePath)
+            raise managerException.ManagerException(profile_name + " profile is stored in " + profile_path)
 
     def is_profile_removable(self, profile_name):
         #  profile is in /etc/profile
